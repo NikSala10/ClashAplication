@@ -15,7 +15,6 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    
 }
 .logo  {
     justify-content: center;
@@ -35,7 +34,7 @@
 }
 
 .first-icons  {
-    width: 15%;
+    width: 20%;
 }
 ul li {
     display: flex; 
@@ -51,6 +50,7 @@ a  {
     padding: 0.4rem 0.6rem;
     border-bottom: 2px solid rgba(0, 0, 0, 0);
     transition: all 0.3s ease; 
+    min-width: 5rem;
 }
 ul  {
     gap: 2rem;
@@ -78,7 +78,7 @@ svg  {
     width: 30%;
     align-items: center;
     position: relative;
-    margin-left: 8rem;
+    margin-left: 3rem;
     margin-right: 2rem;
 }
 .search-bar svg  {
@@ -97,7 +97,8 @@ svg  {
     color:#652484 ;
 }
 .third-icons  {
-    width: 18%;
+    width: 23%;
+    padding: 0 2rem;
 
 }
 .third-icons ul  {
@@ -105,7 +106,9 @@ svg  {
     margin-top: 1.5rem;
     justify-content: space-between;
     
-    
+}
+.third-icons ul a {
+    min-width: 6rem;
 }
 
 .user-icon  {
@@ -121,7 +124,7 @@ svg  {
     width: 60px;
     height: 60px;
     justify-content: center;
-    margin-left: 70%;
+    margin-left: 65%;
     
 }
 .user-icon svg  {
