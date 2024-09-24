@@ -73,6 +73,7 @@
 }
 .img-post  {
     border-radius: 0.5rem;
+    width: 100%;
 }
 .description  {
     font-family: "Poppins", sans-serif;
