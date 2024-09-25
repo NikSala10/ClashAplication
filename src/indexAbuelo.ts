@@ -1,5 +1,6 @@
 import * as components from './components/indexPadre'
 import './components/post1/post1'
+import './components/footer/footer'
 class AppContainer extends HTMLElement  {
     // workersList: Filter[] = []
     constructor()  {
@@ -18,6 +19,8 @@ class AppContainer extends HTMLElement  {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
             <post-1></post-1>
+            <foo-ter></foo-ter>
+
            
            
             `;

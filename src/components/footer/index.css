@@ -1,0 +1,91 @@
+*   {
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    background-color:#652484;
+   
+}
+.foorter
+{
+ display: flex;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-section,
+.find-talent-section,
+.clash-section,
+.social-section {
+    flex: 1;
+    margin: 0 1rem;
+}
+
+.logo-section  {
+    width: 200rem; 
+    margin-left:-3rem;
+    margin-top: 2rem;
+
+}
+
+
+
+h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-size:0.8rem ;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.social-section ul {
+    display: flex;
+    gap: 0rem;
+    display: grid;
+    margin-left: 2rem;
+    margin-top: -8.6rem;
+}
+
+
+
+.copyright {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+.icono{
+    flex-direction: column; 
+    display: flex;
+    gap: 0.7rem;
+    margin-top:-1rem;
+
+}
+.social-section  {
+    display: flex;
+    gap: 1rem;
+    display: grid;
+
+    
+}
+.hr{
+    margin-top: 8rem;
+}
