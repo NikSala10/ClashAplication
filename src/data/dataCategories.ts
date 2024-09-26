@@ -1,4 +1,4 @@
-export const dataCategories=  [
+export const dataCategories=  
     [
         "Illustrator",
         "Animator",
@@ -22,4 +22,3 @@ export const dataCategories=  [
         "Illustrator",
         "3D Animator"
     ]
-]

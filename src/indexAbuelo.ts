@@ -51,8 +51,8 @@ class AppContainer extends HTMLElement  {
             <section class="containers">
                 <div class="container-postcards"></div>
                 <div class="container-barLaterals">
-                    <bar-lateral></bar-lateral>
-                    <bar-lateral></bar-lateral>
+                    <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
+                    <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                 </div>
             </section>
             

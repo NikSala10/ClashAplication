@@ -1,17 +1,14 @@
 import  {hashtags} from '../../data/dataHashtags'
+import  {dataCategories} from '../../data/dataCategories'
 export enum Attribute2  { 
     'titleitem' = 'titleitem',
-    'itemone' = 'itemone',
-    'itemtwo' = 'itemtwo',
-    'itemthree' = 'itemthree', 
+    'dataitem' = 'dataitem',
 }
 
 class BarLateral extends HTMLElement  {
     titleitem?: string;
-    itemone?: string;
-    itemtwo?: string;
-    itemthree?: string;
-    userHashtagsList : String[] = []
+    dataitem?: string;
+    userList : String[] = []
     
 
     constructor()  {
@@ -31,23 +28,30 @@ class BarLateral extends HTMLElement  {
         this.render();
     }
     connectedCallback() { 
-        console.log(this);
+        if (this.dataitem == "hashtags") {
+            for (let i = 0; i < 3; i++) {
+                this.userList[i] = hashtags[i]
+            }
+        }
+        if (this.dataitem == "categories") {
+            for (let i = 0; i < 3; i++) {
+                this.userList[i] = dataCategories[i]
+            }
+        }
         
         this.render();
-        const lateral = this.ownerDocument.querySelector('.barLateral')
-        for (let i = 0; i < hashtags.length; i++) {
-            const hashtag = this.ownerDocument.createElement("p")
-            lateral?.appendChild(hashtag)
-        }
+       
     }
 
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/barLateral/barLateral.css">
-           
                 <div class= "barLateral">
                     <h4>${this.titleitem ? this.titleitem : 'Not found'}</h4>
+                    <p>${this.userList[0] ? this.userList[0] : 'Not found'}</p>
+                    <p>${this.userList[1] ? this.userList[1] : 'Not found'}</p>
+                    <p>${this.userList[2] ? this.userList[2] : 'Not found'}</p>
                 </div>
           
             `;

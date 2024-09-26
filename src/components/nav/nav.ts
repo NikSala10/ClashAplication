@@ -19,7 +19,7 @@ class Nav extends HTMLElement  {
         bars.addEventListener('click', () => {
             console.log('funciona');
             
-            const iconsResponsive = this.querySelector('.icons-responsive') as HTMLElement;
+            const iconsResponsive = this.shadowRoot?.querySelector('.icons-responsive') as HTMLElement;
            
             if (iconsResponsive?.classList.contains('active')) {
                 iconsResponsive?.classList.replace('active', 'inactive'); 
