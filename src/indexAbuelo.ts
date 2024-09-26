@@ -1,5 +1,5 @@
 import * as components from './components/indexPadre'
-import  {imageArray} from './components/data/data'
+import  {imageArray} from './components/data-banner1/data'
 import './components/post1/post1'
 import './components/footer/footer'
 import './components/banner1/banner1'
@@ -26,6 +26,8 @@ class AppContainer extends HTMLElement  {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/Components/index.css">
+            
+
                 <post-1></post-1>
                 <div class="container"></div>
                 <foo-ter></foo-ter>

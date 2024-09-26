@@ -1,4 +1,20 @@
-*
-{
-    background-color: aqua;
+
+.cardWorker {
+    display: flex;
+    align-items: center;
+    
+}
+
+#image {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0; 
+}
+
+#img {
+    width: 13%;
+    height: auto;
+    display: block;
+    border-radius: 10px 10px ;
 }
