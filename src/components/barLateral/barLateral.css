@@ -22,3 +22,8 @@ h4 {
     font-style: normal;
     font-size: 17px;
   }
+  @media (max-width: 768px)  {  
+    .barLateral  {
+      display: none;
+    }
+  }

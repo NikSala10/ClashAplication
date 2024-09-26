@@ -15,7 +15,22 @@ class Nav extends HTMLElement  {
     }
     connectedCallback() { 
         this.render();
-        
+        const bars = this.shadowRoot?.querySelector('.bars') as HTMLElement;
+        bars.addEventListener('click', () => {
+            console.log('funciona');
+            
+            const iconsResponsive = this.querySelector('.icons-responsive') as HTMLElement;
+           
+            if (iconsResponsive?.classList.contains('active')) {
+                iconsResponsive?.classList.replace('active', 'inactive'); 
+                console.log('funciones');
+                
+            }else {
+                iconsResponsive?.classList.replace('inactive', 'active');
+                console.log('nope');
+                 
+            }
+        });
         
     }
      
@@ -65,11 +80,7 @@ class Nav extends HTMLElement  {
                     </li>
                 </ul>
             </div>
-            <div class="bars">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
+            
             <div class="search-bar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -100,8 +111,46 @@ class Nav extends HTMLElement  {
                     </svg>
                 </div>
             </div>
+            <div class="bars">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+           
             
     </nav>
+    <div class="icons-responsive inactive" >
+        <div class="active-icons">
+                    <ul>
+                    
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 16 16">
+                                <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
+                            </svg>
+                            <a href="#" class="active">Dashboard</a>
+                        </li>
+                        <li id="jobs">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"/>
+                            </svg>
+                            <a href="#">Jobs</a>
+                        </li>
+                    
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+                                <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                            </svg>
+                            <a href="#">Messages</a>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+                            </svg>
+                            <a href="#">Notifications</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
                 
           
             `;
