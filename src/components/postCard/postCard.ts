@@ -57,7 +57,7 @@ class PostCard extends HTMLElement  {
         this.render();
     }
     connectedCallback() { 
-        console.log(this);
+        
         
         this.render();
 
@@ -77,6 +77,15 @@ class PostCard extends HTMLElement  {
                         <div class="nacate">
                             <h4 class="name">${this.name ? this.name : 'Not found'}</h4>
                             <p class="category">${this.category ? this.category : 'Not found'}</p>
+                        </div>
+                        <div class="nacate1">
+                            <div class="nacate2">
+                                <h4 class="name">${this.name ? this.name : 'Not found'}</h4>
+                                <h4 class="username2">${this.username ? this.username : 'Not found'}</h4>
+                            </div>
+                            <div class="nacate3">
+                                  <p class="state2">${this.state ? this.state : 'Not found'}</p>
+                            </div>
                         </div>
                         
                         <h4 class="username">${this.username ? this.username : 'Not found'}</h4>

@@ -14,7 +14,6 @@
     background-color: #652484;
     margin: 0;
     padding: 0;
-    width: 100%;
     position: fixed;
     
 }
@@ -141,6 +140,7 @@ svg  {
     display: none;
 }
 @media (max-width: 768px)  {
+
    .bars  {
         display: block;
         cursor: pointer;
@@ -185,7 +185,7 @@ svg  {
     display: flex;   
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     position: fixed;
     margin-top: 5rem;
     background-color: #6624849a;
@@ -209,5 +209,7 @@ svg  {
     margin-left: 0.30rem;
     width: 40px;
 }
+
+
 
 }

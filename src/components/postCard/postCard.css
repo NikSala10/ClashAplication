@@ -110,5 +110,91 @@
     font-weight: 500;
     font-style: normal;
 }
+.nacate1  {
+    display: none;
+}
 
 
+@media (max-width: 768px)  { 
+    .card   {
+        width: 72%;
+        margin-left: 8%;
+        margin-bottom: 2rem;
+    }
+    .category {
+        display: none;
+    }
+    .username  {
+        display: none;
+    }
+    .username2  {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-family: "Hind Guntur", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        color: white;
+        font-size: 13px;
+        cursor: pointer;
+    }
+    .name  {
+        font-size: 18px;
+    }
+    .time-post {
+        margin-top: 1.5rem;
+        margin-left: 0.5rem;
+        font-size: 12px;
+    }
+   .nacate  {
+    display: none;
+   }
+   .nacate2 { 
+    display: block;
+    width: 85%;
+   }
+   #img-user {
+    width: 3.8rem; 
+    height: 3.8rem; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
+.nacate1  {
+    display: flex;
+    width: 50%;
+}
+.state2  {
+    font-family: "Hind Guntur", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: white;
+    cursor: pointer;
+    margin-left: 3rem;
+    margin-top: 0.1rem;
+   
+}
+.state  {
+    display: none;
+}
+.nacate3  {
+    width: 15%;
+}
+.description  {
+    font-size: 15px;
+}
+.hashtags  {
+    font-size: 15px;
+}
+.counter svg   {
+    width: 20px;
+    gap: 0.5rem;
+}
+.counter p  {
+    font-size: 13px;
+
+}
+
+.post-icons  {
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+}
