@@ -26,7 +26,7 @@ class AppContainer extends HTMLElement  {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/Components/index.css">
-            
+            <link rel="stylesheet" href="../src/Components/banner1/index.css">
 
                 <post-1></post-1>
                 <div class="container"></div>

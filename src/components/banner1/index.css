@@ -1,17 +1,19 @@
-
+component-container  {
+    width: 98%;
+}
 
 .container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    gap: 10px; 
-    margin: 20px;
+    gap: 0.2px;
+    margin: 10px;
 }
 
 .cardWorker {
-    display: grid;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    padding: 1px;
+    display: flex;
 }
 
 

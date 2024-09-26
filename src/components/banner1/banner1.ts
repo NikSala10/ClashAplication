@@ -37,14 +37,14 @@ class Banner1 extends HTMLElement  {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/banner1/index.css">
-            <section class="container"> 
+      
                     <div class= "cardWorker">
                         <div id="image">
                             <img id="img" src="${this.image ? this.image : 'Not found'}">
                         </div>
                     
                     </div>
-                </section>
+               
             `;
         }
     }
