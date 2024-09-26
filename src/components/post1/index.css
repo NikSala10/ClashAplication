@@ -57,8 +57,10 @@ input {
 }
 .post hr {
     background-color: #FFF;
-    width: 100%;
-    margin-top: 7%;
+    width: 94.5rem;
+    margin-top: 4%;
+    margin-left:-43rem ;
+    align-items: center;
     
 }
 
