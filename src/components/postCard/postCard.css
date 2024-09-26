@@ -1,6 +1,6 @@
 .card   {
     background-color: #8258BD;
-    width: 40%;
+    width: 70%;
     padding: 1.8rem;
     margin-bottom: 5rem;
     border-radius: 1rem;
@@ -74,6 +74,7 @@
 .img-post  {
     border-radius: 0.5rem;
     width: 100%;
+    
 }
 .description  {
     font-family: "Poppins", sans-serif;
@@ -109,3 +110,5 @@
     font-weight: 500;
     font-style: normal;
 }
+
+
