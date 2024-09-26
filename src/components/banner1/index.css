@@ -4,7 +4,7 @@ component-container  {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(6, 1fr); 
     gap: 0.2px;
     margin: 10px;
 }
@@ -22,6 +22,7 @@ component-container  {
     height: auto;
     overflow: hidden;
     border-radius: 5px; 
+    object-fit: cover;
 }
 
 #img {
@@ -29,4 +30,52 @@ component-container  {
     height: auto;
     display: block;
     border-radius: 10px; 
+    object-fit: cover;
+}
+.container > :nth-child(1) {
+    grid-column: span 1; /* Primer elemento ocupa 2 columnas */
+    grid-row: span 2; /* Primer elemento ocupa 2 filas */
+}
+.container > :nth-child(2) {
+    grid-column: span 0.5;
+    grid-row: span 1;
+}
+.container > :nth-child(3) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.container > :nth-child(4) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.container > :nth-child(5) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.container > :nth-child(6) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.container > :nth-child(7) {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.container > :nth-child(8) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.container > :nth-child(9) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.container > :nth-child(10) {
+    grid-column: span 2;
+    grid-row: span 5;
 }

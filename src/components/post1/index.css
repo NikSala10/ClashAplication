@@ -96,3 +96,81 @@ h2  {
 {
     margin-left: 4rem;
 }
+@media (min-width: 768px) {
+   
+
+    
+}
+/* @media (max-width: 768px)  {
+
+    .bars  {
+         display: block;
+         cursor: pointer;
+         margin-top: 1.3rem;
+         margin-left: 5%;
+    }
+    .bars .line  {
+     width: 35px;
+     height: 0.3rem;
+     border-radius: 1rem;
+     background-color: white;
+     margin: 6px 0px;
+    
+    }
+    .first-icons, .third-icons  {
+     display: none;
+    }
+    .active-icons  {
+     display: block;
+    
+    }
+    #jobs svg {
+     margin-left: -1rem;
+    }
+    .active-icons li  {
+     padding: 0.2rem;
+     width: 8rem;
+     margin-top: 0.3rem;
+     margin-bottom: 0;
+    }
+    .active-icons ul  {
+     padding: 0.4rem;
+    
+    }
+   
+    .icons-responsive.inactive {
+     display: none;
+    }
+    .icons-responsive.active {
+     
+     position: absolute;
+     display: flex;   
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     position: fixed;
+     margin-top: 5rem;
+     background-color: #6624849a;
+    }
+   
+    .search-bar input {
+     width: 12rem;
+     padding: 0 4rem ;
+    }
+    .search-bar svg  {
+     margin-left: 2rem;
+ }
+ .circle  {
+     width: 50px;
+     height: 50px;
+     justify-content: center;
+     margin-left: 40%;
+ }
+ .user-icon svg  {
+     margin-top: 0;
+     margin-left: 0.30rem;
+     width: 40px;
+ }
+ 
+ 
+  */
