@@ -6,16 +6,15 @@ component-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 10px; 
-    margin: 10px;
+    margin: 2px;
 }
 
 .cardWorker {
     justify-content: center;
     align-items: center;
-    padding: 1px;
     display: flex;
     overflow: hidden;
-    height: 250px; 
+    height: 15rem; 
 }
 
 #image {
@@ -33,4 +32,10 @@ component-container {
 }
 .cardWorker:hover #img {
     transform: scale(2.0) translateY(-5px); 
+}
+
+@media (max-width: 600px) {
+    .container {
+        display: none; /* Oculta el contenedor de imágenes en móviles */
+    }
 }
