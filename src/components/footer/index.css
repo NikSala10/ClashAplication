@@ -1,3 +1,4 @@
+
 *   {
     font-family: "Poppins", sans-serif;
     color: #fff;
@@ -90,4 +91,89 @@ a:hover {
 .find-talent-section
 {
     margin-left: 4rem;
+}
+ 
+
+
+
+
+@media (max-width: 768px) {
+    .footer {
+        background-color: #652484;
+        padding: 1rem 1rem;
+    }
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 100rem;
+    }
+    
+    .logo-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem; /* Fixed missing unit */
+    }
+    
+    .logo-section svg {
+        width: 100px; /* Adjust logo size */
+        margin-bottom: 0.5rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        cursor: pointer; /* Indicates interactivity */
+    }
+    
+    #social {
+     display: none;
+
+    }
+    
+    ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        display: block; 
+    }
+    
+    li {
+      display: none;
+    }
+    
+    a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.8rem;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+    
+    .social-section {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+   
+    .copyright {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+  .icono
+  {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: -15rem;
+  }
 }

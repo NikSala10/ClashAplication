@@ -36,6 +36,6 @@ component-container {
 
 @media (max-width: 600px) {
     .container {
-        display: none; /* Oculta el contenedor de imágenes en móviles */
+        display: none; 
     }
 }
