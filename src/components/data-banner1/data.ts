@@ -35,8 +35,5 @@ export const imageArray = [
          id: 9,
          img: '/src/assets/tridi.png'
      },
-     {
-         id: 10,
-         img: '/src/assets/relogitos.png'
-     }
+     
 ];
