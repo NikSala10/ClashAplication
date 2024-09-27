@@ -9,7 +9,11 @@ export const postsUsers = [
       image: "../src/assets/tarde de verano 2.jpg",
       timePosted: "5hr ago",
       hashtags: ["#watercolor", "#pastel", "#art"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 2,
@@ -21,7 +25,11 @@ export const postsUsers = [
       image: "../src/assets/alien.jpg",
       timePosted: "2hr ago",
       hashtags: ["#3Danimation", "#robot", "#CGI"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 3,
@@ -33,7 +41,11 @@ export const postsUsers = [
       image: "../src/assets/antonieta.jpg",
       timePosted: "1hr ago",
       hashtags: ["#logo", "#minimalism", "#branding"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 4,
@@ -45,7 +57,11 @@ export const postsUsers = [
       image: "../src/assets/atardecer.jpeg",
       timePosted: "3hr ago",
       hashtags: ["#pixelart", "#retro", "#digitalart"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 5,
@@ -57,7 +73,11 @@ export const postsUsers = [
       image: "../src/assets/blanconegro.jpeg",
       timePosted: "4hr ago",
       hashtags: ["#packaging", "#cosmetics", "#design"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 6,
@@ -69,7 +89,11 @@ export const postsUsers = [
       image: "../src/assets/bosque otoño.jpg",
       timePosted: "7hr ago",
       hashtags: ["#2Danimation", "#pet", "#shortfilm"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 7,
@@ -81,7 +105,11 @@ export const postsUsers = [
       image: "../src/assets/boycolor.jpeg",
       timePosted: "2hr ago",
       hashtags: ["#abstractart", "#colors", "#illustration"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 8,
@@ -93,7 +121,11 @@ export const postsUsers = [
       image: "../src/assets/CHIJIRO Y HAKU.jpg", 
       timePosted: "5hr ago",
       hashtags: ["#3Dmodeling", "#characterdesign", "#animation"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 9,
@@ -105,7 +137,11 @@ export const postsUsers = [
       image: "../src/assets/chike con aire.jpg",
       timePosted: "3hr ago",
       hashtags: ["#sketch", "#characterdesign", "#artprocess"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 10,
@@ -117,7 +153,11 @@ export const postsUsers = [
       image: "../src/assets/colorgirl.jpeg",
       timePosted: "6hr ago",
       hashtags: ["#typography", "#branding", "#design"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 11,
@@ -129,7 +169,11 @@ export const postsUsers = [
       image: "../src/assets/damared.jpeg",
       timePosted: "1hr ago",
       hashtags: ["#illustration", "#legend", "#digitalart"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 12,
@@ -141,7 +185,11 @@ export const postsUsers = [
       image: "../src/assets/design 3d.png",
       timePosted: "5hr ago",
       hashtags: ["#animation", "#abstract", "#motion"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 13,
@@ -153,7 +201,11 @@ export const postsUsers = [
       image: "../src/assets/dibujito para jhoan.jpg",
       timePosted: "2hr ago",
       hashtags: ["#advertising", "#campaign", "#mockup"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 14,
@@ -165,7 +217,11 @@ export const postsUsers = [
       image: "../src/assets/el fauno.jpg",
       timePosted: "4hr ago",
       hashtags: ["#fantasy", "#landscape", "#art"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 15,
@@ -177,7 +233,11 @@ export const postsUsers = [
       image: "../src/assets/emma.jpeg",
       timePosted: "3hr ago",
       hashtags: ["#blackandwhite", "#detailedart", "#illustration"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 16,
@@ -189,7 +249,11 @@ export const postsUsers = [
       image: "../src/assets/en el bosque.jpg",
       timePosted: "8hr ago",
       hashtags: ["#2Danimation", "#characteranimation", "#animation"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 17,
@@ -201,7 +265,11 @@ export const postsUsers = [
       image: "../src/assets/estatua para historia.png",
       timePosted: "4hr ago",
       hashtags: ["#flyer", "#musicevent", "#graphicdesign"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 18,
@@ -213,7 +281,11 @@ export const postsUsers = [
       image: "../src/assets/expreciones de serantia.jpg",
       timePosted: "1hr ago",
       hashtags: ["#portrait", "#charcoal", "#sketch"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 19,
@@ -225,7 +297,11 @@ export const postsUsers = [
       image: "../src/assets/expreciones thulcarian.jpg",
       timePosted: "7hr ago",
       hashtags: ["#3Danimation", "#animals", "#CGI"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
     {
       id: 20,
@@ -237,7 +313,11 @@ export const postsUsers = [
       image: "../src/assets/facehorror.jpeg",
       timePosted: "6hr ago",
       hashtags: ["#surrealart", "#dreams", "#digitalart"],
-      state: "Follow"
+      state: "Follow",
+      likes: 0,
+      comments: 0,
+      favorites: 0,
+      send: 0
     },
 ]
   //   {
@@ -250,7 +330,11 @@ export const postsUsers = [
   //     image: "../src/assets/fondo 2 teo.jpg",
   //     timePosted: "3hr ago",
   //     hashtags: ["#posterdesign", "#theater", "#vibrant"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 22,
@@ -262,7 +346,11 @@ export const postsUsers = [
   //     image: "../src/assets/fondo 3 TERMINADO.jpg",
   //     timePosted: "2hr ago",
   //     hashtags: ["#3Dcar", "#animation", "#CGI"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 23,
@@ -274,7 +362,11 @@ export const postsUsers = [
   //     image: "../src/assets/girlrude.jpeg",
   //     timePosted: "5hr ago",
   //     hashtags: ["#scifi", "#digitalart", "#illustration"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 24,
@@ -286,7 +378,11 @@ export const postsUsers = [
   //     image: "../src/assets/hongos.jpeg",
   //     timePosted: "4hr ago",
   //     hashtags: ["#GIFanimation", "#loop", "#motion"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 25,
@@ -298,7 +394,11 @@ export const postsUsers = [
   //     image: "../src/assets/hora y musica.png",
   //     timePosted: "7hr ago",
   //     hashtags: ["#rebranding", "#coffeeshop", "#design"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 26,
@@ -310,7 +410,11 @@ export const postsUsers = [
   //     image: "../src/assets/huye.jpeg",
   //     timePosted: "8hr ago",
   //     hashtags: ["#pixelart", "#futuristic", "#city"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 27,
@@ -322,7 +426,11 @@ export const postsUsers = [
   //     image: "../src/assets/ilustracion asia.jpg",
   //     timePosted: "1hr ago",
   //     hashtags: ["#2Danimation", "#lines", "#experimental"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 28,
@@ -334,7 +442,11 @@ export const postsUsers = [
   //     image: "../src/assets/ilustracion cuervo cafe.jpg",
   //     timePosted: "4hr ago",
   //     hashtags: ["#menudesign", "#restaurant", "#graphicdesign"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 29,
@@ -346,7 +458,11 @@ export const postsUsers = [
   //     image: "../src/assets/la cumbre escarlata.jpg",
   //     timePosted: "3hr ago",
   //     hashtags: ["#childrensbook", "#illustration", "#kidsart"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 30,
@@ -358,7 +474,11 @@ export const postsUsers = [
   //     image: "../src/assets/la joven de la perla.jpeg",
   //     timePosted: "7hr ago",
   //     hashtags: ["#spaceship", "#scifi", "#3Danimation"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 31,
@@ -370,7 +490,11 @@ export const postsUsers = [
   //     image: "../src/assets/la noche.jpg",
   //     timePosted: "2hr ago",
   //     hashtags: ["#socialmedia", "#templates", "#graphicdesign"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 32,
@@ -382,7 +506,11 @@ export const postsUsers = [
   //     image: "../src/assets/lady jessica.jpg",
   //     timePosted: "5hr ago",
   //     hashtags: ["#pixelart", "#cyberpunk", "#retro"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 33,
@@ -394,7 +522,11 @@ export const postsUsers = [
   //     image: "../src/assets/m&m.jpeg",
   //     timePosted: "4hr ago",
   //     hashtags: ["#webdesign", "#fashion", "#ecommerce"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 34,
@@ -406,7 +538,11 @@ export const postsUsers = [
   //     image: "../src/assets/Mockup repetido.png",
   //     timePosted: "6hr ago",
   //     hashtags: ["#3Dmodeling", "#castle", "#gameart"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 35,
@@ -418,7 +554,11 @@ export const postsUsers = [
   //     image: "../src/assets/movie.jpeg",
   //     timePosted: "1hr ago",
   //     hashtags: ["#botanicalart", "#sketches", "#nature"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 36,
@@ -430,7 +570,11 @@ export const postsUsers = [
   //     image: "../src/assets/natalie 2.jpg",
   //     timePosted: "3hr ago",
   //     hashtags: ["#businesscard", "#creativedesign", "#sleek"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 37,
@@ -442,7 +586,11 @@ export const postsUsers = [
   //     image: "../src/assets/paradise 2_Mesa de trabajo 1.jpg",
   //     timePosted: "7hr ago",
   //     hashtags: ["#pixelart", "#forest", "#magic"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 38,
@@ -454,7 +602,11 @@ export const postsUsers = [
   //     image: "../src/assets/poño.jpeg",
   //     timePosted: "2hr ago",
   //     hashtags: ["#storyboard", "#animation", "#commercial"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 39,
@@ -466,7 +618,11 @@ export const postsUsers = [
   //     image: "../src/assets/possesion.jpg",
   //     timePosted: "4hr ago",
   //     hashtags: ["#brochure", "#healthandwellness", "#graphicdesign"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 40,
@@ -478,7 +634,11 @@ export const postsUsers = [
   //     image: "../src/assets/poster de serantia con el logo.jpg",
   //     timePosted: "6hr ago",
   //     hashtags: ["#2Danimation", "#characteranimation", "#running"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 41,
@@ -490,7 +650,11 @@ export const postsUsers = [
   //     image: "../src/assets/rudedam.jpeg",
   //     timePosted: "8hr ago",
   //     hashtags: ["#mixedmedia", "#poetry", "#bookcover"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 42,
@@ -502,7 +666,11 @@ export const postsUsers = [
   //     image: "../src/assets/sin ojos.jpg",
   //     timePosted: "3hr ago",
   //     hashtags: ["#infographic", "#education", "#design"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 43,
@@ -514,7 +682,11 @@ export const postsUsers = [
   //     image: "../src/assets/sketch.jpeg",
   //     timePosted: "7hr ago",
   //     hashtags: ["#spaceship", "#3Dmodeling", "#gameart"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 44,
@@ -526,7 +698,11 @@ export const postsUsers = [
   //     image: "../src/assets/sketch2.jpeg",
   //     timePosted: "4hr ago",
   //     hashtags: ["#sketch", "#architecture", "#historicbuilding"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 45,
@@ -538,7 +714,11 @@ export const postsUsers = [
   //     image: "../src/assets/ojoslen.jpeg",
   //     timePosted: "2hr ago",
   //     hashtags: ["#GIFanimation", "#mobileapp", "#UIdesign"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 46,
@@ -550,7 +730,11 @@ export const postsUsers = [
   //     image: "../src/assets/terror.jpeg",
   //     timePosted: "5hr ago",
   //     hashtags: ["#logo", "#startup", "#techdesign"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 47,
@@ -562,7 +746,11 @@ export const postsUsers = [
   //     image: "../src/assets/towns brand.png",
   //     timePosted: "8hr ago",
   //     hashtags: ["#3Danimation", "#forestcreature", "#lighting"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 48,
@@ -574,7 +762,11 @@ export const postsUsers = [
   //     image: "../src/assets/whitplash.jpeg",
   //     timePosted: "6hr ago",
   //     hashtags: ["#portraitpainting", "#historicalfigure", "#emotion"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 49,
@@ -586,7 +778,11 @@ export const postsUsers = [
   //     image: "../src/assets/zorris.jpeg",
   //     timePosted: "4hr ago",
   //     hashtags: ["#caranimation", "#shortfilm", "#animation"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   },
   //   {
   //     id: 50,
@@ -598,7 +794,11 @@ export const postsUsers = [
   //     image: "../src/assets/ajenda.jpeg",
   //     timePosted: "5hr ago",
   //     hashtags: ["#poster", "#charity", "#graphicdesign"],
-  //     state: "Follow"
+  //     state: "Follow",
+  //     likes: 0,
+  //     comments: 0,
+  //     favorites: 0,
+  //     send: 0
   //   }
   // ];
   

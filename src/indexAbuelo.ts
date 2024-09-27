@@ -23,16 +23,13 @@ class AppContainer extends HTMLElement  {
             userPostCards.setAttribute(Attribute.image, user.image);
             userPostCards.setAttribute(Attribute.timeposted, String( user.timePosted));
             userPostCards.setAttribute(Attribute.hashtags, user.hashtags.join(", "));
+            userPostCards.setAttribute(Attribute.likes, String(user.likes));
+            userPostCards.setAttribute(Attribute.comments, String(user.comments));
+            userPostCards.setAttribute(Attribute.favorites, String(user.favorites));
+            userPostCards.setAttribute(Attribute.send, String(user.send));
             this.userPostList.push(userPostCards);
         })
-        // hashtags.forEach(hashtag=>  {
-        //     const hashtagsCard = this.ownerDocument.createElement("bar-lateral") as BarLateral;
-        //     hashtagsCard.setAttribute(Attribute2.titleitem, hashtag);
-        //     hashtagsCard.setAttribute(Attribute2.itemone, hashtag);
-        //     hashtagsCard.setAttribute(Attribute2.itemtwo, hashtag);
-        //     hashtagsCard.setAttribute(Attribute2.itemthree, hashtag);
-        //     this.userHashtagsList.push(hashtagsCard);
-        // })
+      
     }
 
     connectedCallback() {
@@ -48,12 +45,16 @@ class AppContainer extends HTMLElement  {
              <link rel="stylesheet" href="/src/index.css">
            
             <nav-component></nav-component>
+           
             <section class="containers">
                 <div class="container-postcards"></div>
                 <div class="container-barLaterals">
                     <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
                     <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                 </div>
+                <div class="addPost">
+                <p>+</p>
+            </div>
             </section>
             
             `;
@@ -63,15 +64,6 @@ class AppContainer extends HTMLElement  {
             this.userPostList.forEach((post) =>  {
                 containerPost?.appendChild(post);
             });
-
-            //BARRA LATERAL
-            // const containerBar = this.shadowRoot?.querySelector('.container-barLaterals')
-            // for (let i = 0; i < 3; i++) {
-            //     containerBar?.appendChild(this.userHashtagsList[i]); 
-            // }
-            
-           
-       
         }
        
     }

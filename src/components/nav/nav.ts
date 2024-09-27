@@ -17,18 +17,14 @@ class Nav extends HTMLElement  {
         this.render();
         const bars = this.shadowRoot?.querySelector('.bars') as HTMLElement;
         bars.addEventListener('click', () => {
-            console.log('funciona');
+           
             
             const iconsResponsive = this.shadowRoot?.querySelector('.icons-responsive') as HTMLElement;
            
             if (iconsResponsive?.classList.contains('active')) {
-                iconsResponsive?.classList.replace('active', 'inactive'); 
-                console.log('funciones');
-                
+                iconsResponsive?.classList.replace('active', 'inactive');   
             }else {
-                iconsResponsive?.classList.replace('inactive', 'active');
-                console.log('nope');
-                 
+                iconsResponsive?.classList.replace('inactive', 'active'); 
             }
         });
         
@@ -151,7 +147,12 @@ class Nav extends HTMLElement  {
                     </ul>
                 </div>
             </div>
-                
+             <div class="bar-responsive">
+                <p>All</p>
+                <p>Following</p>
+                <p>New</p>
+            </div>
+             
           
             `;
         }
