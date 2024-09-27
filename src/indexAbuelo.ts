@@ -1,5 +1,5 @@
 import * as components from './components/indexPadre'
-import  {imageArray} from './components/data-banner1/data'
+import  {imageArray} from './data-banner1/data'
 import './components/post1/post1'
 import './components/footer/footer'
 import './components/banner1/banner1'

@@ -101,76 +101,67 @@ h2  {
 
 
 
-/* @media (max-width: 768px)  {
+ @media (max-width: 768px)  {
+ .icon2
+ {
+    display: none;
+ }
+ .icon{
+    color: #FFF;
+    display: flex;
+   margin-top: -2rem;
+   margin-left: 72%;
+}
+ .post hr {
+   display: none;
+}
+.button button
+{
+    display: none;
+}
+input {
+    flex-grow: 1;
+    border: none;
+  
+    background-color:#6B43A0; 
+    border-bottom: 0.02rem solid white;
+   
+  }
+  .user-icon  {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    margin-left: -20rem;
+    margin-top:4rem ;
+}
 
-    .bars  {
-         display: block;
-         cursor: pointer;
-         margin-top: 1.3rem;
-         margin-left: 5%;
-    }
-    .bars .line  {
-     width: 35px;
-     height: 0.3rem;
-     border-radius: 1rem;
-     background-color: white;
-     margin: 6px 0px;
+.circle  {
+    background-color: white;
+    border-radius: 50%;
+    object-fit: cover; 
+    width: 50rem;
+    height: 4rem;
+    justify-content: center;
+    margin-left: 180%;
     
-    }
-    .first-icons, .third-icons  {
-     display: none;
-    }
-    .active-icons  {
-     display: block;
+}
+.user-icon svg  {
+    color: #361656;
+    margin-top: 0.99rem;
+    margin-left: 1rem;
     
-    }
-    #jobs svg {
-     margin-left: -1rem;
-    }
-    .active-icons li  {
-     padding: 0.2rem;
-     width: 8rem;
-     margin-top: 0.3rem;
-     margin-bottom: 0;
-    }
-    .active-icons ul  {
-     padding: 0.4rem;
-    
-    }
-   
-    .icons-responsive.inactive {
-     display: none;
-    }
-    .icons-responsive.active {
-     
-     position: absolute;
-     display: flex;   
-     justify-content: center;
-     align-items: center;
-     width: 100%;
-     position: fixed;
-     margin-top: 5rem;
-     background-color: #6624849a;
-    }
-   
-    .search-bar input {
-     width: 12rem;
-     padding: 0 4rem ;
-    }
-    .search-bar svg  {
-     margin-left: 2rem;
  }
- .circle  {
-     width: 50px;
-     height: 50px;
-     justify-content: center;
-     margin-left: 40%;
+ .social-post
+ {
+    margin-left: 40%;
  }
- .user-icon svg  {
-     margin-top: 0;
-     margin-left: 0.30rem;
-     width: 40px;
+ .post
+ {
+    margin-left: auto;
  }
- 
- 
-  */
+ .part2
+ { margin-left: -135%;
+    margin-top: 3rem;
+
+ }
+}
