@@ -19,8 +19,13 @@
     flex-direction: column; 
     justify-content: center; 
     align-items: center;
-    margin-right: 1rem;
     margin-top: 0.9rem;
+    width: 40%;
+}
+.stateUser  {
+    display: flex;
+    gap: 1rem;
+    width: 60%;
 }
 .category  {
     font-family: "Hind Guntur", sans-serif;
@@ -198,5 +203,13 @@
     gap: 2rem;
     margin-top: 0.5rem;
 }
+
+}
+
+@media (max-width: 900px)  {  
+    .stateUser {
+        width: 10%;
+        gap: 0.3rem;
+    }
 
 }

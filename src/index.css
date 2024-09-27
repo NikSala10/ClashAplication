@@ -90,3 +90,10 @@
 
  
 }
+
+@media (max-width: 1110px)  {  
+    .container-barLaterals  {
+        left: 78%;
+       }
+
+}

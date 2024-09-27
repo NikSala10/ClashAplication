@@ -64,6 +64,28 @@ class PostCard extends HTMLElement  {
     connectedCallback() { 
         
         this.render();
+        const state = this.shadowRoot?.querySelector('.state') as HTMLElement;
+        if (state) {
+            state.addEventListener('click', () => {
+                if (state.textContent === 'Follow') {
+                    state.textContent = 'Following';
+                } else {
+                    state.textContent = 'Follow';  
+                }
+            });
+        };
+
+        const state2 = this.shadowRoot?.querySelector('.state2') as HTMLElement;
+        if (state2) {
+            state2.addEventListener('click', () => {
+                if (state2.textContent === 'Follow') {
+                    state2.textContent = 'Following';
+                } else {
+                    state2.textContent = 'Follow';  
+                }
+            });
+        }
+
         let counterLikes = [0];
         const likesButton = this.shadowRoot?.querySelector('#like') as HTMLElement;
         const p = this.shadowRoot?.querySelector('#likeCount')as HTMLElement;
@@ -125,13 +147,14 @@ class PostCard extends HTMLElement  {
                                 <h4 class="username2">${this.username ? this.username : 'Not found'}</h4>
                             </div>
                             <div class="nacate3">
-                                  <p class="state2">${this.state ? this.state : 'Not found'}</p>
+                                  <p class="state2">${this.state ? this.state : 'Follow'}</p>
                             </div>
                         </div>
-                        
-                        <h4 class="username">${this.username ? this.username : 'Not found'}</h4>
-                        <p class="state">${this.state ? this.state : 'Not found'}</p>
-                        <p class="time-post"> ${this.timeposted ? this.timeposted : 'Not found'}</p>
+                        <div class="stateUser">
+                            <h4 class="username">${this.username ? this.username : 'Not found'}</h4>
+                            <p class="state">${this.state ? this.state : 'Follow'}</p>
+                            <p class="time-post"> ${this.timeposted ? this.timeposted : 'Not found'}</p>
+                        </div>
                     </div>
                     <p class="description">${this.description ? this.description : 'Not found'}</p>
                     <p class="hashtags">${this.hashtags ? this.hashtags : 'Not found'}</p>
