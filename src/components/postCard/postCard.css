@@ -206,10 +206,31 @@
 
 }
 
-@media (max-width: 900px)  {  
+@media (max-width: 1110px)  {  
     .stateUser {
-        width: 10%;
-        gap: 0.3rem;
+        width: 5%1;
+        gap: 0.5rem;
+        font-size: 14px;
+        display: block;
+    }
+    .nacate h4  {
+        font-size: 18px;
+    }
+    .nacate p  {
+        font-size: 14px;
+    }
+    .nacate  {
+        width: 50%;
+    }
+    .username {
+        font-size: 15px;
+    }
+    .time-post {
+        display: none;
+    }
+    .state  {
+        margin-top: 0.5rem;
+        margin-left: 4.5rem;
     }
 
 }
