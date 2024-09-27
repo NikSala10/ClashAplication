@@ -16,12 +16,11 @@
 }
 .container-barLaterals  {  
     width: 40%;
-
-    width: 40%; 
     height: auto; 
     overflow-y: auto;
-    left: 67%;
+    left: 60%;
 }
+
 .bar-responsive  {
     display: none;
 }
