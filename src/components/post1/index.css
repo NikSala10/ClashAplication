@@ -116,6 +116,7 @@ h2  {
     display: flex;
     width: 100%;
     justify-content: center;
+    padding-top: 5rem;
 }
 .part2{
    padding: 1rem;
@@ -164,7 +165,7 @@ input {
     width: 4rem;
     display: flex;
     align-items: center;
-    margin-top:4rem ;
+   margin-top: 0;
     
 }
 
@@ -185,7 +186,7 @@ input {
  .part2
  { 
     margin-left: 15.5%;
-    margin-top: 3rem;
+    margin-top: 0;
     margin-right: 2.5rem;
  }
  .post {
@@ -194,9 +195,13 @@ input {
  }
  .social-post {
     width: 10%;
+   
  }
  #galery  {
     margin-top: 0.7rem;
+ }
+ h2   {
+    margin-top: 0;
  }
 }
 

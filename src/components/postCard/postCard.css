@@ -1,0 +1,236 @@
+.card   {
+    background-color: #8258BD;
+    width: 70%;
+    padding: 1.8rem;
+    margin-bottom: 5rem;
+    border-radius: 1rem;
+}
+.name  {
+    font-family: "Hind Guntur", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.nacate  {
+    display: block;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    margin-top: 0.9rem;
+    width: 40%;
+}
+.stateUser  {
+    display: flex;
+    gap: 1rem;
+    width: 60%;
+}
+.category  {
+    font-family: "Hind Guntur", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: white;
+    font-size: 15px;
+    margin-top: 0;
+}
+
+.circle-img  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+#img-user {
+    width: 4.5rem; 
+    height: 4.5rem; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
+.username  {
+    font-family: "Hind Guntur", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 0;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+.part-user  {
+    display: flex;
+    gap: 1rem;
+}
+
+.state  {
+    font-family: "Hind Guntur", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: white;
+    cursor: pointer;
+}
+.time-post { 
+    font-family: "Hind Guntur", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: white;
+    font-size: 14px;
+    margin-top: 1rem;
+}
+.img-post  {
+    border-radius: 0.5rem;
+    width: 100%;
+    
+}
+.description  {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: white;
+    font-size: 15px;
+}
+.hashtags  {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: white;
+    font-size: 15px;
+}
+.post-icons  {
+    margin-top: 1rem;
+    gap: 3.5rem;
+    display: flex;
+}
+.post-icons svg   {
+    color: #CAC1E4;
+    cursor: pointer;
+}
+.counter  {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.counter p  {
+    color: #CAC1E4;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.nacate1  {
+    display: none;
+}
+
+
+@media (max-width: 768px)  { 
+    .card   {
+        width: 72%;
+        margin-left: 8%;
+        margin-bottom: 2rem;
+    }
+    .category {
+        display: none;
+    }
+    .username  {
+        display: none;
+    }
+    .username2  {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-family: "Hind Guntur", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        color: white;
+        font-size: 13px;
+        cursor: pointer;
+    }
+    .name  {
+        font-size: 18px;
+    }
+    .time-post {
+        margin-top: 1.5rem;
+        margin-left: 0.5rem;
+        font-size: 12px;
+    }
+   .nacate  {
+    display: none;
+   }
+   .nacate2 { 
+    display: block;
+    width: 85%;
+   }
+   #img-user {
+    width: 3.8rem; 
+    height: 3.8rem; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
+.nacate1  {
+    display: flex;
+    width: 50%;
+}
+.status2  {
+    font-family: "Hind Guntur", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: white;
+    cursor: pointer;
+    margin-left: 3rem;
+    margin-top: 0.1rem;
+    cursor: pointer;
+}
+.state  {
+    display: none;
+}
+.nacate3  {
+    width: 15%;
+}
+.description  {
+    font-size: 15px;
+}
+.hashtags  {
+    font-size: 15px;
+}
+.counter svg   {
+    width: 20px;
+    gap: 0.6rem;
+}
+.counter p  {
+    font-size: 13px;
+
+}
+
+.post-icons  {
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+}
+
+@media (max-width: 1110px)  {  
+    .stateUser {
+        width: 5%;
+        gap: 0.5rem;
+        font-size: 14px;
+        display: block;
+    }
+    .nacate h4  {
+        font-size: 18px;
+    }
+    .nacate p  {
+        font-size: 14px;
+    }
+    .nacate  {
+        width: 50%;
+    }
+    .username {
+        font-size: 15px;
+    }
+    .time-post {
+        display: none;
+    }
+    .state  {
+        margin-top: 0.5rem;
+        margin-left: 4.5rem;
+    }
+
+}

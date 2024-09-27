@@ -1,0 +1,251 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+.navegation  {
+    display: flex;
+    width: 100%;
+    height: 5rem;
+    background-color: #652484;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    z-index: 1000;
+}
+.logo  {
+    justify-content: center;
+    width: 8%;
+    margin-left: 2rem;
+}
+.logo svg  {
+    margin-top: 0.7rem;
+}
+.bars  {
+    display: none;
+}
+.first-icons  ul {
+    display: flex;
+    margin-top: 1.6rem;
+    justify-content: space-between;
+}
+
+.first-icons  {
+    width: 20%;
+}
+ul li {
+    display: flex; 
+    justify-content: center;
+    text-align: center;  
+}
+a  {
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 14px;
+    padding: 0.4rem 0.6rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+    transition: all 0.3s ease; 
+    min-width: 5rem;
+}
+ul  {
+    gap: 2rem;
+}
+li  {
+   
+    border-bottom: 2px solid transparent;
+}
+li:hover  {
+   
+    border-bottom: 2px solid rgb(255, 255, 255);
+}
+a:hover {
+    
+    font-weight: 700;
+    font-style: normal;
+}
+svg  {
+    color: white;
+    cursor: pointer;
+}
+
+.search-bar  {
+    display: flex;
+    width: 30%;
+    align-items: center;
+    position: relative;
+    margin-left: 3rem;
+    margin-right: 2rem;
+}
+.search-bar svg  {
+    color: #652484;
+    position: absolute;
+    margin-left: 3rem;
+}
+.search-bar input  {
+    border: none;
+    height: 2.5rem;
+    width: 26rem;
+    border-radius: 50px;
+    outline: none;
+    padding: 0 5rem ;
+    cursor: text;
+    color:#652484 ;
+}
+.third-icons  {
+    width: 23%;
+    padding: 0 2rem;
+
+}
+.third-icons ul  {
+    display: flex;
+    margin-top: 1.5rem;
+    justify-content: space-between;
+    
+}
+.third-icons ul a {
+    min-width: 6rem;
+}
+
+.user-icon  {
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+
+.circle  {
+    background-color: white;
+    border-radius: 50%;
+    object-fit: cover; 
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    margin-left: 65%;
+    
+}
+.user-icon svg  {
+    color: #361656;
+    margin-top: 0.2rem;
+    margin-left: 0.25rem;
+}
+.bars  {
+    display: none;
+}
+.active-icons  {
+    display: none;
+}
+.bar-responsive  {
+    display: none;
+}
+hr {
+    display: none;
+}
+@media (max-width: 768px)  {
+
+   .bars  {
+        display: block;
+        cursor: pointer;
+        margin-top: 1.3rem;
+        margin-left: 5%;
+   }
+   .bars .line  {
+    width: 35px;
+    height: 0.3rem;
+    border-radius: 1rem;
+    background-color: white;
+    margin: 6px 0px;
+   
+   }
+   .first-icons, .third-icons  {
+    display: none;
+   }
+   .active-icons  {
+    display: block;
+   
+   }
+   #jobs svg {
+    margin-left: -1rem;
+   }
+   .active-icons li  {
+    padding: 0.2rem;
+    width: 8rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0;
+   }
+   .active-icons ul  {
+    padding: 0.4rem;
+   
+   }
+  
+   .icons-responsive.inactive {
+    display: none;
+   }
+   .icons-responsive.active {
+    
+    position: absolute;
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    margin-top: 5rem;
+    background-color: #652484;
+    z-index: 1000;
+   }
+  
+   .search-bar input {
+    width: 12rem;
+    padding: 0 4rem ;
+   }
+   .search-bar svg  {
+    margin-left: 2rem;
+}
+.circle  {
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    margin-left: 40%;
+}
+.user-icon svg  {
+    margin-top: 0;
+    margin-left: 0.30rem;
+    width: 40px;
+}
+
+.bar-responsive  {
+    display: flex;
+    position: relative;
+    top: 17rem;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin-left: 5%;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    z-index: 999;
+   }
+   .bar-responsive p  {
+    width: 25%;
+    align-items: center;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-size: 19px;
+    font-style: normal;
+    color: white;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+   }
+   .bar-responsive p:hover  {
+        border-bottom: 2px solid rgb(255, 255, 255);
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+   }
+  
+}
