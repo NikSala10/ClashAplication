@@ -111,6 +111,8 @@ h2  {
     display: flex;
    margin-top: -2rem;
    margin-left: 72%;
+   width:45%;
+   height:45% ;
 }
  .post hr {
    display: none;
@@ -157,7 +159,7 @@ input {
  }
  .post
  {
-    margin-left: auto;
+    margin-left: 20%;
  }
  .part2
  { margin-left: -135%;
