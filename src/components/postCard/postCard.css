@@ -168,7 +168,7 @@
     display: flex;
     width: 50%;
 }
-.state2  {
+.status2  {
     font-family: "Hind Guntur", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -176,7 +176,7 @@
     cursor: pointer;
     margin-left: 3rem;
     margin-top: 0.1rem;
-   
+    cursor: pointer;
 }
 .state  {
     display: none;
@@ -208,7 +208,7 @@
 
 @media (max-width: 1110px)  {  
     .stateUser {
-        width: 5%1;
+        width: 5%;
         gap: 0.5rem;
         font-size: 14px;
         display: block;

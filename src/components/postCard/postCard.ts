@@ -75,26 +75,31 @@ class PostCard extends HTMLElement  {
             });
         };
 
-        const state2 = this.shadowRoot?.querySelector('.state2') as HTMLElement;
-        if (state2) {
-            state2.addEventListener('click', () => {
-                if (state2.textContent === 'Follow') {
-                    state2.textContent = 'Following';
+        const status = this.shadowRoot?.querySelector('.status2') as HTMLElement;
+        if (status) {
+            status.addEventListener('click', () => {
+                if (status.textContent === 'Follow') {
+                    status.textContent = 'Following';
                 } else {
-                    state2.textContent = 'Follow';  
+                    status.textContent = 'Follow';  
                 }
             });
         }
 
         let counterLikes = [0];
         const likesButton = this.shadowRoot?.querySelector('#like') as HTMLElement;
-        const p = this.shadowRoot?.querySelector('#likeCount')as HTMLElement;
-        const svg = this.shadowRoot?.querySelector('.icon')as HTMLElement;
+        const p = this.shadowRoot?.querySelector('#likeCount') as HTMLElement;
+        const svg = this.shadowRoot?.querySelector('.icon') as HTMLElement;
+        
         likesButton.addEventListener('click', () => { 
-            counterLikes[0] += 1;
+            if (counterLikes[0] === 0) {
+                counterLikes[0] = 1;
+                svg.style.color = '#FFFFFF';
+            } else {
+                counterLikes[0] = 0;
+                svg.style.color = ''; 
+            }
             p.textContent = `${counterLikes[0]}`;
-            svg.style.color = '#652484'
-            
         });
 
         let counterComments = [0];
@@ -104,16 +109,20 @@ class PostCard extends HTMLElement  {
             counterComments[0] += 1;
             pComments.textContent = `${counterComments[0]}`;
         });
-
         let counterFavorites = [0];
         const favoritesButton = this.shadowRoot?.querySelector('#favorite') as HTMLElement;
-        const pFavorites = this.shadowRoot?.querySelector('#favoriteCount')as HTMLElement;
-        const svgFavorites = this.shadowRoot?.querySelector('.icon3')as HTMLElement;
+        const pFavorites = this.shadowRoot?.querySelector('#favoriteCount') as HTMLElement;
+        const svgFavorites = this.shadowRoot?.querySelector('.icon3') as HTMLElement;
+        
         favoritesButton.addEventListener('click', () => { 
-            counterFavorites[0] += 1;
+            if (counterFavorites[0] === 0) {
+                counterFavorites[0] = 1;
+                svgFavorites.style.color = '#FFFFFF';
+            } else {
+                counterFavorites[0] = 0;
+                svgFavorites.style.color = ''; 
+            }
             pFavorites.textContent = `${counterFavorites[0]}`;
-            svgFavorites.style.color = '#652484'
-            
         });
 
         let counterSend = [0];
@@ -147,7 +156,7 @@ class PostCard extends HTMLElement  {
                                 <h4 class="username2">${this.username ? this.username : 'Not found'}</h4>
                             </div>
                             <div class="nacate3">
-                                  <p class="state2">${this.state ? this.state : 'Follow'}</p>
+                                  <p class="status2">${this.state ? this.state : 'Follow'}</p>
                             </div>
                         </div>
                         <div class="stateUser">
