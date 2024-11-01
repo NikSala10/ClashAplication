@@ -64,6 +64,8 @@ class PostCard extends HTMLElement  {
     connectedCallback() { 
         
         this.render();
+
+        // Cambiar state de follow a following, de following a follow
         const state = this.shadowRoot?.querySelector('.state') as HTMLElement;
         if (state) {
             state.addEventListener('click', () => {

@@ -119,7 +119,10 @@
 .nacate1  {
     display: none;
 }
-
+#logOut  {
+    margin-top: 15rem;
+    position: fixed;
+}
 
 @media (max-width: 768px)  { 
     .card   {

@@ -1,21 +1,42 @@
 const path = require('path');
 
 module.exports = {
-entry: './src/indexAbuelo.ts',
-module: {
+  entry: './src/indexAbuelo.ts',
+  mode: "development",
+  
+  module: {
     rules: [
-    {
+      {
+        test: /\.css$/i,
+        use: ["css-loader"],
+      },
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
-    },
+      },
+      {
+				test: /\.(png|jpeg|gif|jpg)$/i,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+							outputPath: '/images',
+						},
+					},
+				],
+			},
     ],
-},
-resolve: {
+    
+  },
+  
+  resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-},
-output: {
+  },
+  output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-},
+  },
+  
 };
