@@ -1,0 +1,21 @@
+
+.post-icons  {
+    margin-top: 1rem;
+    gap: 3.5rem;
+    display: flex;
+}
+.post-icons svg   {
+    color: #CAC1E4;
+    cursor: pointer;
+}
+.counter  {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.counter p  {
+    color: #CAC1E4;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}

@@ -10,6 +10,7 @@ import  '../components/barLateral/barLateral'
 import '../components/nav/nav'
 import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
+import '../components/comments/comments'
 
 class Dashboard extends HTMLElement  {
     imagesBanner: Banner1[] = [];
@@ -57,16 +58,16 @@ class Dashboard extends HTMLElement  {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/Components/banner1/index.css">
              <link rel="stylesheet" href="../src/components/postCard/postCard.css">
-             <link rel="stylesheet" href="../index.css">
-             
-           
+           <link rel="stylesheet" href="/src/index.css">
             <nav-component></nav-component>
              <button id="logOut">Cerrar Sesion</button>
            <post-1></post-1>
           
            <div class="container"></div>
             <section class="containers">
-                <div class="container-postcards"></div>
+                <div class="container-postcards">
+                    <comment-component></comment-component>
+                </div>
                 <div class="container-barLaterals">
                     <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
                     <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
@@ -89,6 +90,7 @@ class Dashboard extends HTMLElement  {
             this.imagesBanner.forEach(img => {
             container?.appendChild(img);
             });
+
 
             const logOut = this.shadowRoot?.querySelector('#logOut');
             logOut?.addEventListener('click', this.logout);

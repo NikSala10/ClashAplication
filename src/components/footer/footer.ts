@@ -103,10 +103,10 @@ class Footer extends HTMLElement  {
                             </div>
                             <ul >
                                 <li> <a href="#">Instagram</a></li>
-                                <li> <a href="#">X</a></li>
-                                <li> <a href="#">pinterest</a></li>
-                                <li> <a href="#">facebook</a></li>
-                                <li> <a href="#">linkedin</a></li>
+                                <li id="x"> <a href="#">X</a></li>
+                                <li> <a href="#">Pinterest</a></li>
+                                <li> <a href="#">Facebook</a></li>
+                                <li> <a href="#">Linkedin</a></li>
                             </ul>
                         </div>
             </div>

@@ -1,0 +1,36 @@
+.card   {
+    background-color: #8258BD;
+    width: 78%;
+    padding: 1.8rem;
+    margin-bottom: 5rem;
+    border-radius: 1rem;
+}
+
+.img-post  {
+    border-radius: 0.5rem;
+    width: 100%;
+    
+}
+
+.hashtags  {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: white;
+    font-size: 15px;
+}
+
+@media (max-width: 768px)  { 
+    .card   {
+        width: 72%;
+        margin-left: 8%;
+        margin-bottom: 2rem;
+    }
+
+.nacate3  {
+    width: 15%;
+}
+
+
+
+}

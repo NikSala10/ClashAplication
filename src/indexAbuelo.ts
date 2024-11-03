@@ -1,6 +1,7 @@
 import './screens/register';
 import './screens/login'
 import './screens/dahsboard';
+import './screens/account';
 import { addObserver, appState } from './store/store';
 import { Screens } from './types/store';
 
@@ -32,6 +33,10 @@ class AppContainer extends HTMLElement {
 				case Screens.DASHBOARD:
 					const dashboard = this.ownerDocument.createElement('app-dashboard');
 					this.shadowRoot.appendChild(dashboard);
+					break;
+				case Screens.ACCOUNT:
+					const account = this.ownerDocument.createElement('app-account');
+					this.shadowRoot.appendChild(account);
 					break;
 
 				default:

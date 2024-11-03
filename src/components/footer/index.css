@@ -30,7 +30,9 @@
     margin-top: 2rem;
 
 }
-
+#x  {
+    font-size: 22px;
+}
 
 
 h3 {
@@ -62,10 +64,11 @@ a:hover {
     gap: 0rem;
     display: grid;
     margin-left: 2rem;
-    margin-top: -8.6rem;
+    margin-top: -10.5rem;
 }
-
-
+.social-section li  {
+    margin-bottom: 0.4rem;
+}
 
 .copyright {
     text-align: center;
@@ -76,7 +79,7 @@ a:hover {
 .icono{
     flex-direction: column; 
     display: flex;
-    gap: 0.7rem;
+    gap: 1rem;
     margin-top:-1rem;
 
 }

@@ -13,3 +13,10 @@ export const setUserCredentials = (user: string) => {
 		payload: user,
 	};
 };
+
+export const setOpenCloseScreen = (modalScreen: Number) => {
+	return {
+		action: Actions.OPENCLOSESCREEN,
+		payload: modalScreen,
+	};
+};

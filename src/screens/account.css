@@ -1,0 +1,40 @@
+.container-barLaterals {
+    width: 40%;
+    position: sticky;
+    top: 10rem; 
+    height: 100vh;
+    overflow-y: auto;
+    transition: top 0.3s ease;
+}
+.containers{
+    height: auto;
+}
+.account-components{
+    position: relative;
+    height: auto;
+}
+.account-components-post{
+    position: relative;
+}
+.hide{
+    display: none;
+}
+
+.add-Post{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.437);
+}
+.edit-account{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.437);
+}

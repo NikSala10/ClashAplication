@@ -23,17 +23,6 @@ export const imageArray = [
         id: 6,
         img: '/src/assets/el fauno.jpg'   
      },
-     {
-         id: 7,
-         img: '/src/assets/expreciones de serantia.jpg'   
-     },
-     {
-         id: 8,
-        img: '/src/assets/fondo 2 teo.jpg'
-     },
-     {
-         id: 9,
-         img: '/src/assets/tridi.png'
-     },
+    
      
 ];
