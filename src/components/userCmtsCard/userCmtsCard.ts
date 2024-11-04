@@ -34,12 +34,7 @@ class UserCommentsCard extends HTMLElement  {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/userCmtsCard/userCmtsCard.css">
-                 <div class="user-img">
-                    <img src="${this.imgprofile}" alt="">
-                    <p id="username">${this.username}</p>
-                    <p id="timeadd">${this.timeaddcomment}</p>
-                    <p id="description">${this.description}</p>
-                </div>
+               
             `;
         }
     }

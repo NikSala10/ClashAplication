@@ -123,7 +123,12 @@
     margin-top: 15rem;
     position: fixed;
 }
-
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
 @media (max-width: 768px)  { 
     .card   {
         width: 72%;

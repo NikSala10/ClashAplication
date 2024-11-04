@@ -22,6 +22,77 @@ class PostIcons extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
+        this.render();
+
+        // Cambiar state de follow a following, de following a follow
+        const state = this.shadowRoot?.querySelector('.state') as HTMLElement;
+        if (state) {
+            state.addEventListener('click', () => {
+                if (state.textContent === 'Follow') {
+                    state.textContent = 'Following';
+                } else {
+                    state.textContent = 'Follow';  
+                }
+            });
+        };
+
+        const status = this.shadowRoot?.querySelector('.status2') as HTMLElement;
+        if (status) {
+            status.addEventListener('click', () => {
+                if (status.textContent === 'Follow') {
+                    status.textContent = 'Following';
+                } else {
+                    status.textContent = 'Follow';  
+                }
+            });
+        }
+
+        let counterLikes = [0];
+        const likesButton = this.shadowRoot?.querySelector('#like') as HTMLElement;
+        const p = this.shadowRoot?.querySelector('#likeCount') as HTMLElement;
+        const svg = this.shadowRoot?.querySelector('.icon') as HTMLElement;
+        
+        likesButton.addEventListener('click', () => { 
+            if (counterLikes[0] === 0) {
+                counterLikes[0] = 1;
+                svg.style.color = '#FFFFFF';
+            } else {
+                counterLikes[0] = 0;
+                svg.style.color = ''; 
+            }
+            p.textContent = `${counterLikes[0]}`;
+        });
+
+        let counterComments = [0];
+        const commentsButton = this.shadowRoot?.querySelector('#comment') as HTMLElement;
+        const pComments = this.shadowRoot?.querySelector('#commentCount')as HTMLElement;
+        commentsButton.addEventListener('click', () => { 
+            counterComments[0] += 1;
+            pComments.textContent = `${counterComments[0]}`;
+        });
+        let counterFavorites = [0];
+        const favoritesButton = this.shadowRoot?.querySelector('#favorite') as HTMLElement;
+        const pFavorites = this.shadowRoot?.querySelector('#favoriteCount') as HTMLElement;
+        const svgFavorites = this.shadowRoot?.querySelector('.icon3') as HTMLElement;
+        
+        favoritesButton.addEventListener('click', () => { 
+            if (counterFavorites[0] === 0) {
+                counterFavorites[0] = 1;
+                svgFavorites.style.color = '#FFFFFF';
+            } else {
+                counterFavorites[0] = 0;
+                svgFavorites.style.color = ''; 
+            }
+            pFavorites.textContent = `${counterFavorites[0]}`;
+        });
+
+        let counterSend = [0];
+        const sendButton = this.shadowRoot?.querySelector('#send') as HTMLElement;
+        const pSend = this.shadowRoot?.querySelector('#sendCount')as HTMLElement;
+        sendButton.addEventListener('click', () => { 
+            counterSend[0] += 1;
+            pSend.textContent = `${counterSend[0]}`;
+        });
 	}
 
 
@@ -78,6 +149,7 @@ class PostIcons extends HTMLElement {
                 </div>
 			`;
             
+        
 		}
 	}
 }

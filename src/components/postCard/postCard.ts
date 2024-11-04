@@ -1,3 +1,5 @@
+
+import Comments, {CommentsAttribute} from "../comments/comments";
 export enum AttributePostCard  { 
     'imguser' = 'imguser',
     'name' = 'name',
@@ -28,10 +30,12 @@ class PostCard extends HTMLElement  {
     comments?: number;
     favorites?: number;
     send?: number;
-
+    showComent?: boolean;
+    
     constructor()  {
         super();
         this.attachShadow( {mode: 'open'})
+        this.showComent = false;
     }
 
     static get observedAttributes() {
@@ -196,10 +200,39 @@ class PostCard extends HTMLElement  {
                             <p id="sendCount">${this.send || this.send==0 ? this.send : 'Not found'}</p>
                         </div>
                     </div>
+                    <div id="comment-post" class"hide">
+                        
+                    </div>
                 </div>
                
             `;
+            const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
+            commentpost.className = "hide"
+            const comments = this.ownerDocument.createElement("comment-component") as Comments;
+            comments.setAttribute(CommentsAttribute.imgprofile, '');
+            comments.setAttribute(CommentsAttribute.username, 'user');
+            comments.setAttribute(CommentsAttribute.timeaddcomment, 'h');
+            comments.setAttribute(CommentsAttribute.description, '');
+            comments.setAttribute(CommentsAttribute.showinput, 'true');
+            commentpost.appendChild(comments)
+            const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
+    
+            comment.addEventListener('click', ()=>{
+                if (!this.showComent) {
+                    commentpost.className = "show"
+                    this.showComent = true
+                    
+                } else {
+                    comments.setAttribute(CommentsAttribute.showinput, 'false');
+                    comments.render()
+                }
+                    
+            })
+
+            
         }
+
+
     }
 };
 
