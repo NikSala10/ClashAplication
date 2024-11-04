@@ -23,7 +23,9 @@ class AddPost extends HTMLElement  {
             
              <div class="container-modal">
                  <btn-component color="red" label="X" id="close-modal"></btn-component>
+                 
              </div>
+            
             	
             `;
             
