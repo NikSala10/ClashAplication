@@ -72,9 +72,10 @@ class Account extends HTMLElement {
                             <div class="user-text-contact">
                                 <h3 id="name-user">Yeliani</h3>
                                 <p id="username">@yeli</p>
-
-                                <p id="creative">Creative</p>
-
+                                <div id="create">
+                                    <p id="creative">Creative</p>
+                                    <p id="category">Illustrator</p>
+                                </div>
                                 <h3>Contact Information</h3>
                                 <p id="email">@gamil</p>
 
