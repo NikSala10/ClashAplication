@@ -11,6 +11,7 @@ import '../components/nav/nav'
 import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
+import { appState } from '../store/store'
 
 
 class Dashboard extends HTMLElement  {
@@ -65,8 +66,6 @@ class Dashboard extends HTMLElement  {
             <nav-component></nav-component>
              <button id="logOut">Cerrar Sesion</button>
            <post-1></post-1>
-
-          
            <div class="container"></div>
             <section class="containers">
                 <div class="add-Post hide">
@@ -100,6 +99,27 @@ class Dashboard extends HTMLElement  {
 
             const logOut = this.shadowRoot?.querySelector('#logOut');
             logOut?.addEventListener('click', this.logout);
+
+            console.log(appState);
+            
+
+            if (appState.modalScreen[0]) {
+                const add = this.shadowRoot?.querySelector('.add-Post')
+                const container = this.shadowRoot?.querySelector('#account-components')
+                
+                if (add && container) {
+                    add.className = "add-Post"
+                    container.className = "account-components-post"
+                }
+            }else{
+                const add = this.shadowRoot?.querySelector('.edit-account')
+                const container = this.shadowRoot?.querySelector('#account-components')
+                
+                if (add && container) {
+                    add.className = "edit-account hide"
+                    container.className = "account-components"
+                }
+            }
         }
        
     }

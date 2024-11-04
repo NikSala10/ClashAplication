@@ -3,6 +3,7 @@
 }
 .containers {
     display: flex;
+    position: relative;
     padding-top: 5rem;
 }
 
@@ -55,6 +56,15 @@
 
 
 }
+.add-Post{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.437);
+}
 @media (max-width: 768px)  {
      
   .containers {
@@ -93,6 +103,8 @@
 
 
 }
+
+
 
  
 }

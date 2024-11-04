@@ -49,8 +49,6 @@ class Comments extends HTMLElement  {
                 </div>`
                 
             }
-            
-            console.log(texthtml);
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/comments/comments.css">
             <div class="all"> 

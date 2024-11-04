@@ -1,3 +1,7 @@
+import "../button/button";
+import { dispatch } from "../../store/store";
+import { setOpenCloseScreen } from "../../store/actions";
+
 class Post1 extends HTMLElement  {
     constructor()  {
         super();
@@ -48,16 +52,20 @@ class Post1 extends HTMLElement  {
                         <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4 4 0 0 1-.82 1H12a3 3 0 1 0 0-6z"/>
                         </svg>
                         <div class="button">
-                            <button type="submit">Post</button>
+                            <btn-component id="addPost1" color="#361656" label="Post"></btn-component>
                          </div>
                     </div>
                 </div>
-                 
-                
-                  
             </section>
             <hr>
         `;
+        const btnAddPost = this.shadowRoot.querySelector('#addPost1')
+
+        btnAddPost?.addEventListener('click', ()=>{
+            dispatch(setOpenCloseScreen(0))
+        })
+
+        
     }
 }
 }
