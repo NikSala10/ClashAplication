@@ -1,12 +1,12 @@
 import "../button/button";
-
+import { Post } from "../../types/post";
 import { dispatch } from "../../store/store";
 import { setOpenCloseScreen } from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
 import { addPost, getPosts } from '../../utils/firebase'
 import { hashtags } from "../../data/dataHashtags";
 
-const Post = { 
+const post: Post = { 
     description:'',
     hashtags:'',
 }
@@ -35,13 +35,18 @@ class AddPost extends HTMLElement  {
         this.render();
     }
 
-    changeDescription()  {
-
+    changeDescription(e: any)  {
+        post.description = e.target.value
     }
-   changeHashtags() {}
-   submitForm() {}
+   changeHashtags(e: any) {
+        post.hashtags = e.target.value
+}
+   submitForm() {
+        addPost(post);
+        alert('Post creado')
+   }
 
-    render() {
+    async render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/addPost/addPost.css">
@@ -87,7 +92,12 @@ class AddPost extends HTMLElement  {
         hashtags?.addEventListener('change', this.changeHashtags);
 
         const save = this.shadowRoot?.querySelector('#save');
-        save?.addEventListener('click', this.submitForm)
+        save?.addEventListener('click', this.submitForm);
+
+        // const posts = await getPosts()
+        // post?.forEach((post) => {
+            
+        // });
     }
 };
 

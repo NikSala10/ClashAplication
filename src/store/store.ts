@@ -27,6 +27,7 @@ onAuth();
 const initialState: AppState = {
 	screen: 'DASHBOARD',
 	user:   '',
+	post:  [],
 	modalScreen: [false, false],
 };
 
