@@ -4,11 +4,11 @@ import { dispatch } from "../../store/store";
 import { setOpenCloseScreen } from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
 import { addPost, getPosts } from '../../utils/firebase'
-import { hashtags } from "../../data/dataHashtags";
 import { uploadFile, getFile } from '../../utils/firebase';
 const post: Post = { 
     description:'',
     hashtags:'',
+    image:'',
 }
 
 export enum AttributeAddPost  { 
@@ -24,7 +24,7 @@ class AddPost extends HTMLElement  {
     description?: string;
     image?: string;
     hashtags?: string ;
-
+    selectedFile?: File;
     constructor()  {
         super();
         this.attachShadow( {mode: 'open'})
@@ -42,11 +42,37 @@ class AddPost extends HTMLElement  {
         post.hashtags = e.target.value
     }
    
+    async submitForm() {
+        const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
+        const file = img?.files?.[0]; 
+   
+        if (file) {
+            const uniqueFileName = await uploadFile(file, appState.user); 
+            const imageUrl: string | null = await getFile(uniqueFileName); 
+            
+            if (imageUrl) {
+                post.image = imageUrl; 
+            } else {
+                console.error("No se pudo obtener la URL de la imagen.");
+                alert("Error al obtener la URL de la imagen. Por favor intenta de nuevo.");
+                return; 
+            }
+        }
+    
+        await addPost(post);
+        alert('Post creado');
+        this.clearInputs();
+    }
 
-   submitForm() {
-        addPost(post);
-        alert('Post creado')
-   }
+    clearInputs() {
+        const descriptionInput = this.shadowRoot?.querySelector('#description') as HTMLInputElement;
+        const hashtagsInput = this.shadowRoot?.querySelector('#hashtags') as HTMLInputElement;
+        const imgInput = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
+
+        if (descriptionInput) descriptionInput.value = ''; 
+        if (hashtagsInput) hashtagsInput.value = ''; 
+        if (imgInput) imgInput.value = ''; 
+    }
 
     async render() {
         if (this.shadowRoot) {
@@ -93,15 +119,13 @@ class AddPost extends HTMLElement  {
         const hashtags = this.shadowRoot?.querySelector('#hashtags');
         hashtags?.addEventListener('change', this.changeHashtags);
 
-        const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
-        img?.addEventListener('change', () =>  {
-            const file = img.files?.[0];
-            if (file) uploadFile(file, appState.user);
+        const imgInput = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
+        imgInput?.addEventListener('change', () => {
+            this.selectedFile = imgInput.files?.[0] || undefined; 
         });
 
         const save = this.shadowRoot?.querySelector('#save');
-        save?.addEventListener('click', this.submitForm);
-
+        save?.addEventListener('click', this.submitForm.bind(this));
         // const posts = await getPosts()
         // post?.forEach((post) => {
             

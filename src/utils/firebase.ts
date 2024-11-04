@@ -30,6 +30,7 @@ export const addPost = async (post: any) =>  {
 	   const registerPost =  {
 		description: post.description,
 		hashtags: post.hashtags,
+		image: post.image,
 		dateadded: new Date().toISOString(),
 		userUid: appState.user
 	   }
@@ -99,29 +100,34 @@ export const loginUser = async (email: string, password: string) => {
 };
 
 export const uploadFile = async (file: File, id: string) => {
-	const { storage } = await getFirebaseInstance();
-	const { ref, uploadBytes } = await import('firebase/storage');
+    const { storage } = await getFirebaseInstance();
+    const { ref, uploadBytes } = await import('firebase/storage');
 
-	const storageRef = ref(storage, 'imagesPosts/' + id);
-	uploadBytes(storageRef, file).then((snapshot) => {
-		console.log('File uploaded');
-	});
+    // Genera un nombre único para la imagen usando un timestamp
+    const uniqueFileName = `${id}_${Date.now()}_${file.name}`;
+    const storageRef = ref(storage, 'imagesPosts/' + uniqueFileName);
+
+    await uploadBytes(storageRef, file).then((snapshot) => {
+        console.log('File uploaded');
+    });
+
+    // Devuelve el nombre único del archivo subido, si lo necesitas para futuras referencias
+    return uniqueFileName; // Opcional, si necesitas el nombre para obtener la URL
 };
 
-export const getFile = async (id: string) => {
-	const { storage } = await getFirebaseInstance();
-	const { ref, getDownloadURL } = await import('firebase/storage');
+export const getFile = async (id: string): Promise<string | null> => {
+    const { storage } = await getFirebaseInstance();
+    const { ref, getDownloadURL } = await import('firebase/storage');
 
-	const storageRef = ref(storage, 'imagesPosts/' + id);
-	const urlImg = await getDownloadURL(ref(storageRef))
-		.then((url) => {
-			return url;
-		})
-		.catch((error) => {
-			console.error(error);
-		});
-
-	return urlImg;
+    const storageRef = ref(storage, 'imagesPosts/' + id);
+    
+    try {
+        const url = await getDownloadURL(storageRef);
+        return url; // Devuelve la URL si tiene éxito
+    } catch (error) {
+        console.error(error);
+        return null; // Devuelve null si ocurre un error
+    }
 };
 
 export const uploadFileProfile = async (file: File, id: string) => {
