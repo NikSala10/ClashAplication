@@ -6,7 +6,14 @@
     position: relative;
     padding-top: 5rem;
 }
-
+.all{
+    margin: 0;
+    padding: 0;
+    height: auto;
+}
+.container-modal {
+    height: 100vh;
+}
 
 .container-postcards {
     width: 60%;
@@ -115,4 +122,3 @@
        }
 
 }
-

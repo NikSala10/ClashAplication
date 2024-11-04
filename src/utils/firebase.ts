@@ -16,40 +16,40 @@ export const getFirebaseInstance = async () =>  {
 };
 
 
-// export const addSong = async (song: any) =>  {
-//    try {
-//        const {db} = await getFirebaseInstance();
-//        const  { collection, addDoc} = await import('firebase/firestore');
-//        const songWithTimestamp = {
-//            ...song,
-//            dateadded: new Date().toISOString()
-//        };
+export const addPost = async (post: any) =>  {
+   try {
+       const {db} = await getFirebaseInstance();
+       const  { collection, addDoc} = await import('firebase/firestore');
+       const postWithTimestamp = {
+           ...post,
+           dateadded: new Date().toISOString()
+       };
        
-//        const where = collection(db, 'songs');
-//        await addDoc(where, songWithTimestamp);
-//        console.log('Se añadió con éxito');
+       const where = collection(db, 'posts');
+       await addDoc(where, postWithTimestamp);
+       console.log('Se añadió con éxito');
        
-//    } catch (error) {
-//    console.error('Error adding document', error);		
-//    }
-// }
+   } catch (error) {
+   console.error('Error adding document', error);		
+   }
+}
 
-// export const getSongs = async () =>  {
-//    try {
-//        const  {db} = await getFirebaseInstance();
-//        const  { collection, getDocs} = await import('firebase/firestore');
-//        const where = collection(db, 'songs');
-//        const querySnapshot = await getDocs(where);
-//        const data: any[] =[];
+export const getPosts = async () =>  {
+   try {
+       const  {db} = await getFirebaseInstance();
+       const  { collection, getDocs} = await import('firebase/firestore');
+       const where = collection(db, 'posts');
+       const querySnapshot = await getDocs(where);
+       const data: any[] =[];
 
-//        querySnapshot.forEach((doc) => {
-//            data.push(doc.data());
-//        });
-//        return data;
-//    } catch (error) {
-//    console.error('Error getting documents', error)
-//    }
-// }; 
+       querySnapshot.forEach((doc) => {
+           data.push(doc.data());
+       });
+       return data;
+   } catch (error) {
+   console.error('Error getting documents', error)
+   }
+}; 
 
 export const registerUser = async (credentials: any) => {
 	try {

@@ -2,6 +2,7 @@ import { dispatch } from '../../store/store';
 import { navigate } from '../../store/actions';
 import { registerUser } from '../../utils/firebase';
 import  {Screens} from '../../types/store'
+import { get } from 'firebase/database';
 class Nav extends HTMLElement  {
     constructor()  {
         super();
@@ -162,7 +163,7 @@ class Nav extends HTMLElement  {
 
             const redirectToLoginUsers = this.shadowRoot?.querySelector('.user-icon');
             redirectToLoginUsers?.addEventListener('click',() =>  {
-                dispatch(navigate(Screens.REGISTER))
+                // const isLogin = get('firebase:authUser:AIzaSyBHs0GipR5mD5cZ5sWe2AFEpleleNYq97I:[DEFAULT]', '')
             });
 		
         }

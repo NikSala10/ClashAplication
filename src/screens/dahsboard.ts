@@ -63,24 +63,28 @@ class Dashboard extends HTMLElement  {
             <link rel="stylesheet" href="../src/Components/banner1/index.css">
              <link rel="stylesheet" href="../src/components/postCard/postCard.css">
            <link rel="stylesheet" href="/src/index.css">
-            <nav-component></nav-component>
-             <button id="logOut">Cerrar Sesion</button>
-           <post-1></post-1>
-           <div class="container"></div>
-            <section class="containers">
-                <div class="add-Post hide">
+           <nav-component></nav-component>
+           <section class="all" id="all">
+                <div class="add-Post hide" id="add-Post">
                     <addpost-component></addpost-component> 
                 </div>
-                <div class="container-postcards"></div>
-                
-                <div class="container-barLaterals">
-                    <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
-                    <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
+                <button id="logOut">Cerrar Sesion</button>
+                <post-1></post-1>
+                <div class="container"></div>
+                <section class="containers" id="containers">
+                    
+                    <div class="container-postcards"></div>
+                    
+                    <div class="container-barLaterals">
+                        <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
+                        <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
+                    </div>
+                    <div class="addPost">
+                    <p>+</p>
                 </div>
-                <div class="addPost">
-                <p>+</p>
-            </div>
-            </section>
+                </section>
+           </section>
+             
             <foo-ter></foo-ter>
             `;
           
@@ -91,34 +95,26 @@ class Dashboard extends HTMLElement  {
             });
 
             //Banner1
-            const container = this.shadowRoot?.querySelector('.container');
+            const container = this.shadowRoot?.querySelector('#container');
             this.imagesBanner.forEach(img => {
-            container?.appendChild(img);
+                container?.appendChild(img);
             });
-
-
+            
+            
             const logOut = this.shadowRoot?.querySelector('#logOut');
             logOut?.addEventListener('click', this.logout);
-
+            
             console.log(appState);
             
+            const containerAll = this.shadowRoot?.querySelector('#all') as HTMLElement;
+            const add = this.shadowRoot?.querySelector('#add-Post') as HTMLElement;
 
             if (appState.modalScreen[0]) {
-                const add = this.shadowRoot?.querySelector('.add-Post')
-                const container = this.shadowRoot?.querySelector('#account-components')
-                
-                if (add && container) {
-                    add.className = "add-Post"
-                    container.className = "account-components-post"
-                }
+                add.className = "add-Post"
+                containerAll.className = "container-modal"
             }else{
-                const add = this.shadowRoot?.querySelector('.edit-account')
-                const container = this.shadowRoot?.querySelector('#account-components')
-                
-                if (add && container) {
-                    add.className = "edit-account hide"
-                    container.className = "account-components"
-                }
+                add.className = "add-Post hide"
+                containerAll.className = ""
             }
         }
        
