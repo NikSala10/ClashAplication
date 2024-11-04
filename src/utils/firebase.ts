@@ -59,6 +59,40 @@ export const getPosts = async () =>  {
    }
 }; 
 
+export const addHashtags = async (hashtag: any) =>  {
+	try {
+		const {db} = await getFirebaseInstance();
+		const  { collection, addDoc} = await import('firebase/firestore');
+ 
+		const where = collection(db, 'hashtags');
+		const registeHhashtag =  {
+		 hashtags: hashtag.hashtags,
+		}
+		await addDoc(where, registeHhashtag);
+		console.log('Se añadió el hashtags con éxito');
+		
+	} catch (error) {
+	console.error('Error adding document', error);		
+	}
+ }
+ 
+ export const getHashtags = async () =>  {
+	try {
+		const  {db} = await getFirebaseInstance();
+		const  { collection, getDocs} = await import('firebase/firestore');
+		const where = collection(db, 'hashtags');
+		const querySnapshot = await getDocs(where);
+		const data: any[] =[];
+ 
+		querySnapshot.forEach((doc) => {
+			data.push(doc.data());
+		});
+		return data;
+	} catch (error) {
+	console.error('Error getting documents', error)
+	}
+ }; 
+
 export const registerUser = async (credentials: any) => {
 	try {
 		const { auth, db } = await getFirebaseInstance();

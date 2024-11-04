@@ -3,12 +3,17 @@ import { Post } from "../../types/post";
 import { dispatch } from "../../store/store";
 import { setOpenCloseScreen } from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
-import { addPost, getPosts } from '../../utils/firebase'
+import { addPost, getPosts } from '../../utils/firebase';
+import { addHashtags, getHashtags} from '../../utils/firebase'
 import { uploadFile, getFile } from '../../utils/firebase';
 const post: Post = { 
     description:'',
     hashtags:'',
     image:'',
+}
+
+const hashtag =  {
+    hashtags:'',
 }
 
 export enum AttributeAddPost  { 
@@ -58,7 +63,7 @@ class AddPost extends HTMLElement  {
                 return; 
             }
         }
-    
+        await addHashtags(hashtag);
         await addPost(post);
         alert('Post creado');
         this.clearInputs();
