@@ -3,7 +3,7 @@ import { Post } from "../../types/post";
 import { dispatch } from "../../store/store";
 import { setOpenCloseScreen } from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
-import { addPost, getPosts } from '../../utils/firebase';
+import { addPost, getPosts, getUserData } from '../../utils/firebase';
 import { addHashtags, getHashtags} from '../../utils/firebase'
 import { uploadFile, getFile } from '../../utils/firebase';
 const post: Post = { 
@@ -36,15 +36,24 @@ class AddPost extends HTMLElement  {
         addObserver(this)
     }
 
-    connectedCallback() { 
+    async connectedCallback() {
+        // Llamar a la función para obtener los datos del usuario
+        const userId = appState.user; // Asumiendo que appState.user tiene el UID del usuario
+        const userData = await getUserData(userId);
+
+        if (userData) {
+            this.name = userData.name; // Obtener el nombre del usuario
+            this.imguser = userData.img; // Si tienes una propiedad de imagen
+        }
+
         this.render();
     }
-
     changeDescription(e: any)  {
         post.description = e.target.value
     }
    changeHashtags(e: any) {
-        post.hashtags = e.target.value
+        post.hashtags = e.target.value;
+        hashtag.hashtags = e.target.value
     }
    
     async submitForm() {
@@ -131,10 +140,7 @@ class AddPost extends HTMLElement  {
 
         const save = this.shadowRoot?.querySelector('#save');
         save?.addEventListener('click', this.submitForm.bind(this));
-        // const posts = await getPosts()
-        // post?.forEach((post) => {
-            
-        // });
+        
     }
 };
 

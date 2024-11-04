@@ -67,6 +67,7 @@ export const addHashtags = async (hashtag: any) =>  {
 		const where = collection(db, 'hashtags');
 		const registeHhashtag =  {
 		 hashtags: hashtag.hashtags,
+		 userUid: appState.user
 		}
 		await addDoc(where, registeHhashtag);
 		console.log('Se añadió el hashtags con éxito');
@@ -131,6 +132,26 @@ export const loginUser = async (email: string, password: string) => {
 	} catch (error) {
 		console.error(error);
 	}
+};
+
+export const getUserData = async (uid: string) => {
+    try {
+        const { db } = await getFirebaseInstance();
+        const { doc, getDoc } = await import('firebase/firestore');
+
+        const userRef = doc(db, 'users', uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+            return userSnap.data(); // Retornar los datos del usuario
+        } else {
+            console.log('No such document!');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error getting user data:', error);
+        return null;
+    }
 };
 
 export const uploadFile = async (file: File, id: string) => {
