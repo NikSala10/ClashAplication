@@ -5,7 +5,7 @@ import { setOpenCloseScreen } from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
 import { addPost, getPosts } from '../../utils/firebase'
 import { hashtags } from "../../data/dataHashtags";
-
+import { uploadFile, getFile } from '../../utils/firebase';
 const post: Post = { 
     description:'',
     hashtags:'',
@@ -40,7 +40,9 @@ class AddPost extends HTMLElement  {
     }
    changeHashtags(e: any) {
         post.hashtags = e.target.value
-}
+    }
+   
+
    submitForm() {
         addPost(post);
         alert('Post creado')
@@ -90,6 +92,12 @@ class AddPost extends HTMLElement  {
 
         const hashtags = this.shadowRoot?.querySelector('#hashtags');
         hashtags?.addEventListener('change', this.changeHashtags);
+
+        const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
+        img?.addEventListener('change', () =>  {
+            const file = img.files?.[0];
+            if (file) uploadFile(file, appState.user);
+        });
 
         const save = this.shadowRoot?.querySelector('#save');
         save?.addEventListener('click', this.submitForm);
