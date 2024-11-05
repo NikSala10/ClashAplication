@@ -86,7 +86,7 @@ class AddPost extends HTMLElement  {
             }
         }
         await addHashtags(hashtag);
-        await addPost(post);
+        const postId = await addPost(post);
         alert('Post creado');
         this.clearInputs();
     }

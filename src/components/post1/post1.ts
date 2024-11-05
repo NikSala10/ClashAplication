@@ -1,6 +1,8 @@
 import "../button/button";
-import { dispatch } from "../../store/store";
+import { dispatch, appState } from "../../store/store";
 import { setOpenCloseScreen } from "../../store/actions";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/store";
 
 class Post1 extends HTMLElement  {
     constructor()  {
@@ -62,7 +64,12 @@ class Post1 extends HTMLElement  {
         const btnAddPost = this.shadowRoot.querySelector('#addPost1')
 
         btnAddPost?.addEventListener('click', ()=>{
-            dispatch(setOpenCloseScreen(0))
+            if (appState.user) {
+                dispatch(setOpenCloseScreen(0))
+            }else{
+                alert('Para crear un post necesitas una cuenta')
+                dispatch(navigate(Screens.LOGIN))
+            }
         })
 
         

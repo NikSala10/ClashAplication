@@ -1,5 +1,19 @@
 import { addObserver, appState } from '../../store/store';
-import { addPost, getPosts, getUserData } from '../../utils/firebase';
+import { addComment, addPost, getPosts, getUserData } from '../../utils/firebase';
+import { dispatch } from "../../store/store";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/store";
+import { Comment } from '../../types/comment';
+import { uploadFile, getFile } from '../../utils/firebase';
+
+const comment: Comment = { 
+    imgprofile: '',
+    username: '',
+    timeaddcomment: '',
+    description: '', 
+    postid: ''
+}
+
 export enum CommentsAttribute  {
     'imgprofile' = 'imgprofile',
     'username' = 'username',
@@ -19,7 +33,7 @@ class Comments extends HTMLElement  {
     constructor()  {
         super();
         this.attachShadow( {mode: 'open'})
- 
+        addObserver(this);
     }
     static get observedAttributes() {
         return Object.values(CommentsAttribute);
@@ -34,6 +48,9 @@ class Comments extends HTMLElement  {
                 break;
         }
         this.render();
+    }
+    changeDescription(e: any)  {
+        comment.description = e.target.value
     }
     formatTimeAgo(dateadded:any) {
         if (!dateadded) return "Fecha no disponible";
@@ -59,6 +76,15 @@ class Comments extends HTMLElement  {
         }
 
         this.render();
+    }
+    submitForm() {
+        addComment(comment); // Añade el comentario con el `id` del post
+        this.clearInputs();
+    }
+
+    clearInputs() {
+        const descriptionInput = this.shadowRoot?.querySelector('#comment-input') as HTMLInputElement;
+        if (descriptionInput) descriptionInput.value = ''; 
     }
     render() {
         if (this.shadowRoot) {
@@ -93,13 +119,20 @@ class Comments extends HTMLElement  {
             const usernameHTML = this.shadowRoot.querySelector('#description') as HTMLElement
             const timeadd = this.shadowRoot.querySelector('#timeadd') as HTMLElement
             const descriptionhtml = this.shadowRoot.querySelector('#description') as HTMLElement
-            const comment = this.shadowRoot.querySelector('#comment-input') as HTMLInputElement
-            saveComment.addEventListener('click', (e)=>{
-                addComentHTML.className = 'add-comment hide'
-                usernameHTML.innerHTML = "username"
-                timeadd.innerHTML = "now"
-                descriptionhtml.innerHTML = comment.value
-            })
+            const descriptionInputValue = this.shadowRoot.querySelector('#comment-input') as HTMLInputElement
+            descriptionInputValue?.addEventListener('change', this.changeDescription);
+            saveComment.addEventListener('click', this.submitForm)
+                // if (appState.user) {
+                //     addComentHTML.className = 'add-comment hide'
+                //     usernameHTML.innerHTML = "username"
+                //     timeadd.innerHTML = "now"
+                //     descriptionhtml.innerHTML = descriptionInputValue.value
+                //     this.submitForm()
+                // }else{
+                //     alert('No puedes crear un comentario porque no tienes una cuenta de usuario')
+                //     dispatch(navigate(Screens.LOGIN))
+                // }
+            // })
             
             if(!this.showinput){
                 addComentHTML.className = 'add-comment hide'

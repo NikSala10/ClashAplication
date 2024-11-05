@@ -20,11 +20,10 @@ export const getFirebaseInstance = async () =>  {
    return  {db, auth, storage};
 };
 
-
 export const addPost = async (post: any) =>  {
    try {
-       const {db} = await getFirebaseInstance();
-       const  { collection, addDoc} = await import('firebase/firestore');
+       const { db } = await getFirebaseInstance();
+       const { collection, addDoc } = await import('firebase/firestore');
 
        const where = collection(db, 'posts');
 	   const registerPost =  {
@@ -37,18 +36,26 @@ export const addPost = async (post: any) =>  {
 		imgUser: post.imgUser,
 		name: post.name,
 		likes: post.likes,
-		comments:post.comments,
+		comments: post.comments,
 		favourites: post.favourites,
 		dateadded: new Date().toISOString(),
 		userUid: appState.user
-	   }
-       await addDoc(where, registerPost);
-       console.log('Se añadió con éxito');
+	   };
+
+       // Añadir el post y obtener la referencia del documento creado
+       const docRef = await addDoc(where, registerPost);
+
+       console.log('Se añadió con éxito el post con ID:', docRef.id);
+       
+       // Retorna el ID del documento creado
+       return docRef.id;
        
    } catch (error) {
-   console.error('Error adding document', error);		
+       console.error('Error al añadir el documento:', error);		
+       throw error; // Lanzar el error para manejarlo en la llamada
    }
-}
+};
+
 
 export const getPosts = async () =>  {
    try {
@@ -73,14 +80,15 @@ export const addComment = async (comment: any) =>  {
 		const  { collection, addDoc} = await import('firebase/firestore');
  
 		const where = collection(db, 'comments');
-		const registerPost =  {
+		const registerComment =  {
 		 description: comment.description,
-		 imgUser: comment.imgUser,
-		 name: comment.name,
+		 imgprofile: comment.imgprofile,
+		 username: comment.username,
 		 dateadded: new Date().toISOString(),
-		 userUid: appState.user
+		 userUid: appState.user,
+		 postid: comment.postid
 		}
-		await addDoc(where, registerPost);
+		await addDoc(where, registerComment);
 		console.log('Se añadió con éxito');
 		
 	} catch (error) {

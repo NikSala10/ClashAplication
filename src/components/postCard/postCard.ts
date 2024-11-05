@@ -1,5 +1,6 @@
 
 import Comments, {CommentsAttribute} from "../comments/comments";
+import { appState } from "../../store/store";
 import '../hashtags/hashtags'
 export enum AttributePostCard  { 
     'imguser' = 'imguser',
@@ -99,14 +100,18 @@ class PostCard extends HTMLElement  {
         const svg = this.shadowRoot?.querySelector('.icon') as HTMLElement;
         
         likesButton.addEventListener('click', () => { 
-            if (counterLikes[0] === 0) {
-                counterLikes[0] = 1;
-                svg.style.color = '#FFFFFF';
-            } else {
-                counterLikes[0] = 0;
-                svg.style.color = ''; 
+            if(appState.user){
+                if (counterLikes[0] === 0) {
+                    counterLikes[0] = 1;
+                    svg.style.color = '#FFFFFF';
+                } else {
+                    counterLikes[0] = 0;
+                    svg.style.color = ''; 
+                }
+                p.textContent = `${counterLikes[0]}`;
+            }else{
+                alert('No puedes dar like si no tienes una cuenta')
             }
-            p.textContent = `${counterLikes[0]}`;
         });
 
         let counterComments = [0];
@@ -122,14 +127,18 @@ class PostCard extends HTMLElement  {
         const svgFavorites = this.shadowRoot?.querySelector('.icon3') as HTMLElement;
         
         favoritesButton.addEventListener('click', () => { 
-            if (counterFavorites[0] === 0) {
-                counterFavorites[0] = 1;
-                svgFavorites.style.color = '#FFFFFF';
-            } else {
-                counterFavorites[0] = 0;
-                svgFavorites.style.color = ''; 
+            if(appState.user){
+                if (counterFavorites[0] === 0) {
+                    counterFavorites[0] = 1;
+                    svgFavorites.style.color = '#FFFFFF';
+                } else {
+                    counterFavorites[0] = 0;
+                    svgFavorites.style.color = ''; 
+                }
+                pFavorites.textContent = `${counterFavorites[0]}`;
+            }else {
+                alert('No puedes dar like si no tienes una cuenta')
             }
-            pFavorites.textContent = `${counterFavorites[0]}`;
         });
 
     }
