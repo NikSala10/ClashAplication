@@ -12,14 +12,15 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getPosts } from '../utils/firebase'
+import { getPosts, getUserData } from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setUserCredentials } from '../store/actions'
 
 class Dashboard extends HTMLElement  {
     imagesBanner: Banner1[] = [];
     userPostList: PostCard[] = []
-    userHashtagsList : BarLateral[] = []
+    userHashtagsList : BarLateral[] = [];
+    userData: { name?: string; confirmPassword?: string; } = {};
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -35,19 +36,20 @@ class Dashboard extends HTMLElement  {
     }
 
     async connectedCallback() {
-        
+        const userId = appState.user; 
+        const userData = await getUserData(userId);
         const posts = await getPosts();
         posts?.forEach(user=>  {
             const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
             // userPostCards.setAttribute(AttributePostCard.imguser, String( user.imgUser));
-            userPostCards.setAttribute(AttributePostCard.name, user.name);
+            userPostCards.setAttribute(AttributePostCard.name, userData?.name);
             userPostCards.setAttribute(AttributePostCard.username, user.username);
-            // userPostCards.setAttribute(AttributePostCard.category, user.category);
+            userPostCards.setAttribute(AttributePostCard.category, user.category);
             // userPostCards.setAttribute(AttributePostCard.state, user.state);
             userPostCards.setAttribute(AttributePostCard.description, user.description);
             userPostCards.setAttribute(AttributePostCard.image, user.image);
             userPostCards.setAttribute(AttributePostCard.timeposted, String( user.dateadded));
-            userPostCards.setAttribute(AttributePostCard.hashtags, user.hashtags.join(", "));
+            userPostCards.setAttribute(AttributePostCard.hashtags, user.hashtags)
             // userPostCards.setAttribute(AttributePostCard.likes, String(user.likes));
             // userPostCards.setAttribute(AttributePostCard.comments, String(user.comments));
             // userPostCards.setAttribute(AttributePostCard.favorites, String(user.favorites));

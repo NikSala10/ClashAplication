@@ -17,6 +17,9 @@ class Hashtags extends HTMLElement {
 	connectedCallback() {
 		this.render();
 	}
+	convertHashtagsStringToArray(hashtagsString: string) {
+		return hashtagsString ? hashtagsString.split(',') : [];
+	}
 
 
 	attributeChangedCallback(propName : AttributeHashtags, oldValue: string | undefined, newValue: string | undefined) {
@@ -24,7 +27,7 @@ class Hashtags extends HTMLElement {
 		switch (propName) {
             case AttributeHashtags.hashtags:
 				if (newValue) {
-					this.hashtags = JSON.parse(newValue) as string[];
+					this.hashtags = this.convertHashtagsStringToArray(newValue);
 				}
             break;
             
@@ -42,7 +45,7 @@ class Hashtags extends HTMLElement {
             const container = this.shadowRoot.querySelector('.hashtags')
 			this.hashtags?.forEach((hashtag)=>{
                 const hashtagHtml = this.ownerDocument.createElement("p");
-                hashtagHtml.innerHTML = `#${hashtag}`
+                hashtagHtml.innerHTML = `${hashtag}`
                 console.log();
                 
                 container?.appendChild(hashtagHtml)
