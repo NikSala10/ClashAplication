@@ -1,3 +1,5 @@
+import { addObserver, appState } from '../../store/store';
+import { addPost, getPosts, getUserData } from '../../utils/firebase';
 export enum CommentsAttribute  {
     'imgprofile' = 'imgprofile',
     'username' = 'username',
@@ -33,18 +35,40 @@ class Comments extends HTMLElement  {
         }
         this.render();
     }
+    formatTimeAgo(dateadded:any) {
+        if (!dateadded) return "Fecha no disponible";
+    
+        const now = new Date();
+        const date = new Date(dateadded); 
+    
+        const secondsElapsed = Math.floor((now.getTime() - date.getTime()) / 1000);
+    
+        if (secondsElapsed < 60) return `hace ${secondsElapsed}   s`;
+        if (secondsElapsed < 3600) return `hace ${Math.floor(secondsElapsed / 60)}  m`;
+        if (secondsElapsed < 86400) return `hace ${Math.floor(secondsElapsed / 3600)}   h`;
+        const daysElapsed = Math.floor(secondsElapsed / 86400);
+        return `hace ${daysElapsed}d`;
+    }
+    async connectedCallback() {
+        const userId = appState.user; 
+        const userData = await getUserData(userId);
+        console.log(userData);
+        if (userData) {
+            this.username = userData.name;
+            this.imgprofile = userData.img;         
+        }
 
-    connectedCallback() { 
         this.render();
     }
     render() {
         if (this.shadowRoot) {
             let texthtml = "" 
             if (this.username) {
-                texthtml = `<div class="user">
+                texthtml = `
+                <div class="user">
                     <img src="${this.imgprofile}" alt="">
                     <p id="username">${this.username}</p>
-                    <p id="timeadd">${this.timeaddcomment}</p>
+                    <p id="timeadd">${this.formatTimeAgo(this.timeaddcomment)}</p>
                     <p id="description">${this.description}</p>
                 </div>`
                 

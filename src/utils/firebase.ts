@@ -67,6 +67,43 @@ export const getPosts = async () =>  {
    }
 }; 
 
+export const addComment = async (comment: any) =>  {
+	try {
+		const {db} = await getFirebaseInstance();
+		const  { collection, addDoc} = await import('firebase/firestore');
+ 
+		const where = collection(db, 'comments');
+		const registerPost =  {
+		 description: comment.description,
+		 imgUser: comment.imgUser,
+		 name: comment.name,
+		 dateadded: new Date().toISOString(),
+		 userUid: appState.user
+		}
+		await addDoc(where, registerPost);
+		console.log('Se añadió con éxito');
+		
+	} catch (error) {
+	console.error('Error adding document', error);		
+	}
+ }
+ 
+ export const getComment = async () =>  {
+	try {
+		const  {db} = await getFirebaseInstance();
+		const  { collection, getDocs} = await import('firebase/firestore');
+		const where = collection(db, 'comments');
+		const querySnapshot = await getDocs(where);
+		const data: any[] =[];
+ 
+		querySnapshot.forEach((doc) => {
+			data.push(doc.data());
+		});
+		return data;
+	} catch (error) {
+	console.error('Error getting documents', error)
+	}
+ }; 
 export const addHashtags = async (hashtag: any) =>  {
 	try {
 		const {db} = await getFirebaseInstance();
