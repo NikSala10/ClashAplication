@@ -29,6 +29,7 @@ class Comments extends HTMLElement  {
     timeaddcomment?: String;
     description?: String
     showinput?: boolean
+    postid?: string; 
 
     constructor()  {
         super();
@@ -78,7 +79,12 @@ class Comments extends HTMLElement  {
         this.render();
     }
     submitForm() {
-        addComment(comment); // Añade el comentario con el `id` del post
+        if (!this.postid) {
+            console.error("No se especificó el ID del post para el comentario.");
+            return;
+        }
+    
+        addComment(comment, this.postid); // Añade el comentario con el `id` del post
         this.clearInputs();
     }
 

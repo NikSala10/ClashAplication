@@ -74,7 +74,7 @@ export const getPosts = async () =>  {
    }
 }; 
 
-export const addComment = async (comment: any) =>  {
+export const addComment = async (comment: any, postid: string) =>  {
 	try {
 		const {db} = await getFirebaseInstance();
 		const  { collection, addDoc} = await import('firebase/firestore');
@@ -86,7 +86,7 @@ export const addComment = async (comment: any) =>  {
 		 username: comment.username,
 		 dateadded: new Date().toISOString(),
 		 userUid: appState.user,
-		 postid: comment.postid
+		 postid
 		}
 		await addDoc(where, registerComment);
 		console.log('Se añadió con éxito');
