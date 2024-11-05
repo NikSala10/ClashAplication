@@ -166,9 +166,9 @@ class Nav extends HTMLElement  {
             const redirectToLoginUsers = this.shadowRoot?.querySelector('.user-icon');
             redirectToLoginUsers?.addEventListener('click',() =>  {
                 if (userId) {
-                    dispatch(navigate(Screens.LOGIN))
-                }else{
                     dispatch(navigate(Screens.ACCOUNT))
+                }else{
+                    dispatch(navigate(Screens.LOGIN))
                 }
             });
 		

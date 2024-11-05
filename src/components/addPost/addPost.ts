@@ -47,10 +47,15 @@ class AddPost extends HTMLElement  {
     async connectedCallback() {
         const userId = appState.user; 
         const userData = await getUserData(userId);
-
+        console.log(userData);
         if (userData) {
             this.name = userData.name;
             this.imguser = userData.img; 
+
+            post.username = `@${this.name?.replace(/\s+/g, '').toLowerCase()}`;
+
+            console.log(post.username);
+            
         }
 
         this.render();

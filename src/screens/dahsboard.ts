@@ -13,6 +13,8 @@ import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
 import { getPosts } from '../utils/firebase'
+import { dispatch } from '../store/store'
+import { setUserCredentials } from '../store/actions'
 
 class Dashboard extends HTMLElement  {
     imagesBanner: Banner1[] = [];
@@ -38,14 +40,14 @@ class Dashboard extends HTMLElement  {
         posts?.forEach(user=>  {
             const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
             // userPostCards.setAttribute(AttributePostCard.imguser, String( user.imgUser));
-            // userPostCards.setAttribute(AttributePostCard.name, user.name);
-            // userPostCards.setAttribute(AttributePostCard.username, user.username);
+            userPostCards.setAttribute(AttributePostCard.name, user.name);
+            userPostCards.setAttribute(AttributePostCard.username, user.username);
             // userPostCards.setAttribute(AttributePostCard.category, user.category);
             // userPostCards.setAttribute(AttributePostCard.state, user.state);
             userPostCards.setAttribute(AttributePostCard.description, user.description);
             userPostCards.setAttribute(AttributePostCard.image, user.image);
             userPostCards.setAttribute(AttributePostCard.timeposted, String( user.dateadded));
-            userPostCards.setAttribute(AttributePostCard.hashtags, user.hashtags);
+            userPostCards.setAttribute(AttributePostCard.hashtags, user.hashtags.join(", "));
             // userPostCards.setAttribute(AttributePostCard.likes, String(user.likes));
             // userPostCards.setAttribute(AttributePostCard.comments, String(user.comments));
             // userPostCards.setAttribute(AttributePostCard.favorites, String(user.favorites));
@@ -58,6 +60,7 @@ class Dashboard extends HTMLElement  {
 		indexedDB.deleteDatabase('firebase-heartbeat-database');
 		indexedDB.deleteDatabase('firebaseLocalStorageDb');
 		window.location.reload();
+        dispatch(setUserCredentials(''))
         alert('Ha cerrado sesión')
         
 	}

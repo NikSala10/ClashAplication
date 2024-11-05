@@ -1,5 +1,6 @@
 
 import Comments, {CommentsAttribute} from "../comments/comments";
+import '../hashtags/hashtags'
 export enum AttributePostCard  { 
     'imguser' = 'imguser',
     'name' = 'name',
@@ -177,7 +178,7 @@ class PostCard extends HTMLElement  {
                         </div>
                     </div>
                     <p class="description">${this.description ? this.description : 'Not found'}</p>
-                    <p class="hashtags">${this.hashtags ? this.hashtags : 'Not found'}</p>
+                    <hashtags-component hashtags='${this.hashtags ? this.hashtags : '[]'}'></hashtags-component>
                     <img class="img-post" src="${this.image ? this.image : 'Not found'}">
                     <div class="post-icons">
                         <div class="counter" id="like">
