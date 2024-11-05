@@ -10,6 +10,14 @@ const post: Post = {
     description:'',
     hashtags:'',
     image:'',
+    category: '',
+	state: false,
+	username: '',
+	imgUser: '',
+	name: '',
+	likes: 0,
+	comments: '',
+	favourites: 0
 }
 
 const hashtag =  {
@@ -37,13 +45,12 @@ class AddPost extends HTMLElement  {
     }
 
     async connectedCallback() {
-        // Llamar a la función para obtener los datos del usuario
-        const userId = appState.user; // Asumiendo que appState.user tiene el UID del usuario
+        const userId = appState.user; 
         const userData = await getUserData(userId);
 
         if (userData) {
-            this.name = userData.name; // Obtener el nombre del usuario
-            this.imguser = userData.img; // Si tienes una propiedad de imagen
+            this.name = userData.name;
+            this.imguser = userData.img; 
         }
 
         this.render();

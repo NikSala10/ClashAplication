@@ -1,5 +1,13 @@
 export interface Post {
 	description: string;
 	hashtags: string;
-	image: string
+	image: string,
+	category: string,
+	state: boolean,
+	username: string,
+	imgUser: string,
+	name: string,
+	likes: number,
+	comments: string,
+	favourites: number
 }

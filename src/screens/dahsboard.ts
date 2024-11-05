@@ -12,7 +12,7 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-
+import { getPosts } from '../utils/firebase'
 
 class Dashboard extends HTMLElement  {
     imagesBanner: Banner1[] = [];
@@ -28,26 +28,30 @@ class Dashboard extends HTMLElement  {
             imageArrayBanner1.setAttribute(Attribute.image, img.img);
             this.imagesBanner.push(imageArrayBanner1);
         });
-        postsUsers.forEach(user=>  {
-            const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
-            userPostCards.setAttribute(AttributePostCard.imguser, String( user.imgUser));
-            userPostCards.setAttribute(AttributePostCard.name, user.name);
-            userPostCards.setAttribute(AttributePostCard.username, user.username);
-            userPostCards.setAttribute(AttributePostCard.category, user.category);
-            userPostCards.setAttribute(AttributePostCard.state, user.state);
-            userPostCards.setAttribute(AttributePostCard.description, user.description);
-            userPostCards.setAttribute(AttributePostCard.image, user.image);
-            userPostCards.setAttribute(AttributePostCard.timeposted, String( user.timePosted));
-            userPostCards.setAttribute(AttributePostCard.hashtags, user.hashtags.join(", "));
-            userPostCards.setAttribute(AttributePostCard.likes, String(user.likes));
-            userPostCards.setAttribute(AttributePostCard.comments, String(user.comments));
-            userPostCards.setAttribute(AttributePostCard.favorites, String(user.favorites));
-            userPostCards.setAttribute(AttributePostCard.send, String(user.send));
-            this.userPostList.push(userPostCards);
-        })
+
+       
     }
 
-    connectedCallback() {
+    async connectedCallback() {
+        
+        const posts = await getPosts();
+        posts?.forEach(user=>  {
+            const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
+            // userPostCards.setAttribute(AttributePostCard.imguser, String( user.imgUser));
+            // userPostCards.setAttribute(AttributePostCard.name, user.name);
+            // userPostCards.setAttribute(AttributePostCard.username, user.username);
+            // userPostCards.setAttribute(AttributePostCard.category, user.category);
+            // userPostCards.setAttribute(AttributePostCard.state, user.state);
+            userPostCards.setAttribute(AttributePostCard.description, user.description);
+            userPostCards.setAttribute(AttributePostCard.image, user.image);
+            userPostCards.setAttribute(AttributePostCard.timeposted, String( user.dateadded));
+            userPostCards.setAttribute(AttributePostCard.hashtags, user.hashtags);
+            // userPostCards.setAttribute(AttributePostCard.likes, String(user.likes));
+            // userPostCards.setAttribute(AttributePostCard.comments, String(user.comments));
+            // userPostCards.setAttribute(AttributePostCard.favorites, String(user.favorites));
+            // userPostCards.setAttribute(AttributePostCard.send, String(user.send));
+            this.userPostList.push(userPostCards);
+        })
         this.render();
     }
     logout() {

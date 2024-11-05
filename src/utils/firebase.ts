@@ -31,6 +31,14 @@ export const addPost = async (post: any) =>  {
 		description: post.description,
 		hashtags: post.hashtags,
 		image: post.image,
+		category: post.category,
+		state: post.state,
+		username: post.username,
+		imgUser: post.imgUser,
+		name: post.name,
+		likes: post.likes,
+		comments:post.comments,
+		favourites: post.favourites,
 		dateadded: new Date().toISOString(),
 		userUid: appState.user
 	   }

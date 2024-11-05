@@ -2,7 +2,8 @@ import { dispatch } from '../../store/store';
 import { navigate } from '../../store/actions';
 import { registerUser } from '../../utils/firebase';
 import  {Screens} from '../../types/store'
-import { get } from 'firebase/database';
+import { appState } from '../../store/store';
+import { getUserData } from '../../utils/firebase';
 class Nav extends HTMLElement  {
     constructor()  {
         super();
@@ -18,9 +19,10 @@ class Nav extends HTMLElement  {
             this.render(); 
           }
     }
-    connectedCallback() { 
+    async connectedCallback() { 
         this.render();
         const bars = this.shadowRoot?.querySelector('.bars') as HTMLElement;
+        this.render();
         bars.addEventListener('click', () => {
            
             
@@ -34,8 +36,7 @@ class Nav extends HTMLElement  {
         });
         
     }
-     
-
+    
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
@@ -160,10 +161,15 @@ class Nav extends HTMLElement  {
              
           
             `;
+            const userId = appState.user; 
 
             const redirectToLoginUsers = this.shadowRoot?.querySelector('.user-icon');
             redirectToLoginUsers?.addEventListener('click',() =>  {
-                // const isLogin = get('firebase:authUser:AIzaSyBHs0GipR5mD5cZ5sWe2AFEpleleNYq97I:[DEFAULT]', '')
+                if (userId) {
+                    dispatch(navigate(Screens.LOGIN))
+                }else{
+                    dispatch(navigate(Screens.ACCOUNT))
+                }
             });
 		
         }
