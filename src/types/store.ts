@@ -5,7 +5,6 @@ export type AppState = {
 	user: '';
 	post: [];
 	modalScreen: Boolean[];
-	currentPostId?: string; 
 };
 
 export enum Screens {

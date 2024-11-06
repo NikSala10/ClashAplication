@@ -76,27 +76,27 @@ export const getPosts = async () =>  {
    }
 }; 
 
-export const addComment = async (postid: string, comments: Comment) => {
+export const addComment = async (comment: any, postid: string) =>  {
 	try {
-		const { db } = await getFirebaseInstance();
-		const { collection, addDoc, doc } = await import('firebase/firestore');
+		const {db} = await getFirebaseInstance();
+		const  { collection, addDoc} = await import('firebase/firestore');
  
-		// Creamos una referencia al post específico usando el postId
-		const postRef = doc(db, 'posts', postid);
-		const commentsCollection = collection(postRef, 'comments');
- 
-		// Añadimos el comentario a la colección de comentarios del post
-		await addDoc(commentsCollection, {
-			...comments,
-			timeaddcomment: new Date().toISOString()
-		});
- 
-		console.log('Comentario añadido con éxito al post con ID:', postid);
+		const where = collection(db, 'comments');
+		const registerComment =  {
+		 description: comment.description,
+		 imgprofile: comment.imgprofile,
+		 username: comment.username,
+		 dateadded: new Date().toISOString(),
+		 userUid: appState.user,
+		 postid
+		}
+		await addDoc(where, registerComment);
+		console.log('Se añadió con éxito');
+		
 	} catch (error) {
-		console.error('Error al añadir el comentario:', error);
-		throw error;
+	console.error('Error adding document', error);		
 	}
- };
+ }
  
  export const getComment = async () =>  {
 	try {

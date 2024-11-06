@@ -86,11 +86,7 @@ class AddPost extends HTMLElement  {
             }
         }
         await addHashtags(hashtag);
-        const postId = await addPost(post);  // Guardamos el `postId` retornado
-
-        if (postId) {
-            appState.currentPostId = postId;  // Guardamos el `postId` en el estado compartido
-        }
+        await addPost(post);
     
         alert('Post creado');
         this.clearInputs();

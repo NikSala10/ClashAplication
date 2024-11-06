@@ -1,10 +1,7 @@
 import { addObserver, appState } from '../../store/store';
 import { addComment, addPost, getPosts, getUserData } from '../../utils/firebase';
-import { dispatch } from "../../store/store";
-import { navigate } from "../../store/actions";
-import { Screens } from "../../types/store";
 import { Comment } from '../../types/comment';
-import { uploadFile, getFile } from '../../utils/firebase';
+
 
 const comment: Comment = { 
     imgprofile: '',
@@ -37,7 +34,6 @@ class Comments extends HTMLElement  {
         super();
         this.attachShadow( {mode: 'open'})
         addObserver(this)
-        
     }
     static get observedAttributes() {
         return Object.values(CommentsAttribute);
@@ -77,7 +73,7 @@ class Comments extends HTMLElement  {
             this.username = userData.name;
             this.imgprofile = userData.img;         
         }
-        this.postid = appState.currentPostId; 
+        // this.postid = appState.currentPostId; 
         this.render();
     }
     
@@ -86,14 +82,16 @@ class Comments extends HTMLElement  {
             console.error("ID del post no definido.");
             return;
         }
-
+    
         // Asignamos los valores del comentario
-        comment.postid = this.postid; 
+        comment.postid = String(this.postid); 
         comment.username = String(this.username || 'Anónimo');
         comment.imgprofile = this.imgprofile || '';
-
-        // Llamamos a la función para agregar el comentario al post
-        // await addComment(this.postid, comment);
+        comment.timeaddcomment = new Date().toISOString();  // Agregar tiempo actual
+    
+        // Enviar comentario como parte de un arreglo
+        console.log("Comentario a enviar: ", [comment]);  // Convertido en array
+        await addComment(this.postid, String([comment]));  // Pasando el comentario como un array
         this.clearInputs();
     }
 
@@ -137,8 +135,8 @@ class Comments extends HTMLElement  {
             const timeadd = this.shadowRoot.querySelector('#timeadd') as HTMLElement
             const descriptionhtml = this.shadowRoot.querySelector('#description') as HTMLElement
             const descriptionInputValue = this.shadowRoot.querySelector('#comment-input') as HTMLInputElement
-            descriptionInputValue?.addEventListener('change', this.changeDescription.bind(this));
-            saveComment.addEventListener('click', this.submitForm.bind(this))
+            descriptionInputValue?.addEventListener('change', this.changeDescription);
+            saveComment.addEventListener('click', this.submitForm)
                 // if (appState.user) {
                 //     addComentHTML.className = 'add-comment hide'
                 //     usernameHTML.innerHTML = "username"

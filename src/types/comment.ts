@@ -1,8 +1,7 @@
 export interface Comment {
-    postid: string,
-	imgprofile: string,
-    username: string,
-    timeaddcomment: string,
-    description: string,
-    
+    postid: string;
+    username: string;
+    imgprofile: string;
+    description: string;
+    timeaddcomment: string;  
 }

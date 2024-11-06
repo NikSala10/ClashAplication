@@ -1,11 +1,8 @@
-import * as components from '../components/indexPadre'
 import  {imageArray} from '../data/dataBanner'
 import '../components/post1/post1'
 import '../components/footer/footer'
 import '../components/banner1/banner1'
 import Banner1, {Attribute} from '../components/banner1/banner1';
-import  {postsUsers} from '../data/dataPost'
-import  {hashtags} from '../data/dataHashtags'
 import  '../components/barLateral/barLateral'
 import '../components/nav/nav'
 import PostCard, {AttributePostCard} from '../components/postCard/postCard';
@@ -36,28 +33,45 @@ class Dashboard extends HTMLElement  {
     }
 
     async connectedCallback() {
-        const userId = appState.user; 
-        const userData = await getUserData(userId);
+        this.render();  
+    
+        const userId = appState.user;
+        if (userId) {
+            const userData = await getUserData(userId);
+        }
+    
         const posts = await getPosts();
-        posts?.forEach(user=>  {
+        
+        for (const post of posts || []) {
+            let username = '';
+            let name = '';
+    
+            if (post.userUid) {
+                console.log('id: ', post.userUid);
+    
+                const userDataPost = await getUserData(post.userUid);
+                name = userDataPost?.name || '';
+                username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;
+            }
+    
             const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
-            // userPostCards.setAttribute(AttributePostCard.imguser, String( user.imgUser));
-            userPostCards.setAttribute(AttributePostCard.name, userData?.name);
-            userPostCards.setAttribute(AttributePostCard.username, user.username);
-            userPostCards.setAttribute(AttributePostCard.category, user.category);
-            // userPostCards.setAttribute(AttributePostCard.state, user.state);
-            userPostCards.setAttribute(AttributePostCard.description, user.description);
-            userPostCards.setAttribute(AttributePostCard.image, user.image);
-            userPostCards.setAttribute(AttributePostCard.timeposted, String( user.dateadded));
-            userPostCards.setAttribute(AttributePostCard.hashtags, user.hashtags)
-            // userPostCards.setAttribute(AttributePostCard.likes, String(user.likes));
-            // userPostCards.setAttribute(AttributePostCard.comments, String(user.comments));
-            // userPostCards.setAttribute(AttributePostCard.favorites, String(user.favorites));
-            // userPostCards.setAttribute(AttributePostCard.send, String(user.send));
+    
+            userPostCards.setAttribute(AttributePostCard.name, name);
+            userPostCards.setAttribute(AttributePostCard.username, username);
+            userPostCards.setAttribute(AttributePostCard.category, post.category);
+            userPostCards.setAttribute(AttributePostCard.description, post.description);
+            userPostCards.setAttribute(AttributePostCard.image, post.image);
+            userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
+            userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
+    
             this.userPostList.push(userPostCards);
-        })
+        }
+    
         this.render();
     }
+
+
+
     logout() {
 		indexedDB.deleteDatabase('firebase-heartbeat-database');
 		indexedDB.deleteDatabase('firebaseLocalStorageDb');
@@ -99,8 +113,10 @@ class Dashboard extends HTMLElement  {
           
             //POST
             const containerPost = this.shadowRoot?.querySelector('.container-postcards')
-            this.userPostList.forEach((post) =>  {
-                containerPost?.appendChild(post);
+            this.userPostList.forEach((postElement) =>  {
+                console.log(postElement);
+                
+                containerPost?.appendChild(postElement);
             });
 
             //Banner1
@@ -112,8 +128,7 @@ class Dashboard extends HTMLElement  {
             
             const logOut = this.shadowRoot?.querySelector('#logOut');
             logOut?.addEventListener('click', this.logout);
-            
-            console.log(appState);
+         
             
             const containerAll = this.shadowRoot?.querySelector('#all') as HTMLElement;
             const add = this.shadowRoot?.querySelector('#add-Post') as HTMLElement;
