@@ -76,7 +76,7 @@ export const getPosts = async () =>  {
    }
 }; 
 
-export const addComment = async (comment: any, postid: string) =>  {
+export const addComment = async (comment: any) =>  {
 	try {
 		const {db} = await getFirebaseInstance();
 		const  { collection, addDoc} = await import('firebase/firestore');
@@ -88,7 +88,7 @@ export const addComment = async (comment: any, postid: string) =>  {
 		 username: comment.username,
 		 dateadded: new Date().toISOString(),
 		 userUid: appState.user,
-		 postid
+		 postid: comment.postid,
 		}
 		await addDoc(where, registerComment);
 		console.log('Se añadió con éxito');
@@ -122,7 +122,8 @@ export const addHashtags = async (hashtag: any) =>  {
 		const where = collection(db, 'hashtags');
 		const registeHhashtag =  {
 		 hashtags: hashtag.hashtags,
-		 userUid: appState.user
+		 userUid: appState.user,
+		 dateadded: new Date().toISOString(),
 		}
 		await addDoc(where, registeHhashtag);
 		console.log('Se añadió el hashtags con éxito');
@@ -132,28 +133,29 @@ export const addHashtags = async (hashtag: any) =>  {
 	}
  }
  
- export const getHashtags = async () => { 
+ export const getHashtags = async (): Promise<string[]> => {
     try {
         const { db } = await getFirebaseInstance();
         const { collection, getDocs, query, orderBy, limit } = await import('firebase/firestore');
         
-        // Reemplaza 'hashtags' por el nombre de tu colección de hashtags
         const hashtagsCollection = collection(db, 'hashtags');
-        
-        // Ordena por el campo 'date' (debes tener un campo de tipo timestamp o similar)
-        const hashtagsQuery = query(hashtagsCollection, orderBy('date', 'desc'), limit(6)); // Muestra solo los 6 más recientes
-        
-        // Obtener los documentos
-        const querySnapshot = await getDocs(hashtagsQuery);
-        const data: any[] = [];
+        const recentHashtagsQuery = query(
+            hashtagsCollection,
+            orderBy('dateadded', 'desc'),  // Orden descendente por la fecha
+            limit(3)  // Limita a los 3 más recientes
+        );
+        const querySnapshot = await getDocs(recentHashtagsQuery);
+        const data: string[] = [];
         
         querySnapshot.forEach((doc) => {
-            data.push(doc.data());
+            const hashtags = doc.data().hashtags;
+            if (typeof hashtags === 'string') {
+                data.push(...hashtags.split(',').map(tag => tag.trim()));  // Convierte el string a array de hashtags
+            }
         });
-        
         return data;
     } catch (error) {
-        console.error('Error getting documents', error);
+        console.error('Error obteniendo hashtags:', error);
         return [];
     }
 };

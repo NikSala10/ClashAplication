@@ -9,7 +9,7 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getPosts, getUserData, getFiles, getHashtags } from '../utils/firebase'
+import { getPosts, getUserData, getFiles } from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setUserCredentials } from '../store/actions'
 
@@ -66,22 +66,7 @@ class Dashboard extends HTMLElement  {
             userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
     
             this.userPostList.push(userPostCards);
-        }
-
-        const latestHashtags = await getHashtags();
-
-        const containerHashtags = this.shadowRoot?.querySelector('.container-barLaterals');
-    
-        if (latestHashtags && containerHashtags) {
-            latestHashtags.forEach(hashtagData => {
-                const barLateralElement = this.ownerDocument.createElement("bar-lateral");
-                barLateralElement.setAttribute("titleitem", "Lastest");
-                barLateralElement.setAttribute("dataitem", hashtagData.hashtags);  
-
-                containerHashtags.appendChild(barLateralElement);
-            });
-        }
-    
+        }    
         this.render();
     }
 
@@ -114,7 +99,7 @@ class Dashboard extends HTMLElement  {
                     <div class="container-postcards"></div>
                     
                     <div class="container-barLaterals">
-                        <bar-lateral titleitem="Lastest" dataitem="hashtagData.hashtags"></bar-lateral>
+                        <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
                         <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                     </div>
                     <div class="addPost">

@@ -1,5 +1,6 @@
 import  {hashtags} from '../../data/dataHashtags'
 import  {dataCategories} from '../../data/dataCategories'
+import { getHashtags } from '../../utils/firebase';
 export enum Attribute2  { 
     'titleitem' = 'titleitem',
     'dataitem' = 'dataitem',
@@ -27,20 +28,23 @@ class BarLateral extends HTMLElement  {
        }
         this.render();
     }
-    connectedCallback() { 
-        if (this.dataitem == "hashtags") {
-            for (let i = 0; i < 3; i++) {
-                this.userList[i] = hashtags[i]
+    async connectedCallback() {
+        if (this.dataitem === 'hashtags') {
+            try {
+                const hashtagsFromFirebase = await getHashtags(); 
+    
+                // Toma solo los primeros tres hashtags
+                this.userList = hashtagsFromFirebase.slice(0, 3);
+            } catch (error) {
+                console.error('Error obteniendo hashtags:', error);
             }
+        } 
+    
+        if (this.dataitem === 'categories') {
+            this.userList = dataCategories.slice(0, 3);
         }
-        if (this.dataitem == "categories") {
-            for (let i = 0; i < 3; i++) {
-                this.userList[i] = dataCategories[i]
-            }
-        }
-        
+    
         this.render();
-       
     }
 
     render() {

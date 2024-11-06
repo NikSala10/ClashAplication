@@ -1,7 +1,9 @@
 import { addObserver, appState } from '../../store/store';
 import { addComment, addPost, getPosts, getUserData } from '../../utils/firebase';
+import { dispatch } from "../../store/store";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/store";
 import { Comment } from '../../types/comment';
-
 
 const comment: Comment = { 
     imgprofile: '',
@@ -18,28 +20,34 @@ export enum CommentsAttribute  {
     'description' = 'description',
     'showinput' = 'showinput',
     'postid' = 'postid'
- 
 }
 
 class Comments extends HTMLElement  {
-    postid?: string;
+ 
     imgprofile?: string;
-    username?: string;
-    timeaddcomment?: string;
-    description?: string
+    username?: String;
+    timeaddcomment?: String;
+    description?: String
     showinput?: boolean
-
+    postid?: String; 
 
     constructor()  {
         super();
         this.attachShadow( {mode: 'open'})
-        addObserver(this)
+        addObserver(this);
     }
     static get observedAttributes() {
         return Object.values(CommentsAttribute);
     }
     attributeChangedCallback(propName : CommentsAttribute, oldValue: string | undefined, newValue: string | undefined) {
         switch (propName) {
+            case CommentsAttribute.postid:
+                this.postid = newValue ;
+                if (newValue) {
+                    comment.postid = newValue
+                }
+                break;
+
             case CommentsAttribute.showinput:
                 this.showinput = newValue ? Boolean(newValue) : true;
                 break;
@@ -73,27 +81,23 @@ class Comments extends HTMLElement  {
             this.username = userData.name;
             this.imgprofile = userData.img;         
         }
-        // this.postid = appState.currentPostId; 
+
         this.render();
     }
-    
     async submitForm() {
-        if (!this.postid) {
-            console.error("ID del post no definido.");
-            return;
+        if (this.postid) {
+            await addComment(comment); 
+            this.clearInputs();
+        }else{
+            if (comment.postid) {
+                this.postid = comment.postid
+                await addComment(comment);   
+            }else{
+                alert('algo pasa con el id del post')
+            }
         }
-    
-        // Asignamos los valores del comentario
-        comment.postid = String(this.postid); 
-        comment.username = String(this.username || 'Anónimo');
-        comment.imgprofile = this.imgprofile || '';
-        comment.timeaddcomment = new Date().toISOString();  
-        await addComment(this.postid, String([comment]));  // Pasando el comentario como un array
         this.clearInputs();
     }
-
-
-
     clearInputs() {
         const descriptionInput = this.shadowRoot?.querySelector('#comment-input') as HTMLInputElement;
         if (descriptionInput) descriptionInput.value = ''; 
@@ -151,7 +155,6 @@ class Comments extends HTMLElement  {
             }
         }
     }
-
 };
 
 customElements.define('comment-component',Comments);
