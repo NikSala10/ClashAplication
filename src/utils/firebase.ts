@@ -132,23 +132,31 @@ export const addHashtags = async (hashtag: any) =>  {
 	}
  }
  
- export const getHashtags = async () =>  {
-	try {
-		const  {db} = await getFirebaseInstance();
-		const  { collection, getDocs} = await import('firebase/firestore');
-		const where = collection(db, 'hashtags');
-		const querySnapshot = await getDocs(where);
-		const data: any[] =[];
- 
-		querySnapshot.forEach((doc) => {
-			data.push(doc.data());
-		});
-		return data;
-	} catch (error) {
-	console.error('Error getting documents', error)
-	}
- }; 
-
+ export const getHashtags = async () => { 
+    try {
+        const { db } = await getFirebaseInstance();
+        const { collection, getDocs, query, orderBy, limit } = await import('firebase/firestore');
+        
+        // Reemplaza 'hashtags' por el nombre de tu colección de hashtags
+        const hashtagsCollection = collection(db, 'hashtags');
+        
+        // Ordena por el campo 'date' (debes tener un campo de tipo timestamp o similar)
+        const hashtagsQuery = query(hashtagsCollection, orderBy('date', 'desc'), limit(6)); // Muestra solo los 6 más recientes
+        
+        // Obtener los documentos
+        const querySnapshot = await getDocs(hashtagsQuery);
+        const data: any[] = [];
+        
+        querySnapshot.forEach((doc) => {
+            data.push(doc.data());
+        });
+        
+        return data;
+    } catch (error) {
+        console.error('Error getting documents', error);
+        return [];
+    }
+};
 export const registerUser = async (credentials: any) => {
 	try {
 		const { auth, db } = await getFirebaseInstance();
@@ -239,7 +247,25 @@ export const getFile = async (id: string): Promise<string | null> => {
         return null; // Devuelve null si ocurre un error
     }
 };
+export const getFiles = async (id: string): Promise<string[]> => {
+    const { storage } = await getFirebaseInstance();
+    const { ref, listAll, getDownloadURL } = await import('firebase/storage');
 
+    const storageRef = ref(storage, 'imagesPosts/' + id);
+    
+    try {
+        // Obtener una lista de archivos en el directorio
+        const result = await listAll(storageRef);
+
+        // Obtener las URLs de los archivos
+        const urls = await Promise.all(result.items.map(item => getDownloadURL(item)));
+        
+        return urls; // Devolvemos un array de URLs
+    } catch (error) {
+        console.error(error);
+        return []; // Si hay error, devolvemos un array vacío
+    }
+};
 export const uploadFileProfile = async (file: File, id: string) => {
 	const { storage } = await getFirebaseInstance();
 	const { ref, uploadBytes } = await import('firebase/storage');

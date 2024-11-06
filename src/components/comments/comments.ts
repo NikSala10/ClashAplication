@@ -87,10 +87,7 @@ class Comments extends HTMLElement  {
         comment.postid = String(this.postid); 
         comment.username = String(this.username || 'Anónimo');
         comment.imgprofile = this.imgprofile || '';
-        comment.timeaddcomment = new Date().toISOString();  // Agregar tiempo actual
-    
-        // Enviar comentario como parte de un arreglo
-        console.log("Comentario a enviar: ", [comment]);  // Convertido en array
+        comment.timeaddcomment = new Date().toISOString();  
         await addComment(this.postid, String([comment]));  // Pasando el comentario como un array
         this.clearInputs();
     }

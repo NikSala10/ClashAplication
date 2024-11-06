@@ -9,7 +9,7 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getPosts, getUserData } from '../utils/firebase'
+import { getPosts, getUserData, getFiles, getHashtags } from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setUserCredentials } from '../store/actions'
 
@@ -23,18 +23,21 @@ class Dashboard extends HTMLElement  {
         this.attachShadow({ mode: 'open' });
 
         
-        imageArray.forEach(img => {
-            const imageArrayBanner1 = this.ownerDocument.createElement("component-container") as Banner1;
-            imageArrayBanner1.setAttribute(Attribute.image, img.img);
-            this.imagesBanner.push(imageArrayBanner1);
-        });
+        
 
        
     }
 
     async connectedCallback() {
         this.render();  
-    
+        const imageUrls = await getFiles(this.id); 
+        const firstSixImages = imageUrls?.slice(0, 6) || []; 
+        firstSixImages.forEach(url => {
+            const imageArrayBanner1 = this.ownerDocument.createElement("component-container") as Banner1;
+            imageArrayBanner1.setAttribute(Attribute.image, url); 
+            this.imagesBanner.push(imageArrayBanner1); 
+        });
+
         const userId = appState.user;
         if (userId) {
             const userData = await getUserData(userId);
@@ -46,9 +49,7 @@ class Dashboard extends HTMLElement  {
             let username = '';
             let name = '';
     
-            if (post.userUid) {
-                console.log('id: ', post.userUid);
-    
+            if (post.userUid) {    
                 const userDataPost = await getUserData(post.userUid);
                 name = userDataPost?.name || '';
                 username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;
@@ -65,6 +66,20 @@ class Dashboard extends HTMLElement  {
             userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
     
             this.userPostList.push(userPostCards);
+        }
+
+        const latestHashtags = await getHashtags();
+
+        const containerHashtags = this.shadowRoot?.querySelector('.container-barLaterals');
+    
+        if (latestHashtags && containerHashtags) {
+            latestHashtags.forEach(hashtagData => {
+                const barLateralElement = this.ownerDocument.createElement("bar-lateral");
+                barLateralElement.setAttribute("titleitem", "Lastest");
+                barLateralElement.setAttribute("dataitem", hashtagData.hashtags);  
+
+                containerHashtags.appendChild(barLateralElement);
+            });
         }
     
         this.render();
@@ -99,7 +114,7 @@ class Dashboard extends HTMLElement  {
                     <div class="container-postcards"></div>
                     
                     <div class="container-barLaterals">
-                        <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
+                        <bar-lateral titleitem="Lastest" dataitem="hashtagData.hashtags"></bar-lateral>
                         <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                     </div>
                     <div class="addPost">
@@ -113,14 +128,12 @@ class Dashboard extends HTMLElement  {
           
             //POST
             const containerPost = this.shadowRoot?.querySelector('.container-postcards')
-            this.userPostList.forEach((postElement) =>  {
-                console.log(postElement);
-                
+            this.userPostList.forEach((postElement) =>  {   
                 containerPost?.appendChild(postElement);
             });
 
             //Banner1
-            const container = this.shadowRoot?.querySelector('#container');
+            const container = this.shadowRoot?.querySelector('.container');
             this.imagesBanner.forEach(img => {
                 container?.appendChild(img);
             });

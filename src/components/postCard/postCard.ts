@@ -162,13 +162,13 @@ class PostCard extends HTMLElement  {
     }
     render() {
         if (this.shadowRoot) {
+            const initialLetter = this.name ? this.name.charAt(0).toUpperCase() : ''; 
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/postCard/postCard.css">
            
                 <div class= "card">
                     <div class="part-user">
-                        <div  circle-img>
-                            <img id="img-user" src="${this.imguser ? this.imguser : 'Not found'}">
+                        <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}
                         </div>
                         
                         <div class="nacate">
@@ -190,9 +190,9 @@ class PostCard extends HTMLElement  {
                             <p class="time-post"> ${this.formatTimeAgo(this.timeposted)} </p>
                         </div>
                     </div>
-                    <p class="description">${this.description ? this.description : 'Not found'}</p>
-                    <hashtags-component hashtags='${this.hashtags ? this.hashtags : '[]'}'></hashtags-component>
-                    <img class="img-post" src="${this.image ? this.image : 'Not found'}">
+                    <p class="description">${this.description ? this.description : ''}</p>
+                    <hashtags-component hashtags='${this.hashtags ? this.hashtags : ''}'></hashtags-component>
+                    <img class="img-post" src="${this.image ? this.image : ''}">
                     <div class="post-icons">
                         <div class="counter" id="like">
                             <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
