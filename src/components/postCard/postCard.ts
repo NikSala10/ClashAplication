@@ -1,7 +1,9 @@
 
 import Comments, {CommentsAttribute} from "../comments/comments";
 import { appState } from "../../store/store";
+
 import '../hashtags/hashtags'
+
 export enum AttributePostCard  { 
     'imguser' = 'imguser',
     'name' = 'name',
@@ -19,6 +21,7 @@ export enum AttributePostCard  {
 }
 
 class PostCard extends HTMLElement  {
+    postid?: string; 
     imguser?: string;
     name?: string;
     username?: string;
@@ -33,6 +36,7 @@ class PostCard extends HTMLElement  {
     favorites?: number;
     send?: number;
     showComent?: boolean;
+
     
     constructor()  {
         super();
@@ -68,7 +72,7 @@ class PostCard extends HTMLElement  {
         this.render();
     }
     connectedCallback() { 
-        
+       
         this.render();
 
         // Cambiar state de follow a following, de following a follow
@@ -215,14 +219,18 @@ class PostCard extends HTMLElement  {
                 </div>
                
             `;
+           
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
             const comments = this.ownerDocument.createElement("comment-component") as Comments;
+            comments.postid = this.postid;
             comments.setAttribute(CommentsAttribute.imgprofile, '');
             comments.setAttribute(CommentsAttribute.username, 'user');
             comments.setAttribute(CommentsAttribute.timeaddcomment, 'h');
             comments.setAttribute(CommentsAttribute.description, '');
             comments.setAttribute(CommentsAttribute.showinput, 'true');
+            
+
             commentpost.appendChild(comments)
             const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
     

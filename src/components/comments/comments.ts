@@ -19,22 +19,25 @@ export enum CommentsAttribute  {
     'username' = 'username',
     'timeaddcomment' = 'timeaddcomment',
     'description' = 'description',
-    'showinput' = 'showinput'
+    'showinput' = 'showinput',
+    'postid' = 'postid'
+ 
 }
 
 class Comments extends HTMLElement  {
- 
+    postid?: string;
     imgprofile?: string;
-    username?: String;
-    timeaddcomment?: String;
-    description?: String
+    username?: string;
+    timeaddcomment?: string;
+    description?: string
     showinput?: boolean
-    postid?: string; 
+
 
     constructor()  {
         super();
         this.attachShadow( {mode: 'open'})
-        addObserver(this);
+        addObserver(this)
+        
     }
     static get observedAttributes() {
         return Object.values(CommentsAttribute);
@@ -70,23 +73,31 @@ class Comments extends HTMLElement  {
     async connectedCallback() {
         const userId = appState.user; 
         const userData = await getUserData(userId);
-        console.log(userData);
         if (userData) {
             this.username = userData.name;
             this.imgprofile = userData.img;         
         }
-
+        this.postid = appState.currentPostId; 
         this.render();
     }
-    submitForm() {
+    
+    async submitForm() {
         if (!this.postid) {
-            console.error("No se especificó el ID del post para el comentario.");
+            console.error("ID del post no definido.");
             return;
         }
-    
-        addComment(comment, this.postid); // Añade el comentario con el `id` del post
+
+        // Asignamos los valores del comentario
+        comment.postid = this.postid; 
+        comment.username = String(this.username || 'Anónimo');
+        comment.imgprofile = this.imgprofile || '';
+
+        // Llamamos a la función para agregar el comentario al post
+        // await addComment(this.postid, comment);
         this.clearInputs();
     }
+
+
 
     clearInputs() {
         const descriptionInput = this.shadowRoot?.querySelector('#comment-input') as HTMLInputElement;
@@ -126,8 +137,8 @@ class Comments extends HTMLElement  {
             const timeadd = this.shadowRoot.querySelector('#timeadd') as HTMLElement
             const descriptionhtml = this.shadowRoot.querySelector('#description') as HTMLElement
             const descriptionInputValue = this.shadowRoot.querySelector('#comment-input') as HTMLInputElement
-            descriptionInputValue?.addEventListener('change', this.changeDescription);
-            saveComment.addEventListener('click', this.submitForm)
+            descriptionInputValue?.addEventListener('change', this.changeDescription.bind(this));
+            saveComment.addEventListener('click', this.submitForm.bind(this))
                 // if (appState.user) {
                 //     addComentHTML.className = 'add-comment hide'
                 //     usernameHTML.innerHTML = "username"
@@ -145,6 +156,7 @@ class Comments extends HTMLElement  {
             }
         }
     }
+
 };
 
 customElements.define('comment-component',Comments);
