@@ -1,8 +1,10 @@
-import { getCommentsByPost, getUserData } from "../../utils/firebase";
+import { getCommentsByPost, getUserData, updatePostField } from "../../utils/firebase";
 import Comments, {CommentsAttribute} from "../comments/comments";
+import { UpdateFieldType } from "../../types/post";
 import { appState } from "../../store/store";
 
 import '../hashtags/hashtags'
+import Field from "../professionalField/professionalField";
 
 export enum AttributePostCard  { 
     'postid' = 'postid',
@@ -33,7 +35,7 @@ class PostCard extends HTMLElement  {
     hashtags?: string ;
     state?: string;
     likes? : number;
-    comments?: number;
+    commentsN?: number;
     favorites?: number;
     send?: number;
     showComent?: boolean;
@@ -58,7 +60,7 @@ class PostCard extends HTMLElement  {
                 this.likes = newValue ? Number(newValue) : undefined;
                 break;
             case AttributePostCard.comments:
-                this.comments = newValue ? Number(newValue) : undefined;
+                this.commentsN = newValue ? Number(newValue) : undefined;
                 break;
             case AttributePostCard.favorites:
                 this.favorites = newValue ? Number(newValue) : undefined;
@@ -100,67 +102,81 @@ class PostCard extends HTMLElement  {
         }
 
         let counterLikes = [0];
+        let counterLikesboolean = true;
+        counterLikes[0] = this.likes ? this.likes : 0;
         const likesButton = this.shadowRoot?.querySelector('#like') as HTMLElement;
         const p = this.shadowRoot?.querySelector('#likeCount') as HTMLElement;
         const svg = this.shadowRoot?.querySelector('.icon') as HTMLElement;
         
         likesButton.addEventListener('click', () => { 
+
             if(appState.user){
-                if (counterLikes[0] === 0) {
-                    counterLikes[0] = 1;
+                if (counterLikesboolean) {
+                    counterLikes[0] += 1;
                     svg.style.color = '#FFFFFF';
+                    this.likes = counterLikes[0]
                 } else {
-                    counterLikes[0] = 0;
+                    counterLikes[0] -= 1;
                     svg.style.color = ''; 
+                    this.likes = counterLikes[0]
                 }
+                counterLikesboolean = !counterLikesboolean
                 p.textContent = `${counterLikes[0]}`;
+                this.updatePost('likes', counterLikes[0])
             }else{
                 alert('No puedes dar like si no tienes una cuenta')
             }
         });
 
-        let counterComments = [0];
-        const commentsButton = this.shadowRoot?.querySelector('#comment') as HTMLElement;
-        const pComments = this.shadowRoot?.querySelector('#commentCount')as HTMLElement;
-        commentsButton.addEventListener('click', () => { 
-            counterComments[0] += 1;
-            pComments.textContent = `${counterComments[0]}`;
-        });
         let counterFavorites = [0];
+        let counterFavoritesboolean = true;
+        counterFavorites[0] = this.favorites ? this.favorites : 0;
         const favoritesButton = this.shadowRoot?.querySelector('#favorite') as HTMLElement;
         const pFavorites = this.shadowRoot?.querySelector('#favoriteCount') as HTMLElement;
         const svgFavorites = this.shadowRoot?.querySelector('.icon3') as HTMLElement;
         
         favoritesButton.addEventListener('click', () => { 
             if(appState.user){
-                if (counterFavorites[0] === 0) {
-                    counterFavorites[0] = 1;
+                if (counterFavoritesboolean) {
+                    counterFavorites[0] += 1;
                     svgFavorites.style.color = '#FFFFFF';
+                    this.favorites = counterFavorites[0]
                 } else {
-                    counterFavorites[0] = 0;
+                    counterFavorites[0] -= 1;
                     svgFavorites.style.color = ''; 
+                    this.favorites = counterFavorites[0]
                 }
+                counterFavoritesboolean = !counterFavoritesboolean
                 pFavorites.textContent = `${counterFavorites[0]}`;
+                this.updatePost('favourites', counterFavorites[0])
             }else {
                 alert('No puedes dar like si no tienes una cuenta')
             }
         });
 
     }
+    updatePost(field: UpdateFieldType, count: number){
+        if (this.postid) {
+            if(count < 0 ){
+                updatePostField(this.postid, field, 0)
+            }else{
+                updatePostField(this.postid, field, count)
+            }
+        }
+    }
+
     async loadComments() {
         let comments: any[] = []; 
-
-        // let comment: Comments = new Comments();
         if (this.postid) {
-            console.log(this.postid);
             
             comments = [await getCommentsByPost(this.postid)];
-            console.log(comments);
+        const pComments = this.shadowRoot?.querySelector('#commentCount')as HTMLElement;
             
             const comments1 = comments[0]
+            this.commentsN = comments[0].length
+            pComments.textContent = `${this.commentsN}`;
+
             comments1.forEach(async (commentData: any)=> {
-                console.log('comentario',commentData);
-                
                 let name = '';
         
                 if (commentData.userUid) {
@@ -183,14 +199,13 @@ class PostCard extends HTMLElement  {
         // if (comments.length > 0) {
         //     comment = comments[0]
         // }
-        // if(this.commentsElements){
-        //     const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
-        //         commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
-        //         commentsElement.setAttribute(CommentsAttribute.username, '');
-        //         this.commentsElements?.push(commentsElement)
+        if(this.commentsElements){
+            const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+                commentsElement.setAttribute(CommentsAttribute.username, '');
+                this.commentsElements?.push(commentsElement)
             
-        // }
-        console.log(this.commentsElements);
+        }
     }
     formatTimeAgo(dateadded:any) {
         if (!dateadded) return "Fecha no disponible";
@@ -251,7 +266,7 @@ class PostCard extends HTMLElement  {
                             <svg class="icon2" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-chat-square-fill" viewBox="0 0 16 16">
                                 <path d="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
                             </svg>
-                            <p id="commentCount">${this.comments || this.comments==0 ? this.comments : 0}</p>
+                            <p id="commentCount">${this.commentsN || this.commentsN==0 ? this.commentsN : 0}</p>
                         </div>
                         <div class="counter" id="favorite">
                             <svg class="icon3" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
@@ -266,19 +281,20 @@ class PostCard extends HTMLElement  {
                 </div>
                
             `;
-           
             this.loadComments()
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
-            const comments = this.ownerDocument.createElement("comment-component") as Comments;
             
                 const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
         
                 comment.addEventListener('click', ()=>{
-                    let commentShow = this.commentsElements?.pop()
+                    const commentShow = this.commentsElements?.pop()
                     
                     if (commentShow) {
-                        
+                        if (countComment > 0) {
+                            
+                            commentShow.setAttribute(CommentsAttribute.showinput, 'true');
+                        }else{
                             commentpost.appendChild(commentShow)
                             if (!this.showComent) {
                                 commentpost.className = "show"
@@ -288,7 +304,10 @@ class PostCard extends HTMLElement  {
                                 commentShow.setAttribute(CommentsAttribute.showinput, 'false');
                             }
             
+                        }
+                        this.commentsElements?.push(commentShow)
                     }   
+                    countComment++
                 })   
         }
     }

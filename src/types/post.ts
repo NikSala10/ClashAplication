@@ -8,6 +8,7 @@ export interface Post {
 	imgUser: string,
 	name: string,
 	likes: number,
-	comments: string,
+	comments: number,
 	favourites: number
 }
+export type UpdateFieldType = 'likes' | 'favourites' | 'comments';

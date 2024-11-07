@@ -47,11 +47,8 @@ class Dashboard extends HTMLElement  {
             if (post.userUid) {
                 const userDataPost = await getUserData(post.userUid);
                 name = userDataPost?.name || '';
-                username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;
-              
-                
+                username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;  
             }
-    console.log(post.id);
     
             const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
             userPostCards.setAttribute(AttributePostCard.postid, post.id)
@@ -62,15 +59,15 @@ class Dashboard extends HTMLElement  {
             userPostCards.setAttribute(AttributePostCard.image, post.image);
             userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
             userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
+            userPostCards.setAttribute(AttributePostCard.likes, post.likes);
+            userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
+            userPostCards.setAttribute(AttributePostCard.comments, post.comments);
     
             this.userPostList.push(userPostCards);
         }
     
         this.render();
     }
-
-
-
 
     logout() {
 		indexedDB.deleteDatabase('firebase-heartbeat-database');

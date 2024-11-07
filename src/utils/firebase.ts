@@ -1,6 +1,7 @@
 import { hashtags } from '../data/dataHashtags';
 import { appState } from '../store/store';
 import  {firebaseConfig} from '../utils/firebaseConfig'
+import { UpdateFieldType } from '../types/post';
 let db: any;
 let auth: any;
 let storage: any;
@@ -319,4 +320,21 @@ export const getFileProfile = async (id: string) => {
 		});
 
 	return urlImg;
+};
+
+export const updatePostField = async (postId: string, field: UpdateFieldType, count: number) => {
+    try {
+		const { db } = await getFirebaseInstance();
+        const { doc, updateDoc } = await import('firebase/firestore');
+        
+        const postRef = doc(db, 'posts', postId);
+        
+        await updateDoc(postRef, {
+            [field]: count
+        });
+
+    } catch (error) {
+        console.error(`Error al añadir ${field} al documento:`, error);
+        throw error; 
+    }
 };

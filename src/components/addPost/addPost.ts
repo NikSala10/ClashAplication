@@ -17,7 +17,7 @@ const post: Post = {
 	imgUser: '',
 	name: '',
 	likes: 0,
-	comments: '',
+	comments: 0,
 	favourites: 0
 }
 
