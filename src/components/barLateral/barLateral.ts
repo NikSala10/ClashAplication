@@ -32,9 +32,11 @@ class BarLateral extends HTMLElement  {
         if (this.dataitem === 'hashtags') {
             try {
                 const hashtagsFromFirebase = await getHashtags(); 
-    
-                // Toma solo los primeros tres hashtags
-                this.userList = hashtagsFromFirebase.slice(0, 3);
+
+                const filterList = hashtagsFromFirebase.filter((hashtag) => hashtag != null && hashtag != '' && hashtag != '#');
+                this.userList = filterList.slice(0, 3);
+                console.log(hashtagsFromFirebase);
+                
             } catch (error) {
                 console.error('Error obteniendo hashtags:', error);
             }

@@ -161,7 +161,6 @@ export const addHashtags = async (hashtag: any) =>  {
 	console.error('Error adding document', error);		
 	}
  }
- 
  export const getHashtags = async (): Promise<string[]> => {
     try {
         const { db } = await getFirebaseInstance();
@@ -171,7 +170,6 @@ export const addHashtags = async (hashtag: any) =>  {
         const recentHashtagsQuery = query(
             hashtagsCollection,
             orderBy('dateadded', 'desc'),  // Orden descendente por la fecha
-            limit(3)  // Limita a los 3 más recientes
         );
         const querySnapshot = await getDocs(recentHashtagsQuery);
         const data: string[] = [];
