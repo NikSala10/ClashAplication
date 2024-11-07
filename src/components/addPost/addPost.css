@@ -57,11 +57,9 @@
     border-bottom: 1px solid #ffffff;
     color: white;
     margin-top: -8rem;
-    white-space: normal;  /* Evita que el texto salte a la siguiente línea */
+    white-space: normal;  
     overflow-y: auto;
     resize: none; 
-   /* Permite el desbordamiento en el eje Y si el contenido es más grande */
- 
 }
 input::placeholder  {
     color: white;
