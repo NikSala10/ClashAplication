@@ -44,7 +44,7 @@ class Nav extends HTMLElement  {
     <nav class="navegation">
         
             <div class="logo">
-                <svg width="62" height="50" viewBox="0 0 62 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg id="logo" width="62" height="50" viewBox="0 0 62 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_126_877)">
                     <path d="M19.658 45.7512L21.5993 46.4805C21.1795 47.4312 20.4928 48.2401 19.6222 48.8093C18.7441 49.399 17.7076 49.7089 16.6493 49.6983H16.2386C14.803 49.6983 13.4261 49.1291 12.411 48.1157C11.3958 47.1023 10.8255 45.7279 10.8255 44.2948V42.8265C10.823 42.1153 10.9611 41.4106 11.232 40.7528C11.5029 40.095 11.9013 39.4971 12.4042 38.9933C12.9071 38.4895 13.5047 38.0898 14.1627 37.817C14.8207 37.5443 15.5262 37.4039 16.2386 37.4039H16.6565C17.601 37.3952 18.5302 37.6423 19.3452 38.119C20.1511 38.5867 20.8248 39.251 21.3032 40.0497L19.4168 40.9197C19.0988 40.472 18.6812 40.104 18.1966 39.8447C17.7083 39.5788 17.1603 39.441 16.604 39.4442H16.3007C15.8513 39.4427 15.4059 39.5299 14.9904 39.7009C14.5748 39.8718 14.1972 40.1232 13.8794 40.4405C13.5615 40.7577 13.3097 41.1346 13.1385 41.5494C12.9672 41.9643 12.8798 42.4088 12.8814 42.8575V44.2424C12.8792 44.6912 12.9661 45.1361 13.1371 45.5512C13.3082 45.9663 13.56 46.3434 13.8779 46.6608C14.1959 46.9782 14.5737 47.2296 14.9896 47.4003C15.4054 47.5711 15.8511 47.6578 16.3007 47.6556H16.604C17.2451 47.6625 17.874 47.4801 18.4115 47.1312C18.9416 46.7889 19.3716 46.3128 19.658 45.7512Z" fill="white"/>
                     <path d="M24.6271 49.3958H22.5784V37.5399H24.6271V49.3958Z" fill="white"/>
@@ -68,7 +68,7 @@ class Nav extends HTMLElement  {
             </div>
             <div class="first-icons">
                 <ul>
-                    <li>
+                    <li id="dash">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 16 16">
                             <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
                         </svg>
@@ -171,7 +171,16 @@ class Nav extends HTMLElement  {
                     dispatch(navigate(Screens.LOGIN))
                 }
             });
-		
+
+            const logoRedirectToDashboard = this.shadowRoot.querySelector('.logo')
+            logoRedirectToDashboard?.addEventListener('click', () => {
+                dispatch(navigate(Screens.DASHBOARD));
+            });
+
+            const dashRedirectToDashboard = this.shadowRoot.querySelector('#dash')
+            dashRedirectToDashboard?.addEventListener('click', () => {
+                dispatch(navigate(Screens.DASHBOARD));
+            });
         }
     }
 };

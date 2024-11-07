@@ -43,7 +43,7 @@ class Post1 extends HTMLElement  {
               
                 <div class="part2">
                     <h2 id=>What's happening?</h2>
-                    <input type="text" placeholder="Write your new post" </input>
+                    <input id="writer" type="text" placeholder="Write your new post" </input>
                     <div class="icon">
                         <svg id="galery" xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-image-fill" viewBox="0 0 16 16">
                         <path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
@@ -54,7 +54,7 @@ class Post1 extends HTMLElement  {
                         <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4 4 0 0 1-.82 1H12a3 3 0 1 0 0-6z"/>
                         </svg>
                         <div class="button">
-                            <btn-component id="addPost1" color="#361656" label="Post"></btn-component>
+                            <btn-component id="addPost1" color="#361656" label="+ Post"></btn-component>
                          </div>
                     </div>
                 </div>
@@ -71,8 +71,15 @@ class Post1 extends HTMLElement  {
                 dispatch(navigate(Screens.LOGIN))
             }
         })
-
-        
+        const writer = this.shadowRoot.querySelector('#writer')
+        writer?.addEventListener('click', ()=>{
+            if (appState.user) {
+                dispatch(setOpenCloseScreen(0))
+            }else{
+                alert('Para crear un post necesitas una cuenta')
+                dispatch(navigate(Screens.LOGIN))
+            }
+        })
     }
 }
 }

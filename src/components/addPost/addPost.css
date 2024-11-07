@@ -6,3 +6,27 @@
     background-color: white;
     border-radius: 20px;
 }
+.circle-img  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #F5F5F5;
+    width: 5rem; 
+    height: 4.5rem; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+#img-user {
+    width: 4.5rem; 
+    height: 4.5rem; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+#initial {
+    font-size: 32px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #652484;
+}

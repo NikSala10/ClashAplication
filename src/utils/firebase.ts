@@ -59,22 +59,28 @@ export const addPost = async (post: any) =>  {
 };
 
 
-export const getPosts = async () =>  {
-   try {
-       const  {db} = await getFirebaseInstance();
-       const  { collection, getDocs} = await import('firebase/firestore');
-       const where = collection(db, 'posts');
-       const querySnapshot = await getDocs(where);
-       const data: any[] =[];
+export const getPosts = async () => {
+    try {
+        const { db } = await getFirebaseInstance();
+        const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
 
-       querySnapshot.forEach((doc) => {
-           data.push(doc.data());
-       });
-       return data;
-   } catch (error) {
-   console.error('Error getting documents', error)
-   }
-}; 
+        const postsCollection = collection(db, 'posts');
+
+        // Ordena los documentos por 'dateadded' en orden descendente
+        const postsQuery = query(postsCollection, orderBy('dateadded', 'desc'));
+        const querySnapshot = await getDocs(postsQuery);
+
+        const data: any[] = [];
+        querySnapshot.forEach((doc) => {
+            data.push(doc.data());
+        });
+
+        return data;
+    } catch (error) {
+        console.error('Error obteniendo los documentos:', error);
+        return [];
+    }
+};
 
 export const addComment = async (comment: any) =>  {
 	try {
@@ -114,6 +120,26 @@ export const addComment = async (comment: any) =>  {
 	console.error('Error getting documents', error)
 	}
  }; 
+ export const getCommentsByPost = async (pid: string) => {
+    try {
+        const { db } = await getFirebaseInstance();
+        const { collection, getDocs, query, where } = await import('firebase/firestore');
+
+        const commentsRef = collection(db, 'comments');
+        const q = query(commentsRef, where('postid', '==', String(pid))); 
+        const postSnap = await getDocs(q);
+
+        const data: any[] = [];
+        postSnap.forEach((doc) => {
+            data.push(doc.data());
+        });
+
+        return data;
+    } catch (error) {
+        console.error('Error getting comments:', error);
+        return null;
+    }
+};
 export const addHashtags = async (hashtag: any) =>  {
 	try {
 		const {db} = await getFirebaseInstance();

@@ -11,6 +11,7 @@ import '../components/addPost/addPost';
 import '../components/editAccount/editAccount';
 import styles from './login.css'
 import storage from '../utils/storage';
+import '../components/nav/nav'
 
 class Account extends HTMLElement {
 	constructor() {
@@ -45,7 +46,9 @@ class Account extends HTMLElement {
             
 			this.shadowRoot.innerHTML = `
 			    <link rel="stylesheet" href="/src/screens/account.css">
+                <nav-component></nav-component>
                 <section class="account-components" id="account-components">
+                    
                     <div class="add-Post hide">
                        <addpost-component></addpost-component> 
                     </div>

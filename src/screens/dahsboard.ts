@@ -21,11 +21,6 @@ class Dashboard extends HTMLElement  {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-
-        
-        
-
-       
     }
 
     async connectedCallback() {
@@ -49,14 +44,14 @@ class Dashboard extends HTMLElement  {
             let username = '';
             let name = '';
     
-            if (post.userUid) {    
+            if (post.userUid) {
                 const userDataPost = await getUserData(post.userUid);
                 name = userDataPost?.name || '';
                 username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;
             }
     
             const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
-    
+            userPostCards.setAttribute(AttributePostCard.postid, post.id)
             userPostCards.setAttribute(AttributePostCard.name, name);
             userPostCards.setAttribute(AttributePostCard.username, username);
             userPostCards.setAttribute(AttributePostCard.category, post.category);
@@ -66,9 +61,11 @@ class Dashboard extends HTMLElement  {
             userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
     
             this.userPostList.push(userPostCards);
-        }    
+        }
+    
         this.render();
     }
+
 
 
 

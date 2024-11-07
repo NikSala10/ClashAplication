@@ -1,4 +1,5 @@
 import "../button/button";
+import '../buttonClose/buttonClose'
 import { Post } from "../../types/post";
 import { dispatch } from "../../store/store";
 import { setOpenCloseScreen } from "../../store/actions";
@@ -100,16 +101,16 @@ class AddPost extends HTMLElement  {
 
     async render() {
         if (this.shadowRoot) {
-            
+            const initialLetter = this.name ? this.name.charAt(0).toUpperCase() : ''; 
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/addPost/addPost.css">
             
              <div class="container-modal">
-                 <btn-component color="red" label="X" id="close-modal"></btn-component>
+                 <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
                 <div class="post">
                     <div class="user">
                         <div  circle-img>
-                                <img id="img-user" src="${this.imguser ? this.imguser : 'Not found'}">
+                            <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}
                         </div>
                         <h4 class="name">${this.name ? this.name : 'Not found'}</h4>
                     </div>

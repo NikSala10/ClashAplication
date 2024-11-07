@@ -1,12 +1,12 @@
 button {
-    background-color: #361656; 
+    background-color: #9A81C2; 
     color: white;
     border: none;
     padding: 0rem;
     border-radius: 2rem;
     cursor: pointer;
-    height: 2.5rem;
-    width: 5.6rem;
+    height: 2rem;
+    width: 2rem;
     display: flex;
     gap: 1rem; 
     margin-left:22rem;

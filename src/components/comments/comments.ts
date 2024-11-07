@@ -84,19 +84,27 @@ class Comments extends HTMLElement  {
 
         this.render();
     }
-    async submitForm() {
+    async submitForm(id : string) {
         if (this.postid) {
+            console.log('nnnnn', comment.postid);
+            console.log('swwwws',id);
+            console.log('sss',this.postid);
+            comment.postid = String(this.postid);
             await addComment(comment); 
+            
             this.clearInputs();
+
         }else{
-            if (comment.postid) {
-                this.postid = comment.postid
-                await addComment(comment);   
-            }else{
+            // if (comment.postid) {
+            //     this.postid = comment.postid
+            //     await addComment(comment);   
+            // }else{
                 alert('algo pasa con el id del post')
-            }
+            // }
+                // console.log(comment.postid);
+                console.log(id);
+
         }
-        this.clearInputs();
     }
     clearInputs() {
         const descriptionInput = this.shadowRoot?.querySelector('#comment-input') as HTMLInputElement;
@@ -104,15 +112,19 @@ class Comments extends HTMLElement  {
     }
     render() {
         if (this.shadowRoot) {
+            const initialLetter = this.username ? this.username.charAt(0).toUpperCase() : ''; 
             let texthtml = "" 
             if (this.username) {
                 texthtml = `
                 <div class="user">
-                    <img src="${this.imgprofile}" alt="">
+                     <div circle-img>
+                            <div class="circle-img">${this.imgprofile? `<img id="img-user" src="${this.imgprofile}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}
+                        </div>
                     <p id="username">${this.username}</p>
                     <p id="timeadd">${this.formatTimeAgo(this.timeaddcomment)}</p>
-                    <p id="description">${this.description}</p>
-                </div>`
+                </div>
+                <p id="description">${this.description}</p>
+                `
                 
             }
             this.shadowRoot.innerHTML = `
@@ -137,18 +149,23 @@ class Comments extends HTMLElement  {
             const descriptionhtml = this.shadowRoot.querySelector('#description') as HTMLElement
             const descriptionInputValue = this.shadowRoot.querySelector('#comment-input') as HTMLInputElement
             descriptionInputValue?.addEventListener('change', this.changeDescription);
-            saveComment.addEventListener('click', this.submitForm)
-                // if (appState.user) {
-                //     addComentHTML.className = 'add-comment hide'
-                //     usernameHTML.innerHTML = "username"
-                //     timeadd.innerHTML = "now"
-                //     descriptionhtml.innerHTML = descriptionInputValue.value
-                //     this.submitForm()
-                // }else{
-                //     alert('No puedes crear un comentario porque no tienes una cuenta de usuario')
-                //     dispatch(navigate(Screens.LOGIN))
-                // }
-            // })
+            if (comment.postid) {
+                saveComment.addEventListener('click', async () => {
+                    
+                    if (appState.user) {
+                        addComentHTML.className = 'add-comment hide'
+                        usernameHTML.innerHTML = comment.username
+                        timeadd.innerHTML = 'now'
+                        descriptionhtml.innerHTML = descriptionInputValue.value
+                        await this.submitForm(comment.postid)
+                        
+                    }else{
+                        alert('No puedes crear un comentario porque no tienes una cuenta de usuario')
+                        dispatch(navigate(Screens.LOGIN))
+                    }
+                })
+                
+            }
             
             if(!this.showinput){
                 addComentHTML.className = 'add-comment hide'

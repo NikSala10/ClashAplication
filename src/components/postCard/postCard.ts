@@ -1,10 +1,11 @@
-
+import { getCommentsByPost, getUserData } from "../../utils/firebase";
 import Comments, {CommentsAttribute} from "../comments/comments";
 import { appState } from "../../store/store";
 
 import '../hashtags/hashtags'
 
 export enum AttributePostCard  { 
+    'postid' = 'postid',
     'imguser' = 'imguser',
     'name' = 'name',
     'username' = 'username',
@@ -36,7 +37,7 @@ class PostCard extends HTMLElement  {
     favorites?: number;
     send?: number;
     showComent?: boolean;
-
+    commentsElements?: Comments[] = []
     
     constructor()  {
         super();
@@ -146,6 +147,39 @@ class PostCard extends HTMLElement  {
         });
 
     }
+    async loadComments() {
+        let comments: any[] = []; 
+        // let comment: Comments = new Comments();
+        if (this.postid) {
+            comments = [await getCommentsByPost(this.postid)];
+            const comments1 = comments[0]
+            comments1.forEach(async (commentData: any)=> {
+                console.log('comentario',commentData);
+                
+                let name = '';
+        
+                if (commentData.userUid) {
+                    const userDataPost = await getUserData(commentData.userUid);
+                    name = userDataPost?.name || '';
+                }
+                const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+    
+                commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile);    
+                commentsElement.setAttribute(CommentsAttribute.postid, commentData.postid);
+                commentsElement.setAttribute(CommentsAttribute.username, name);
+                commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded);
+                commentsElement.setAttribute(CommentsAttribute.description, commentData.description);
+                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+
+                this.commentsElements?.push(commentsElement)
+            });
+                
+        }
+        // if (comments.length > 0) {
+        //     comment = comments[0]
+        // }
+        console.log(this.commentsElements);
+    }
     formatTimeAgo(dateadded:any) {
         if (!dateadded) return "Fecha no disponible";
     
@@ -161,6 +195,7 @@ class PostCard extends HTMLElement  {
         return `hace ${daysElapsed}d`;
     }
     render() {
+        let countComment = 0; 
         if (this.shadowRoot) {
             const initialLetter = this.name ? this.name.charAt(0).toUpperCase() : ''; 
             this.shadowRoot.innerHTML = `
@@ -220,36 +255,33 @@ class PostCard extends HTMLElement  {
                
             `;
            
+            this.loadComments()
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
             const comments = this.ownerDocument.createElement("comment-component") as Comments;
-            comments.postid = this.postid;
-            comments.setAttribute(CommentsAttribute.imgprofile, '');
-            comments.setAttribute(CommentsAttribute.username, 'user');
-            comments.setAttribute(CommentsAttribute.timeaddcomment, 'h');
-            comments.setAttribute(CommentsAttribute.description, '');
-            comments.setAttribute(CommentsAttribute.showinput, 'true');
             
-
-            commentpost.appendChild(comments)
-            const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
-    
-            comment.addEventListener('click', ()=>{
-                if (!this.showComent) {
-                    commentpost.className = "show"
-                    this.showComent = true
+                const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
+        
+                comment.addEventListener('click', ()=>{
+                    let commentShow = this.commentsElements?.pop()
                     
-                } else {
-                    comments.setAttribute(CommentsAttribute.showinput, 'false');
-                    comments.render()
-                }
-                    
-            })
-
-            
+                    if (commentShow) {
+                        if (countComment > 0) {
+                            commentShow?.setAttribute(CommentsAttribute.showinput, 'true');
+                        }else{
+                            commentpost.appendChild(commentShow)
+                            if (!this.showComent) {
+                                commentpost.className = "show"
+                                this.showComent = true
+                                
+                            } else {
+                                commentShow.setAttribute(CommentsAttribute.showinput, 'false');
+                            }
+                        }
+                        
+                    }   
+                })   
         }
-
-
     }
 };
 

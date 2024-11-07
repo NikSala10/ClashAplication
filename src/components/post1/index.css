@@ -14,34 +14,9 @@ input {
   input::placeholder  {
     color: white;
   }
-  .button button {
-    background-color: #361656; 
-    color: white;
-    border: none;
-    padding: 0rem;
-    border-radius: 2rem;
-    cursor: pointer;
-    height: 2.5rem;
-    width: 5.5rem;
-    display: flex;
-    gap: 1rem; 
-    margin-top: -1.5rem;
-    margin-left:22rem;
-    align-items: center;
-    justify-content: center;
-    display:flex ;
-    font-size: 16px;
-  }
-  button:hover  {
-    background-color: #550978; 
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  }
+  
  
-  
-  
+
   .circle  {
     width: 20%;
     display: flex;

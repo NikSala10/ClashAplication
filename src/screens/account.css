@@ -12,6 +12,7 @@
 .account-components{
     position: relative;
     height: auto;
+    padding-top: 8rem;
 }
 .account-components-post{
     position: relative;

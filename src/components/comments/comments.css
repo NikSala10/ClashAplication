@@ -4,3 +4,41 @@
 .show{
     display: block;
 }
+.circle-img  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #F5F5F5;
+    width: 5rem; 
+    height: 4.5rem; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+#img-user {
+    width: 4.5rem; 
+    height: 4.5rem; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+#initial {
+    font-size: 32px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #652484;
+}
+.user  {
+    display: flex;
+}
+.add-comment  {
+    display: flex;
+    width: 8rem;
+    height: 1rem;
+    background-color: #9A81C2;
+}
+#username  {
+    font-family: "Hind Guntur", serif;
+    font-weight: 600;
+    font-style: normal;
+}
