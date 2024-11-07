@@ -75,35 +75,17 @@ class Comments extends HTMLElement  {
         return `hace ${daysElapsed}d`;
     }
     async connectedCallback() {
-        const userId = appState.user; 
-        const userData = await getUserData(userId);
-        if (userData) {
-            this.username = userData.name;
-            this.imgprofile = userData.img;         
-        }
-
         this.render();
     }
-    async submitForm(id : string) {
+    async submitForm() {
         if (this.postid) {
-            console.log('nnnnn', comment.postid);
-            console.log('swwwws',id);
-            console.log('sss',this.postid);
             comment.postid = this.postid
             await addComment(comment); 
             
             this.clearInputs();
 
         }else{
-            // if (comment.postid) {
-            //     this.postid = comment.postid
-            //     await addComment(comment);   
-            // }else{
-                alert('algo pasa con el id del post')
-            // }
-                // console.log(comment.postid);
-                console.log(id);
-
+            alert('algo pasa con el id del post')
         }
     }
     clearInputs() {
@@ -160,7 +142,7 @@ class Comments extends HTMLElement  {
                         usernameHTML.innerHTML = comment.username
                         timeadd.innerHTML = 'now'
                         descriptionhtml.innerHTML = descriptionInputValue.value
-                        await this.submitForm(comment.postid)
+                        await this.submitForm()
                         
                     }else{
                         alert('No puedes crear un comentario porque no tienes una cuenta de usuario')
@@ -173,8 +155,7 @@ class Comments extends HTMLElement  {
             if(!this.showinput){
                 addComentHTML.className = 'add-comment hide'
             }
-        }
-    }
+    }}
 };
 
 customElements.define('comment-component',Comments);
