@@ -149,9 +149,14 @@ class PostCard extends HTMLElement  {
     }
     async loadComments() {
         let comments: any[] = []; 
+
         // let comment: Comments = new Comments();
         if (this.postid) {
+            console.log(this.postid);
+            
             comments = [await getCommentsByPost(this.postid)];
+            console.log(comments);
+            
             const comments1 = comments[0]
             comments1.forEach(async (commentData: any)=> {
                 console.log('comentario',commentData);
@@ -177,6 +182,13 @@ class PostCard extends HTMLElement  {
         }
         // if (comments.length > 0) {
         //     comment = comments[0]
+        // }
+        // if(this.commentsElements){
+        //     const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+        //         commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+        //         commentsElement.setAttribute(CommentsAttribute.username, '');
+        //         this.commentsElements?.push(commentsElement)
+            
         // }
         console.log(this.commentsElements);
     }
@@ -266,9 +278,7 @@ class PostCard extends HTMLElement  {
                     let commentShow = this.commentsElements?.pop()
                     
                     if (commentShow) {
-                        if (countComment > 0) {
-                            commentShow?.setAttribute(CommentsAttribute.showinput, 'true');
-                        }else{
+                        
                             commentpost.appendChild(commentShow)
                             if (!this.showComent) {
                                 commentpost.className = "show"
@@ -277,8 +287,7 @@ class PostCard extends HTMLElement  {
                             } else {
                                 commentShow.setAttribute(CommentsAttribute.showinput, 'false');
                             }
-                        }
-                        
+            
                     }   
                 })   
         }

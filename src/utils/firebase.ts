@@ -72,7 +72,10 @@ export const getPosts = async () => {
 
         const data: any[] = [];
         querySnapshot.forEach((doc) => {
-            data.push(doc.data());
+            const postData = doc.data();
+			postData.id = doc.id;
+            
+            data.push(postData);
         });
 
         return data;

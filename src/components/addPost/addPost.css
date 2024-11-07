@@ -1,9 +1,9 @@
 .container-modal{
-    margin: 100px;
-    padding: 20px;
-    height: 500;
-    width: 500px;
-    background-color: white;
+    margin: 150px;
+    padding: 2rem;
+    height: 24rem;
+    width: 30rem;
+    background-color: #8258BD;
     border-radius: 20px;
 }
 .circle-img  {
@@ -12,7 +12,7 @@
     display: flex;
     background-color: #F5F5F5;
     width: 5rem; 
-    height: 4.5rem; 
+    height: 5rem; 
     border-radius: 50%;
     object-fit: cover;
 }
@@ -24,9 +24,113 @@
 }
 
 #initial {
-    font-size: 32px;
+    font-size: 38px;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-style: normal;
     color: #652484;
+}
+.user  {
+    display: flex;
+    margin-top: -2rem;
+    gap: 1rem;
+}
+.write  {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    
+}
+.name  {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+    color: #EBE7F5;
+}
+#description  {
+    width: 100%;
+    height:18rem ;
+    outline: none;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    color: white;
+    margin-top: -8rem;
+    white-space: normal;  /* Evita que el texto salte a la siguiente línea */
+    overflow-y: auto;
+    resize: none; 
+   /* Permite el desbordamiento en el eje Y si el contenido es más grande */
+ 
+}
+input::placeholder  {
+    color: white;
+    font-family: "Hind Guntur", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
+}
+#hashtags  {
+    outline: none;
+    height: 2rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    color: white;
+    
+}
+.img-post {
+    position: relative;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 2rem;
+}
+.img-post p  {
+    color: #F5F5F5;
+   margin-left: 7%;
+   justify-content: center;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
+    display: flex;
+}
+hr  {
+    height: 12.5rem;
+    margin-left: 2rem;
+    margin-top: 4rem;
+}
+#text  {
+    color: white;
+    text-align: center;
+    width: 15rem;
+    font-family: "Poppins", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
+    margin-top: 2rem;
+    margin-left: 3%;
+}
+.post  {
+    display: flex;
+}
+.fn  {
+    width: 50%;
+}
+#imgs-Post {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2rem;
+    opacity: 0;  /* Hacemos invisible el input */
+    cursor: pointer;  /* Hace que el input actúe como un botón al pasar por encima */
+}
+.img-post svg  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15%;
+    padding: 2rem;
+    padding-bottom: 0;
 }

@@ -29,7 +29,7 @@ class Comments extends HTMLElement  {
     timeaddcomment?: String;
     description?: String
     showinput?: boolean
-    postid?: String; 
+    postid?: string; 
 
     constructor()  {
         super();
@@ -89,7 +89,7 @@ class Comments extends HTMLElement  {
             console.log('nnnnn', comment.postid);
             console.log('swwwws',id);
             console.log('sss',this.postid);
-            comment.postid = String(this.postid);
+            comment.postid = this.postid
             await addComment(comment); 
             
             this.clearInputs();
@@ -150,6 +150,7 @@ class Comments extends HTMLElement  {
             const descriptionInputValue = this.shadowRoot.querySelector('#comment-input') as HTMLInputElement
             descriptionInputValue?.addEventListener('change', this.changeDescription);
             if (comment.postid) {
+                // console.log(comment.postid);
                 saveComment.addEventListener('click', async () => {
                     
                     if (appState.user) {

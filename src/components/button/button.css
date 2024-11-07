@@ -6,7 +6,7 @@ button {
     border-radius: 2rem;
     cursor: pointer;
     height: 2.5rem;
-    width: 5.6rem;
+    width: 5.7rem;
     display: flex;
     gap: 1rem; 
     margin-left:22rem;
@@ -14,6 +14,7 @@ button {
     justify-content: center;
     display:flex ;
     font-size: 16px;
+    margin-top: -3rem;
 }
 button:hover  {
     background-color: #550978; 

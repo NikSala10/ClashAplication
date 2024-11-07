@@ -48,7 +48,10 @@ class Dashboard extends HTMLElement  {
                 const userDataPost = await getUserData(post.userUid);
                 name = userDataPost?.name || '';
                 username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;
+              
+                
             }
+    console.log(post.id);
     
             const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
             userPostCards.setAttribute(AttributePostCard.postid, post.id)

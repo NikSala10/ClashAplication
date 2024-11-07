@@ -108,25 +108,26 @@ class AddPost extends HTMLElement  {
              <div class="container-modal">
                  <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
                 <div class="post">
-                    <div class="user">
-                        <div  circle-img>
-                            <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}
+                    <div class="fn">
+                        <div class="user">
+                            <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}</div>
+                            <h4 class="name">${this.name ? this.name : 'Not found'}</h4>
                         </div>
-                        <h4 class="name">${this.name ? this.name : 'Not found'}</h4>
-                    </div>
-                    <div class="write">
-                        <input id="description" type="text" placeholder="Write the description of the post">
-                        <input id="hashtags" type="text" placeholder="Write your hashtags">
-                    </div>
-                    <div class="img-post">
-                        <svg id="galery" xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-image-fill" viewBox="0 0 16 16">
-                        <path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
-                        </svg>
-                        <input id="imgs-Post" type="file">
+                        <div class="write">
+                            <input id="description" type="text" placeholder="Write the description of the post">
+                            <input id="hashtags" type="text" placeholder="Write your hashtags">
+                        </div>
                     </div>
                     <hr>
-                    <p>Your followers will be able to see the reel in their feed and on your profile.</p>
+                    <div class="img-post">
+                        <svg id="galery" xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="#FFFFFF" class="bi bi-image-fill" viewBox="0 0 16 16">
+                        <path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
+                        </svg>
+                        <p>Select an image</p>
+                        <input id="imgs-Post" type="file">
+                    </div>
                 </div>
+                <p id="text">Your followers will be able to see the reel in their feed and on your profile.</p>
                 <btn-component id="save" color="#361656" label="Add Post"></btn-component>
              </div>
             
@@ -141,6 +142,7 @@ class AddPost extends HTMLElement  {
 
         const description = this.shadowRoot?.querySelector('#description');
         description?.addEventListener('change', this.changeDescription);
+        
 
         const hashtags = this.shadowRoot?.querySelector('#hashtags');
         hashtags?.addEventListener('change', this.changeHashtags);
