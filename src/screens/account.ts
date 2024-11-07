@@ -95,7 +95,7 @@ class Account extends HTMLElement {
                                 <p id="Works">More Works</p>
                                 <p id="url">https</p>
                             </div>
-                            <btn-component color="blue" label="edit" id="btn-edit"></btn-component>
+                            <btn-component color="blue" label="Edit" id="btn-edit"></btn-component>
                         </section>
                         <div id="post-config">
                             <btn-component color="red" label="+ Post" id="add-post"></btn-component>

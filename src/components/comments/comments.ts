@@ -116,14 +116,16 @@ class Comments extends HTMLElement  {
             let texthtml = "" 
             if (this.username) {
                 texthtml = `
+                 <link rel="stylesheet" href="../src/components/comments/comments.css">
                 <div class="user">
-                     <div circle-img>
-                            <div class="circle-img">${this.imgprofile? `<img id="img-user" src="${this.imgprofile}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}
-                        </div>
-                    <p id="username">${this.username}</p>
+                    <div class="circle-img">${this.imgprofile? `<img id="img-user" src="${this.imgprofile}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}</div>
+                    <div class="two">
+                        <p id="username">${this.username}</p>
+                        <p id="description">${this.description}</p>
+                    </div>
                     <p id="timeadd">${this.formatTimeAgo(this.timeaddcomment)}</p>
                 </div>
-                <p id="description">${this.description}</p>
+                
                 `
                 
             }
@@ -133,9 +135,9 @@ class Comments extends HTMLElement  {
                 ${texthtml}
                 <hr>
                 <div class="add-comment">
-                    <input id="comment-input" type="text">
+                    <input id="comment-input" placeholder="Write a reply" type="text">
                     <div class="save-comment">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M3.291 3.309a.75.75 0 0 0-.976.996l3.093 6.945H13a.75.75 0 0 1 0 1.5H5.408l-3.093 6.945a.75.75 0 0 0 .976.996l19-8a.75.75 0 0 0 0-1.382z" clip-rule="evenodd"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="#CAC1E4" fill-rule="evenodd" d="M3.291 3.309a.75.75 0 0 0-.976.996l3.093 6.945H13a.75.75 0 0 1 0 1.5H5.408l-3.093 6.945a.75.75 0 0 0 .976.996l19-8a.75.75 0 0 0 0-1.382z" clip-rule="evenodd"/></svg>
                     </div>
                    
                 </div>
