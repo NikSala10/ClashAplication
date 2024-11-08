@@ -36,6 +36,7 @@ class Login extends HTMLElement {
 			this.shadowRoot.innerHTML = `
 			    <link rel="stylesheet" href="./login.css">
 				<section>
+					<div class="imgLogin"><img src="../src/assets/Group 354.png" alt="" class="img-mobile"></div>
         			<img src="../src/assets/ImageBackgroundLoginandRegister.png" alt="">
 					<div class="information">
 						<div class="logo">

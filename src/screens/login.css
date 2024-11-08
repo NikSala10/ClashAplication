@@ -85,3 +85,64 @@ button  {
     display: flex;
     justify-content: center;
 }
+.img-mobile  {
+    display: none;
+}
+.imgLogin  {
+    display: none;
+}
+@media (max-width: 768px)  { 
+    section  {
+        display: block;
+        flex-direction: column;
+    }
+    section img {
+        display: none; 
+    }
+    .imgLogin  {
+        display: block;
+        height: 10rem;
+        width: 100%;
+    }
+    .imgLogin img {
+    display: block;
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+    }
+    .logo svg  {
+        width: 5rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .information  {
+        display: block;
+        text-align: center;
+        width: 100%;
+        margin-top: 8rem;
+    }
+    .userIn  {
+        margin-top: 2rem;
+        padding-left: 0;
+        margin: 0;
+    }
+    h3 {
+        font-family: "Istok Web", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 28px;
+        color: white;
+        margin: 0;
+    }
+    .inputsValues  {
+        margin-top: 0;
+        gap: 2rem;
+        margin-left: 17%;
+    }
+    p  {
+        margin-bottom: 2rem;
+    }
+    button  {
+        margin-top: 2.5rem;
+    }
+}
