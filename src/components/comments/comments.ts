@@ -138,6 +138,11 @@ class Comments extends HTMLElement  {
                 saveComment.addEventListener('click', async () => {
                     
                     if (appState.user) {
+                            if (!descriptionInputValue.value.trim()) {
+                                alert('Por favor, escribe un comentario antes de enviarlo.');
+                                return; 
+                            }
+            
                         addComentHTML.className = 'add-comment hide'
                         usernameHTML.innerHTML = comment.username
                         timeadd.innerHTML = 'now'

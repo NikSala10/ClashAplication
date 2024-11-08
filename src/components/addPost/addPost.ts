@@ -120,11 +120,11 @@ class AddPost extends HTMLElement  {
                     </div>
                     <hr>
                     <div class="img-post">
+                        <input id="imgs-Post" type="file">
                         <svg id="galery" xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="#FFFFFF" class="bi bi-image-fill" viewBox="0 0 16 16">
                         <path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/>
                         </svg>
                         <p>Select an image</p>
-                        <input id="imgs-Post" type="file">
                     </div>
                 </div>
                 <p id="text">Your followers will be able to see the reel in their feed and on your profile.</p>
@@ -140,11 +140,11 @@ class AddPost extends HTMLElement  {
             dispatch(setOpenCloseScreen(0))
         });
 
-        const description = this.shadowRoot?.querySelector('#description');
+        const description = this.shadowRoot?.querySelector('#description') as HTMLInputElement;
         description?.addEventListener('change', this.changeDescription);
         
 
-        const hashtags = this.shadowRoot?.querySelector('#hashtags');
+        const hashtags = this.shadowRoot?.querySelector('#hashtags') as HTMLInputElement;
         hashtags?.addEventListener('change', this.changeHashtags);
 
         const imgInput = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
@@ -153,8 +153,21 @@ class AddPost extends HTMLElement  {
         });
 
         const save = this.shadowRoot?.querySelector('#save');
-        save?.addEventListener('click', this.submitForm.bind(this));
+        save?.addEventListener('click', () => {
+            const descriptionValue = description.value.trim();
+            const hashtagsValue = hashtags.value.trim();
         
+            if (!descriptionValue) {
+                alert('Por favor, escribe una descripción del post.');
+                return; 
+            }
+        
+            if (!hashtagsValue) {
+                alert('Por favor, escribe al menos un hashtag.');
+                return; 
+            }
+            this.submitForm.bind(this)();
+        });
     }
 };
 

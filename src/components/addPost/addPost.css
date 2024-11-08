@@ -121,9 +121,9 @@ hr  {
     top: 0;
     left: 0;
     width: 100%;
-    height: 2rem;
-    opacity: 0;  /* Hacemos invisible el input */
-    cursor: pointer;  /* Hace que el input actúe como un botón al pasar por encima */
+    height: 100%;
+    opacity: 0;  
+    cursor: pointer;  
 }
 .img-post svg  {
     display: flex;
