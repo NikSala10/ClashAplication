@@ -99,7 +99,7 @@
     position: fixed;
     bottom: 2rem; 
     right: 2rem;  
-    z-index: 10000;
+    z-index: 998;
 }
 #logOut  {display: none;}
 
@@ -109,8 +109,10 @@
     font-style: normal;
     color: white;
     font-size: 55px;
-
-
+}
+.add-Post  {
+    width: 96.7vw;
+    z-index: 999;
 }
 
 

@@ -136,7 +136,7 @@ hr  {
 @media (max-width: 768px)  {
     .container-modal  {
         z-index: 100000;
-        margin-left: 0;
+        margin-left: 5%;
         height: 31rem;
         width: 22rem;
         margin-top: 5.2rem;

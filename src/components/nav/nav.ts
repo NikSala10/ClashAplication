@@ -22,10 +22,7 @@ class Nav extends HTMLElement  {
     async connectedCallback() { 
         this.render();
         const bars = this.shadowRoot?.querySelector('.bars') as HTMLElement;
-        this.render();
         bars.addEventListener('click', () => {
-           
-            
             const iconsResponsive = this.shadowRoot?.querySelector('.icons-responsive') as HTMLElement;
            
             if (iconsResponsive?.classList.contains('active')) {
@@ -125,7 +122,7 @@ class Nav extends HTMLElement  {
         <div class="active-icons">
                     <ul>
                     
-                        <li>
+                        <li id="dashtwo">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 16 16">
                                 <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
                             </svg>
@@ -155,7 +152,7 @@ class Nav extends HTMLElement  {
             </div>
              <div class="bar-responsive">
                 <p id="nav-all">All</p>
-                <p id="nav-new">New</p>
+                <p id="nav-new">Top</p>
             </div>
              
           
@@ -186,6 +183,11 @@ class Nav extends HTMLElement  {
 
             const dashRedirectToDashboard = this.shadowRoot.querySelector('#dash')
             dashRedirectToDashboard?.addEventListener('click', () => {
+                dispatch(navigate(Screens.DASHBOARD));
+            });
+
+            const dashtwoRedirectToDashboard = this.shadowRoot.querySelector('#dashtwo')
+            dashtwoRedirectToDashboard?.addEventListener('click', () => {
                 dispatch(navigate(Screens.DASHBOARD));
             });
         }
