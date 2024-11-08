@@ -196,9 +196,7 @@ class PostCard extends HTMLElement  {
             });
                 
         }
-        // if (comments.length > 0) {
-        //     comment = comments[0]
-        // }
+        
         if(this.commentsElements){
             const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
                 commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
@@ -230,8 +228,7 @@ class PostCard extends HTMLElement  {
            
                 <div class= "card">
                     <div class="part-user">
-                        <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}
-                        </div>
+                        <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}</div>
                         
                         <div class="nacate">
                             <h4 class="name">${this.name ? this.name : 'Not found'}</h4>

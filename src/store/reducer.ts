@@ -33,6 +33,11 @@ export const reducer = (currentAction: any, currentState: any) => {
 				modalScreen: newModalScreen,
 				
 			};
+		case Actions.LOADPOST:
+            return {
+                ...currentState,
+                loadPost: payload,
+            };
 		default:
 			return currentState;
 	}

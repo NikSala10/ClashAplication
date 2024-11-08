@@ -1,5 +1,5 @@
 import { dispatch } from '../../store/store';
-import { navigate } from '../../store/actions';
+import { navigate, loadPost} from '../../store/actions';
 import { registerUser } from '../../utils/firebase';
 import  {Screens} from '../../types/store'
 import { appState } from '../../store/store';
@@ -154,16 +154,23 @@ class Nav extends HTMLElement  {
                 </div>
             </div>
              <div class="bar-responsive">
-                <p>All</p>
-                <p>Following</p>
-                <p>New</p>
+                <p id="nav-all">All</p>
+                <p id="nav-new">New</p>
             </div>
              
           
             `;
             const userId = appState.user; 
-
+            const navNew = this.shadowRoot.querySelector('#nav-new');
+            const navAll = this.shadowRoot.querySelector('#nav-all');
             const redirectToLoginUsers = this.shadowRoot?.querySelector('.user-icon');
+            navNew?.addEventListener('click', ()=>{
+                dispatch(loadPost(true))
+            })
+            navAll?.addEventListener('click', ()=>{
+                dispatch(loadPost(false))
+            })
+
             redirectToLoginUsers?.addEventListener('click',() =>  {
                 if (userId) {
                     dispatch(navigate(Screens.ACCOUNT))

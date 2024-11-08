@@ -20,3 +20,9 @@ export const setOpenCloseScreen = (modalScreen: Number) => {
 		payload: modalScreen,
 	};
 };
+export const loadPost = (loadPost: Boolean) => {
+    return {
+        action: Actions.LOADPOST,
+        payload: loadPost,
+    };
+};

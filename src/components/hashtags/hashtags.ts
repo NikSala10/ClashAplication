@@ -46,8 +46,6 @@ class Hashtags extends HTMLElement {
 			this.hashtags?.forEach((hashtag)=>{
                 const hashtagHtml = this.ownerDocument.createElement("p");
                 hashtagHtml.innerHTML = `${hashtag}`
-                console.log();
-                
                 container?.appendChild(hashtagHtml)
             })
 		}

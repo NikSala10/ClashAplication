@@ -113,6 +113,9 @@ h2  {
  {
     display: none;
  }
+ #addPost1  {
+    display: none;
+ }
  .icon{
     color: #FFF;
     display: flex;

@@ -12,6 +12,9 @@ import { appState } from '../store/store'
 import { getPosts, getUserData, getFiles } from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setUserCredentials } from '../store/actions'
+import { setOpenCloseScreen } from '../store/actions';
+import { navigate } from '../store/actions';
+import { Screens } from '../types/store';
 
 class Dashboard extends HTMLElement  {
     imagesBanner: Banner1[] = [];
@@ -69,14 +72,6 @@ class Dashboard extends HTMLElement  {
         this.render();
     }
 
-    logout() {
-		indexedDB.deleteDatabase('firebase-heartbeat-database');
-		indexedDB.deleteDatabase('firebaseLocalStorageDb');
-		window.location.reload();
-        dispatch(setUserCredentials(''))
-        alert('Ha cerrado sesión')
-        
-	}
     render()  {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
@@ -88,7 +83,6 @@ class Dashboard extends HTMLElement  {
                 <div class="add-Post hide" id="add-Post">
                     <addpost-component></addpost-component> 
                 </div>
-                <button id="logOut">Cerrar Sesion</button>
                 <post-1></post-1>
                 <div class="container"></div>
                 <section class="containers" id="containers">
@@ -99,7 +93,7 @@ class Dashboard extends HTMLElement  {
                         <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
                         <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                     </div>
-                    <div class="addPost">
+                    <div id="addPost1" class="addPost">
                     <p>+</p>
                 </div>
                 </section>
@@ -108,6 +102,17 @@ class Dashboard extends HTMLElement  {
             <foo-ter></foo-ter>
             `;
           
+            //ADDPOSTBTN
+            const btnAddPost = this.shadowRoot.querySelector('#addPost1');
+            btnAddPost?.addEventListener('click', () => {
+                if (appState.user) {
+                    dispatch(setOpenCloseScreen(0));
+                } else {
+                    alert('Para crear un post necesitas una cuenta');
+                    dispatch(navigate(Screens.LOGIN));
+                }
+            });
+
             //POST
             const containerPost = this.shadowRoot?.querySelector('.container-postcards')
             this.userPostList.forEach((postElement) =>  {   
@@ -120,10 +125,6 @@ class Dashboard extends HTMLElement  {
                 container?.appendChild(img);
             });
             
-            
-            const logOut = this.shadowRoot?.querySelector('#logOut');
-            logOut?.addEventListener('click', this.logout);
-         
             
             const containerAll = this.shadowRoot?.querySelector('#all') as HTMLElement;
             const add = this.shadowRoot?.querySelector('#add-Post') as HTMLElement;

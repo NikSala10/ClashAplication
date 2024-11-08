@@ -83,26 +83,56 @@ class Register extends HTMLElement {
     			</section>
 			`;
 		
-            const pName = this.shadowRoot?.querySelector('#name');
+            const pName = this.shadowRoot?.querySelector('#name') as HTMLInputElement;
 			pName?.addEventListener('change', this.changeName);
 			
 
-			const pEmail = this.shadowRoot?.querySelector('#email');
+			const pEmail = this.shadowRoot?.querySelector('#email') as HTMLInputElement;
 			pEmail?.addEventListener('change', this.changeEmail);
 		
-			const pPaswword = this.shadowRoot?.querySelector('#password');
+			const pPaswword = this.shadowRoot?.querySelector('#password') as HTMLInputElement;
 			pPaswword?.addEventListener('change', this.changePassword);
 		
-			const confirmPassword = this.shadowRoot?.querySelector('#confirmpassword');
+			const confirmPassword = this.shadowRoot?.querySelector('#confirmpassword') as HTMLInputElement;
 			confirmPassword?.addEventListener('change', this.changeConfirmPassword);
 		
 
 			const save = this.shadowRoot?.querySelector('#save');
-			save?.addEventListener('click', this.submitForm);
+			save?.addEventListener('click', () => {
+				const nameValue = pName.value.trim();
+				const emailValue = pEmail.value.trim();
+				const paswwordValue = pPaswword.value.trim();
+				const confirmValue = confirmPassword.value.trim();
+			
+				if (!nameValue) {
+					alert('Por favor, rellene todos los campos.');
+					return; 
+				}
+			
+				if (!emailValue) {
+					alert('Por favor, rellene todos los campos.');
+					return; 
+				}
+				if (!paswwordValue) {
+					alert('Por favor, rellene todos los campos.');
+					return; 
+				}
+				if (!confirmValue) {
+					alert('Por favor, rellene todos los campos.');
+					return; 
+				}
+				this.submitForm();
+			});
+			
 
 			const redirectToLogin = this.shadowRoot?.querySelector('#redirectLogin');
             redirectToLogin?.addEventListener('click',() =>  {
                 dispatch(navigate(Screens.LOGIN))
+            });
+
+			const logoRedirectToDashboard = this.shadowRoot.querySelector('.logo')
+            logoRedirectToDashboard?.addEventListener('click', () => {
+                dispatch(navigate(Screens.DASHBOARD));
             });
 
 		}

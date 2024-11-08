@@ -24,7 +24,7 @@
 }
 .stateUser  {
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
     width: 60%;
 }
 .category  {
@@ -33,7 +33,7 @@
     font-style: normal;
     color: white;
     font-size: 15px;
-    margin-top: 0;
+    margin-top: -0.5rem;
 }
 
 .circle-img  {
@@ -41,14 +41,15 @@
     align-items: center;
     display: flex;
     background-color: #F5F5F5;
-    width: 5rem; 
-    height: 5rem; 
-    border-radius: 50%;
-    object-fit: cover;
-}
-#img-user {
     width: 4.5rem; 
     height: 4.5rem; 
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+#img-user {
+    width: 5rem; 
+    height: 5rem; 
     border-radius: 50%;
     object-fit: cover; 
 }
@@ -154,8 +155,12 @@
     .username  {
         display: none;
     }
+    .circle-img  { 
+        width: 3.5rem;
+        height: 3.5rem;
+    }
     .username2  {
-        margin-top: 0;
+        margin-top: -0.5rem;
         margin-bottom: 0;
         font-family: "Hind Guntur", sans-serif;
         font-weight: 500;
