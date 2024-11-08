@@ -9,7 +9,7 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getPosts, getUserData, getFiles } from '../utils/firebase'
+import { getPosts, getUserData, getFiles, getPostsTopLikes } from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setUserCredentials } from '../store/actions'
 import { setOpenCloseScreen } from '../store/actions';
@@ -19,6 +19,7 @@ import { Screens } from '../types/store';
 class Dashboard extends HTMLElement  {
     imagesBanner: Banner1[] = [];
     userPostList: PostCard[] = []
+    postListTopLikes: PostCard[] = []
     userHashtagsList : BarLateral[] = [];
     userData: { name?: string; confirmPassword?: string; } = {};
     constructor() {
@@ -68,6 +69,32 @@ class Dashboard extends HTMLElement  {
     
             this.userPostList.push(userPostCards);
         }
+        const postsTopLikes = await getPostsTopLikes();
+        for (const post of postsTopLikes || []) {
+            let username = '';
+            let name = '';
+    
+            if (post.userUid) {
+                const userDataPost = await getUserData(post.userUid);
+                name = userDataPost?.name || '';
+                username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;  
+            }
+    
+            const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
+            userPostCards.setAttribute(AttributePostCard.postid, post.id)
+            userPostCards.setAttribute(AttributePostCard.name, name);
+            userPostCards.setAttribute(AttributePostCard.username, username);
+            userPostCards.setAttribute(AttributePostCard.category, post.category);
+            userPostCards.setAttribute(AttributePostCard.description, post.description);
+            userPostCards.setAttribute(AttributePostCard.image, post.image);
+            userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
+            userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
+            userPostCards.setAttribute(AttributePostCard.likes, post.likes);
+            userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
+            userPostCards.setAttribute(AttributePostCard.comments, post.comments);
+    
+            this.postListTopLikes.push(userPostCards);
+        }
     
         this.render();
     }
@@ -101,7 +128,21 @@ class Dashboard extends HTMLElement  {
              
             <foo-ter></foo-ter>
             `;
-          
+            
+        
+            //POST
+            const containerPost = this.shadowRoot?.querySelector('.container-postcards');
+            if(!appState.loadPost){
+                console.log(appState.loadPost);
+                
+                this.userPostList.forEach((postElement) =>  {   
+                    containerPost?.appendChild(postElement);
+                });
+            }else{
+                this.postListTopLikes.forEach((postElement) =>  {   
+                    containerPost?.appendChild(postElement);
+                });
+            }
             //ADDPOSTBTN
             const btnAddPost = this.shadowRoot.querySelector('#addPost1');
             btnAddPost?.addEventListener('click', () => {
@@ -113,12 +154,7 @@ class Dashboard extends HTMLElement  {
                 }
             });
 
-            //POST
-            const containerPost = this.shadowRoot?.querySelector('.container-postcards')
-            this.userPostList.forEach((postElement) =>  {   
-                containerPost?.appendChild(postElement);
-            });
-
+         
             //Banner1
             const container = this.shadowRoot?.querySelector('.container');
             this.imagesBanner.forEach(img => {
