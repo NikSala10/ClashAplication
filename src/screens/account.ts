@@ -39,7 +39,7 @@ class Account extends HTMLElement {
 	connectedCallback() {
 		this.render();
 	}
-    logout() {
+    logout() { 
 		indexedDB.deleteDatabase('firebase-heartbeat-database');
 		indexedDB.deleteDatabase('firebaseLocalStorageDb');
 		window.location.reload();
