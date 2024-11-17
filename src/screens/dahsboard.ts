@@ -9,17 +9,15 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getUserData, getFiles, getUsers} from '../utils/firebase'
+import { getUserData, getFiles} from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setUserCredentials } from '../store/actions'
-import { setOpenCloseScreen, getProductsAction } from '../store/actions';
+import { setOpenCloseScreen, getProductsAction, getUsersAction} from '../store/actions';
 import { navigate } from '../store/actions';
 import { Screens } from '../types/store';
 
 class Dashboard extends HTMLElement  {
     imagesBanner: Banner1[] = [];
-    userPostList: PostCard[] = []
-    postListTopLikes: PostCard[] = []
     userHashtagsList : BarLateral[] = [];
     userData: { name?: string; confirmPassword?: string; } = {};
     constructor() {
@@ -41,9 +39,10 @@ class Dashboard extends HTMLElement  {
             dispatch(postsAction)
         }
         if (appState.users.length === 0) {
-            const usersAction = await getUsers();
+            const usersAction = await getUsersAction();
             dispatch(usersAction)
         }
+        console.log(appState.users);
         
         this.render();
     }
@@ -83,17 +82,18 @@ class Dashboard extends HTMLElement  {
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');
             if(!appState.loadPost){
                 appState.post.forEach((post) =>  {   
-                    let username = '';
-                    let name = '';
-                // if (post.userUid) {
-                //     const userDataPost = await getUserData(post.userUid);
-                //     name = userDataPost?.name || '';
-                //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
-                // }
+                    const user = appState.users.find(user => user.id === post.userUid);
+                    const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
+                
+                    // if (post.userUid) {
+                    //     const userDataPost = await getUserData(post.userUid);
+                    //     name = userDataPost?.name || '';
+                    //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
+                    // }
         
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
-                    userPostCards.setAttribute(AttributePostCard.name, name);
+                    userPostCards.setAttribute(AttributePostCard.name, user.name);
                     userPostCards.setAttribute(AttributePostCard.username, username);
                     userPostCards.setAttribute(AttributePostCard.category, post.category);
                     userPostCards.setAttribute(AttributePostCard.description, post.description);
@@ -111,17 +111,17 @@ class Dashboard extends HTMLElement  {
                 console.log(postTopLikes);
                 
                 postTopLikes.forEach((post) =>  {   
-                    let username = '';
-                    let name = '';
-                // if (post.userUid) {
-                //     const userDataPost = await getUserData(post.userUid);
-                //     name = userDataPost?.name || '';
-                //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
-                // }
+                    const user = appState.users.find(user => user.id === post.userUid);
+                    const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
+                    // if (post.userUid) {
+                    //     const userDataPost = await getUserData(post.userUid);
+                    //     name = userDataPost?.name || '';
+                    //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
+                    // }
         
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
-                    userPostCards.setAttribute(AttributePostCard.name, name);
+                    userPostCards.setAttribute(AttributePostCard.name, user.name);
                     userPostCards.setAttribute(AttributePostCard.username, username);
                     userPostCards.setAttribute(AttributePostCard.category, post.category);
                     userPostCards.setAttribute(AttributePostCard.description, post.description);
