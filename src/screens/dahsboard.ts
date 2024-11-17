@@ -9,7 +9,7 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getPosts, getUserData, getFiles, getPostsTopLikes } from '../utils/firebase'
+import { getUserData, getFiles, getUsers} from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setUserCredentials } from '../store/actions'
 import { setOpenCloseScreen, getProductsAction } from '../store/actions';
@@ -45,8 +45,10 @@ class Dashboard extends HTMLElement  {
             const postsAction = await getProductsAction();
             dispatch(postsAction)
         }
-        
-        console.log('arreglo de post', appState.post);
+        if (appState.users.length === 0) {
+            const usersAction = await getUsers();
+            dispatch(usersAction)
+        }
         
         this.render();
     }
@@ -155,7 +157,6 @@ class Dashboard extends HTMLElement  {
             this.imagesBanner.forEach(img => {
                 container?.appendChild(img);
             });
-            
             
             const containerAll = this.shadowRoot?.querySelector('#all') as HTMLElement;
             const add = this.shadowRoot?.querySelector('#add-Post') as HTMLElement;
