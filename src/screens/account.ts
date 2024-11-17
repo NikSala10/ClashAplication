@@ -87,7 +87,7 @@ class Account extends HTMLElement {
                             <div class="user-text-contact">
                                 <h3 id="name-user">Yeliani Barbosa</h3>
                                 <p id="username">@yelibarbosis</p>
-                                <btn-component color="blue" label="Edit" id="btn-edit"></btn-component>
+                                <btn-component color="#361656" label="Edit" id="btn-edit"></btn-component>
                                 <div id="create">
                                     <p id="creative">Creative</p>
                                     <p id="category">Illustrator</p>
