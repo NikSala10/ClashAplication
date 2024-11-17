@@ -171,46 +171,7 @@ class PostCard extends HTMLElement  {
         }
     }
 
-    async loadComments() {
-        let comments: any[] = []; 
-        if (this.postid) {
-            
-            comments = [await getCommentsByPost(this.postid)];
-        const pComments = this.shadowRoot?.querySelector('#commentCount')as HTMLElement;
-            
-            const comments1 = comments[0]
-            this.commentsN = comments[0].length
-            pComments.textContent = `${this.commentsN}`;
-
-            comments1.forEach(async (commentData: any)=> {
-                let name = '';
-        
-                if (commentData.userUid) {
-                    const userDataPost = await getUserData(commentData.userUid);
-                    name = userDataPost?.name || '';
-                }
-                const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
-    
-                commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile);    
-                commentsElement.setAttribute(CommentsAttribute.postid, commentData.postid);
-                commentsElement.setAttribute(CommentsAttribute.username, name);
-                commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded);
-                commentsElement.setAttribute(CommentsAttribute.description, commentData.description);
-                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
-
-                this.commentsElements?.push(commentsElement)
-            });
-                
-        }
-        
-        if(this.commentsElements){
-            const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
-                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
-                commentsElement.setAttribute(CommentsAttribute.username, '');
-                this.commentsElements?.push(commentsElement)
-            
-        }
-    }
+   
     formatTimeAgo(dateadded:any) {
         if (!dateadded) return "Fecha no disponible";
     
@@ -284,7 +245,7 @@ class PostCard extends HTMLElement  {
                 </div>
                
             `;
-            this.loadComments()
+            
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
             
@@ -311,7 +272,9 @@ class PostCard extends HTMLElement  {
                         this.commentsElements?.push(commentShow)
                     }   
                     countComment++
-                })   
+                })  
+                console.log(this.commentsElements);
+ 
         }
     }
 };

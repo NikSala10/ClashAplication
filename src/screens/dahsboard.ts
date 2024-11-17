@@ -45,7 +45,7 @@ class Dashboard extends HTMLElement  {
             const commentsAction = await getCommentsAction();
             dispatch(commentsAction)
         }
-        console.log(appState.comments);
+
         
         this.render();
     }
@@ -112,7 +112,7 @@ class Dashboard extends HTMLElement  {
             }else{
                 const postTopLikes = appState.post.slice()
                 postTopLikes.sort((a, b) => b.likes - a.likes);
-                console.log(postTopLikes);
+              
                 
                 postTopLikes.forEach((post) =>  {   
                     const user = appState.users.find(user => user.id === post.userUid);
