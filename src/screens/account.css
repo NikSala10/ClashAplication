@@ -155,6 +155,10 @@
     cursor: pointer;
     color: white;
 }
+#post-config svg {
+    color: white;
+}
+
 .account-components-post{
     position: relative;
 }

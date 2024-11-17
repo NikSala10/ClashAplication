@@ -4,6 +4,7 @@ import { Actions, Screens } from '../types/store';
 import { addObserver, appState } from '../store/store';
 import { loginUser } from '../utils/firebase';
 import Button, { AttributeBtn } from '../components/button/button';
+import ButtonAccount,  {AttributeBtnAccount} from '../components/buttonAddPostAccount/buttonAccount';
 import Field, {AttributeField} from '../components/professionalField/professionalField';
 import CardAccount, {AttributeCardAccount} from '../components/cardAccount/cardAccount';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
@@ -19,9 +20,9 @@ class Account extends HTMLElement {
 		super();
         addObserver(this)
 		this.attachShadow({ mode: 'open' });
-        const btnAddPost = this.ownerDocument.createElement("btn-component") as Button;
-            btnAddPost.setAttribute(AttributeBtn.color, '');
-            btnAddPost.setAttribute(AttributeBtn.label, '');
+        const btnAddPost = this.ownerDocument.createElement("btn-account") as ButtonAccount;
+            btnAddPost.setAttribute(AttributeBtnAccount.color, '');
+            btnAddPost.setAttribute(AttributeBtnAccount.label, '');
 			const field = this.ownerDocument.createElement("field-component") as Field;
             field.setAttribute(AttributeField.field, '');
             field.setAttribute(AttributeField.label, '');
@@ -111,9 +112,9 @@ class Account extends HTMLElement {
                      
                         </section>
                         <div id="post-config">
-                            <btn-component color="red" label="+ Post" id="add-post"></btn-component>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M14.647 4.081a.724.724 0 0 0 1.08.448c2.439-1.485 5.23 1.305 3.745 3.744a.724.724 0 0 0 .447 1.08c2.775.673 2.775 4.62 0 5.294a.724.724 0 0 0-.448 1.08c1.485 2.439-1.305 5.23-3.744 3.745a.724.724 0 0 0-1.08.447c-.673 2.775-4.62 2.775-5.294 0a.724.724 0 0 0-1.08-.448c-2.439 1.485-5.23-1.305-3.745-3.744a.724.724 0 0 0-.447-1.08c-2.775-.673-2.775-4.62 0-5.294a.724.724 0 0 0 .448-1.08c-1.485-2.439 1.305-5.23 3.744-3.745a.722.722 0 0 0 1.08-.447c.673-2.775 4.62-2.775 5.294 0M12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6"/></svg>
-                            <svg id="logOut" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12h-9.5m7.5 3l3-3l-3-3m-5-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2v-1"/></svg>
+                            <btn-account color="red" label="+ Post" id="add-post"></btn-account>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 24 24"><path fill="currentColor" d="M14.647 4.081a.724.724 0 0 0 1.08.448c2.439-1.485 5.23 1.305 3.745 3.744a.724.724 0 0 0 .447 1.08c2.775.673 2.775 4.62 0 5.294a.724.724 0 0 0-.448 1.08c1.485 2.439-1.305 5.23-3.744 3.745a.724.724 0 0 0-1.08.447c-.673 2.775-4.62 2.775-5.294 0a.724.724 0 0 0-1.08-.448c-2.439 1.485-5.23-1.305-3.745-3.744a.724.724 0 0 0-.447-1.08c-2.775-.673-2.775-4.62 0-5.294a.724.724 0 0 0 .448-1.08c-1.485-2.439 1.305-5.23 3.744-3.745a.722.722 0 0 0 1.08-.447c.673-2.775 4.62-2.775 5.294 0M12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6"/></svg>
+                            <svg id="logOut" xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12h-9.5m7.5 3l3-3l-3-3m-5-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2v-1"/></svg>
                         </div>
                         <div class="filter">
                             <p>All  6</p>
