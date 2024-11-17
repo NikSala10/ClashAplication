@@ -81,6 +81,53 @@
 }
 #name-user  {
     margin-top: 0;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 25px;
+    margin-bottom: 0;
+}
+#username  {
+    font-family: "Poppins", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 15px;
+    margin-top: -0.4rem;
+}
+#create  {
+    display: flex;
+    margin-top: 7%;
+    gap: 2rem;
+}
+#creative  {
+    font-family: "Istok Web", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 17px;
+    background-color: #DD4632;
+    padding: 0.3rem 0.8rem 0.3rem 0.8rem;
+    border-radius: 50px;
+}
+#category  {
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#contct  {
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 19px;
+}
+#email  {
+    font-family: "Poppins", serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 15px;
 }
 .account-components{
     position: relative;

@@ -85,15 +85,15 @@ class Account extends HTMLElement {
                                 </div>
                             </div>
                             <div class="user-text-contact">
-                                <h3 id="name-user">Yeliani</h3>
-                                <p id="username">@yeli</p>
+                                <h3 id="name-user">Yeliani Barbosa</h3>
+                                <p id="username">@yelibarbosis</p>
                                 <btn-component color="blue" label="Edit" id="btn-edit"></btn-component>
                                 <div id="create">
                                     <p id="creative">Creative</p>
                                     <p id="category">Illustrator</p>
                                 </div>
-                                <h3>Contact Information</h3>
-                                <p id="email">@gamil</p>
+                                <h3 id="contct">Contact Information</h3>
+                                <p id="email">@yeliani@gmail.com</p>
 
                                 <div class="icons-profesional">
                                     <div class="first">
