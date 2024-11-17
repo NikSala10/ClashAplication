@@ -45,63 +45,9 @@ class Dashboard extends HTMLElement  {
             const postsAction = await getProductsAction();
             dispatch(postsAction)
         }
-
-        // if (!appState.post){
-        //     for (const post of posts || []) {
-        //         let username = '';
-        //         let name = '';
         
-        //         if (post.userUid) {
-        //             const userDataPost = await getUserData(post.userUid);
-        //             name = userDataPost?.name || '';
-        //             username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
-        //         }
-        
-        //         const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
-        //         userPostCards.setAttribute(AttributePostCard.postid, post.id)
-        //         userPostCards.setAttribute(AttributePostCard.name, name);
-        //         userPostCards.setAttribute(AttributePostCard.username, username);
-        //         userPostCards.setAttribute(AttributePostCard.category, post.category);
-        //         userPostCards.setAttribute(AttributePostCard.description, post.description);
-        //         userPostCards.setAttribute(AttributePostCard.image, post.image);
-        //         userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
-        //         userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
-        //         userPostCards.setAttribute(AttributePostCard.likes, post.likes);
-        //         userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
-        //         userPostCards.setAttribute(AttributePostCard.comments, post.comments);
-        
-        //         appState.post.push(userPostCards);
-        //     }
-        // }
         console.log('arreglo de post', appState.post);
         
-        const postsTopLikes = await getPostsTopLikes();
-        for (const post of postsTopLikes || []) {
-            let username = '';
-            let name = '';
-    
-            if (post.userUid) {
-                const userDataPost = await getUserData(post.userUid);
-                name = userDataPost?.name || '';
-                username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;  
-            }
-    
-            const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
-            userPostCards.setAttribute(AttributePostCard.postid, post.id)
-            userPostCards.setAttribute(AttributePostCard.name, name);
-            userPostCards.setAttribute(AttributePostCard.username, username);
-            userPostCards.setAttribute(AttributePostCard.category, post.category);
-            userPostCards.setAttribute(AttributePostCard.description, post.description);
-            userPostCards.setAttribute(AttributePostCard.image, post.image);
-            userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
-            userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
-            userPostCards.setAttribute(AttributePostCard.likes, post.likes);
-            userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
-            userPostCards.setAttribute(AttributePostCard.comments, post.comments);
-    
-            this.postListTopLikes.push(userPostCards);
-        }
-    
         this.render();
     }
 
@@ -148,25 +94,50 @@ class Dashboard extends HTMLElement  {
                 //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
                 // }
         
-                const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
-                userPostCards.setAttribute(AttributePostCard.postid, post.id)
-                userPostCards.setAttribute(AttributePostCard.name, name);
-                userPostCards.setAttribute(AttributePostCard.username, username);
-                userPostCards.setAttribute(AttributePostCard.category, post.category);
-                userPostCards.setAttribute(AttributePostCard.description, post.description);
-                userPostCards.setAttribute(AttributePostCard.image, post.image);
-                userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
-                userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
-                userPostCards.setAttribute(AttributePostCard.likes, post.likes);
-                userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
-                userPostCards.setAttribute(AttributePostCard.comments, post.comments);
+                    const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
+                    userPostCards.setAttribute(AttributePostCard.postid, post.id)
+                    userPostCards.setAttribute(AttributePostCard.name, name);
+                    userPostCards.setAttribute(AttributePostCard.username, username);
+                    userPostCards.setAttribute(AttributePostCard.category, post.category);
+                    userPostCards.setAttribute(AttributePostCard.description, post.description);
+                    userPostCards.setAttribute(AttributePostCard.image, post.image);
+                    userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
+                    userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
+                    userPostCards.setAttribute(AttributePostCard.likes, post.likes);
+                    userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
+                    userPostCards.setAttribute(AttributePostCard.comments, post.comments);
                     containerPost?.appendChild(userPostCards);
                 });
             }else{
-                this.postListTopLikes.forEach((postElement) =>  {   
-                    containerPost?.appendChild(postElement);
+                const postTopLikes = appState.post.slice()
+                postTopLikes.sort((a, b) => b.likes - a.likes);
+                console.log(postTopLikes);
+                
+                postTopLikes.forEach((post) =>  {   
+                    let username = '';
+                    let name = '';
+                // if (post.userUid) {
+                //     const userDataPost = await getUserData(post.userUid);
+                //     name = userDataPost?.name || '';
+                //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
+                // }
+        
+                    const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
+                    userPostCards.setAttribute(AttributePostCard.postid, post.id)
+                    userPostCards.setAttribute(AttributePostCard.name, name);
+                    userPostCards.setAttribute(AttributePostCard.username, username);
+                    userPostCards.setAttribute(AttributePostCard.category, post.category);
+                    userPostCards.setAttribute(AttributePostCard.description, post.description);
+                    userPostCards.setAttribute(AttributePostCard.image, post.image);
+                    userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
+                    userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
+                    userPostCards.setAttribute(AttributePostCard.likes, post.likes);
+                    userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
+                    userPostCards.setAttribute(AttributePostCard.comments, post.comments);
+                    containerPost?.appendChild(userPostCards);
                 });
             }
+
             //ADDPOSTBTN
             const btnAddPost = this.shadowRoot.querySelector('#addPost1');
             btnAddPost?.addEventListener('click', () => {
