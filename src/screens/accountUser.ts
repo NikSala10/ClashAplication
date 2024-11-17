@@ -71,7 +71,7 @@ class AccountUsers extends HTMLElement {
                         <section class="">
                             <div class="user-info">
                                 <div class="img-user">
-                                    <img src="" alt="">
+                                    <img src="https://images.pexels.com/photos/13353180/pexels-photo-13353180.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
                                 </div>
                                 <div id="follows">
                                     <div id="followers">

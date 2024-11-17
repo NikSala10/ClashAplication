@@ -39,3 +39,12 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.437);
 }
+@media (max-width: 768px) {
+    .container-barLaterals {
+        width: 100%;
+        top: 0;
+    }
+    .account-components {
+        padding-top: 4rem; /* Reducir el espacio superior */
+    }
+}
