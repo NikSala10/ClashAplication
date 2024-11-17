@@ -1,11 +1,4 @@
-.container-barLaterals {
-    width: 40%;
-    position: sticky;
-    top: 10rem; 
-    height: 100vh;
-    overflow-y: auto;
-    transition: top 0.3s ease;
-}
+
 .circle-img  {
     justify-content: center;
     align-items: center;
@@ -17,10 +10,18 @@
     object-fit: cover;
     aspect-ratio: 1 / 1;
 }
+.container-barLaterals {
+    width: 40%;
+    position: sticky;
+    top: 10rem; 
+    height: 100vh;
+    overflow-y: auto;
+    transition: top 0.3s ease;
+}
 .containers {
     display: flex;
     position: relative;
-    padding-top: 5rem;
+    padding-top: 1rem;
 }
 .container-postcards {
     width: 60%;
@@ -46,9 +47,7 @@
     gap: 5rem;
     height: 13%;
 }
-.containers{
-    height: auto;
-}
+
 #follows  {
     display: flex;
     gap: 1.5rem;
@@ -200,6 +199,14 @@
    }
 hr  {
     margin-top: 0;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+.containers {
+    display: flex;
+    position: relative;
+    padding-top: 5rem;
 }
 .account-components-post{
     position: relative;
