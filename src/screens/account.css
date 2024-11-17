@@ -17,11 +17,31 @@
     object-fit: cover;
     aspect-ratio: 1 / 1;
 }
+.containers {
+    display: flex;
+    position: relative;
+    padding-top: 5rem;
+}
+.container-postcards {
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12rem;
+    overflow-y: scroll; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+.container-postcards::-webkit-scrollbar {
+    display: none;
+}
 #img-user {
     width: 15rem; 
     height: 15rem;
     border-radius: 50%;
     object-fit: cover; 
+}
+.info-contact-user  {
+    display: flex;
 }
 .containers{
     height: auto;

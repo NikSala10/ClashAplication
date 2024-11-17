@@ -68,7 +68,7 @@ class Account extends HTMLElement {
                        <editaccount-component></editaccount-component> 
                     </div>
                     <div class="container-account"  >
-                        <section class="">
+                        <section class="info-contact-user">
                             <div class="user-info">
                                 <div class="circle-img">
                                     <img id="img-user" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
