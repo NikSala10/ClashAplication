@@ -41,7 +41,8 @@ class PostCard extends HTMLElement  {
     favorites?: number;
     send?: number;
     showComent?: boolean;
-    commentsElements?: any[] = []
+    commentsElements?: any[] = [];
+    commentsAll?: any[] = []
     
     constructor()  {
         super();
