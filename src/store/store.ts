@@ -26,8 +26,9 @@ onAuth();
 //El estado global, appState
 const initialState: AppState = {
 	screen: 'DASHBOARD',
-	user:   '',
-	post:  [],
+	user:  '',
+	post: [],
+	comments: [],
 	modalScreen: [false, false],
 	loadPost: false,
 	users: []
