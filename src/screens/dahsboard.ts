@@ -93,7 +93,7 @@ class Dashboard extends HTMLElement  {
                     //     name = userDataPost?.name || '';
                     //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
                     // }
-                    const commentsPost = appState.comments.filter((c) => {c.postid === post.id})
+                    const commentsPost = appState.comments.filter((c) => c.postid === post.id)                    
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
                     userPostCards.setAttribute(AttributePostCard.name, user.name);
