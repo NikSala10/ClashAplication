@@ -29,7 +29,8 @@ const initialState: AppState = {
 	user:   '',
 	post:  [],
 	modalScreen: [false, false],
-	loadPost: false
+	loadPost: false,
+	users: []
 };
 
 
