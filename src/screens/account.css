@@ -6,6 +6,23 @@
     overflow-y: auto;
     transition: top 0.3s ease;
 }
+.circle-img  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #F5F5F5;
+    width: 4.5rem; 
+    height: 4.5rem; 
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+#img-user {
+    width: 5rem; 
+    height: 5rem; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
 .containers{
     height: auto;
 }
@@ -38,13 +55,4 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.437);
-}
-@media (max-width: 768px) {
-    .container-barLaterals {
-        width: 100%;
-        top: 0;
-    }
-    .account-components {
-        padding-top: 4rem; /* Reducir el espacio superior */
-    }
 }

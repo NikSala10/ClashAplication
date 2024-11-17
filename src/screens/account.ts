@@ -70,8 +70,8 @@ class Account extends HTMLElement {
                     <div class="container-account"  >
                         <section class="">
                             <div class="user-info">
-                                <div class="img-user">
-                                    <img src="" alt="">
+                                <div class="circle-img">
+                                    <img id="img-user" src="../../src/assets/ajenda.jpeg" alt="">
                                 </div>
                                 <div id="follows">
                                     <div id="followers">
@@ -122,6 +122,7 @@ class Account extends HTMLElement {
                         <hr>
                         <section class="containers">
                             <div class="container-postcards">
+                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
                                 <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
                             </div>
                             <div class="container-barLaterals">
