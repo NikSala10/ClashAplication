@@ -7,6 +7,7 @@ export type AppState = {
     modalScreen: Boolean[];
     loadPost: Boolean;
     users: any[];
+    comments: any[];
 };
 
 export enum Screens {
