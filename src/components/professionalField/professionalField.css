@@ -3,13 +3,15 @@
 }
 .icons  {
     display: flex;
-    gap: 1rem;
-    margin-top: 4%;
+    gap: 0.5rem;
+    margin-top: 2%;
 }
 .icons p { 
     margin: 0;
     font-family: "Poppins", serif;
-    font-weight: 400;
+    font-weight: 300;
     font-style: normal;
     font-size: 15px;
+    display: flex;
+    align-items: center;
 }

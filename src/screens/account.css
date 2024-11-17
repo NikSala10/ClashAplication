@@ -134,6 +134,11 @@
     height: auto;
     padding-top: 8rem;
 }
+.icons-profesional  {
+    display: flex;
+    gap: 3rem;
+    margin-top: 5%;
+}
 .account-components-post{
     position: relative;
 }
