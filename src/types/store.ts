@@ -3,7 +3,7 @@ export type Observer = { render: () => void } & HTMLElement;
 export type AppState = {
     screen: string;
     user: '';
-    post: [];
+    post: any[];
     modalScreen: Boolean[];
     loadPost: Boolean;
 };
@@ -19,5 +19,6 @@ export enum Actions {
     'NAVIGATE' = 'NAVIGATE',
     'SETUSERCREDENTIALS' = 'SETUSERCREDENTIALS',
     'OPENCLOSESCREEN' = 'OPENCLOSESCREEN',
-    'LOADPOST' = 'LOADPOST'
+    'LOADPOST' = 'LOADPOST',
+    'GETPOST' = 'GETPOST'
 }
