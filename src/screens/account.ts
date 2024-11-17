@@ -79,7 +79,7 @@ class Account extends HTMLElement {
                                         <p class="num">14</p>
                                     </div>
                                     <div id="followeing">
-                                        <p>Following</p>
+                                        <p class="pFOlS">Following</p>
                                         <p class="num">10</p>
                                     </div>
                                 </div>
