@@ -256,7 +256,9 @@ export const getUsers = async () =>  {
 		const data: any[] =[];
  
 		querySnapshot.forEach((doc) => {
-			data.push(doc.data());
+            const user = doc.data()
+            user.id = doc.id
+			data.push(user);
 		});
 		return data;
 	} catch (error) {
