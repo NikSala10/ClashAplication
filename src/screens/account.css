@@ -156,8 +156,14 @@
     cursor: pointer;
     color: white;
 }
+#post-config  {
+    display: flex;
+}
 #post-config svg {
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .account-components-post{
