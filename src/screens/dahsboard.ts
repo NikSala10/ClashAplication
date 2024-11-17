@@ -35,11 +35,6 @@ class Dashboard extends HTMLElement  {
             imageArrayBanner1.setAttribute(Attribute.image, url); 
             this.imagesBanner.push(imageArrayBanner1); 
         });
-
-        const userId = appState.user;
-        if (userId) {
-            const userData = await getUserData(userId);
-        }
         
         if (appState.post.length === 0) {
             const postsAction = await getProductsAction();
