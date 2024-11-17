@@ -6,6 +6,7 @@ export type AppState = {
     post: any[];
     modalScreen: Boolean[];
     loadPost: Boolean;
+    users: any[];
 };
 
 export enum Screens {
@@ -21,4 +22,5 @@ export enum Actions {
     'OPENCLOSESCREEN' = 'OPENCLOSESCREEN',
     'LOADPOST' = 'LOADPOST',
     'GETPOST' = 'GETPOST'
+
 }
