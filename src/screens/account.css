@@ -184,11 +184,22 @@
     font-style: normal;
     font-size: 20px;
     cursor: pointer;
+    border-bottom: 2px solid transparent;
 }
 .filter p b  {
     font-family: "Poppins", serif;
     font-weight: 500;
     font-style: normal;
+}
+
+.filter p:hover  {
+        border-bottom: 2px solid rgb(255, 255, 255);
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+   }
+hr  {
+    margin-top: 0;
 }
 .account-components-post{
     position: relative;
