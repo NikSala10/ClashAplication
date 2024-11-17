@@ -338,27 +338,3 @@ export const updatePostField = async (postId: string, field: UpdateFieldType, co
         throw error; 
     }
 };
-export const getPostsTopLikes = async () => {
-    try {
-        const { db } = await getFirebaseInstance();
-        const { collection, getDocs, query, orderBy, limit } = await import('firebase/firestore');
-
-        const postsCollection = collection(db, 'posts');
-
-        const postsQuery = query(postsCollection, orderBy('likes', 'desc'), limit(5));
-        const querySnapshot = await getDocs(postsQuery);
-
-        const data: any[] = [];
-        querySnapshot.forEach((doc) => {
-            const postData = doc.data();
-            postData.id = doc.id;
-
-            data.push(postData);
-        });
-
-        return data;
-    } catch (error) {
-        console.error('Error obteniendo los documentos:', error);
-        return [];
-    }
-};
