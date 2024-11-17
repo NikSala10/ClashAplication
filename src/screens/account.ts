@@ -87,6 +87,7 @@ class Account extends HTMLElement {
                             <div class="user-text-contact">
                                 <h3 id="name-user">Yeliani</h3>
                                 <p id="username">@yeli</p>
+                                <btn-component color="blue" label="Edit" id="btn-edit"></btn-component>
                                 <div id="create">
                                     <p id="creative">Creative</p>
                                     <p id="category">Illustrator</p>
@@ -107,7 +108,7 @@ class Account extends HTMLElement {
                                 <p id="Works">More Works</p>
                                 <p id="url">https</p>
                             </div>
-                            <btn-component color="blue" label="Edit" id="btn-edit"></btn-component>
+                     
                         </section>
                         <div id="post-config">
                             <btn-component color="red" label="+ Post" id="add-post"></btn-component>

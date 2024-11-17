@@ -42,19 +42,31 @@
 }
 .info-contact-user  {
     display: flex;
+    justify-content: center;
+    gap: 5rem;
 }
 .containers{
     height: auto;
 }
 #follows  {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+#followers  {
+    width: 50%;
+}
+#followeing  {
+    width: 50%;
 }
 .pFOlS  {
     font-family: "Poppins", serif;
     font-weight: 500;
     font-style: normal;
     font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .num  {
     font-family: "Poppins", serif;
@@ -67,6 +79,9 @@
     justify-content: center;
     align-items: center;
 }
+#name-user  {
+    margin-top: 0;
+}
 .account-components{
     position: relative;
     height: auto;
@@ -77,6 +92,9 @@
 }
 .hide{
     display: none;
+}
+.container-account  {
+    width: 100%;
 }
 
 .add-Post{
