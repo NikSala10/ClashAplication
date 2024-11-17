@@ -106,6 +106,7 @@ class Dashboard extends HTMLElement  {
                     userPostCards.setAttribute(AttributePostCard.likes, post.likes);
                     userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
                     userPostCards.setAttribute(AttributePostCard.comments, post.comments);
+                    userPostCards.setAttribute(AttributePostCard.commentsElements,JSON.stringify(commentsPost));
                     containerPost?.appendChild(userPostCards);
                 });
             }else{

@@ -41,7 +41,7 @@ class PostCard extends HTMLElement  {
     favorites?: number;
     send?: number;
     showComent?: boolean;
-    commentsElements?: Comments[] = []
+    commentsElements?: any[] = []
     
     constructor()  {
         super();
@@ -71,8 +71,8 @@ class PostCard extends HTMLElement  {
             this.send = newValue ? Number(newValue) : undefined;
                 break;
             case AttributePostCard.commentsElements:
-                    this.send = newValue ? JSON.parse(newValue) : undefined;
-                        break;
+                this.commentsElements = newValue ? JSON.parse(newValue) : undefined;
+                    break;
             default:
                 this[propName] = newValue;
                 break;
