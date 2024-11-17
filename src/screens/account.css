@@ -1,4 +1,8 @@
-
+.containers {
+    display: flex;
+    position: relative;
+    padding-top: 5rem;
+}
 .circle-img  {
     justify-content: center;
     align-items: center;
@@ -10,19 +14,7 @@
     object-fit: cover;
     aspect-ratio: 1 / 1;
 }
-.container-barLaterals {
-    width: 40%;
-    position: sticky;
-    top: 10rem; 
-    height: 100vh;
-    overflow-y: auto;
-    transition: top 0.3s ease;
-}
-.containers {
-    display: flex;
-    position: relative;
-    padding-top: 1rem;
-}
+
 .container-postcards {
     width: 60%;
     justify-content: center;
@@ -34,6 +26,14 @@
 }
 .container-postcards::-webkit-scrollbar {
     display: none;
+}
+.container-barLaterals {
+    width: 40%;
+    position: sticky;
+    top: 10rem; 
+    height: 100vh;
+    overflow-y: auto;
+    transition: top 0.3s ease;
 }
 #img-user {
     width: 15rem; 
@@ -203,11 +203,7 @@ hr  {
     display: flex;
     justify-content: center;
 }
-.containers {
-    display: flex;
-    position: relative;
-    padding-top: 5rem;
-}
+
 .account-components-post{
     position: relative;
 }
