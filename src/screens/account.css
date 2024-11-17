@@ -158,6 +158,9 @@
 }
 #post-config  {
     display: flex;
+    gap: 1rem;
+    margin-left: 65%;
+    align-items: center;
 }
 #post-config svg {
     color: white;
@@ -165,7 +168,28 @@
     justify-content: center;
     align-items: center;
 }
-
+#logOut  {
+    cursor: pointer;
+}
+.filter   {
+    display: flex;
+    gap: 10rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+}
+.filter p  {
+    font-family: "Poppins", serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 20px;
+    cursor: pointer;
+}
+.filter p b  {
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+}
 .account-components-post{
     position: relative;
 }
