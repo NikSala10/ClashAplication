@@ -23,6 +23,6 @@ export enum Actions {
     'OPENCLOSESCREEN' = 'OPENCLOSESCREEN',
     'LOADPOST' = 'LOADPOST',
     'GETPOST' = 'GETPOST',
-    'GETUSERS' = 'GETUSERS'
-
+    'GETUSERS' = 'GETUSERS',
+    'GETCOMMENT' = 'GETCOMMENT'
 }
