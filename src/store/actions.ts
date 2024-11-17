@@ -1,4 +1,5 @@
 import { Actions, Screens } from '../types/store';
+import { getPosts } from '../utils/firebase';
 
 export const navigate = (screen: Screens) => {
 	return {
@@ -20,6 +21,15 @@ export const setOpenCloseScreen = (modalScreen: Number) => {
 		payload: modalScreen,
 	};
 };
+
+export const getProductsAction = async () => {
+	const products = await getPosts(); //Firestore
+	return {
+		action: Actions.GETPOST,
+		payload: products,
+	};
+};
+
 export const loadPost = (loadPost: Boolean) => {
     return {
         action: Actions.LOADPOST,
