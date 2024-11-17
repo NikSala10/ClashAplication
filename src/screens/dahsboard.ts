@@ -9,10 +9,9 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getUserData, getFiles} from '../utils/firebase'
+import { getFiles} from '../utils/firebase'
 import { dispatch } from '../store/store'
-import { setUserCredentials } from '../store/actions'
-import { setOpenCloseScreen, getProductsAction, getUsersAction} from '../store/actions';
+import { setOpenCloseScreen, getPostAction, getUsersAction} from '../store/actions';
 import { navigate } from '../store/actions';
 import { Screens } from '../types/store';
 
@@ -35,13 +34,17 @@ class Dashboard extends HTMLElement  {
         });
         
         if (appState.post.length === 0) {
-            const postsAction = await getProductsAction();
+            const postsAction = await getPostAction();
             dispatch(postsAction)
         }
         if (appState.users.length === 0) {
             const usersAction = await getUsersAction();
             dispatch(usersAction)
         }
+        // if (appState.comments.length === 0) {
+        //     const commentsAction = await getUsersAction();
+        //     dispatch(commentsAction)
+        // }
         console.log(appState.users);
         
         this.render();
