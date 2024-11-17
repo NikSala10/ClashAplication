@@ -20,6 +20,11 @@ export const reducer = (currentAction: any, currentState: any) => {
 				...currentState,
 				post: payload,
 			};
+		case Actions.GETUSERS:
+			return {
+				...currentState,
+				users: payload,
+			};
 
 		case Actions.OPENCLOSESCREEN:
 		
