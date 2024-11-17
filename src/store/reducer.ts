@@ -18,7 +18,7 @@ export const reducer = (currentAction: any, currentState: any) => {
 		case Actions.GETPOST:
 			return {
 				...currentState,
-				products: payload,
+				post: payload,
 			};
 
 		case Actions.OPENCLOSESCREEN:
