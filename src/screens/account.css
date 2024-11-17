@@ -151,6 +151,9 @@
     font-weight: 300;
     font-style: normal;
     font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
 }
 .account-components-post{
     position: relative;

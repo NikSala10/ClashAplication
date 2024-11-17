@@ -106,7 +106,7 @@ class Account extends HTMLElement {
                                     </div>
                                 </div>
                                 <p id="Works">More Works</p>
-                                <p id="url">https</p>
+                                <a id="url" href="https://www.behance.net/yelianibarbosa1" target="_blank">https://www.behance.net/yelianibarbosa1</a>
                             </div>
                      
                         </section>
