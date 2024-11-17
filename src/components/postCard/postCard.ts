@@ -20,7 +20,9 @@ export enum AttributePostCard  {
     'likes' =  'likes',
     'comments' = 'comments',
     'favorites' = 'favorites',
-    'send' = 'send'
+    'send' = 'send',
+    'commentsElements' = 'commentsElements'
+
 }
 
 class PostCard extends HTMLElement  {
@@ -68,6 +70,9 @@ class PostCard extends HTMLElement  {
             case AttributePostCard.send:
             this.send = newValue ? Number(newValue) : undefined;
                 break;
+            case AttributePostCard.commentsElements:
+                    this.send = newValue ? JSON.parse(newValue) : undefined;
+                        break;
             default:
                 this[propName] = newValue;
                 break;
