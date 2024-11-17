@@ -3,4 +3,13 @@
 }
 .icons  {
     display: flex;
+    gap: 1rem;
+    margin-top: 4%;
+}
+.icons p { 
+    margin: 0;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
 }
