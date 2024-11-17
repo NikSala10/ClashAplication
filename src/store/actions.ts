@@ -22,8 +22,8 @@ export const setOpenCloseScreen = (modalScreen: Number) => {
 	};
 };
 
-export const getProductsAction = async () => {
-	const posts = await getPosts(); //Firestore
+export const getPostAction = async () => {
+	const posts = await getPosts(); 
 	return {
 		action: Actions.GETPOST,
 		payload: posts,
@@ -31,7 +31,7 @@ export const getProductsAction = async () => {
 };
 
 export const getUsersAction = async () => {
-	const users = await getUsers(); //Firestore
+	const users = await getUsers(); 
 	return {
 		action: Actions.GETUSERS,
 		payload: users,
