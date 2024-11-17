@@ -11,15 +11,15 @@
     align-items: center;
     display: flex;
     background-color: #F5F5F5;
-    width: 4.5rem; 
-    height: 4.5rem; 
+    width: 15rem; 
+    height: 15rem; 
     border-radius: 50%;
     object-fit: cover;
     aspect-ratio: 1 / 1;
 }
 #img-user {
-    width: 5rem; 
-    height: 5rem; 
+    width: 15rem; 
+    height: 15rem;
     border-radius: 50%;
     object-fit: cover; 
 }
