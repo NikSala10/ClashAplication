@@ -3,7 +3,17 @@ import { uploadFileProfileByUser } from "../../utils/firebase";
 import { dispatch } from "../../store/store";
 import { setOpenCloseScreen } from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
+import { EditUserInformation } from "../../types/editPost";
 
+const edit: EditUserInformation = {
+    username: '',
+	category: '',
+	imgUser: '',
+    placeresidence: '',
+	currenttraining: '',
+	currentjob: '',
+	academy: '',
+}
 export enum AttributeEditPost  { 
     'imguser' = 'imguser',
     'name' = 'name',

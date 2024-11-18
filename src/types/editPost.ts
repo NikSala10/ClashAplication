@@ -1,4 +1,4 @@
-export interface EditPost {
+export interface EditUserInformation {
 	username: string;
 	category: string,
 	imgUser: string,
