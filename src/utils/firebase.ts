@@ -357,3 +357,23 @@ export const updatePostField = async (postId: string, field: UpdateFieldType, co
         throw error; 
     }
 };
+
+export const getProductsByUser = async () => {
+	try {
+		const { db } = await getFirebaseInstance();
+		const { collection, getDocs, query, where } = await import('firebase/firestore');
+
+		const ref = collection(db, 'products');
+		const q = query(ref, where('userUid', '==', appState.user));
+		const querySnapshot = await getDocs(q);
+		const data: any[] = [];
+
+		querySnapshot.forEach((doc) => {
+			data.push(doc.data());
+		});
+
+		return data;
+	} catch (error) {
+		console.error('Error getting documents', error);
+	}
+};
