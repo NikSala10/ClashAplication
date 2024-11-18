@@ -273,8 +273,6 @@ class PostCard extends HTMLElement  {
                     }   
                     countComment++
                 })  
-                console.log(this.commentsElements);
- 
         }
     }
 };
