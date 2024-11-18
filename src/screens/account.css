@@ -1,6 +1,12 @@
 *  { 
     margin: 0;
 }
+.containers {
+    display: flex;
+    position: relative;
+    height: 100%;  
+    overflow: hidden;
+}
 .circle-img  {
     justify-content: center;
     align-items: center;
@@ -13,20 +19,15 @@
     aspect-ratio: 1 / 1;
 }
 
-.containers {
-    display: flex;
-    position: relative;
-    height: 100%;  
-}
+
 
 .container-postcards {
     width: 60%;
     margin-left: 12rem;
     align-items: center;
-    height: 100vh; 
+    height: 100%; 
     overflow-y: scroll; 
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
+    padding-top: 3rem;
 }
 
 .container-postcards::-webkit-scrollbar {
@@ -36,7 +37,7 @@
 .container-barLaterals {
     width: 40%;
     position: sticky;
-    top: 8rem; 
+    top: 3rem; 
     height: 100vh; 
     overflow-y: auto; 
     transition: top 0.3s ease;
@@ -51,7 +52,7 @@
     display: flex;
     justify-content: center;
     gap: 5rem;
-    height: 30%;
+    height: 7%;
 }
 
 #follows  {
@@ -128,6 +129,7 @@
     font-weight: 500;
     font-style: normal;
     font-size: 19px;
+    margin-top: 1rem;
 }
 #email  {
     font-family: "Poppins", serif;
@@ -203,12 +205,7 @@
         font-weight: 500;
         font-style: normal;
    }
-hr  {
-    margin-top: 0;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-}
+
 
 .account-components-post{
     position: relative;
@@ -237,4 +234,11 @@ hr  {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.437);
+}
+hr  {
+    margin-top: 0;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+
 }

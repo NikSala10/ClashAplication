@@ -120,7 +120,7 @@ class CardAccount extends HTMLElement  {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/cardAccount/cardAccount.css">
             <div class= "card">
-                    <hashtags-component hashtags='${this.hashtags ? this.hashtags : '[]'}'></hashtags-component>
+                    <hashtags-component hashtags='${this.hashtags ? this.hashtags : ''}'></hashtags-component>
                     <img class="img-post" src="${this.image ? this.image : 'Not found'}">
                     <div class="post-icons">
                         <div class="counter" id="like">
