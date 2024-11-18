@@ -20,6 +20,11 @@ export const reducer = (currentAction: any, currentState: any) => {
 				...currentState,
 				post: payload,
 			};
+		case Actions.GETPOSTSBYUSER:
+			return {
+				...currentState,
+				postsByUser: payload,
+			};	
 		case Actions.GETUSERS:
 			return {
 				...currentState,
