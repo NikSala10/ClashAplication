@@ -1,5 +1,6 @@
 import { Actions, Screens } from '../types/store';
-import { getComment, getPosts, getUsers, getPostsByUser } from '../utils/firebase';
+import { getComment, getPosts, getUsers, getPostsByUser, getFileProfile } from '../utils/firebase';
+import { appState } from './store';
 
 export const navigate = (screen: Screens) => {
 	return {
@@ -52,6 +53,13 @@ export const getPostsByUserAction = async () => {
 	return {
 		action: Actions.GETPOSTSBYUSER,
 		payload: postsByUser,
+	};
+};
+export const getImgUserFileAction = async () => {
+	const imgByUser = await getFileProfile(appState.user); 
+	return {
+		action: Actions.GETPOSTSBYUSER,
+		payload: imgByUser,
 	};
 };
 
