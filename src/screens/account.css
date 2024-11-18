@@ -4,7 +4,6 @@
 .containers {
     display: flex;
     position: relative;
-    padding-top: 3rem;
 }
 .circle-img  {
     justify-content: center;
@@ -16,6 +15,14 @@
     border-radius: 50%;
     object-fit: cover;
     aspect-ratio: 1 / 1;
+}
+
+.container-barLaterals {
+    width: 30%;
+    position: fixed;
+    top: 0; 
+    max-height: 100vh;
+    overflow-y: auto; 
 }
 .container-postcards {
     width: 60%;
@@ -29,15 +36,11 @@
     margin-bottom: 10rem;
     overflow-y: auto;
 }
-
-.container-barLaterals {
-    width: 30%;
-    position: sticky;
-    top: 3rem; 
-    height: calc(100vh - 3rem); 
-    overflow-y: auto; 
+.container-postcards::-webkit-scrollbar,
+.container-barLaterals::-webkit-scrollbar {
+    width: 0;
+    display: none;
 }
-
 cardaccount-component  {
     width: 45%;
     margin-bottom: 1rem;

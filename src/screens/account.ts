@@ -183,7 +183,37 @@ class Account extends HTMLElement {
             logOut?.addEventListener('click', this.logout);
 
 		}
-       
+       // Definir tipos de elementos
+const barLaterals = this.shadowRoot?.querySelector('.container-barLaterals') as HTMLElement;
+const postcardsSection = this.shadowRoot?.querySelector('.container-postcards') as HTMLElement;
+
+// Verificar si los elementos existen para evitar errores en tiempo de ejecución
+if (barLaterals && postcardsSection) {
+    // Crear el Intersection Observer
+    const observer = new IntersectionObserver(
+        (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry: IntersectionObserverEntry) => {
+                if (entry.isIntersecting) {
+                    // Cambiar la posición a fija cuando la sección de postales esté visible
+                    barLaterals.style.position = 'fixed';
+                    barLaterals.style.top = '0';
+                } else {
+                    // Restablecer a posición absoluta cuando se salga del área
+                    barLaterals.style.position = 'absolute';
+                    barLaterals.style.top = '0';
+                }
+            });
+        },
+        {
+            root: null,
+            threshold: 0
+        }
+    );
+
+    // Iniciar la observación de la sección de postales
+    observer.observe(postcardsSection);
+}
+
 	}
 }
 
