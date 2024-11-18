@@ -363,7 +363,7 @@ export const getProductsByUser = async () => {
 		const { db } = await getFirebaseInstance();
 		const { collection, getDocs, query, where } = await import('firebase/firestore');
 
-		const ref = collection(db, 'products');
+		const ref = collection(db, 'posts');
 		const q = query(ref, where('userUid', '==', appState.user));
 		const querySnapshot = await getDocs(q);
 		const data: any[] = [];
