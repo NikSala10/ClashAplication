@@ -1,5 +1,5 @@
 import { Actions, Screens } from '../types/store';
-import { getComment, getPosts, getUsers } from '../utils/firebase';
+import { getComment, getPosts, getUsers, getPostsByUser } from '../utils/firebase';
 
 export const navigate = (screen: Screens) => {
 	return {
@@ -44,6 +44,14 @@ export const getCommentsAction = async () => {
 	return {
 		action: Actions.GETCOMMENT,
 		payload: comments,
+	};
+};
+
+export const getPostsByUserAction = async () => {
+	const productsByUser = await getPostsByUser(); //Firestore
+	return {
+		action: Actions.GETPOSTSBYUSER,
+		payload: productsByUser,
 	};
 };
 

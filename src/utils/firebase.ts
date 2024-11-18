@@ -358,7 +358,7 @@ export const updatePostField = async (postId: string, field: UpdateFieldType, co
     }
 };
 
-export const getProductsByUser = async () => {
+export const getPostsByUser = async () => {
 	try {
 		const { db } = await getFirebaseInstance();
 		const { collection, getDocs, query, where } = await import('firebase/firestore');
