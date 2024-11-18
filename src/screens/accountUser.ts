@@ -26,7 +26,6 @@ class AccountUsers extends HTMLElement {
             cardAccount.setAttribute(AttributeCardAccount.likes, '');
             cardAccount.setAttribute(AttributeCardAccount.comments, '');
             cardAccount.setAttribute(AttributeCardAccount.favorites, '');
-            cardAccount.setAttribute(AttributeCardAccount.send, '');
             cardAccount.setAttribute(AttributeCardAccount.hashtags, '');
 			const barLateral = this.ownerDocument.createElement("bar-lateral") as BarLateral;
 	}

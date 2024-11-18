@@ -21,6 +21,7 @@
 
 .container-barLaterals {
     width: 40%;
+    position: -webkit-sticky;
     position: sticky;
     top: 3rem; 
     height: 100vh; 
