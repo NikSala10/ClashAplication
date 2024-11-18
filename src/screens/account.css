@@ -37,10 +37,6 @@
     justify-content: center;
     margin-bottom: 10rem;
 }
-.sticky {
-    position: sticky;
-    top: 3rem;
-}
 
 cardaccount-component  {
     width: 45%;

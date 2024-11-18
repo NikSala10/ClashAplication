@@ -51,6 +51,7 @@ class Account extends HTMLElement {
         alert('Ha cerrado sesión')
         
 	}
+    
 	async render() {
 		if (this.shadowRoot) {
             let hash = ['hola', 'hola2', 'hola3']
