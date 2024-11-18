@@ -26,11 +26,7 @@ class Account extends HTMLElement {
 			const field = this.ownerDocument.createElement("field-component") as Field;
             field.setAttribute(AttributeField.field, '');
             field.setAttribute(AttributeField.label, '');
-			const cardAccount = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
-            cardAccount.setAttribute(AttributeCardAccount.likes, '');
-            cardAccount.setAttribute(AttributeCardAccount.comments, '');
-            cardAccount.setAttribute(AttributeCardAccount.favorites, '');
-            cardAccount.setAttribute(AttributeCardAccount.hashtags, '');
+		
 			const barLateral = this.ownerDocument.createElement("bar-lateral") as BarLateral;
             
             

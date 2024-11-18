@@ -156,12 +156,16 @@ class AddPost extends HTMLElement  {
         save?.addEventListener('click', () => {
             const descriptionValue = description.value.trim();
             const hashtagsValue = hashtags.value.trim();
+            const imageValue = imgInput.value.trim();
         
             if (!descriptionValue) {
                 alert('Por favor, escribe una descripción del post.');
                 return; 
             }
-        
+            if (!imageValue) {
+                alert('Por favor, selecciona una imagen.');
+                return; 
+            }
             if (!hashtagsValue) {
                 alert('Por favor, escribe al menos un hashtag.');
                 return; 
