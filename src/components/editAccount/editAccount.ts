@@ -1,5 +1,5 @@
 import "../button/button";
-
+import { uploadFileProfileByUser } from "../../utils/firebase";
 import { dispatch } from "../../store/store";
 import { setOpenCloseScreen } from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
@@ -24,7 +24,24 @@ class EditAccount extends HTMLElement  {
         
         this.render();
     }
+    async submitForm() {
+        const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
+        const file = img?.files?.[0]; 
+   
+    
+        alert('Post creado');
+        this.clearInputs();
+    }
+    
+    clearInputs() {
+        const descriptionInput = this.shadowRoot?.querySelector('#description') as HTMLInputElement;
+        const hashtagsInput = this.shadowRoot?.querySelector('#hashtags') as HTMLInputElement;
+        const imgInput = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
 
+        if (descriptionInput) descriptionInput.value = ''; 
+        if (hashtagsInput) hashtagsInput.value = ''; 
+        if (imgInput) imgInput.value = ''; 
+    }
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
@@ -80,6 +97,12 @@ class EditAccount extends HTMLElement  {
         const btn = this.shadowRoot?.querySelector('#close-modal')
         btn?.addEventListener('click', ()=>{
             dispatch(setOpenCloseScreen(1))
+        })
+
+        const imageInput = this.shadowRoot?.querySelector('#fileInput') as HTMLInputElement;
+        imageInput?.addEventListener('change', () => { 
+            const file = imageInput.files?.[0];
+				// if (file) uploadFileCloudinary(file, appState.user);
         })
     }
 };
