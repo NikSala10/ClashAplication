@@ -1,7 +1,7 @@
 import "../button/button";
 import { uploadFileProfileByUser } from "../../utils/firebase";
 import { dispatch } from "../../store/store";
-import { setOpenCloseScreen } from "../../store/actions";
+import { setOpenCloseScreen, getImgUserFileAction} from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
 import { EditUserInformation } from "../../types/editPost";
 
@@ -34,7 +34,10 @@ class EditAccount extends HTMLElement  {
     }
 
     async connectedCallback() { 
-        
+        if (!appState.imgUserProfile) {
+            const imgAction = await getImgUserFileAction();
+            dispatch(imgAction);
+        }
         this.render();
     }
     changeUserName(e: any) {
@@ -97,7 +100,7 @@ class EditAccount extends HTMLElement  {
                   <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
                  <div class="user-profile">
                     <div class="circle-img">
-                        <img id="img-user" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                        <img id="img-user" src="" alt="">
                         <div class="icon">
                             <input type="file" id="fileInput">
                             <label for="fileInput">
@@ -144,7 +147,11 @@ class EditAccount extends HTMLElement  {
         btn?.addEventListener('click', ()=>{
             dispatch(setOpenCloseScreen(1))
         })
-
+        
+        const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
+        if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
+            imgElement.src = appState.imgUserProfile; 
+        } 
         const userName = this.shadowRoot?.querySelector('#usernamechange') as HTMLInputElement;
         userName?.addEventListener('change', this.changeUserName);
 

@@ -72,7 +72,7 @@ class Account extends HTMLElement {
                         <section class="info-contact-user">
                             <div class="user-info">
                                 <div class="circle-img">
-                                    <img id="img-user" src="${appState.imgUserProfile}" alt="">
+                                    <img id="img-user" src="" alt="">
                                 </div>
                                 <div id="follows">
                                     <div id="followers">
@@ -146,13 +146,9 @@ class Account extends HTMLElement {
         });
 
         const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
-        console.log('appState.imgUserProfile', appState.imgUserProfile); // Verifica el valor
         if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
-            imgElement.src = appState.imgUserProfile; // Asigna la URL si es válida
-        } else {
-            console.log('Imagen no válida, asignando imagen predeterminada');
-            imgElement.src = 'path_to_default_image.jpg'; // Imagen predeterminada en caso de que no haya URL válida
-        }
+            imgElement.src = appState.imgUserProfile; 
+        } 
 			const cssAccount = this.ownerDocument.createElement("style");
 			cssAccount.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssAccount);
