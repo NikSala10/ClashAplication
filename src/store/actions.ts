@@ -48,10 +48,10 @@ export const getCommentsAction = async () => {
 };
 
 export const getPostsByUserAction = async () => {
-	const productsByUser = await getPostsByUser(); //Firestore
+	const postsByUser = await getPostsByUser(); 
 	return {
 		action: Actions.GETPOSTSBYUSER,
-		payload: productsByUser,
+		payload: postsByUser,
 	};
 };
 
