@@ -61,24 +61,13 @@ class EditAccount extends HTMLElement  {
     changeMoreWorksUrl(e: any) {
         edit.moreworksurl = e.target.value;
     }
-    async submitForm() {
+    submitForm = async () => {
         try {
-            // Obtenemos el input del archivo y el archivo seleccionado
-            const imageInput = this.shadowRoot?.querySelector('#fileInput') as HTMLInputElement;
-            const file = imageInput?.files?.[0];
-        
-            // Verificamos si se seleccionó un archivo
+            const file = this.selectedFile; // Utiliza this.selectedFile
             if (file) {
                 console.log("Iniciando subida de archivo:", file.name);
-    
-                // Esperamos la subida del archivo y obtenemos la URL
                 const imgURL = await uploadFileProfileByUser(file, appState.user);
-                console.log("Imagen subida, URL obtenida:", imgURL);
-    
-                // Asignamos la URL al objeto edit
-                edit.imgUser = String(imgURL);
-                console.log("URL de la imagen asignada al perfil:", edit.imgUser);
-    
+                edit.imgUser = imgURL;
                 alert('Perfil actualizado correctamente');
             } else {
                 console.warn("No se seleccionó ningún archivo para subir");
@@ -87,10 +76,8 @@ class EditAccount extends HTMLElement  {
         } catch (error) {
             console.error("Error al enviar el formulario:", error);
             alert("Ocurrió un error al actualizar el perfil");
-        
+        }
     }
-    alert('Cambios realizados')
-}
     
     clearInputs() {
         const descriptionInput = this.shadowRoot?.querySelector('#description') as HTMLInputElement;
@@ -180,12 +167,18 @@ class EditAccount extends HTMLElement  {
         userMoreWorksUrl?.addEventListener('change', this.changeMoreWorksUrl);
 
         const imageInput = this.shadowRoot?.querySelector('#fileInput') as HTMLInputElement;
-        imageInput?.addEventListener('change', () => { 
-            this.selectedFile = imageInput.files?.[0] || undefined;
-            
-        })
+        imageInput?.addEventListener('change', (event) => {
+            const target = event.target as HTMLInputElement;
+            if (target.files && target.files.length > 0) {
+                this.selectedFile = target.files[0];
+                console.log("Archivo seleccionado:", this.selectedFile);
+            } else {
+                console.warn("No se seleccionó ningún archivo");
+                this.selectedFile = undefined;
+            }
+        });
         const save = this.shadowRoot?.querySelector('#save');
-        save?.addEventListener('click', this.submitForm);
+        save?.addEventListener('click', this.submitForm.bind(this));
     }
 };
 
