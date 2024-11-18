@@ -124,10 +124,6 @@ class Account extends HTMLElement {
                         <hr>
                         <section class="containers">
                             <div class="container-postcards">
-                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
-                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
-                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
-                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
                             </div>
                             <div class="container-barLaterals">
                                 <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
@@ -139,7 +135,17 @@ class Account extends HTMLElement {
                 </section>
 				
 			`;
-           
+            appState.postsByUser.forEach((post: any) => { 
+            const containerPost = this.shadowRoot?.querySelector('.container-postcards');         
+            const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
+            userPostCard.setAttribute(AttributeCardAccount.image, post.image);
+            userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
+            userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
+            userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
+            userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
+            containerPost?.appendChild(userPostCard);
+        });
+
 			const cssAccount = this.ownerDocument.createElement("style");
 			cssAccount.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssAccount);
