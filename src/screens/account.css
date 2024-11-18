@@ -4,6 +4,7 @@
 .containers {
     display: flex;
     position: relative;
+    height: auto;  
 }
 .circle-img  {
     justify-content: center;
@@ -19,9 +20,9 @@
 
 .container-barLaterals {
     width: 30%;
-    position: fixed;
-    top: 0; 
-    max-height: 100vh;
+    position: sticky;
+    top: 3rem; 
+    height: calc(100vh - 3rem); 
     overflow-y: auto; 
 }
 .container-postcards {
