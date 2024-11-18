@@ -46,7 +46,7 @@ class EditAccount extends HTMLElement  {
                     </div>
                     
                     <div id="user">
-                        <p>${this.name}</p>
+                        <p id="name">${this.name}</p>
                         <input type="text" placeholder="Add Username">
                         <div id="create">
                             <p id="creative">Creative</p>
@@ -64,7 +64,7 @@ class EditAccount extends HTMLElement  {
                         </div>
                         <div class="profesional-work">
                             <input type="text" placeholder="Current Training">
-                             <input type="text" placeholder="Academy">
+                            <input type="text" placeholder="Academy">
                         </div>
                     </div>
                     <p id="Works">More Works</p>
