@@ -63,7 +63,7 @@ class EditAccount extends HTMLElement  {
     }
     submitForm = async () => {
         try {
-            const file = this.selectedFile; // Utiliza this.selectedFile
+            const file = this.selectedFile;
             if (file) {
                 console.log("Iniciando subida de archivo:", file.name);
                 const imgURL = await uploadFileProfileByUser(file, appState.user);
