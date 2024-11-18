@@ -317,12 +317,20 @@ export const getFiles = async (id: string): Promise<string[]> => {
 };
 export const uploadFileProfileByUser = async (file: File, id: string) => {
 	const { storage } = await getFirebaseInstance();
-	const { ref, uploadBytes } = await import('firebase/storage');
+    const { ref, uploadBytes, getDownloadURL } = await import('firebase/storage');
 
-	const storageRef = ref(storage, 'imagesProfile/' + id);
-	uploadBytes(storageRef, file).then((snapshot) => {
-		console.log('File uploaded');
-	});
+    // Referencia de Firebase Storage
+    const storageRef = ref(storage, 'imagesProfile/' + id);
+    
+    // Subir archivo
+    const snapshot = await uploadBytes(storageRef, file);
+    console.log('File uploaded:', snapshot);
+
+    // Obtener URL de descarga
+    const downloadURL = await getDownloadURL(storageRef);
+    console.log('Download URL:', downloadURL);
+
+    return downloadURL;
 };
 
 export const getFileProfile = async (id: string) => {

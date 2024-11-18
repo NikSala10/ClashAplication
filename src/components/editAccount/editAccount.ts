@@ -62,13 +62,35 @@ class EditAccount extends HTMLElement  {
         edit.moreworksurl = e.target.value;
     }
     async submitForm() {
-        const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
-        const file = img?.files?.[0]; 
-   
+        try {
+            // Obtenemos el input del archivo y el archivo seleccionado
+            const imageInput = this.shadowRoot?.querySelector('#fileInput') as HTMLInputElement;
+            const file = imageInput?.files?.[0];
+        
+            // Verificamos si se seleccionó un archivo
+            if (file) {
+                console.log("Iniciando subida de archivo:", file.name);
     
-        alert('Post creado');
-        this.clearInputs();
+                // Esperamos la subida del archivo y obtenemos la URL
+                const imgURL = await uploadFileProfileByUser(file, appState.user);
+                console.log("Imagen subida, URL obtenida:", imgURL);
+    
+                // Asignamos la URL al objeto edit
+                edit.imgUser = String(imgURL);
+                console.log("URL de la imagen asignada al perfil:", edit.imgUser);
+    
+                alert('Perfil actualizado correctamente');
+            } else {
+                console.warn("No se seleccionó ningún archivo para subir");
+                alert('Por favor selecciona una imagen para subir.');
+            }
+        } catch (error) {
+            console.error("Error al enviar el formulario:", error);
+            alert("Ocurrió un error al actualizar el perfil");
+        
     }
+    alert('Cambios realizados')
+}
     
     clearInputs() {
         const descriptionInput = this.shadowRoot?.querySelector('#description') as HTMLInputElement;
@@ -160,6 +182,7 @@ class EditAccount extends HTMLElement  {
         const imageInput = this.shadowRoot?.querySelector('#fileInput') as HTMLInputElement;
         imageInput?.addEventListener('change', () => { 
             this.selectedFile = imageInput.files?.[0] || undefined;
+            
         })
         const save = this.shadowRoot?.querySelector('#save');
         save?.addEventListener('click', this.submitForm);
