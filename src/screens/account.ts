@@ -125,6 +125,8 @@ class Account extends HTMLElement {
                             <div class="container-postcards">
                                 <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
                                 <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
+                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
+                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
                             </div>
                             <div class="container-barLaterals">
                                 <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
