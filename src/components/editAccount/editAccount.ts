@@ -24,7 +24,9 @@ class EditAccount extends HTMLElement  {
     imguser?: string;
     name?: string;
     gmail?: string;
-   
+    selectedFile?: File;
+
+
     constructor()  {
         super();
         this.attachShadow( {mode: 'open'})
@@ -157,8 +159,7 @@ class EditAccount extends HTMLElement  {
 
         const imageInput = this.shadowRoot?.querySelector('#fileInput') as HTMLInputElement;
         imageInput?.addEventListener('change', () => { 
-            const file = imageInput.files?.[0];
-				// if (file) uploadFileCloudinary(file, appState.user);
+            this.selectedFile = imageInput.files?.[0] || undefined;
         })
         const save = this.shadowRoot?.querySelector('#save');
         save?.addEventListener('click', this.submitForm);
