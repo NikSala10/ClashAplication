@@ -35,25 +35,26 @@ class EditAccount extends HTMLElement  {
                  <div class="user-profile">
                     <div class="circle-img">
                         <img id="img-user" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                        <div class="icon">
+                            <input type="file" id="fileInput">
+                            <label for="fileInput">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
+                                    <path fill="#8258BD" d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5a5 5 0 0 0 5 5a5 5 0 0 0 5-5a5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3"/>
+                                </svg>
+                            </label>
+                        </div>
                     </div>
-                <div class="icon">
-                    <input type="file" id="fileInput">
-                    <label for="fileInput">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-                            <path fill="#8258BD" d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5a5 5 0 0 0 5 5a5 5 0 0 0 5-5a5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3"/>
-                        </svg>
-                    </label>
-                </div>
+                    
                     <div id="user">
                         <p>${this.name}</p>
                         <input type="text" placeholder="Add Username">
+                        <div id="create">
+                            <p id="creative">Creative</p>
+                            <input type="text" placeholder="Write your creative category">
+                        </div>
                     </div>
                 </div>
                 <div class="info">
-                    <div id="create">
-                        <p id="creative">Creative</p>
-                        <input type="text" placeholder="Write your creative category">
-                    </div>
                     <h3>Contact Information</h3>
                     <p id="email">${this.gmail}</p>
                      <div class="icons-profesional">

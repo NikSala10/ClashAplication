@@ -12,33 +12,41 @@
     margin-left: 2rem;
 }
 .circle-img  {
+    position: relative;
     justify-content: center;
     align-items: center;
     display: flex;
     background-color: #F5F5F5;
-    width: 5rem; 
-    height: 5rem; 
+    width: 10rem; 
+    height: 10rem; 
     border-radius: 50%;
     object-fit: cover;
 }
 #img-user {
-    width: 5rem; 
-    height: 5rem; 
+    width: 10rem; 
+    height: 10rem; 
     border-radius: 50%;
     object-fit: cover; 
 }
 .user-profile  {
-    margin-top: -2rem;
+    margin-top: -1rem;
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
 }
 .icon {
-    width: 3rem;
-    height: 3rem;
+    position: absolute;
+    bottom: 0;
+    margin-top: 4rem;
+    margin-left: 6rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     background-color: #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
