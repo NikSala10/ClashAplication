@@ -315,7 +315,7 @@ export const getFiles = async (id: string): Promise<string[]> => {
         return []; // Si hay error, devolvemos un array vacío
     }
 };
-export const uploadFileProfile = async (file: File, id: string) => {
+export const uploadFileProfileByUser = async (file: File, id: string) => {
 	const { storage } = await getFirebaseInstance();
 	const { ref, uploadBytes } = await import('firebase/storage');
 
