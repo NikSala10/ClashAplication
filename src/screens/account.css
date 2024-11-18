@@ -37,11 +37,7 @@
     margin-bottom: 10rem;
     overflow-y: auto;
 }
-.container-postcards::-webkit-scrollbar,
-.container-barLaterals::-webkit-scrollbar {
-    width: 0;
-    display: none;
-}
+
 cardaccount-component  {
     width: 45%;
     margin-bottom: 1rem;
