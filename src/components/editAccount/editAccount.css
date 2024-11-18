@@ -1,9 +1,9 @@
-
 .container-modal{
-    margin: 30px;
-    padding: 20px;
-    height: 60px;
-    width: 100px;
-    background-color: white;
+    margin: 140px;
+    padding: 2rem;
+    height: 30rem;
+    width: 30rem;
+    background-color: #8258BD;
     border-radius: 20px;
+    margin-left: 32%;
 }

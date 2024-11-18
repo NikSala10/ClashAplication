@@ -27,7 +27,7 @@ class EditAccount extends HTMLElement  {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../src/components/addPost/addPost.css">
+            <link rel="stylesheet" href="../src/components/editAccount/editAccount.css">
             
              <div class="container-modal">
                   <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
