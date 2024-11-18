@@ -1,5 +1,5 @@
 import { dispatch } from '../store/store';
-import { setOpenCloseScreen, getPostAction, getPostsByUserAction } from '../store/actions';
+import { setOpenCloseScreen, getPostAction, getPostsByUserAction, getImgUserFileAction } from '../store/actions';
 import { Actions, Screens } from '../types/store';
 import { addObserver, appState } from '../store/store';
 import { loginUser } from '../utils/firebase';
@@ -33,12 +33,15 @@ class Account extends HTMLElement {
 	}
 
 	async connectedCallback() {
+        if (!appState.imgUserProfile) {
+            const imgAction = await getImgUserFileAction();
+            dispatch(imgAction);
+        }
 		if (appState.postsByUser.length === 0) {
 			const action = await getPostsByUserAction();
 			dispatch(action);
-		} else {
-			this.render();
-		}
+		}         this.render();
+
 	}
     logout() {
 		indexedDB.deleteDatabase('firebase-heartbeat-database');
@@ -69,7 +72,7 @@ class Account extends HTMLElement {
                         <section class="info-contact-user">
                             <div class="user-info">
                                 <div class="circle-img">
-                                    <img id="img-user" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                                    <img id="img-user" src="${appState.imgUserProfile}" alt="">
                                 </div>
                                 <div id="follows">
                                     <div id="followers">
@@ -142,6 +145,14 @@ class Account extends HTMLElement {
             containerPost?.appendChild(userPostCard);
         });
 
+        const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
+        console.log('appState.imgUserProfile', appState.imgUserProfile); // Verifica el valor
+        if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
+            imgElement.src = appState.imgUserProfile; // Asigna la URL si es válida
+        } else {
+            console.log('Imagen no válida, asignando imagen predeterminada');
+            imgElement.src = 'path_to_default_image.jpg'; // Imagen predeterminada en caso de que no haya URL válida
+        }
 			const cssAccount = this.ownerDocument.createElement("style");
 			cssAccount.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssAccount);

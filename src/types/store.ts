@@ -9,7 +9,7 @@ export type AppState = {
     users: any[];
     comments: any[];
     postsByUser: any[]
-    imgUserProfile: any[]
+    imgUserProfile: ''
 };
 
 export enum Screens {

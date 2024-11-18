@@ -33,7 +33,7 @@ const initialState: AppState = {
 	loadPost: false,
 	users: [],
 	postsByUser: [],
-	imgUserProfile: []
+	imgUserProfile: ''
 };
 
 
