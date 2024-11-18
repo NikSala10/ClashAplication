@@ -8,6 +8,7 @@ export type AppState = {
     loadPost: Boolean;
     users: any[];
     comments: any[];
+    postsByUser: any[]
 };
 
 export enum Screens {

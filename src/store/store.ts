@@ -31,7 +31,8 @@ const initialState: AppState = {
 	comments: [],
 	modalScreen: [false, false],
 	loadPost: false,
-	users: []
+	users: [],
+	postsByUser: []
 };
 
 
