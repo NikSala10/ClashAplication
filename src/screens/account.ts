@@ -182,6 +182,21 @@ class Account extends HTMLElement {
             logOut?.addEventListener('click', this.logout);
 
 		}
+        document.addEventListener('scroll', () => {
+            const containerPostcards = document.querySelector('.container-postcards') as HTMLElement;
+            const containerBarLaterals = document.querySelector('.container-barLaterals') as HTMLElement;
+            
+            if (containerPostcards && containerBarLaterals) {
+                const rect = containerPostcards.getBoundingClientRect();
+                const isInViewport = rect.top < window.innerHeight && rect.bottom >= 0;
+        
+                if (isInViewport) {
+                    containerBarLaterals.classList.add('sticky');
+                } else {
+                    containerBarLaterals.classList.remove('sticky');
+                }
+            }
+        });
 	}
 }
 
