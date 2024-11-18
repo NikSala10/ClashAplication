@@ -5,7 +5,7 @@
     display: flex;
     position: relative;
     height: auto;  
-    min-height: 100vh;
+    overflow-y: auto;
 }
 .circle-img  {
     justify-content: center;
@@ -23,8 +23,9 @@
     width: 30%;
     position: sticky;
     top: 3rem; 
-    height: calc(100vh - 3rem); 
+    height: auto;
     overflow-y: auto; 
+    transition: top 0.3s;
 }
 .container-postcards {
     width: 60%;
@@ -36,8 +37,17 @@
     gap: 0.5rem;
     justify-content: center;
     margin-bottom: 10rem;
+    overflow-y: auto;
 }
-
+.sticky {
+    position: sticky;
+    top: 3rem;
+    right: 0;
+    height: calc(100vh - 3rem);
+    z-index: 100;
+    width: 30%;
+    overflow-y: auto;
+}
 cardaccount-component  {
     width: 45%;
     margin-bottom: 1rem;
