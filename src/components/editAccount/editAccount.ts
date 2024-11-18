@@ -24,6 +24,9 @@ class EditAccount extends HTMLElement  {
         
         this.render();
     }
+    // changeName(e: any) {
+	// 	product.name = e.target.value;
+	// }
     async submitForm() {
         const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
         const file = img?.files?.[0]; 
