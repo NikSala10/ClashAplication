@@ -30,7 +30,7 @@ class EditAccount extends HTMLElement  {
             <link rel="stylesheet" href="../src/components/addPost/addPost.css">
             
              <div class="container-modal">
-                 <btn-component color="red" label="X" id="close-modal"></btn-component>
+                  <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
                  <div class="user-profile">
                     <div class="img-user">
                         <img src="${this.imguser}" alt="">
