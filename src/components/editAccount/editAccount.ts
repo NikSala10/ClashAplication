@@ -63,7 +63,7 @@ class EditAccount extends HTMLElement  {
                     </div>
                     <p id="Works">More Works</p>
                     <input type="url" placeholder="Ex: https://www.behance.net">
-                    <btn-component color="#361656" label="Edit"></btn-component>
+                    <div class="btn-edi"><btn-component color="#361656" label="Edit"></btn-component></div>
                 </div>
             
              </div>
