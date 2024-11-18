@@ -5,7 +5,6 @@
     display: flex;
     position: relative;
     height: 100%;  
-    overflow: hidden;
 }
 .circle-img  {
     justify-content: center;
@@ -19,28 +18,26 @@
     aspect-ratio: 1 / 1;
 }
 
-
-
 .container-postcards {
-    width: 60%;
-    margin-left: 12rem;
+    width: 90%;
+    margin-left: 10rem;
     align-items: center;
     height: 100%; 
-    overflow-y: scroll; 
-    padding-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
-.container-postcards::-webkit-scrollbar {
-    display: none; 
-}
 
 .container-barLaterals {
     width: 40%;
     position: sticky;
     top: 3rem; 
     height: 100vh; 
-    overflow-y: auto; 
-    transition: top 0.3s ease;
+}
+cardaccount-component  {
+    width: 45%;
 }
 #img-user {
     width: 15rem; 
@@ -52,7 +49,7 @@
     display: flex;
     justify-content: center;
     gap: 5rem;
-    height: 7%;
+    height: 22%;
 }
 
 #follows  {
