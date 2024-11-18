@@ -86,7 +86,7 @@ class EditAccount extends HTMLElement  {
                     </div>
                     <p id="Works">More Works</p>
                     <input id="work-Inpt" type="url" placeholder="Ex: https://www.behance.net">
-                    <div class="btn-edi"><btn-component color="#361656" label="Save"></btn-component></div>
+                    <div class="btn-edi" ><btn-component id="save" color="#361656" label="Save"></btn-component></div>
                 </div>
             
              </div>
@@ -104,6 +104,8 @@ class EditAccount extends HTMLElement  {
             const file = imageInput.files?.[0];
 				// if (file) uploadFileCloudinary(file, appState.user);
         })
+        const save = this.shadowRoot?.querySelector('#save');
+        save?.addEventListener('click', this.submitForm);
     }
 };
 
