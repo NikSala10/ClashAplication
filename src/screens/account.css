@@ -5,6 +5,7 @@
     display: flex;
     position: relative;
     height: auto;  
+    min-height: 100vh;
 }
 .circle-img  {
     justify-content: center;
@@ -18,6 +19,13 @@
     aspect-ratio: 1 / 1;
 }
 
+.container-barLaterals {
+    width: 40%;
+    position: sticky;
+    top: 3rem; 
+    height: 100vh; 
+    overflow-y: auto; 
+}
 .container-postcards {
     width: 90%;
     margin-left: 10rem;
@@ -32,12 +40,6 @@
 }
 
 
-.container-barLaterals {
-    width: 40%;
-    position: sticky;
-    top: 3rem; 
-    height: 100vh; 
-}
 cardaccount-component  {
     width: 45%;
     margin-bottom: 1rem;
