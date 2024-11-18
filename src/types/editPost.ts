@@ -6,4 +6,5 @@ export interface EditUserInformation {
 	currenttraining: string,
 	currentjob: string,
 	academy: string,
+	moreworksurl: string
 }

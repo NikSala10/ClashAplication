@@ -13,6 +13,7 @@ const edit: EditUserInformation = {
 	currenttraining: '',
 	currentjob: '',
 	academy: '',
+    moreworksurl: ''
 }
 export enum AttributeEditPost  { 
     'imguser' = 'imguser',
@@ -55,6 +56,9 @@ class EditAccount extends HTMLElement  {
     changeAcademy(e: any) {
 		edit.academy = e.target.value;
 	}
+    changeMoreWorksUrl(e: any) {
+        edit.moreworksurl = e.target.value;
+    }
     async submitForm() {
         const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
         const file = img?.files?.[0]; 
@@ -147,6 +151,9 @@ class EditAccount extends HTMLElement  {
 
         const userAcademy = this.shadowRoot?.querySelector('#acadmy') as HTMLInputElement;
         userAcademy?.addEventListener('change', this.changeAcademy);
+
+        const userMoreWorksUrl = this.shadowRoot?.querySelector('#work-Inpt') as HTMLInputElement;
+        userMoreWorksUrl?.addEventListener('change', this.changeMoreWorksUrl);
 
         const imageInput = this.shadowRoot?.querySelector('#fileInput') as HTMLInputElement;
         imageInput?.addEventListener('change', () => { 
