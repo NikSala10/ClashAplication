@@ -58,7 +58,7 @@ export const getPostsByUserAction = async () => {
 export const getImgUserFileAction = async () => {
 	const imgByUser = await getFileProfile(appState.user); 
 	return {
-		action: Actions.GETPOSTSBYUSER,
+		action: Actions.GETIMGUSERPROFILE,
 		payload: imgByUser,
 	};
 };
