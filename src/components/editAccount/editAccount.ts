@@ -34,9 +34,27 @@ class EditAccount extends HTMLElement  {
         
         this.render();
     }
-    // changeName(e: any) {
-	// 	product.name = e.target.value;
-	// }
+    changeUserName(e: any) {
+		edit.username = e.target.value;
+	}
+    changeCategory(e: any) {
+		edit.category = e.target.value;
+	}
+    changeImgUser(e: any) {
+		edit.imgUser = e.target.value;
+	}
+    changePlaceResidence(e: any) {
+		edit.placeresidence = e.target.value;
+	}
+    changeCurrentTraining(e: any) {
+		edit.currenttraining = e.target.value;
+	}
+    changeCurrentJob(e: any) {
+		edit.currentjob = e.target.value;
+	}
+    changeAcademy(e: any) {
+		edit.academy = e.target.value;
+	}
     async submitForm() {
         const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
         const file = img?.files?.[0]; 
@@ -77,10 +95,10 @@ class EditAccount extends HTMLElement  {
                     
                     <div id="user">
                         <p id="name">${this.name}</p>
-                        <input type="text" placeholder="Add Username">
+                        <input id="usernamechange" type="text" placeholder="Add Username">
                         <div id="create">
                             <p id="creative">Creative</p>
-                            <input type="text" placeholder="Write your creative category">
+                            <input id="categorychange" type="text" placeholder="Write your creative category">
                         </div>
                     </div>
                 </div>
@@ -89,12 +107,12 @@ class EditAccount extends HTMLElement  {
                     <p id="email">${this.gmail}</p>
                      <div class="icons-profesional">
                         <div class="profesional-work">
-                            <input type="text" placeholder="Place Residence">
-                            <input type="text" placeholder="Current Job">
+                            <input id="place" type="text" placeholder="Place Residence">
+                            <input id="job" type="text" placeholder="Current Job">
                         </div>
                         <div class="profesional-work">
-                            <input type="text" placeholder="Current Training">
-                            <input type="text" placeholder="Academy">
+                            <input id="training" type="text" placeholder="Current Training">
+                            <input id="acadmy" type="text" placeholder="Academy">
                         </div>
                     </div>
                     <p id="Works">More Works</p>
@@ -111,6 +129,24 @@ class EditAccount extends HTMLElement  {
         btn?.addEventListener('click', ()=>{
             dispatch(setOpenCloseScreen(1))
         })
+
+        const userName = this.shadowRoot?.querySelector('#usernamechange') as HTMLInputElement;
+        userName?.addEventListener('change', this.changeUserName);
+
+        const userCategory = this.shadowRoot?.querySelector('#categorychange') as HTMLInputElement;
+        userCategory?.addEventListener('change', this.changeCategory);
+
+        const userPlaceResidence = this.shadowRoot?.querySelector('#place') as HTMLInputElement;
+        userPlaceResidence?.addEventListener('change', this.changePlaceResidence);
+
+        const userCurrentTraining = this.shadowRoot?.querySelector('#training') as HTMLInputElement;
+        userCurrentTraining?.addEventListener('change', this.changeCurrentTraining);
+
+        const userCurrentJob = this.shadowRoot?.querySelector('#job') as HTMLInputElement;
+        userCurrentJob?.addEventListener('change', this.changeCurrentJob);
+
+        const userAcademy = this.shadowRoot?.querySelector('#acadmy') as HTMLInputElement;
+        userAcademy?.addEventListener('change', this.changeAcademy);
 
         const imageInput = this.shadowRoot?.querySelector('#fileInput') as HTMLInputElement;
         imageInput?.addEventListener('change', () => { 
