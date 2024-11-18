@@ -20,7 +20,8 @@ class EditAccount extends HTMLElement  {
         addObserver(this)
     }
 
-    connectedCallback() { 
+    async connectedCallback() { 
+        
         this.render();
     }
 
@@ -32,13 +33,17 @@ class EditAccount extends HTMLElement  {
              <div class="container-modal">
                   <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
                  <div class="user-profile">
-                    <div class="img-user">
-                        <img src="${this.imguser}" alt="">
+                    <div class="circle-img">
+                        <img id="img-user" src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
                     </div>
-                    <div class="icon">
-                        <input type="file">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5a5 5 0 0 0 5 5a5 5 0 0 0 5-5a5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3"/></svg>
-                    </div>
+                <div class="icon">
+                    <input type="file" id="fileInput">
+                    <label for="fileInput">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                            <path fill="#8258BD" d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5a5 5 0 0 0 5 5a5 5 0 0 0 5-5a5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3"/>
+                        </svg>
+                    </label>
+                </div>
                     <div id="user">
                         <p>${this.name}</p>
                         <input type="text" placeholder="Add Username">
@@ -63,7 +68,7 @@ class EditAccount extends HTMLElement  {
                     </div>
                     <p id="Works">More Works</p>
                     <input type="url" placeholder="Ex: https://www.behance.net">
-                    <div class="btn-edi"><btn-component color="#361656" label="Edit"></btn-component></div>
+                    <div class="btn-edi"><btn-component color="#361656" label="Save"></btn-component></div>
                 </div>
             
              </div>
