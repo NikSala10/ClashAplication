@@ -1,5 +1,5 @@
 import { dispatch } from '../store/store';
-import { setOpenCloseScreen, getPostAction } from '../store/actions';
+import { setOpenCloseScreen, getPostAction, getPostsByUserAction } from '../store/actions';
 import { Actions, Screens } from '../types/store';
 import { addObserver, appState } from '../store/store';
 import { loginUser } from '../utils/firebase';
@@ -37,11 +37,12 @@ class Account extends HTMLElement {
 	}
 
 	async connectedCallback() {
-		this.render();
-        if (appState.post.length === 0) {
-            const postsAction = await getPostAction();
-            dispatch(postsAction)
-        }
+		if (appState.postsByUser.length === 0) {
+			const action = await getPostsByUserAction();
+			dispatch(action);
+		} else {
+			this.render();
+		}
 	}
     logout() {
 		indexedDB.deleteDatabase('firebase-heartbeat-database');
