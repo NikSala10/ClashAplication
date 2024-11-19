@@ -14,7 +14,6 @@ const edit: EditUserInformation = {
 	currentjob: '',
 	academy: '',
     moreworksurl: '',
-    gmail: ''
 }
 export enum AttributeEditPost  { 
     'imguser' = 'imguser',
@@ -35,10 +34,6 @@ class EditAccount extends HTMLElement  {
     }
 
     async connectedCallback() { 
-        if (!appState.imgUserProfile) {
-            const imgAction = await getImgUserFileAction();
-            dispatch(imgAction);
-        }
         this.render();
     }
     changeUserName(e: any) {
@@ -80,7 +75,7 @@ class EditAccount extends HTMLElement  {
             console.error("Error al enviar el formulario:", error);
             alert("Ocurrió un error al actualizar el perfil");
         }
-        await uploadUserData(appState.user, edit)
+        
     }
     
     clearInputs() {

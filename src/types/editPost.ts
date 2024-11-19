@@ -7,5 +7,4 @@ export interface EditUserInformation {
 	currentjob: string,
 	academy: string,
 	moreworksurl: string,
-	gmail: string
 }

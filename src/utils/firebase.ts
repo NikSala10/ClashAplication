@@ -199,7 +199,7 @@ export const registerUser = async (credentials: any) => {
 		const data = {
 			name: credentials.name,
 			confirmPassword: credentials.confirmPassword,
-			email: credentials.email
+            
 		};
 
 		await setDoc(where, data);
@@ -378,13 +378,14 @@ export const getPostsByUser = async () => {
 		console.error('Error getting documents', error);
 	}
 };
-export const uploadUserData = async (uid: string, userinfo: { username: string, category: string, imgUser: string, placeresidence: string, currenttraining: string, currentjob: string, academy: string, moreworksurl: string, gmail: string }) => {
+export const uploadUserData = async (uid: string, userinfo: { name: string, username: string, category: string, imgUser: string, placeresidence: string, currenttraining: string, currentjob: string, academy: string, moreworksurl: string }) => {
     try {
         const { db } = await getFirebaseInstance();
         const { doc, setDoc } = await import('firebase/firestore');
 
         const userRef = doc(db, 'users', uid);
-        const userData = {
+        const userInformation = {
+            name: userinfo.name,
             username: userinfo.username, 
             category: userinfo.category,
             imgUser: userinfo.imgUser,
@@ -393,9 +394,8 @@ export const uploadUserData = async (uid: string, userinfo: { username: string, 
             currentjob: userinfo.currentjob,
             academy: userinfo.academy,
             moreworksurl: userinfo.moreworksurl,
-			gmail:userinfo.gmail
         };
-        await setDoc(userRef, userData);
+        await setDoc(userRef, userInformation);
         console.log('User data uploaded successfully');
     } catch (error) {
         console.error('Error uploading user data:', error);

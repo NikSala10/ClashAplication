@@ -86,21 +86,20 @@ class Dashboard extends HTMLElement  {
             if(!appState.loadPost){
                 appState.post.forEach((post) =>  {   
                     const user = appState.users.find(user => user.id === post.userUid);
-                    const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
-                    
-                    if (user) {
-                        uploadUserData(user.id, {
-                            username: username,
-                            category: user.category || '',
-                            imgUser: user.imgUser ||  '', 
-                            placeresidence: user.placeresidence || '', 
-                            currenttraining: user.currenttraining || '', 
-                            currentjob: user.currentjob || '', 
-                            academy: user.academy || '',
-                            moreworksurl: user.moreworksurl || '',
-                            gmail: user.gmail || ''
-                        });
-                    }
+                    // const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
+                    // if (user) {
+                    //     uploadUserData(user.id, {
+                    //         name: user.name,
+                    //         username: us,
+                    //         category: user.category || '',
+                    //         imgUser: user.imgUser ||  '', 
+                    //         placeresidence: user.placeresidence || '', 
+                    //         currenttraining: user.currenttraining || '', 
+                    //         currentjob: user.currentjob || '', 
+                    //         academy: user.academy || '',
+                    //         moreworksurl: user.moreworksurl || ''
+                    //     });
+                    // }
                     // if (post.userUid) {
                     //     const userDataPost = await getUserData(post.userUid);
                     //     name = userDataPost?.name || '';
@@ -110,7 +109,7 @@ class Dashboard extends HTMLElement  {
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
                     userPostCards.setAttribute(AttributePostCard.name, user.name);
-                    userPostCards.setAttribute(AttributePostCard.username, username);
+                    // userPostCards.setAttribute(AttributePostCard.username, username);
                     userPostCards.setAttribute(AttributePostCard.category, post.category);
                     userPostCards.setAttribute(AttributePostCard.description, post.description);
                     userPostCards.setAttribute(AttributePostCard.image, post.image);
@@ -129,7 +128,7 @@ class Dashboard extends HTMLElement  {
                 
                 postTopLikes.forEach((post) =>  {   
                     const user = appState.users.find(user => user.id === post.userUid);
-                    const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
+                    // const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
                     // if (post.userUid) {
                     //     const userDataPost = await getUserData(post.userUid);
                     //     name = userDataPost?.name || '';
@@ -139,7 +138,7 @@ class Dashboard extends HTMLElement  {
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
                     userPostCards.setAttribute(AttributePostCard.name, user.name);
-                    userPostCards.setAttribute(AttributePostCard.username, username);
+                    // userPostCards.setAttribute(AttributePostCard.username, username);
                     userPostCards.setAttribute(AttributePostCard.category, post.category);
                     userPostCards.setAttribute(AttributePostCard.description, post.description);
                     userPostCards.setAttribute(AttributePostCard.image, post.image);
