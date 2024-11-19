@@ -68,7 +68,6 @@ class EditAccount extends HTMLElement  {
         try {
             const file = this.selectedFile;
             if (file) {
-                console.log("Iniciando subida de archivo:", file.name);
                 const imgURL = await uploadFileProfileByUser(file, appState.user);
                 edit.imgUser = imgURL;
                 alert('Perfil actualizado correctamente');
@@ -178,7 +177,7 @@ class EditAccount extends HTMLElement  {
             const target = event.target as HTMLInputElement;
             if (target.files && target.files.length > 0) {
                 this.selectedFile = target.files[0];
-                console.log("Archivo seleccionado:", this.selectedFile);
+                alert('Imagen seleccionada');
             } else {
                 console.warn("No se seleccionó ningún archivo");
                 this.selectedFile = undefined;
