@@ -393,9 +393,7 @@ export const uploadUserData = async (uid: string, userinfo: { username: string, 
             academy: userinfo.academy,
             moreworksurl: userinfo.moreworksurl,
         };
-
         await setDoc(userRef, userData);
-
         console.log('User data uploaded successfully');
     } catch (error) {
         console.error('Error uploading user data:', error);

@@ -9,7 +9,7 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getComment, getFiles} from '../utils/firebase'
+import { getComment, getFiles, uploadUserData} from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setOpenCloseScreen, getPostAction, getUsersAction, getCommentsAction} from '../store/actions';
 import { navigate } from '../store/actions';
@@ -87,7 +87,19 @@ class Dashboard extends HTMLElement  {
                 appState.post.forEach((post) =>  {   
                     const user = appState.users.find(user => user.id === post.userUid);
                     const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
-                
+                    
+                    if (user) {
+                        uploadUserData(user.id, {
+                            username: username,
+                            category: user.category || '',
+                            imgUser: user.imgUser ||  '', 
+                            placeresidence: user.placeresidence || '', 
+                            currenttraining: user.currenttraining || '', 
+                            currentjob: user.currentjob || '', 
+                            academy: user.academy || '',
+                            moreworksurl: user.moreworksurl || ''
+                        });
+                    }
                     // if (post.userUid) {
                     //     const userDataPost = await getUserData(post.userUid);
                     //     name = userDataPost?.name || '';

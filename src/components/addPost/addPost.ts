@@ -84,6 +84,7 @@ class AddPost extends HTMLElement  {
         }
         await addHashtags(hashtag);
         await addPost(post);
+        
     
         alert('Post creado');
         this.clearInputs();

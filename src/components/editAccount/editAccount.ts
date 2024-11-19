@@ -1,5 +1,5 @@
 import "../button/button";
-import { uploadFileProfileByUser } from "../../utils/firebase";
+import { uploadFileProfileByUser, uploadUserData} from "../../utils/firebase";
 import { dispatch } from "../../store/store";
 import { setOpenCloseScreen, getImgUserFileAction} from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
@@ -79,6 +79,7 @@ class EditAccount extends HTMLElement  {
             console.error("Error al enviar el formulario:", error);
             alert("Ocurrió un error al actualizar el perfil");
         }
+        await uploadUserData(appState.user, edit)
     }
     
     clearInputs() {
