@@ -13,7 +13,8 @@ const edit: EditUserInformation = {
 	currenttraining: '',
 	currentjob: '',
 	academy: '',
-    moreworksurl: ''
+    moreworksurl: '',
+    gmail: ''
 }
 export enum AttributeEditPost  { 
     'imguser' = 'imguser',

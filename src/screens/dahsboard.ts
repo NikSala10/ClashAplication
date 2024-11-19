@@ -97,7 +97,8 @@ class Dashboard extends HTMLElement  {
                             currenttraining: user.currenttraining || '', 
                             currentjob: user.currentjob || '', 
                             academy: user.academy || '',
-                            moreworksurl: user.moreworksurl || ''
+                            moreworksurl: user.moreworksurl || '',
+                            gmail: user.gmail || ''
                         });
                     }
                     // if (post.userUid) {
