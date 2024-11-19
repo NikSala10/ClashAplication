@@ -40,8 +40,8 @@ class Account extends HTMLElement {
 		if (appState.postsByUser.length === 0) {
 			const action = await getPostsByUserAction();
 			dispatch(action);
-		}         this.render();
-
+		}         
+        this.render();
 	}
     logout() {
 		indexedDB.deleteDatabase('firebase-heartbeat-database');

@@ -377,3 +377,27 @@ export const getPostsByUser = async () => {
 		console.error('Error getting documents', error);
 	}
 };
+export const uploadUserData = async (uid: string, userinfo: { username: string, category: string, imgUser: string, placeresidence: string, currenttraining: string, currentjob: string, academy: string, moreworksurl: string }) => {
+    try {
+        const { db } = await getFirebaseInstance();
+        const { doc, setDoc } = await import('firebase/firestore');
+
+        const userRef = doc(db, 'users', uid);
+        const userData = {
+            username: userinfo.username, 
+            category: userinfo.category,
+            imgUser: userinfo.imgUser,
+            placeresidence: userinfo.placeresidence,
+            currenttraining: userinfo.currenttraining,
+            currentjob: userinfo.currentjob,
+            academy: userinfo.academy,
+            moreworksurl: userinfo.moreworksurl,
+        };
+
+        await setDoc(userRef, userData);
+
+        console.log('User data uploaded successfully');
+    } catch (error) {
+        console.error('Error uploading user data:', error);
+    }
+};
