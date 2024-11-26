@@ -9,7 +9,7 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getComment, getFiles, uploadUserData} from '../utils/firebase'
+import { getComment, getFiles, uploadUserData, getUserData} from '../utils/firebase'
 import { dispatch } from '../store/store'
 import { setOpenCloseScreen, getPostAction, getUsersAction, getCommentsAction} from '../store/actions';
 import { navigate } from '../store/actions';
@@ -86,30 +86,29 @@ class Dashboard extends HTMLElement  {
             if(!appState.loadPost){
                 appState.post.forEach((post) =>  {   
                     const user = appState.users.find(user => user.id === post.userUid);
-                    // const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
-                    // if (user) {
-                    //     uploadUserData(user.id, {
-                    //         name: user.name,
-                    //         username: us,
-                    //         category: user.category || '',
-                    //         imgUser: user.imgUser ||  '', 
-                    //         placeresidence: user.placeresidence || '', 
-                    //         currenttraining: user.currenttraining || '', 
-                    //         currentjob: user.currentjob || '', 
-                    //         academy: user.academy || '',
-                    //         moreworksurl: user.moreworksurl || ''
-                    //     });
-                    // }
+                    const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
+                    if (user) {
+                        uploadUserData(user.id, {
+                            username: username,
+                            category: user.category || '',
+                            imgUser: user.imgUser ||  '', 
+                            placeresidence: user.placeresidence || '', 
+                            currenttraining: user.currenttraining || '', 
+                            currentjob: user.currentjob || '', 
+                            academy: user.academy || '',
+                            moreworksurl: user.moreworksurl || ''
+                        });
+                    }
                     // if (post.userUid) {
                     //     const userDataPost = await getUserData(post.userUid);
                     //     name = userDataPost?.name || '';
-                    //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
+                    //     username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;  
                     // }
                     const commentsPost = appState.comments.filter((c) => c.postid === post.id)                    
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
                     userPostCards.setAttribute(AttributePostCard.name, user.name);
-                    // userPostCards.setAttribute(AttributePostCard.username, username);
+                    userPostCards.setAttribute(AttributePostCard.username, username);
                     userPostCards.setAttribute(AttributePostCard.category, post.category);
                     userPostCards.setAttribute(AttributePostCard.description, post.description);
                     userPostCards.setAttribute(AttributePostCard.image, post.image);
