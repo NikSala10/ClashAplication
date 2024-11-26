@@ -360,24 +360,28 @@ export const updatePostField = async (postId: string, field: UpdateFieldType, co
 };
 
 export const getPostsByUser = async () => {
-	try {
-		const { db } = await getFirebaseInstance();
-		const { collection, getDocs, query, where } = await import('firebase/firestore');
+    try {
+        const { db } = await getFirebaseInstance();
+        const { collection, getDocs, query, where, orderBy } = await import('firebase/firestore');
+        const ref = collection(db, 'posts');
+        const q = query(
+            ref,
+            where('userUid', '==', appState.user), // Filtra por el UID del usuario
+            orderBy('dateadded', 'desc') // Ordena por la fecha en orden descendente
+        );
+        const querySnapshot = await getDocs(q);
+        const data: any[] = [];
 
-		const ref = collection(db, 'posts');
-		const q = query(ref, where('userUid', '==', appState.user));
-		const querySnapshot = await getDocs(q);
-		const data: any[] = [];
+        querySnapshot.forEach((doc) => {
+            data.push({ id: doc.id, ...doc.data() }); // Incluye también el ID del documento
+        });
 
-		querySnapshot.forEach((doc) => {
-			data.push(doc.data());
-		});
-
-		return data;
-	} catch (error) {
-		console.error('Error getting documents', error);
-	}
+        return data;
+    } catch (error) {
+        console.error('Error getting documents', error);
+    }
 };
+
 export const uploadUserData = async (uid: string, userinfo: { name: string, username: string, category: string, imgUser: string, placeresidence: string, currenttraining: string, currentjob: string, academy: string, moreworksurl: string }) => {
     try {
         const { db } = await getFirebaseInstance();
