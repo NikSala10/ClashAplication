@@ -213,18 +213,15 @@ export const loginUser = async (email: string, password: string): Promise<boolea
       const { auth } = await getFirebaseInstance();
       const { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } = await import('firebase/auth');
   
-      // Establece la persistencia de sesión
       await setPersistence(auth, browserLocalPersistence);
   
-      // Intenta iniciar sesión con el correo y la contraseña proporcionados
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
   
-      // Si la autenticación es exitosa, devuelve true
-      return !!userCredential.user; // Verifica si existe un usuario autenticado
+      return !!userCredential.user; 
   
     } catch (error) {
       console.error('Error de autenticación:', error);
-      return false; // Si ocurre un error, devuelve false
+      return false; 
     }
   };
   
@@ -384,12 +381,24 @@ export const getPostsByUser = async () => {
     }
 };
 
-export const uploadUserData = async (uid: string, userinfo: { name: string, username: string, category: string, imgUser: string, placeresidence: string, currenttraining: string, currentjob: string, academy: string, moreworksurl: string }) => {
+export const uploadUserData = async (uid: string, userinfo: { 
+    name: string, 
+    username: string, 
+    category: string, 
+    imgUser: string, 
+    placeresidence: string, 
+    currenttraining: string, 
+    currentjob: string, 
+    academy: string, 
+    moreworksurl: string 
+}) => {
     try {
         const { db } = await getFirebaseInstance();
-        const { doc, setDoc } = await import('firebase/firestore');
+        const { doc, updateDoc } = await import('firebase/firestore');
 
         const userRef = doc(db, 'users', uid);
+
+        // Solo actualiza los campos que se pasan como parámetros
         const userInformation = {
             name: userinfo.name,
             username: userinfo.username, 
@@ -401,7 +410,8 @@ export const uploadUserData = async (uid: string, userinfo: { name: string, user
             academy: userinfo.academy,
             moreworksurl: userinfo.moreworksurl,
         };
-        await setDoc(userRef, userInformation);
+
+        await updateDoc(userRef, userInformation); // Utiliza updateDoc para evitar sobrescribir todo el documento
         console.log('User data uploaded successfully');
     } catch (error) {
         console.error('Error uploading user data:', error);
