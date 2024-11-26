@@ -382,7 +382,6 @@ export const getPostsByUser = async () => {
 };
 
 export const uploadUserData = async (uid: string, userinfo: { 
-    name: string, 
     username: string, 
     category: string, 
     imgUser: string, 
@@ -400,7 +399,6 @@ export const uploadUserData = async (uid: string, userinfo: {
 
         // Solo actualiza los campos que se pasan como parámetros
         const userInformation = {
-            name: userinfo.name,
             username: userinfo.username, 
             category: userinfo.category,
             imgUser: userinfo.imgUser,

@@ -75,7 +75,7 @@ class EditAccount extends HTMLElement  {
             console.error("Error al enviar el formulario:", error);
             alert("Ocurrió un error al actualizar el perfil");
         }
-        
+        await uploadUserData(appState.user, edit)
     }
     
     clearInputs() {
