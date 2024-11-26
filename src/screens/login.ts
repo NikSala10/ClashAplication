@@ -27,8 +27,18 @@ class Login extends HTMLElement {
 		credentials.password = e.target.value;
 	}
 
-	submitForm() {
-		loginUser(credentials.email, credentials.password);
+	async submitForm() {
+		try {
+			const isAuthenticated = await loginUser(credentials.email, credentials.password);
+			if (isAuthenticated) {
+				dispatch(navigate(Screens.DASHBOARD));
+			} else {
+				alert('Usuario o contraseña incorrectos.');
+			}
+		} catch (error) {
+			alert('Ocurrió un error al intentar iniciar sesión. Por favor, inténtalo de nuevo.');
+			console.error('Error en login:', error);
+		}
 	}
 
 	async render() {

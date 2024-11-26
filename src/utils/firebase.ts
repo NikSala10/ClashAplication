@@ -199,7 +199,6 @@ export const registerUser = async (credentials: any) => {
 		const data = {
 			name: credentials.name,
 			confirmPassword: credentials.confirmPassword,
-            
 		};
 
 		await setDoc(where, data);
@@ -209,24 +208,26 @@ export const registerUser = async (credentials: any) => {
 		return false;
 	}
 };
-export const loginUser = async (email: string, password: string) => {
-	try {
-		const { auth } = await getFirebaseInstance();
-		const { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } = await import('firebase/auth');
-
-		setPersistence(auth, browserLocalPersistence)
-			.then(() => {
-				return signInWithEmailAndPassword(auth, email, password);
-			})
-			.catch((error: any) => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				console.log(errorCode, errorMessage);
-			});
-	} catch (error) {
-		console.error(error);
-	}
-};
+export const loginUser = async (email: string, password: string): Promise<boolean> => {
+    try {
+      const { auth } = await getFirebaseInstance();
+      const { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } = await import('firebase/auth');
+  
+      // Establece la persistencia de sesión
+      await setPersistence(auth, browserLocalPersistence);
+  
+      // Intenta iniciar sesión con el correo y la contraseña proporcionados
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  
+      // Si la autenticación es exitosa, devuelve true
+      return !!userCredential.user; // Verifica si existe un usuario autenticado
+  
+    } catch (error) {
+      console.error('Error de autenticación:', error);
+      return false; // Si ocurre un error, devuelve false
+    }
+  };
+  
 
 export const getUserData = async (uid: string) => {
     try {
