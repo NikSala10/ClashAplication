@@ -364,6 +364,7 @@ export const getPostsByUser = async () => {
         const { db } = await getFirebaseInstance();
         const { collection, getDocs, query, where, orderBy } = await import('firebase/firestore');
         const ref = collection(db, 'posts');
+        //Create index in firebase console
         const q = query(
             ref,
             where('userUid', '==', appState.user), // Filtra por el UID del usuario
