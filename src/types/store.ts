@@ -8,7 +8,6 @@ export type AppState = {
     loadPost: Boolean;
     users: any[];
     comments: any[];
-    postsByUser: any[]
     imgUserProfile: string
 };
 

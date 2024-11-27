@@ -32,7 +32,6 @@ const initialState: AppState = {
 	modalScreen: [false, false],
 	loadPost: false,
 	users: [],
-	postsByUser: [],
 	imgUserProfile: ''
 };
 
