@@ -77,7 +77,7 @@ class AddPost extends HTMLElement  {
    
     async submitForm() {
         post.category = 'Creative';
-        const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
+        const img = this.shadowRoot?.querySelector('.user') as HTMLInputElement;
         const file = img?.files?.[0]; 
    
         if (file) {
