@@ -175,8 +175,7 @@ hr {
    .bars  {
         display: block;
         cursor: pointer;
-        margin-top: 1.3rem;
-        margin-left: 5%;
+        margin-left: 25%;
    }
    .bars .line  {
     width: 35px;
