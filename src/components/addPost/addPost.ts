@@ -20,7 +20,10 @@ const post: Post = {
 	comments: 0,
 	favourites: 0
 }
-
+interface UserData {
+    name: string;
+    imgUser:string;
+}
 const hashtag =  {
     hashtags:'',
 }
@@ -46,14 +49,21 @@ class AddPost extends HTMLElement  {
     }
 
     async connectedCallback() {
-        // const userId = appState.user; 
-        // const userData = await getUserData(userId);
-        // if (userData) {
-        //     this.name = userData.name;
-        //     this.imguser = userData.imgUser; 
+        const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
+        const userId = appState.user
+            getUserData(userId, (userInfo: UserData | null) => {
+                if (!userInfo) {
+                    console.warn('No se recibió información de usuario.');
+                    return;
+                }
 
-        //     post.username = `@${this.name?.replace(/\s+/g, '').toLowerCase()}`;
-        // }
+                while (containerUserInformation?.firstChild) {
+                    containerUserInformation.removeChild(containerUserInformation.firstChild);
+                }
+                this.name = userInfo.name || ''; 
+                this.imguser = userInfo.imgUser || '';
+                this.render();
+            });
 
         this.render();
     }
