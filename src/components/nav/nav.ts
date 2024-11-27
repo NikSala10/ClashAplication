@@ -4,6 +4,12 @@ import { registerUser } from '../../utils/firebase';
 import  {Screens} from '../../types/store'
 import { appState } from '../../store/store';
 import { getUserData } from '../../utils/firebase';
+
+interface UserData {
+    name: string;
+    imgUser:string;
+}
+
 export enum AttributeNav { 
     'imguser' = 'imguser',
     'name' = 'name'
@@ -40,7 +46,21 @@ class Nav extends HTMLElement  {
                 iconsResponsive?.classList.replace('inactive', 'active'); 
             }
         });
-        
+        const containerUserInformation = this.shadowRoot?.querySelector('.circle');  
+        const userId = appState.user
+            getUserData(userId, (userInfo: UserData | null) => {
+                if (!userInfo) {
+                    console.warn('No se recibió información de usuario.');
+                    return;
+                }
+
+                while (containerUserInformation?.firstChild) {
+                    containerUserInformation.removeChild(containerUserInformation.firstChild);
+                }
+                this.name = userInfo.name || ''; 
+                this.imguser = userInfo.imgUser || '';
+                this.render();
+            });
     }
     
     render() {
@@ -115,9 +135,7 @@ class Nav extends HTMLElement  {
             </div>
             <div class="user-icon">
                <div class="circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                    </svg>
+                    <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}</div>
                 </div>
             </div>
             <div class="bars">
