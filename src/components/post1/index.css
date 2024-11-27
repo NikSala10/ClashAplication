@@ -137,6 +137,13 @@ h2  {
  {
     display: none;
  }
+ #initial {
+    font-size: 35px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #652484;
+}
  #addPost1  {
     display: none;
  }
