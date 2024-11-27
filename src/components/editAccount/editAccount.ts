@@ -147,10 +147,10 @@ class EditAccount extends HTMLElement  {
                     
                     <div id="user">
                         <p id="name">${this.name}</p>
-                        <input id="usernamechange" type="text" placeholder="Add Username">
+                        <input id="usernamechange" type="text" value="${edit.username}" placeholder="Add Username">
                         <div id="create">
                             <p id="creative">Creative</p>
-                            <input id="categorychange" type="text" placeholder="Write your creative category">
+                            <input id="categorychange" type="text" value="${edit.category}" placeholder="Write your creative category">
                         </div>
                     </div>
                 </div>
@@ -159,16 +159,16 @@ class EditAccount extends HTMLElement  {
                     <p id="email">${this.gmail}</p>
                      <div class="icons-profesional">
                         <div class="profesional-work">
-                            <input id="place" type="text" placeholder="Place Residence">
-                            <input id="job" type="text" placeholder="Current Job">
+                            <input id="place" type="text" value="${edit.placeresidence}" placeholder="Place Residence">
+                            <input id="job" type="text" value="${edit.currentjob}" placeholder="Current Job">
                         </div>
                         <div class="profesional-work">
-                            <input id="training" type="text" placeholder="Current Training">
-                            <input id="acadmy" type="text" placeholder="Academy">
+                            <input id="training" type="text" value="${edit.currenttraining}" placeholder="Current Training">
+                            <input id="acadmy" type="text" value="${edit.academy}" placeholder="Academy">
                         </div>
                     </div>
                     <p id="Works">More Works</p>
-                    <input id="work-Inpt" type="url" placeholder="Ex: https://www.behance.net">
+                    <input id="work-Inpt" type="url" value="${edit.moreworksurl}" placeholder="Ex: https://www.behance.net">
                     <div class="btn-edi" ><btn-component id="save" color="#361656" label="Save"></btn-component></div>
                 </div>
             
