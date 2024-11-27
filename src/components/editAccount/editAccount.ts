@@ -25,7 +25,7 @@ class EditAccount extends HTMLElement  {
     name?: string;
     gmail?: string;
     selectedFile?: File;
-
+    isSaved: boolean = false;
 
     constructor()  {
         super();
@@ -74,6 +74,7 @@ class EditAccount extends HTMLElement  {
     
             await uploadUserData(appState.user, edit);
             alert("Datos del perfil actualizados correctamente");
+            this.isSaved = true;
         } catch (error) {
             console.error("Error al enviar el formulario:", error);
             alert("Ocurrió un error al actualizar el perfil");
@@ -144,24 +145,29 @@ class EditAccount extends HTMLElement  {
         }
         const btn = this.shadowRoot?.querySelector('#close-modal')
         btn?.addEventListener('click', () => {
-            const inputs = this.shadowRoot?.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
-            let hasData = false;
-        
-            inputs.forEach(input => {
-                if (input.value.trim() !== '') {
-                    hasData = true;
-                }
-            });
-        
-            if (hasData) {
-                const confirmClose = confirm('¿Estás seguro de que deseas cerrar? Los cambios no guardados se perderán.');
-                if (!confirmClose) {
-                    return; 
+            if (!this.isSaved) {
+                const inputs = this.shadowRoot?.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+                let hasData = false;
+
+                inputs.forEach(input => {
+                    if (input.value.trim() !== '') {
+                        hasData = true;
+                    }
+                });
+
+                if (hasData) {
+                    const confirmClose = confirm('¿Estás seguro de que deseas cerrar? Los cambios no guardados se perderán.');
+                    if (!confirmClose) {
+                        return; 
+                    }
                 }
             }
-            dispatch(setOpenCloseScreen(1));
+
+            dispatch(setOpenCloseScreen(1)); 
         });
-        
+
+        const saveButton = this.shadowRoot?.querySelector('#save');
+        saveButton?.addEventListener('click', this.submitForm.bind(this));
         
         const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
         if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
@@ -199,8 +205,7 @@ class EditAccount extends HTMLElement  {
                 this.selectedFile = undefined;
             }
         });
-        const save = this.shadowRoot?.querySelector('#save');
-        save?.addEventListener('click', this.submitForm.bind(this));
+      
     }
 };
 
