@@ -61,7 +61,30 @@ class Account extends HTMLElement {
             const imgAction = await getImgUserFileAction();
             dispatch(imgAction);
         }        
-        
+        const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
+        getUserData((userInfo: UserData | null) =>  {
+                if (!userInfo) {
+                        console.warn('No se recibió información de usuario.');
+                return;
+                }
+            while (containerUserInformation?.firstChild) {
+                containerUserInformation.removeChild(containerUserInformation.firstChild);
+            }
+                    
+            this.name = userInfo.name || 'Not found';
+            this.username = userInfo.username || 'Not found';
+            this.email = userInfo.email || 'Not found';
+            this.followers = userInfo.followers || 0;
+            this.following = userInfo.following || 0;
+            this.category = userInfo.category || 'Not found';
+            this.placeresidence = userInfo.placeresidence || 'Not found';
+            this.currenttraining = userInfo.currenttraining || 'Not found';
+            this.currentjob = userInfo.currentjob || 'Not found';
+            this.academy = userInfo.academy || 'Not found';
+            this.moreworksurl = userInfo.moreworksurl || '#';
+
+            this.render();
+        });
         this.render();
 	}
     logout() {
@@ -94,8 +117,8 @@ class Account extends HTMLElement {
                                 </div>
                                 <div id="follows">
                                     <div id="followers">
-                                        <p class="pFOlS">${this.followers ? this.followers : 'Not found'}</p>
-                                        <p class="num">14</p>
+                                        <p class="pFOlS">Followers</p>
+                                        <p class="num">${this.followers ? this.followers : 'Not found'}</p>
                                     </div>
                                     <div id="followeing">
                                         <p class="pFOlS">Following</p>
@@ -169,30 +192,7 @@ class Account extends HTMLElement {
                 });
             });
 
-            // const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
-            // getUserData((userInfo: UserData | null) =>  {
-            //         if (!userInfo) {
-            //              console.warn('No se recibió información de usuario.');
-            //         return;
-            //         }
-            //     while (containerUserInformation?.firstChild) {
-            //         containerUserInformation.removeChild(containerUserInformation.firstChild);
-            //     }
-                     
-            //     this.name = userInfo.name || 'Not found';
-            //     this.username = userInfo.username || 'Not found';
-            //     this.email = userInfo.email || 'Not found';
-            //     this.followers = userInfo.followers || 0;
-            //     this.following = userInfo.following || 0;
-            //     this.category = userInfo.category || 'Not found';
-            //     this.placeresidence = userInfo.placeresidence || 'Not found';
-            //     this.currenttraining = userInfo.currenttraining || 'Not found';
-            //     this.currentjob = userInfo.currentjob || 'Not found';
-            //     this.academy = userInfo.academy || 'Not found';
-            //     this.moreworksurl = userInfo.moreworksurl || '#';
-
-            //     this.render();
-            // });
+           
 
         const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
         if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {

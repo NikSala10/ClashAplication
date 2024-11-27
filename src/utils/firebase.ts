@@ -200,6 +200,7 @@ export const registerUser = async (credentials: any) => {
 		const data = {
 			name: credentials.name,
 			confirmPassword: credentials.confirmPassword,
+            email: credentials.email
 		};
 
 		await setDoc(where, data);
