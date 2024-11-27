@@ -72,31 +72,16 @@ class Account extends HTMLElement {
             this.followers = userInfo.followers || 0;
             this.following = userInfo.following || 0;
             this.category = userInfo.category || 'Not found';
+            this.placeresidence = userInfo.placeresidence || 'Not found';
+            this.currentjob = userInfo.currentjob || 'Not found';
+            this.currenttraining = userInfo.currenttraining || 'Not found';
+            this.academy = userInfo.academy || 'Not found';
             this.moreworksurl = userInfo.moreworksurl || '#';
 
             const fieldPlaceResidence = this.ownerDocument.createElement("field-component") as Field;
-            fieldPlaceResidence.setAttribute(AttributeField.field, 'placeResidence');
-            fieldPlaceResidence.setAttribute(AttributeField.label, userInfo.placeresidence || 'There is no Place Residence');
+            fieldPlaceResidence.setAttribute(AttributeField.field, '');
+            fieldPlaceResidence.setAttribute(AttributeField.label, '');
             
-            const fieldCurrentJob = this.ownerDocument.createElement("field-component") as Field;
-            fieldCurrentJob.setAttribute(AttributeField.field, 'currentJob');
-            fieldCurrentJob.setAttribute(AttributeField.label, userInfo.currentjob || 'There is no Current Job');
-
-            const fieldCurrentTraining = this.ownerDocument.createElement("field-component") as Field;
-            fieldCurrentTraining.setAttribute(AttributeField.field, 'currentTraining');
-            fieldCurrentTraining.setAttribute(AttributeField.label, userInfo.currenttraining || 'There is no Current Training');
-
-            const fieldAcademy = this.ownerDocument.createElement("field-component") as Field;
-            fieldAcademy.setAttribute(AttributeField.field, 'academy');
-            fieldAcademy.setAttribute(AttributeField.label, userInfo.academy || 'There is no Academy');
-            console.log(userInfo.placeresidence, userInfo.currentjob, userInfo.currenttraining, userInfo.academy);
-
-            const field = this.shadowRoot?.querySelector('.first')
-            field?.appendChild(fieldPlaceResidence);
-            field?.appendChild(fieldCurrentJob);
-            field?.appendChild(fieldCurrentTraining);
-            field?.appendChild(fieldAcademy);
-            this.render();
         });
        
         this.render();
@@ -153,12 +138,12 @@ class Account extends HTMLElement {
 
                                 <div class="icons-profesional">
                                     <div class="first">
-                                        <field-component field="placeResidence" label=""></field-component>
-                                        <field-component field="currentJob" label=""></field-component>
+                                        <field-component field="placeResidence" label="${this.placeresidence ? this.placeresidence : 'Not found'}"></field-component>
+                                        <field-component field="currentJob" label="${this.currentjob ? this.currentjob : 'Not found'}"></field-component>
                                     </div>
                                     <div class="first">
-                                        <field-component field="Academy" label=""></field-component>
-                                        <field-component field="currentTraining" label=""></field-component>
+                                        <field-component field="Academy" label="${this.academy ? this.academy : 'Not found'}"></field-component>
+                                        <field-component field="currentTraining" label="${this.currenttraining ? this.currenttraining : 'Not found'}"></field-component>
                                     </div>
                                 </div>
                                 <p id="Works">More Works</p>
