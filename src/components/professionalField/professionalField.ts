@@ -22,11 +22,14 @@ class Field extends HTMLElement  {
         
         if (oldValue !== newValue) {
             this[propName] = newValue;
+            this.render();
         }
-        this.render();
+     
     }
     connectedCallback() { 
-        this.render();
+        if (this.field && this.label) {
+            this.render();
+        }
     }
     loadIcon() {
         let iconHTML = '';
@@ -53,6 +56,7 @@ class Field extends HTMLElement  {
         return iconHTML
     }
     render() {
+        console.log('Render ejecutado');
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/professionalField/professionalField.css">

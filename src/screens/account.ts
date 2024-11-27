@@ -156,12 +156,12 @@ class Account extends HTMLElement {
 
                                 <div class="icons-profesional">
                                     <div class="first">
-                                        <field-component field="placeResidence"></field-component>
-                                        <field-component field="currentJob"></field-component>
+                                        <field-component field="placeResidence" label=""></field-component>
+                                        <field-component field="currentJob" label=""></field-component>
                                     </div>
                                     <div class="first">
-                                        <field-component field="Academy"></field-component>
-                                        <field-component field="currentTraining"></field-component>
+                                        <field-component field="Academy" label=""></field-component>
+                                        <field-component field="currentTraining" label=""></field-component>
                                     </div>
                                 </div>
                                 <p id="Works">More Works</p>
