@@ -101,14 +101,33 @@ class EditAccount extends HTMLElement  {
         try {
             const file = this.selectedFile;
     
+            // Manejo de la imagen del usuario
             if (file) {
                 const imgURL = await uploadFileProfileByUser(file, appState.user);
                 edit.imgUser = imgURL;
                 alert('Imagen de perfil actualizada correctamente');
-            } else {
-                console.info("No se seleccionó ningún archivo para subir. Solo se actualizarán otros datos.");
             }
     
+            // Mantener los valores actuales si los inputs están vacíos
+            const currentData = await new Promise<UserData | null>((resolve) =>
+                getUserData(resolve)
+            );
+    
+            if (currentData) {
+                edit.username = edit.username.trim() || currentData.username;
+                edit.category = edit.category.trim() || currentData.category;
+                edit.placeresidence = edit.placeresidence.trim() || currentData.placeresidence;
+                edit.currenttraining = edit.currenttraining.trim() || currentData.currenttraining;
+                edit.currentjob = edit.currentjob.trim() || currentData.currentjob;
+                edit.academy = edit.academy.trim() || currentData.academy;
+                edit.moreworksurl = edit.moreworksurl.trim() || currentData.moreworksurl;
+                edit.imgUser = edit.imgUser || currentData.imgUser;
+            } else {
+                alert("No se pudo obtener la información actual del usuario");
+                return;
+            }
+    
+            // Subir los datos actualizados
             await uploadUserData(appState.user, edit);
             alert("Datos del perfil actualizados correctamente");
             this.isSaved = true;
@@ -117,7 +136,6 @@ class EditAccount extends HTMLElement  {
             alert("Ocurrió un error al actualizar el perfil");
         }
     };
-    
     
     clearInputs() {
         const descriptionInput = this.shadowRoot?.querySelector('#description') as HTMLInputElement;
