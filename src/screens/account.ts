@@ -71,12 +71,12 @@ class Account extends HTMLElement {
             this.email = userInfo.email || 'Not found';
             this.followers = userInfo.followers || 0;
             this.following = userInfo.following || 0;
-            this.category = userInfo.category || 'Not found';
-            this.placeresidence = userInfo.placeresidence || 'Not found';
-            this.currentjob = userInfo.currentjob || 'Not found';
-            this.currenttraining = userInfo.currenttraining || 'Not found';
-            this.academy = userInfo.academy || 'Not found';
-            this.moreworksurl = userInfo.moreworksurl || '#';
+            this.category = userInfo.category || 'Empty field';
+            this.placeresidence = userInfo.placeresidence || 'Empty field';
+            this.currentjob = userInfo.currentjob || 'Empty field';
+            this.currenttraining = userInfo.currenttraining || 'Empty field';
+            this.academy = userInfo.academy || 'Empty field';
+            this.moreworksurl = userInfo.moreworksurl || 'Url not entered';
 
             const fieldPlaceResidence = this.ownerDocument.createElement("field-component") as Field;
             fieldPlaceResidence.setAttribute(AttributeField.field, '');
@@ -120,11 +120,11 @@ class Account extends HTMLElement {
                                 <div id="follows">
                                     <div id="followers">
                                         <p class="pFOlS">Followers</p>
-                                        <p class="num">${this.followers ? this.followers : 'Not found'}</p>
+                                        <p class="num">${this.followers}</p>
                                     </div>
                                     <div id="followeing">
                                         <p class="pFOlS">Following</p>
-                                        <p class="num">${this.following ? this.following : 'Not found'}</p>
+                                        <p class="num">${this.following}</p>
                                     </div>
                                 </div>
                             </div>
@@ -134,23 +134,23 @@ class Account extends HTMLElement {
                                 <btn-component color="#361656" label="Edit" id="btn-edit"></btn-component>
                                 <div id="create">
                                     <p id="creative">Creative</p>
-                                    <p id="category">${this.category ? this.category : 'Not found'}</p>
+                                    <p id="category">${this.category ? this.category : 'Empty field'}</p>
                                 </div>
                                 <h3 id="contct">Contact Information</h3>
                                 <p id="email">${this.email ? this.email : 'Not found'}</p>
 
                                 <div class="icons-profesional">
                                     <div class="first">
-                                        <field-component field="placeResidence" label="${this.placeresidence ? this.placeresidence : 'Not found'}"></field-component>
-                                        <field-component field="currentJob" label="${this.currentjob ? this.currentjob : 'Not found'}"></field-component>
+                                        <field-component field="placeResidence" label="${this.placeresidence ? this.placeresidence : 'Empty field'}"></field-component>
+                                        <field-component field="currentJob" label="${this.currentjob ? this.currentjob : 'Empty field'}"></field-component>
                                     </div>
                                     <div class="first">
-                                        <field-component field="Academy" label="${this.academy ? this.academy : 'Not found'}"></field-component>
-                                        <field-component field="currentTraining" label="${this.currenttraining ? this.currenttraining : 'Not found'}"></field-component>
+                                        <field-component field="Academy" label="${this.academy ? this.academy : 'Empty field'}"></field-component>
+                                        <field-component field="currentTraining" label="${this.currenttraining ? this.currenttraining : 'Empty field'}"></field-component>
                                     </div>
                                 </div>
                                 <p id="Works">More Works</p>
-                                <a id="url" href="${this.moreworksurl ? this.moreworksurl : 'Not found'}" target="_blank">${this.moreworksurl ? this.moreworksurl : 'Not found'}</a>
+                                <a id="url" href="${this.moreworksurl ? this.moreworksurl : 'Url not entered'}" target="_blank">${this.moreworksurl ? this.moreworksurl : 'Not found'}</a>
                             </div>
                      
                         </section>
