@@ -2,6 +2,9 @@ import Hashtags, {AttributeHashtags} from '../hashtags/hashtags';
 import PostIcons, {AttributePostIcons} from '../postIcons/postIcons';
 import Comments, {CommentsAttribute} from '../comments/comments';
 import '../hashtags/hashtags'
+import { dispatch } from '../../store/store';
+import { getPostsByUserAction } from '../../store/actions';
+import { deletePost } from '../../utils/firebase';
 
 export enum AttributeCardAccount {
     'image' = 'image',
@@ -9,7 +12,8 @@ export enum AttributeCardAccount {
     'comments' = 'comments',
     'favorites' = 'favorites',
     'commentsElements' = 'commentsElements',
-    'hashtags' = 'hashtags'
+    'hashtags' = 'hashtags',
+    'postid' = 'postid'
 }
 
 
@@ -24,6 +28,7 @@ class CardAccount extends HTMLElement  {
     commentsN?: number;
     showComent?: boolean;
     commentsElements?: any[] = [];
+    postid?: string
    
     constructor()  {
         super();
@@ -143,8 +148,12 @@ class CardAccount extends HTMLElement  {
                     
                 </div>	
             `;
-            
-            
+            const deleteButton = this.shadowRoot.querySelector('#delete');
+            deleteButton?.addEventListener('click', () => {
+                this.deletePostFunction(this.postid);
+                alert('Post borrado')
+            });
+
 
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
@@ -176,6 +185,25 @@ class CardAccount extends HTMLElement  {
         
         }
         
+        
+    }
+    async deletePostFunction(postId: string | undefined) {
+        if (!postId) {
+            console.error('ID del producto no proporcionado para eliminar.');
+            return; // Sale de la función si no hay un ID
+        }
+    
+        try {
+            // Llamada para eliminar el post
+            await deletePost(postId);
+    
+            // Actualiza los posts del usuario después de la eliminación
+            const action = await getPostsByUserAction();
+            dispatch(action); // Despacha la acción para actualizar el estado
+    
+        } catch (error) {
+            console.error('Error al eliminar el post:', error); // Error más específico
+        }
     }
 };
 

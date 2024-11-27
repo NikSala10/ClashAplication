@@ -2,6 +2,7 @@ import { hashtags } from '../data/dataHashtags';
 import { appState } from '../store/store';
 import  {firebaseConfig} from '../utils/firebaseConfig'
 import { UpdateFieldType } from '../types/post';
+import { doc, deleteDoc } from 'firebase/firestore';
 let db: any;
 let auth: any;
 let storage: any;
@@ -424,9 +425,9 @@ export const deletePost= async (id: string) => {
   
       await deleteDoc(docRef);
   
-      console.log(`El producto con ID ${id} ha sido eliminado correctamente.`);
+      console.log(`El post con ID ${id} ha sido eliminado correctamente.`);
     } catch (error) {
-      console.error('Error al eliminar el producto de Firebase:', error);
+      console.error('Error al eliminar el post de Firebase:', error);
       throw error; 
     }
   };
