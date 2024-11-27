@@ -15,22 +15,19 @@ import storage from '../utils/storage';
 import { getPostsByUser, getUserData } from '../utils/firebase';
 import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
-
-export enum AttributeAccountScreen {
-    'imguser' = 'imguser',
-    'name' =  'name',
-    'email' = 'email',
-    'following' = 'following',
-    'followers' = 'followers',
-    'username' = 'username',
-    'category' = 'category',
-    'placeresidence' = 'placeresidence',
-    'currenttraining' = 'currenttraining',
-    'currentjob' = 'currentjob',
-    'academy' = 'academy',
-    'moreworksurl' = 'moreworksurl',
+interface UserData {
+    name: string;
+    username: string;
+    email: string;
+    followers: number;
+    following: number;
+    category: string;
+    placeresidence: string;
+    currenttraining: string;
+    currentjob: string;
+    academy: string;
+    moreworksurl: string;
 }
-
 class Account extends HTMLElement {
     imguser?: string;
     name?: string;
@@ -58,26 +55,7 @@ class Account extends HTMLElement {
             field.setAttribute(AttributeField.label, '');
 			const barLateral = this.ownerDocument.createElement("bar-lateral") as BarLateral;
 	}
-    static get observedAttributes() {
-        return Object.values(AttributeAccountScreen);
-    }
-
-    attributeChangedCallback(propName : AttributeAccountScreen, oldValue: string | undefined, newValue: string | undefined) {
-        
-        switch (propName) {
-            case AttributeAccountScreen.followers:
-				this.followers = newValue ? Number(newValue) : undefined;
-            break;
-            case AttributeAccountScreen.following:
-				this.following = newValue ? Number(newValue) : undefined;
-            break;
-            default:
-                this[propName] = newValue;
-                break;
-            
-        }
-        this.render();
-    }
+   
 	async connectedCallback() {
         if (!appState.imgUserProfile) {
             const imgAction = await getImgUserFileAction();
@@ -97,9 +75,6 @@ class Account extends HTMLElement {
     
 	async render() {
 		if (this.shadowRoot) {
-            let hash = ['hola', 'hola2', 'hola3']
-            
-            
 			this.shadowRoot.innerHTML = `
 			    <link rel="stylesheet" href="/src/screens/account.css">
                 <nav-component></nav-component>
@@ -194,27 +169,30 @@ class Account extends HTMLElement {
                 });
             });
 
-            const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
-            getUserData((userInfo: any[]) =>  {
-                while (containerUserInformation?.firstChild) {
-                    containerUserInformation.removeChild(containerUserInformation.firstChild);
-                }
-                userInfo.forEach((user: any) => {        
-                    this.name = user.name || 'Not found';
-                    this.username = user.username || 'Not found';
-                    this.email = user.email || 'Not found';
-                    this.followers = user.followers || 0;
-                    this.following = user.following || 0;
-                    this.category = user.category || 'Not found';
-                    this.placeresidence = user.placeresidence || 'Not found';
-                    this.currenttraining = user.currenttraining || 'Not found';
-                    this.currentjob = user.currentjob || 'Not found';
-                    this.academy = user.academy || 'Not found';
-                    this.moreworksurl = user.moreworksurl || '#';
-                });
-            });
+            // const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
+            // getUserData((userInfo: UserData | null) =>  {
+            //         if (!userInfo) {
+            //              console.warn('No se recibió información de usuario.');
+            //         return;
+            //         }
+            //     while (containerUserInformation?.firstChild) {
+            //         containerUserInformation.removeChild(containerUserInformation.firstChild);
+            //     }
+                     
+            //     this.name = userInfo.name || 'Not found';
+            //     this.username = userInfo.username || 'Not found';
+            //     this.email = userInfo.email || 'Not found';
+            //     this.followers = userInfo.followers || 0;
+            //     this.following = userInfo.following || 0;
+            //     this.category = userInfo.category || 'Not found';
+            //     this.placeresidence = userInfo.placeresidence || 'Not found';
+            //     this.currenttraining = userInfo.currenttraining || 'Not found';
+            //     this.currentjob = userInfo.currentjob || 'Not found';
+            //     this.academy = userInfo.academy || 'Not found';
+            //     this.moreworksurl = userInfo.moreworksurl || '#';
 
-        
+            //     this.render();
+            // });
 
         const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
         if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {

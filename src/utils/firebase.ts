@@ -238,8 +238,6 @@ export const getUsers = async () =>  {
             user.id = doc.id
 			data.push(user);
 		});
-        console.log(data);
-        
 		return data;
 	} catch (error) {
 	console.error('Error getting documents', error)
@@ -401,7 +399,6 @@ export const uploadUserData = async (uid: string, userinfo: {
         };
 
         await updateDoc(userRef, userInformation); // Utiliza updateDoc para evitar sobrescribir todo el documento
-        console.log('User data uploaded successfully');
     } catch (error) {
         console.error('Error uploading user data:', error);
     }
@@ -421,6 +418,7 @@ export const getUserData = async (callback: (userData: any | null) => void) => {
             }
         });
         return unsubscribe;
+        
     } catch (error) {
         console.error('Error listening to user data in real-time:', error);
         callback(null);
