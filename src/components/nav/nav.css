@@ -128,6 +128,30 @@ svg  {
     margin-left: 65%;
     
 }
+.circle-img  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #F5F5F5;
+    width: 7rem; 
+    height: 7rem; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+#img-user {
+    width: 7rem; 
+    height: 7rem; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+#initial {
+    font-size: 50px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #652484;
+}
 .user-icon svg  {
     color: #361656;
     margin-top: 0.2rem;
