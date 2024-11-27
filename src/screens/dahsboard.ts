@@ -14,8 +14,15 @@ import { dispatch } from '../store/store'
 import { setOpenCloseScreen, getPostAction, getUsersAction, getCommentsAction} from '../store/actions';
 import { navigate } from '../store/actions';
 import { Screens } from '../types/store';
-
+interface UserData {
+    name: string;
+    imgUser:string;
+    username: string;
+}
 class Dashboard extends HTMLElement  {
+    name?: string;
+    imguser?:string;
+    username?:string;
     imagesBanner: Banner1[] = [];
     userHashtagsList : BarLateral[] = [];
     userData: { name?: string; confirmPassword?: string; } = {};
@@ -45,8 +52,22 @@ class Dashboard extends HTMLElement  {
             const commentsAction = await getCommentsAction();
             dispatch(commentsAction)
         }
+        const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
+        const userId = appState.user
+            getUserData((userInfo: UserData | null) => {
+                if (!userInfo) {
+                    console.warn('No se recibió información de usuario.');
+                    return;
+                }
 
-        
+                while (containerUserInformation?.firstChild) {
+                    containerUserInformation.removeChild(containerUserInformation.firstChild);
+                }
+                this.name = userInfo.name || ''; 
+                this.imguser = userInfo.imgUser || '';
+                this.username = userInfo.username || '';  
+                this.render();
+            });
         this.render();
     }
 
@@ -85,30 +106,12 @@ class Dashboard extends HTMLElement  {
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');
             if(!appState.loadPost){
                 appState.post.forEach((post) =>  {   
-                    const user = appState.users.find(user => user.id === post.userUid);
-                    const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
-                    if (user) {
-                        uploadUserData(user.id, {
-                            username: username,
-                            category: user.category || '',
-                            imgUser: user.imgUser ||  '', 
-                            placeresidence: user.placeresidence || '', 
-                            currenttraining: user.currenttraining || '', 
-                            currentjob: user.currentjob || '', 
-                            academy: user.academy || '',
-                            moreworksurl: user.moreworksurl || ''
-                        });
-                    }
-                    // if (post.userUid) {
-                    //     const userDataPost = await getUserData(post.userUid);
-                    //     name = userDataPost?.name || '';
-                    //     username = `@${userDataPost?.name.replace(/\s+/g, '').toLowerCase()}`;  
-                    // }
                     const commentsPost = appState.comments.filter((c) => c.postid === post.id)                    
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
-                    userPostCards.setAttribute(AttributePostCard.name, user.name);
-                    userPostCards.setAttribute(AttributePostCard.username, username);
+                    userPostCards.setAttribute(AttributePostCard.name, String(this.name));
+                    userPostCards.setAttribute(AttributePostCard.imguser, String(this.imguser));
+                    userPostCards.setAttribute(AttributePostCard.username, String(this.username));
                     userPostCards.setAttribute(AttributePostCard.category, post.category);
                     userPostCards.setAttribute(AttributePostCard.description, post.description);
                     userPostCards.setAttribute(AttributePostCard.image, post.image);

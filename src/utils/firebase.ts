@@ -404,12 +404,12 @@ export const uploadUserData = async (uid: string, userinfo: {
         console.error('Error uploading user data:', error);
     }
 };
-export const getUserData = async (callback: (userData: any | null) => void) => {
+export const getUserData = async (userId: string, callback: (userData: any | null) => void) => {
     try {
         const { db } = await getFirebaseInstance();
         const { doc, onSnapshot } = await import('firebase/firestore');
 
-        const userRef = doc(db, 'users', appState.user); 
+        const userRef = doc(db, 'users', userId); 
         const unsubscribe = onSnapshot(userRef, (docSnapshot) => {
             if (docSnapshot.exists()) {
                 callback({ id: docSnapshot.id, ...docSnapshot.data() }); 
