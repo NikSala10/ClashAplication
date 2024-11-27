@@ -9,7 +9,6 @@ interface UserData {
     name: string;
     imgUser:string;
 }
-
 export enum AttributeNav { 
     'imguser' = 'imguser',
     'name' = 'name'
@@ -66,6 +65,17 @@ class Nav extends HTMLElement  {
     render() {
         if (this.shadowRoot) {
             const initialLetter = this.name?.charAt(0)?.toUpperCase() ?? '';
+            const isLoggedIn = !!appState.user; // Verificar si el usuario está logueado
+            const profilePicture = this.imguser; // URL de la imagen del usuario
+            const defaultPicture = '../src/assets/ImgUserIcon.svg'; // Ruta local de la imagen predeterminada
+
+            let imageSource;
+            if (isLoggedIn) {
+                imageSource = profilePicture || ''; // Usar imagen de perfil si existe
+            } else {
+                imageSource = defaultPicture; // Imagen predeterminada para usuarios no logueados
+            }
+
             this.shadowRoot.innerHTML = `
            <link rel="stylesheet" href="../src/components/nav/nav.css">
     <nav class="navegation">
@@ -135,7 +145,11 @@ class Nav extends HTMLElement  {
             </div>
             <div class="user-icon">
                <div class="circle">
-                    <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}</div>
+                    <div class="circle-img">
+                    ${isLoggedIn && !profilePicture 
+                        ? `<span id="initial">${initialLetter}</span>` 
+                        : `<img id="img-user" src="${imageSource}" alt="User Profile">`
+                    }
                 </div>
             </div>
             <div class="bars">
