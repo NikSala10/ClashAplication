@@ -151,6 +151,7 @@ class AddPost extends HTMLElement  {
         const imgInput = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
         imgInput?.addEventListener('change', () => {
             this.selectedFile = imgInput.files?.[0] || undefined; 
+            alert('Imagen seleccionada');
         });
 
         const save = this.shadowRoot?.querySelector('#save');
