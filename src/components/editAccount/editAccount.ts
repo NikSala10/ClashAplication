@@ -63,20 +63,23 @@ class EditAccount extends HTMLElement  {
     submitForm = async () => {
         try {
             const file = this.selectedFile;
+    
             if (file) {
                 const imgURL = await uploadFileProfileByUser(file, appState.user);
                 edit.imgUser = imgURL;
-                alert('Perfil actualizado correctamente');
+                alert('Imagen de perfil actualizada correctamente');
             } else {
-                console.warn("No se seleccionó ningún archivo para subir");
-                alert('Por favor selecciona una imagen para subir.');
+                console.info("No se seleccionó ningún archivo para subir. Solo se actualizarán otros datos.");
             }
+    
+            await uploadUserData(appState.user, edit);
+            alert("Datos del perfil actualizados correctamente");
         } catch (error) {
             console.error("Error al enviar el formulario:", error);
             alert("Ocurrió un error al actualizar el perfil");
         }
-        await uploadUserData(appState.user, edit)
-    }
+    };
+    
     
     clearInputs() {
         const descriptionInput = this.shadowRoot?.querySelector('#description') as HTMLInputElement;
@@ -140,9 +143,25 @@ class EditAccount extends HTMLElement  {
             
         }
         const btn = this.shadowRoot?.querySelector('#close-modal')
-        btn?.addEventListener('click', ()=>{
-            dispatch(setOpenCloseScreen(1))
-        })
+        btn?.addEventListener('click', () => {
+            const inputs = this.shadowRoot?.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+            let hasData = false;
+        
+            inputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    hasData = true;
+                }
+            });
+        
+            if (hasData) {
+                const confirmClose = confirm('¿Estás seguro de que deseas cerrar? Los cambios no guardados se perderán.');
+                if (!confirmClose) {
+                    return; 
+                }
+            }
+            dispatch(setOpenCloseScreen(1));
+        });
+        
         
         const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
         if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
