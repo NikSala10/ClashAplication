@@ -86,10 +86,7 @@ class Dashboard extends HTMLElement  {
             if(!appState.loadPost){
                 appState.post.forEach((post) =>  {   
                     const user = appState.users.find(user => user.id === post.userUid);
-                    const username = user && user.name 
-                    ? `@${user.name.replace(/\s+/g, '').toLowerCase()}`
-                    : '@anonymous';  // Default username in case the name is undefined or empty
-
+                    const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
                     if (user) {
                         uploadUserData(user.id, {
                             username: username,
