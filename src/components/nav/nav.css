@@ -116,6 +116,7 @@ svg  {
     width: 20%;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .circle  {
@@ -235,10 +236,29 @@ hr {
     justify-content: center;
     margin-left: 40%;
 }
-.user-icon svg  {
-    margin-top: 0;
-    margin-left: 0.30rem;
-    width: 40px;
+.circle-img  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color:none;
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+#img-user {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+#initial {
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #652484;
 }
 
 .bar-responsive  {

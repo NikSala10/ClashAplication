@@ -172,10 +172,27 @@ input {
   }
   .circle  {
     width: 4rem;
+    height: 4rem;
     display: flex;
     align-items: center;
    margin-top: 0;
     
+}
+.circle-img  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: none;
+    width: 4rem; 
+    height: 4rem; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+#img-user {
+    width: 4rem; 
+    height: 4rem; 
+    border-radius: 50%;
+    object-fit: cover; 
 }
 
 .circle svg {
