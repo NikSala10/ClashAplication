@@ -82,6 +82,8 @@ class Account extends HTMLElement {
             fieldPlaceResidence.setAttribute(AttributeField.field, '');
             fieldPlaceResidence.setAttribute(AttributeField.label, '');
             
+            this.render();
+
         });
        
         this.render();

@@ -67,6 +67,9 @@ class EditAccount extends HTMLElement  {
             edit.currentjob = userInfo.currentjob || '';
             edit.academy = userInfo.academy || '';
             edit.moreworksurl = userInfo.moreworksurl || '';
+
+            this.render();
+
         });
         this.render();
     }
