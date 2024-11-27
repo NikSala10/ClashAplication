@@ -34,6 +34,30 @@ input {
     justify-content: center;
     align-items: center;
 }
+.circle-img  {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #F5F5F5;
+    width: 7rem; 
+    height: 7rem; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+#img-user {
+    width: 7rem; 
+    height: 7rem; 
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+#initial {
+    font-size: 50px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #652484;
+}
 .social-post  {
     width: 30%;
     padding: 1rem;
@@ -146,30 +170,7 @@ input {
    margin-top: 0;
     
 }
-.circle-img  {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    background-color: #F5F5F5;
-    width: 5rem; 
-    height: 5rem; 
-    border-radius: 50%;
-    object-fit: cover;
-}
-#img-user {
-    width: 4.5rem; 
-    height: 4.5rem; 
-    border-radius: 50%;
-    object-fit: cover; 
-}
 
-#initial {
-    font-size: 38px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    color: #652484;
-}
 .circle svg {
     background-color: white;
     border-radius: 50%;
