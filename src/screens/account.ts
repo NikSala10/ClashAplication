@@ -38,6 +38,7 @@ class Account extends HTMLElement {
             const imgAction = await getImgUserFileAction();
             dispatch(imgAction);
         }        
+        
         this.render();
 	}
     logout() {
@@ -132,16 +133,23 @@ class Account extends HTMLElement {
 				
 			`;
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
-            appState.postsByUser.forEach((post: any) => {        
-            const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
-            userPostCard.setAttribute(AttributeCardAccount.image, post.image);
-            userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
-            userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
-            userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
-            userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
-            userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
-            containerPost?.appendChild(userPostCard);
-        });
+            getPostsByUser((posts: any[]) =>  {
+                while (containerPost?.firstChild) {
+                    containerPost.removeChild(containerPost.firstChild);
+                }
+                posts.forEach((post: any) => {        
+                    const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
+                    userPostCard.setAttribute(AttributeCardAccount.image, post.image);
+                    userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
+                    userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
+                    userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
+                    userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
+                    userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
+                    containerPost?.appendChild(userPostCard);
+                });
+            });
+
+        
 
         const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
         if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
