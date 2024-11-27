@@ -54,13 +54,13 @@ export const getCommentsAction = async () => {
 	};
 };
 
-export const getPostsByUserAction = async () => {
-	const postsByUser = await getPostsByUser(); 
-	return {
-		action: Actions.GETPOSTSBYUSER,
-		payload: postsByUser,
-	};
-};
+// export const getPostsByUserAction = async () => {
+// 	const postsByUser = await getPostsByUser(); 
+// 	return {
+// 		action: Actions.GETPOSTSBYUSER,
+// 		payload: postsByUser,
+// 	};
+// };
 export const getImgUserFileAction = async () => {
 	const imgByUser = await getFileProfile(appState.user); 
 	return {

@@ -358,27 +358,37 @@ export const updatePostField = async (postId: string, field: UpdateFieldType, co
     }
 };
 
-export const getPostsByUser = async () => {
+export const getPostsByUser = async (callback: (posts: any[]) => void) => { // Recibe una función de callback para pasar los datos actualizados
     try {
         const { db } = await getFirebaseInstance();
-        const { collection, getDocs, query, where, orderBy } = await import('firebase/firestore');
+        const { collection, query, where, orderBy, onSnapshot } = await import('firebase/firestore');
+        
         const ref = collection(db, 'posts');
-        //Create index in firebase console
+        
+        // Crea la consulta para obtener los posts del usuario ordenados por fecha
         const q = query(
             ref,
             where('userUid', '==', appState.user), // Filtra por el UID del usuario
             orderBy('dateadded', 'desc') // Ordena por la fecha en orden descendente
         );
-        const querySnapshot = await getDocs(q);
-        const data: any[] = [];
+        
+        // Usamos `onSnapshot` para escuchar cambios en tiempo real
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const data: any[] = [];
 
-        querySnapshot.forEach((doc) => {
-            data.push({ id: doc.id, ...doc.data() }); // Incluye también el ID del documento
+            querySnapshot.forEach((doc) => {
+                data.push({ id: doc.id, ...doc.data() }); // Incluye también el ID del documento
+            });
+
+            // Llama al callback con los datos actualizados
+            callback(data);
         });
 
-        return data;
+        // Retorna una función para dejar de escuchar los cambios cuando ya no sea necesario
+        return unsubscribe;
+
     } catch (error) {
-        console.error('Error getting documents', error);
+        console.error('Error getting documents in real-time', error);
     }
 };
 

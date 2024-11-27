@@ -3,8 +3,7 @@ import PostIcons, {AttributePostIcons} from '../postIcons/postIcons';
 import Comments, {CommentsAttribute} from '../comments/comments';
 import '../hashtags/hashtags'
 import { dispatch } from '../../store/store';
-import { getPostsByUserAction } from '../../store/actions';
-import { deletePost } from '../../utils/firebase';
+import { deletePost, getPostsByUser} from '../../utils/firebase';
 
 export enum AttributeCardAccount {
     'image' = 'image',
@@ -148,11 +147,11 @@ class CardAccount extends HTMLElement  {
                     
                 </div>	
             `;
-            const deleteButton = this.shadowRoot.querySelector('#delete');
-            deleteButton?.addEventListener('click', () => {
-                this.deletePostFunction(this.postid);
-                alert('Post borrado')
-            });
+            // const deleteButton = this.shadowRoot.querySelector('#delete');
+            // deleteButton?.addEventListener('click', () => {
+            //     this.deletePostFunction(this.postid);
+            //     alert('Post borrado')
+            // });
 
 
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
@@ -187,24 +186,24 @@ class CardAccount extends HTMLElement  {
         
         
     }
-    async deletePostFunction(postId: string | undefined) {
-        if (!postId) {
-            console.error('ID del producto no proporcionado para eliminar.');
-            return; // Sale de la función si no hay un ID
-        }
+    // async deletePostFunction(postId: string | undefined) {
+    //     if (!postId) {
+    //         console.error('ID del producto no proporcionado para eliminar.');
+    //         return; // Sale de la función si no hay un ID
+    //     }
     
-        try {
-            // Llamada para eliminar el post
-            await deletePost(postId);
+    //     try {
+    //         // Llamada para eliminar el post
+    //         await deletePost(postId);
     
-            // Actualiza los posts del usuario después de la eliminación
-            const action = await getPostsByUserAction();
-            dispatch(action); // Despacha la acción para actualizar el estado
+    //         // Actualiza los posts del usuario después de la eliminación
+    //         const action = await getPostsByUser();
+    //         dispatch(action); // Despacha la acción para actualizar el estado
     
-        } catch (error) {
-            console.error('Error al eliminar el post:', error); // Error más específico
-        }
-    }
+    //     } catch (error) {
+    //         console.error('Error al eliminar el post:', error); // Error más específico
+    //     }
+    // }
 };
 
 customElements.define('cardaccount-component',CardAccount);

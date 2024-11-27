@@ -1,5 +1,5 @@
 import { dispatch } from '../store/store';
-import { setOpenCloseScreen, getPostAction, getPostsByUserAction, getImgUserFileAction } from '../store/actions';
+import { setOpenCloseScreen, getPostAction, getImgUserFileAction } from '../store/actions';
 import { Actions, Screens } from '../types/store';
 import { addObserver, appState } from '../store/store';
 import { loginUser } from '../utils/firebase';
@@ -12,6 +12,7 @@ import '../components/addPost/addPost';
 import '../components/editAccount/editAccount';
 import styles from './login.css'
 import storage from '../utils/storage';
+import { getPostsByUser } from '../utils/firebase';
 import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
 
@@ -36,11 +37,7 @@ class Account extends HTMLElement {
         if (!appState.imgUserProfile) {
             const imgAction = await getImgUserFileAction();
             dispatch(imgAction);
-        }
-		if (appState.postsByUser.length === 0) {
-			const action = await getPostsByUserAction();
-			dispatch(action);
-		}         
+        }        
         this.render();
 	}
     logout() {
@@ -134,10 +131,11 @@ class Account extends HTMLElement {
                 </section>
 				
 			`;
-            appState.postsByUser.forEach((post: any) => { 
-            const containerPost = this.shadowRoot?.querySelector('.container-postcards');         
+            const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
+            appState.postsByUser.forEach((post: any) => {        
             const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
             userPostCard.setAttribute(AttributeCardAccount.image, post.image);
+            userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
             userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
             userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
             userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
