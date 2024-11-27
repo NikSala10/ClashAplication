@@ -16,6 +16,21 @@ import { getPostsByUser, getUserData } from '../utils/firebase';
 import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
 
+export enum AttributeAccountScreen {
+    'imguser' = 'imguser',
+    'name' =  'name',
+    'email' = 'email',
+    'following' = 'following',
+    'followers' = 'followers',
+    'username' = 'username',
+    'category' = 'category',
+    'placeresidence' = 'placeresidence',
+    'currenttraining' = 'currenttraining',
+    'currentjob' = 'currentjob',
+    'academy' = 'academy',
+    'moreworksurl' = 'moreworksurl',
+}
+
 class Account extends HTMLElement {
     imguser?: string;
     name?: string;
@@ -41,7 +56,26 @@ class Account extends HTMLElement {
             field.setAttribute(AttributeField.label, '');
 			const barLateral = this.ownerDocument.createElement("bar-lateral") as BarLateral;
 	}
+    static get observedAttributes() {
+        return Object.values(AttributeAccountScreen);
+    }
 
+    attributeChangedCallback(propName : AttributeAccountScreen, oldValue: string | undefined, newValue: string | undefined) {
+        
+        switch (propName) {
+            case AttributeAccountScreen.followers:
+				this.followers = newValue ? Number(newValue) : undefined;
+            break;
+            case AttributeAccountScreen.following:
+				this.following = newValue ? Number(newValue) : undefined;
+            break;
+            default:
+                this[propName] = newValue;
+                break;
+            
+        }
+        this.render();
+    }
 	async connectedCallback() {
         if (!appState.imgUserProfile) {
             const imgAction = await getImgUserFileAction();
@@ -83,25 +117,25 @@ class Account extends HTMLElement {
                                 </div>
                                 <div id="follows">
                                     <div id="followers">
-                                        <p class="pFOlS">Followers</p>
+                                        <p class="pFOlS">${this.followers ? this.followers : 'Not found'}</p>
                                         <p class="num">14</p>
                                     </div>
                                     <div id="followeing">
                                         <p class="pFOlS">Following</p>
-                                        <p class="num">10</p>
+                                        <p class="num">${this.following ? this.following : 'Not found'}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="user-text-contact">
-                                <h3 id="name-user">Yeliani Barbosa</h3>
-                                <p id="username">@yelibarbosis</p>
+                                <h3 id="name-user">${this.name ? this.name : 'Not found'}</h3>
+                                <p id="username">${this.username ? this.username : 'Not found'}</p>
                                 <btn-component color="#361656" label="Edit" id="btn-edit"></btn-component>
                                 <div id="create">
                                     <p id="creative">Creative</p>
-                                    <p id="category">Illustrator</p>
+                                    <p id="category">${this.category ? this.category : 'Not found'}</p>
                                 </div>
                                 <h3 id="contct">Contact Information</h3>
-                                <p id="email">@yeliani@gmail.com</p>
+                                <p id="email">${this.email ? this.email : 'Not found'}</p>
 
                                 <div class="icons-profesional">
                                     <div class="first">
@@ -114,7 +148,7 @@ class Account extends HTMLElement {
                                     </div>
                                 </div>
                                 <p id="Works">More Works</p>
-                                <a id="url" href="https://www.behance.net/yelianibarbosa1" target="_blank">https://www.behance.net/yelianibarbosa1</a>
+                                <a id="url" href="${this.moreworksurl ? this.moreworksurl : 'Not found'}" target="_blank">${this.moreworksurl ? this.moreworksurl : 'Not found'}</a>
                             </div>
                      
                         </section>
