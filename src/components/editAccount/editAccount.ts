@@ -142,6 +142,7 @@ class EditAccount extends HTMLElement  {
     }
     render() {
         if (this.shadowRoot) {
+            const userImage = this.imguser || '../src/assets/ImgUserIcon.svg';
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/editAccount/editAccount.css">
             
@@ -149,7 +150,7 @@ class EditAccount extends HTMLElement  {
                   <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
                  <div class="user-profile">
                     <div class="circle-img">
-                        <img id="img-user" src="${this.imguser}" alt="">
+                        <img id="img-user" src="${userImage}" alt="">
                         <div class="icon">
                             <input type="file" id="fileInput">
                             <label for="fileInput">

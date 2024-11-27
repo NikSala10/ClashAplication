@@ -99,6 +99,7 @@ class Account extends HTMLElement {
     
 	async render() {
 		if (this.shadowRoot) {
+            const userImage = this.imguser || '/src/assets/ImgUserIcon.svg';
 			this.shadowRoot.innerHTML = `
 			    <link rel="stylesheet" href="/src/screens/account.css">
                 <nav-component></nav-component>
@@ -114,7 +115,7 @@ class Account extends HTMLElement {
                         <section class="info-contact-user">
                             <div class="user-info">
                                 <div class="circle-img">
-                                    <img id="img-user" src="${this.imguser}" alt="">
+                                    <img id="img-user" src="${userImage}" alt="">
                                 </div>
                                 <div id="follows">
                                     <div id="followers">
