@@ -50,9 +50,6 @@ class Account extends HTMLElement {
         const btnAddPost = this.ownerDocument.createElement("btn-account") as ButtonAccount;
             btnAddPost.setAttribute(AttributeBtnAccount.color, '');
             btnAddPost.setAttribute(AttributeBtnAccount.label, '');
-			const field = this.ownerDocument.createElement("field-component") as Field;
-            field.setAttribute(AttributeField.field, '');
-            field.setAttribute(AttributeField.label, '');
 			const barLateral = this.ownerDocument.createElement("bar-lateral") as BarLateral;
 	}
    
@@ -61,6 +58,7 @@ class Account extends HTMLElement {
             const imgAction = await getImgUserFileAction();
             dispatch(imgAction);
         }        
+        
         const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
         getUserData((userInfo: UserData | null) =>  {
                 if (!userInfo) {
@@ -77,14 +75,27 @@ class Account extends HTMLElement {
             this.followers = userInfo.followers || 0;
             this.following = userInfo.following || 0;
             this.category = userInfo.category || 'Not found';
-            this.placeresidence = userInfo.placeresidence || 'Not found';
-            this.currenttraining = userInfo.currenttraining || 'Not found';
-            this.currentjob = userInfo.currentjob || 'Not found';
-            this.academy = userInfo.academy || 'Not found';
             this.moreworksurl = userInfo.moreworksurl || '#';
+
+            const fieldPlaceResidence = this.ownerDocument.createElement("field-component") as Field;
+            fieldPlaceResidence.setAttribute(AttributeField.field, 'placeResidence');
+            fieldPlaceResidence.setAttribute(AttributeField.label, userInfo.placeresidence || 'Not found');
+
+            const fieldCurrentJob = this.ownerDocument.createElement("field-component") as Field;
+            fieldCurrentJob.setAttribute(AttributeField.field, 'currentJob');
+            fieldCurrentJob.setAttribute(AttributeField.label, userInfo.currentjob || 'Not found');
+
+            const fieldCurrentTraining = this.ownerDocument.createElement("field-component") as Field;
+            fieldCurrentTraining.setAttribute(AttributeField.field, 'currentTraining');
+            fieldCurrentTraining.setAttribute(AttributeField.label, userInfo.currenttraining || 'Not found');
+
+            const fieldAcademy = this.ownerDocument.createElement("field-component") as Field;
+            fieldAcademy.setAttribute(AttributeField.field, 'academy');
+            fieldAcademy.setAttribute(AttributeField.label, userInfo.academy || 'Not found');
 
             this.render();
         });
+       
         this.render();
 	}
     logout() {
@@ -139,12 +150,12 @@ class Account extends HTMLElement {
 
                                 <div class="icons-profesional">
                                     <div class="first">
-                                        <field-component field="placeResidence" label="Cali, Colombia"></field-component>
-                                        <field-component field="currentJob" label="UI Disney"></field-component>
+                                        <field-component field="placeResidence" label="${this.placeresidence ? this.placeresidence : 'Not found'}"></field-component>
+                                        <field-component field="currentJob" label="${this.currentjob ? this.currentjob : 'Not found'}"></field-component>
                                     </div>
                                     <div class="first">
-                                        <field-component field="Academy" label="DMI, ICESI"></field-component>
-                                        <field-component field="currentTraining" label="Course of Design"></field-component>
+                                        <field-component field="Academy" label="${this.academy ? this.academy : 'Not found'}"></field-component>
+                                        <field-component field="currentTraining" label="${this.currenttraining ? this.currenttraining : 'Not found'}"></field-component>
                                     </div>
                                 </div>
                                 <p id="Works">More Works</p>
