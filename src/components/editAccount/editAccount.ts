@@ -49,7 +49,7 @@ class EditAccount extends HTMLElement  {
 
     async connectedCallback() { 
         const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
-        getUserData((userInfo: UserData | null) =>  {
+        getUserData(appState.user, (userInfo: UserData | null) =>  {
                 if (!userInfo) {
                         console.warn('No se recibió información de usuario.');
                 return;
@@ -106,7 +106,7 @@ class EditAccount extends HTMLElement  {
                 alert('Imagen de perfil actualizada correctamente');
             }
             const currentData = await new Promise<UserData | null>((resolve) =>
-                getUserData(resolve)
+                getUserData(appState.user, resolve)
             );
     
             if (currentData) {

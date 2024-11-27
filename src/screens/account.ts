@@ -56,7 +56,7 @@ class Account extends HTMLElement {
    
 	async connectedCallback() {
         const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
-        getUserData((userInfo: UserData | null) =>  {
+        getUserData(appState.user, (userInfo: UserData | null) =>  {
                 if (!userInfo) {
                         console.warn('No se recibió información de usuario.');
                 return;

@@ -54,7 +54,7 @@ class Dashboard extends HTMLElement  {
         }
         const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
         const userId = appState.user
-            getUserData((userInfo: UserData | null) => {
+            getUserData(userId, (userInfo: UserData | null) => {
                 if (!userInfo) {
                     console.warn('No se recibió información de usuario.');
                     return;
@@ -106,12 +106,13 @@ class Dashboard extends HTMLElement  {
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');
             if(!appState.loadPost){
                 appState.post.forEach((post) =>  {   
-                    const commentsPost = appState.comments.filter((c) => c.postid === post.id)                    
+                    const commentsPost = appState.comments.filter((c) => c.postid === post.id) 
+                    const user = appState.users.find(u => u.id === post.userUid);                   
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
-                    userPostCards.setAttribute(AttributePostCard.name, String(this.name));
-                    userPostCards.setAttribute(AttributePostCard.imguser, String(this.imguser));
-                    userPostCards.setAttribute(AttributePostCard.username, String(this.username));
+                    userPostCards.setAttribute(AttributePostCard.name, user?.name || '');  
+                    userPostCards.setAttribute(AttributePostCard.imguser, user?.imgUser || ''); 
+                    userPostCards.setAttribute(AttributePostCard.username, user?.username || '');
                     userPostCards.setAttribute(AttributePostCard.category, post.category);
                     userPostCards.setAttribute(AttributePostCard.description, post.description);
                     userPostCards.setAttribute(AttributePostCard.image, post.image);
