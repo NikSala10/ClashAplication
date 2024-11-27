@@ -17,6 +17,7 @@ import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
 interface UserData {
     name: string;
+    imguser:string;
     username: string;
     email: string;
     followers: number;
@@ -54,11 +55,6 @@ class Account extends HTMLElement {
 	}
    
 	async connectedCallback() {
-        if (!appState.imgUserProfile) {
-            const imgAction = await getImgUserFileAction();
-            dispatch(imgAction);
-        }        
-        
         const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
         getUserData((userInfo: UserData | null) =>  {
                 if (!userInfo) {
@@ -70,6 +66,7 @@ class Account extends HTMLElement {
             }
                     
             this.name = userInfo.name || 'Not found';
+            this.imguser = userInfo.imguser || 'Not found';
             this.username = userInfo.username || 'Not found';
             this.email = userInfo.email || 'Not found';
             this.followers = userInfo.followers || 0;
@@ -130,7 +127,7 @@ class Account extends HTMLElement {
                         <section class="info-contact-user">
                             <div class="user-info">
                                 <div class="circle-img">
-                                    <img id="img-user" src="" alt="">
+                                    <img id="img-user" src="${this.imguser}" alt="">
                                 </div>
                                 <div id="follows">
                                     <div id="followers">
@@ -209,14 +206,6 @@ class Account extends HTMLElement {
                 });
             });
 
-           
-
-        const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
-        if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
-            imgElement.src = appState.imgUserProfile; 
-        } 
-       
-        
 			const cssAccount = this.ownerDocument.createElement("style");
 			cssAccount.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssAccount);
