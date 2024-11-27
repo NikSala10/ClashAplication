@@ -12,11 +12,23 @@ import '../components/addPost/addPost';
 import '../components/editAccount/editAccount';
 import styles from './login.css'
 import storage from '../utils/storage';
-import { getPostsByUser } from '../utils/firebase';
+import { getPostsByUser, getUserData } from '../utils/firebase';
 import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
 
 class Account extends HTMLElement {
+    imguser?: string;
+    name?: string;
+    email?: string;
+    following?: number;
+    followers?: number;
+    username?: string;
+    category?: string;
+    placeresidence?: string;
+	currenttraining?: string;
+	currentjob?: string;
+	academy?: string;
+    moreworksurl?: string;
 	constructor() {
 		super();
         addObserver(this)
@@ -27,10 +39,7 @@ class Account extends HTMLElement {
 			const field = this.ownerDocument.createElement("field-component") as Field;
             field.setAttribute(AttributeField.field, '');
             field.setAttribute(AttributeField.label, '');
-		
 			const barLateral = this.ownerDocument.createElement("bar-lateral") as BarLateral;
-            
-            
 	}
 
 	async connectedCallback() {
@@ -147,6 +156,22 @@ class Account extends HTMLElement {
                     userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
                     containerPost?.appendChild(userPostCard);
                 });
+            });
+
+            const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
+            getUserData((userInfo: any[]) =>  {
+                while (containerUserInformation?.firstChild) {
+                    containerUserInformation.removeChild(containerUserInformation.firstChild);
+                }
+            //     userInfo.forEach((post: any) => {        
+            //         userPostCard.setAttribute(AttributeCardAccount.image, post.image);
+            //         userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
+            //         userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
+            //         userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
+            //         userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
+            //         userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
+            //         containerPost?.appendChild(userPostCard);
+            //     });
             });
 
         
