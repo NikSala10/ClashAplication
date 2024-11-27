@@ -47,9 +47,9 @@ class Register extends HTMLElement {
 	}
 
 	async submitForm() {
-		console.log(credentials.password,credentials.confirmPassword);
-		
 		if(credentials.password === credentials.confirmPassword){
+			const username = `@${credentials.name.replace(/\s+/g, '').toLowerCase()}`;
+        	edit.username = username;  
 			const resp = await registerUser(credentials);
 			resp ? dispatch(navigate('DASHBOARD' as Screens)) : alert('No se pudo crear el usuario');
 		}else{
