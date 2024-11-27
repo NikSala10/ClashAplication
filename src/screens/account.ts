@@ -17,7 +17,7 @@ import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
 interface UserData {
     name: string;
-    imguser:string;
+    imgUser:string;
     username: string;
     email: string;
     followers: number;
@@ -66,7 +66,7 @@ class Account extends HTMLElement {
             }
                     
             this.name = userInfo.name || 'Not found';
-            this.imguser = userInfo.imguser || 'Not found';
+            this.imguser = userInfo.imgUser;
             this.username = userInfo.username || 'Not found';
             this.email = userInfo.email || 'Not found';
             this.followers = userInfo.followers || 0;
