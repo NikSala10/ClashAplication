@@ -44,6 +44,8 @@ class Account extends HTMLElement {
 	currentjob?: string;
 	academy?: string;
     moreworksurl?: string;
+
+
 	constructor() {
 		super();
         addObserver(this)
@@ -197,15 +199,19 @@ class Account extends HTMLElement {
                 while (containerUserInformation?.firstChild) {
                     containerUserInformation.removeChild(containerUserInformation.firstChild);
                 }
-            //     userInfo.forEach((post: any) => {        
-            //         userPostCard.setAttribute(AttributeCardAccount.image, post.image);
-            //         userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
-            //         userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
-            //         userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
-            //         userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
-            //         userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
-            //         containerPost?.appendChild(userPostCard);
-            //     });
+                userInfo.forEach((user: any) => {        
+                    this.name = user.name || 'Not found';
+                    this.username = user.username || 'Not found';
+                    this.email = user.email || 'Not found';
+                    this.followers = user.followers || 0;
+                    this.following = user.following || 0;
+                    this.category = user.category || 'Not found';
+                    this.placeresidence = user.placeresidence || 'Not found';
+                    this.currenttraining = user.currenttraining || 'Not found';
+                    this.currentjob = user.currentjob || 'Not found';
+                    this.academy = user.academy || 'Not found';
+                    this.moreworksurl = user.moreworksurl || '#';
+                });
             });
 
         
