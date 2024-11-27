@@ -45,26 +45,7 @@ class Nav extends HTMLElement  {
     
     render() {
         if (this.shadowRoot) {
-
             const initialLetter = this.name?.charAt(0)?.toUpperCase() ?? '';
-            let imgUserHTML = ''
-            if (this.name) {
-                imgUserHTML = `
-                    <div class="circle-img">
-                        ${this.imguser 
-                            ? `<img id="img-user" src="${this.imguser}" alt="User Image">` 
-                            : `<span id="initial">${initialLetter}</span>`
-                        }
-                    </div>
-                `;
-            }  else{
-                imgUserHTML = `
-                <div class="circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                    </svg>
-                </div>`
-            }
             this.shadowRoot.innerHTML = `
            <link rel="stylesheet" href="../src/components/nav/nav.css">
     <nav class="navegation">
@@ -133,7 +114,11 @@ class Nav extends HTMLElement  {
                 </ul>
             </div>
             <div class="user-icon">
-                ${imgUserHTML}
+               <div class="circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                    </svg>
+                </div>
             </div>
             <div class="bars">
                 <div class="line"></div>
