@@ -2,6 +2,20 @@ import { dispatch } from '../store/store';
 import { navigate } from '../store/actions';
 import { registerUser } from '../utils/firebase';
 import  {Screens} from '../types/store'
+import { uploadUserData } from '../utils/firebase';
+import { appState } from '../store/store';
+import { EditUserInformation } from '../types/editPost';
+
+const edit: EditUserInformation = {
+    username: '',
+	category: '',
+	imgUser: '',
+    placeresidence: '',
+	currenttraining: '',
+	currentjob: '',
+	academy: '',
+    moreworksurl: '',
+}
 const credentials = {
     name: '',
 	email: '',
@@ -41,6 +55,7 @@ class Register extends HTMLElement {
 		}else{
 			alert("No coinciden las contraseñas")
 		}
+		await uploadUserData(appState.user, edit)
 	}
 
 	async render() {
