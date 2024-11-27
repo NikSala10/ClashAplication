@@ -39,6 +39,7 @@ class Login extends HTMLElement {
 			alert('Ocurrió un error al intentar iniciar sesión. Por favor, inténtalo de nuevo.');
 			console.error('Error en login:', error);
 		}
+		alert('Bienvenidx')
 	}
 
 	async render() {

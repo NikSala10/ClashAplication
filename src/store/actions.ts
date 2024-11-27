@@ -1,5 +1,5 @@
 import { Actions, Screens } from '../types/store';
-import { getComment, getPosts, getUsers, getPostsByUser, getFileProfile } from '../utils/firebase';
+import { getComment, getPosts, getUsers, getPostsByUser, getFileProfile, getUserData } from '../utils/firebase';
 import { appState } from './store';
 
 export const navigate = (screen: Screens) => {
@@ -22,7 +22,13 @@ export const setOpenCloseScreen = (modalScreen: Number) => {
 		payload: modalScreen,
 	};
 };
-
+// export const getUserDataAction = async () => {
+// 	const user = await getUserData(appState.user); 
+// 	return {
+// 		action: Actions.GETUSERDATA,
+// 		payload: user,
+// 	};
+// };
 export const getPostAction = async () => {
 	const posts = await getPosts(); 
 	return {

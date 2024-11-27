@@ -40,7 +40,12 @@ export const reducer = (currentAction: any, currentState: any) => {
 				...currentState,
 				comments: payload,
 			};
-
+		// case Actions.GETUSERDATA:
+		// 	return {
+		// 		...currentState,
+		// 		comments: payload,
+		// 	};
+	
 		case Actions.OPENCLOSESCREEN:
 		
 			const modalScreen1 = currentState.modalScreen
