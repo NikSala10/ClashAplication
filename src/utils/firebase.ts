@@ -415,3 +415,18 @@ export const uploadUserData = async (uid: string, userinfo: {
         console.error('Error uploading user data:', error);
     }
 };
+export const deletePost= async (id: string) => {
+    try {
+      const { db } = await getFirebaseInstance();
+      const { doc, deleteDoc } = await import('firebase/firestore');
+
+      const docRef = doc(db, 'posts', id);
+  
+      await deleteDoc(docRef);
+  
+      console.log(`El producto con ID ${id} ha sido eliminado correctamente.`);
+    } catch (error) {
+      console.error('Error al eliminar el producto de Firebase:', error);
+      throw error; 
+    }
+  };

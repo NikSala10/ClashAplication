@@ -33,14 +33,14 @@ class Account extends HTMLElement {
 	}
 
 	async connectedCallback() {
-        // if (!appState.imgUserProfile) {
-        //     const imgAction = await getImgUserFileAction();
-        //     dispatch(imgAction);
-        // }
-		// if (appState.postsByUser.length === 0) {
-		// 	const action = await getPostsByUserAction();
-		// 	dispatch(action);
-		// }         
+        if (!appState.imgUserProfile) {
+            const imgAction = await getImgUserFileAction();
+            dispatch(imgAction);
+        }
+		if (appState.postsByUser.length === 0) {
+			const action = await getPostsByUserAction();
+			dispatch(action);
+		}         
         this.render();
 	}
     logout() {
@@ -134,21 +134,21 @@ class Account extends HTMLElement {
                 </section>
 				
 			`;
-        //     appState.postsByUser.forEach((post: any) => { 
-        //     const containerPost = this.shadowRoot?.querySelector('.container-postcards');         
-        //     const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
-        //     userPostCard.setAttribute(AttributeCardAccount.image, post.image);
-        //     userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
-        //     userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
-        //     userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
-        //     userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
-        //     containerPost?.appendChild(userPostCard);
-        // });
+            appState.postsByUser.forEach((post: any) => { 
+            const containerPost = this.shadowRoot?.querySelector('.container-postcards');         
+            const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
+            userPostCard.setAttribute(AttributeCardAccount.image, post.image);
+            userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
+            userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
+            userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
+            userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
+            containerPost?.appendChild(userPostCard);
+        });
 
-        // const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
-        // if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
-        //     imgElement.src = appState.imgUserProfile; 
-        // } 
+        const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
+        if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
+            imgElement.src = appState.imgUserProfile; 
+        } 
        
         
 			const cssAccount = this.ownerDocument.createElement("style");
