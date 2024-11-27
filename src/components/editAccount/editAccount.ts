@@ -100,15 +100,11 @@ class EditAccount extends HTMLElement  {
     submitForm = async () => {
         try {
             const file = this.selectedFile;
-    
-            // Manejo de la imagen del usuario
             if (file) {
                 const imgURL = await uploadFileProfileByUser(file, appState.user);
                 edit.imgUser = imgURL;
                 alert('Imagen de perfil actualizada correctamente');
             }
-    
-            // Mantener los valores actuales si los inputs están vacíos
             const currentData = await new Promise<UserData | null>((resolve) =>
                 getUserData(resolve)
             );
@@ -126,8 +122,6 @@ class EditAccount extends HTMLElement  {
                 alert("No se pudo obtener la información actual del usuario");
                 return;
             }
-    
-            // Subir los datos actualizados
             await uploadUserData(appState.user, edit);
             alert("Datos del perfil actualizados correctamente");
             this.isSaved = true;
@@ -200,24 +194,6 @@ class EditAccount extends HTMLElement  {
         }
         const btn = this.shadowRoot?.querySelector('#close-modal')
         btn?.addEventListener('click', () => {
-            if (!this.isSaved) {
-                const inputs = this.shadowRoot?.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
-                let hasData = false;
-
-                inputs.forEach(input => {
-                    if (input.value.trim() !== '') {
-                        hasData = true;
-                    }
-                });
-
-                if (hasData) {
-                    const confirmClose = confirm('¿Estás seguro de que deseas cerrar? Los cambios no guardados se perderán.');
-                    if (!confirmClose) {
-                        return; 
-                    }
-                }
-            }
-
             dispatch(setOpenCloseScreen(1)); 
         });
 
