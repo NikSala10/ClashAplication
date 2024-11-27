@@ -406,25 +406,27 @@ export const uploadUserData = async (uid: string, userinfo: {
         console.error('Error uploading user data:', error);
     }
 };
-export const getUserData = async (uid: string) => {
+export const getUserData = async (callback: (userData: any | null) => void) => {
     try {
         const { db } = await getFirebaseInstance();
-        const { doc, getDoc } = await import('firebase/firestore');
+        const { doc, onSnapshot } = await import('firebase/firestore');
 
-        const userRef = doc(db, 'users', uid);
-        const userSnap = await getDoc(userRef);
-
-        if (userSnap.exists()) {
-            return userSnap.data(); // Retornar los datos del usuario
-        } else {
-            console.log('No such document!');
-            return null;
-        }
+        const userRef = doc(db, 'users', appState.user); 
+        const unsubscribe = onSnapshot(userRef, (docSnapshot) => {
+            if (docSnapshot.exists()) {
+                callback({ id: docSnapshot.id, ...docSnapshot.data() }); 
+            } else {
+                console.warn('El documento no existe.');
+                callback(null); 
+            }
+        });
+        return unsubscribe;
     } catch (error) {
-        console.error('Error getting user data:', error);
-        return null;
+        console.error('Error listening to user data in real-time:', error);
+        callback(null);
     }
 };
+
 export const deletePost= async (id: string) => {
     try {
       const { db } = await getFirebaseInstance();
