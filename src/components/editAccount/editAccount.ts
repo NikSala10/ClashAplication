@@ -1,10 +1,24 @@
 import "../button/button";
-import { uploadFileProfileByUser, uploadUserData} from "../../utils/firebase";
+import { uploadFileProfileByUser, uploadUserData, getUserData} from "../../utils/firebase";
 import { dispatch } from "../../store/store";
 import { setOpenCloseScreen, getImgUserFileAction} from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
 import { EditUserInformation } from "../../types/editPost";
 
+interface UserData {
+    name: string;
+    imgUser:string;
+    username: string;
+    email: string;
+    followers: number;
+    following: number;
+    category: string;
+    placeresidence: string;
+    currenttraining: string;
+    currentjob: string;
+    academy: string;
+    moreworksurl: string;
+}
 const edit: EditUserInformation = {
     username: '',
 	category: '',
@@ -34,6 +48,26 @@ class EditAccount extends HTMLElement  {
     }
 
     async connectedCallback() { 
+        const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
+        getUserData((userInfo: UserData | null) =>  {
+                if (!userInfo) {
+                        console.warn('No se recibió información de usuario.');
+                return;
+                }
+            while (containerUserInformation?.firstChild) {
+                containerUserInformation.removeChild(containerUserInformation.firstChild);
+            }
+            this.name = userInfo.username || ''; 
+            this.gmail = userInfo.email || '';
+            this.imguser = userInfo.imgUser || '';
+            edit.username = userInfo.username || '';
+            edit.category = userInfo.category || '';
+            edit.placeresidence = userInfo.placeresidence || '';
+            edit.currenttraining = userInfo.currenttraining || '';
+            edit.currentjob = userInfo.currentjob || '';
+            edit.academy = userInfo.academy || '';
+            edit.moreworksurl = userInfo.moreworksurl || '';
+        });
         this.render();
     }
     changeUserName(e: any) {
@@ -100,7 +134,7 @@ class EditAccount extends HTMLElement  {
                   <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
                  <div class="user-profile">
                     <div class="circle-img">
-                        <img id="img-user" src="" alt="">
+                        <img id="img-user" src="${this.imguser}" alt="">
                         <div class="icon">
                             <input type="file" id="fileInput">
                             <label for="fileInput">
@@ -169,10 +203,6 @@ class EditAccount extends HTMLElement  {
         const saveButton = this.shadowRoot?.querySelector('#save');
         saveButton?.addEventListener('click', this.submitForm.bind(this));
         
-        const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
-        if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
-            imgElement.src = appState.imgUserProfile; 
-        } 
         const userName = this.shadowRoot?.querySelector('#usernamechange') as HTMLInputElement;
         userName?.addEventListener('change', this.changeUserName);
 
