@@ -132,21 +132,21 @@ svg  {
     justify-content: center;
     align-items: center;
     display: flex;
-    background-color: #F5F5F5;
-    width: 7rem; 
-    height: 7rem; 
+    background-color:none;
+    width: 60px; 
+    height: 60px; 
     border-radius: 50%;
     object-fit: cover;
 }
 #img-user {
-    width: 7rem; 
-    height: 7rem; 
+    width: 60px; 
+    height: 60px; 
     border-radius: 50%;
     object-fit: cover; 
 }
 
 #initial {
-    font-size: 50px;
+    font-size: 25px;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-style: normal;
