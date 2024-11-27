@@ -225,28 +225,6 @@ export const loginUser = async (email: string, password: string): Promise<boolea
       return false; 
     }
   };
-  
-
-export const getUserData = async (uid: string) => {
-    try {
-        const { db } = await getFirebaseInstance();
-        const { doc, getDoc } = await import('firebase/firestore');
-
-        const userRef = doc(db, 'users', uid);
-        const userSnap = await getDoc(userRef);
-
-        if (userSnap.exists()) {
-            return userSnap.data(); // Retornar los datos del usuario
-        } else {
-            console.log('No such document!');
-            return null;
-        }
-    } catch (error) {
-        console.error('Error getting user data:', error);
-        return null;
-    }
-};
-
 export const getUsers = async () =>  {
 	try {
 		const  {db} = await getFirebaseInstance();
@@ -260,6 +238,8 @@ export const getUsers = async () =>  {
             user.id = doc.id
 			data.push(user);
 		});
+        console.log(data);
+        
 		return data;
 	} catch (error) {
 	console.error('Error getting documents', error)
@@ -424,6 +404,25 @@ export const uploadUserData = async (uid: string, userinfo: {
         console.log('User data uploaded successfully');
     } catch (error) {
         console.error('Error uploading user data:', error);
+    }
+};
+export const getUserData = async (uid: string) => {
+    try {
+        const { db } = await getFirebaseInstance();
+        const { doc, getDoc } = await import('firebase/firestore');
+
+        const userRef = doc(db, 'users', uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+            return userSnap.data(); // Retornar los datos del usuario
+        } else {
+            console.log('No such document!');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error getting user data:', error);
+        return null;
     }
 };
 export const deletePost= async (id: string) => {
