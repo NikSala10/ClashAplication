@@ -96,7 +96,7 @@ class EditAccount extends HTMLElement  {
                   <btn-close color="#9A81C2" label="X" id="close-modal"></btn-close>
                  <div class="user-profile">
                     <div class="circle-img">
-                        <img id="img-user" src="" alt="">
+                        <img id="img-user" alt="User profile picture"><span id="user-initial" style="display: none;"></span>
                         <div class="icon">
                             <input type="file" id="fileInput">
                             <label for="fileInput">
@@ -144,10 +144,22 @@ class EditAccount extends HTMLElement  {
             dispatch(setOpenCloseScreen(1))
         })
         
+        const initialLetter = this.name ? this.name.charAt(0).toUpperCase() : ''; 
         const imgElement = this.shadowRoot?.querySelector('#img-user') as HTMLImageElement;
-        if (imgElement && typeof appState.imgUserProfile === 'string' && appState.imgUserProfile !== '') {
-            imgElement.src = appState.imgUserProfile; 
-        } 
+        const profileImage = appState.imgUserProfile; 
+
+        if (imgElement) {
+            if (typeof profileImage === 'string' && profileImage !== '') {
+                imgElement.src = profileImage;
+                imgElement.style.display = 'block'; 
+            } else {
+                const fallbackElement = this.shadowRoot?.querySelector('#user-initial'); 
+                if (fallbackElement) {
+                    fallbackElement.textContent = initialLetter; 
+                    imgElement.style.display = 'none'; 
+                }
+            }
+        }
         const userName = this.shadowRoot?.querySelector('#usernamechange') as HTMLInputElement;
         userName?.addEventListener('change', this.changeUserName);
 
