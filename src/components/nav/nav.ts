@@ -46,29 +46,47 @@ class Nav extends HTMLElement  {
             }
         });
         const containerUserInformation = this.shadowRoot?.querySelector('.circle');  
-        const userId = appState.user
+        const userId = appState.user;
+
+        if (!userId) {
+            // Usuario no logueado, muestra imagen predeterminada
+            const defaultImage = document.createElement('img');
+            defaultImage.src = '../src/assets/ImgUserIcon.svg';
+            defaultImage.alt = 'Default User Icon';
+            defaultImage.id = 'img-user';
+            containerUserInformation?.appendChild(defaultImage);
+        } else {
+            // Obtener información del usuario logueado
             getUserData(userId, (userInfo: UserData | null) => {
                 if (!userInfo) {
                     console.warn('No se recibió información de usuario.');
+
+                    // Usuario logueado pero no se recuperó información, muestra imagen predeterminada
+                    const defaultImage = document.createElement('img');
+                    defaultImage.src = '../src/assets/ImgUserIcon.svg';
+                    defaultImage.alt = 'Default User Icon';
+                    defaultImage.id = 'img-user';
+                    containerUserInformation?.appendChild(defaultImage);
                     return;
                 }
 
+                // Limpiar contenido previo
                 while (containerUserInformation?.firstChild) {
                     containerUserInformation.removeChild(containerUserInformation.firstChild);
                 }
+
                 this.name = userInfo.name || ''; 
                 this.imguser = userInfo.imgUser || '';
 
-                if (this.imguser) {
-                    const userImage = document.createElement('img');
-                    userImage.src = this.imguser || '../src/assets/ImgUserIcon.svg';
-                    userImage.alt = 'User Image';
-                    userImage.id = 'img-user'
-                    containerUserInformation?.appendChild(userImage);
-                }
-               
+                const userImage = document.createElement('img');
+                userImage.src = this.imguser || '../src/assets/ImgUserIcon.svg'; // Si no hay imgUser, usa predeterminada
+                userImage.alt = 'User Image';
+                userImage.id = 'img-user';
+
+                containerUserInformation?.appendChild(userImage);
             });
-            
+}
+
     }
     
     render() {
