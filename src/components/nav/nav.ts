@@ -36,11 +36,9 @@ class Nav extends HTMLElement  {
     async connectedCallback() { 
         this.render();
         const bars = this.shadowRoot?.querySelector('.bars') as HTMLElement;
-        console.log(bars);
         bars.addEventListener('click', () => {
-            
             const iconsResponsive = this.shadowRoot?.querySelector('.icons-responsive') as HTMLElement;
-            console.log(iconsResponsive); 
+           
             if (iconsResponsive?.classList.contains('active')) {
                 iconsResponsive?.classList.replace('active', 'inactive');   
             }else {
@@ -60,25 +58,20 @@ class Nav extends HTMLElement  {
                 }
                 this.name = userInfo.name || ''; 
                 this.imguser = userInfo.imgUser || '';
-                this.render();
+
+                if (this.imguser) {
+                    const userImage = document.createElement('img');
+                    userImage.src = this.imguser || '../src/assets/ImgUserIcon.svg';
+                    userImage.alt = 'User Image';
+                    userImage.id = 'img-user'
+                    containerUserInformation?.appendChild(userImage);
+                }
+               
             });
-            this.render();
     }
     
     render() {
         if (this.shadowRoot) {
-            const initialLetter = this.name?.charAt(0)?.toUpperCase() ?? '';
-            const isLoggedIn = !!appState.user; // Verificar si el usuario está logueado
-            const profilePicture = this.imguser; // URL de la imagen del usuario
-            const defaultPicture = '../src/assets/ImgUserIcon.svg'; // Ruta local de la imagen predeterminada
-
-            let imageSource;
-            if (isLoggedIn) {
-                imageSource = profilePicture || ''; // Usar imagen de perfil si existe
-            } else {
-                imageSource = defaultPicture; // Imagen predeterminada para usuarios no logueados
-            }
-
             this.shadowRoot.innerHTML = `
            <link rel="stylesheet" href="../src/components/nav/nav.css">
     <nav class="navegation">
@@ -148,11 +141,7 @@ class Nav extends HTMLElement  {
             </div>
             <div class="user-icon">
                <div class="circle">
-                    <div class="circle-img">
-                    ${isLoggedIn && !profilePicture 
-                        ? `<span id="initial">${initialLetter}</span>` 
-                        : `<img id="img-user" src="${imageSource}" alt="User Profile">`
-                    }
+                    
                 </div>
             </div>
             <div class="bars">
@@ -162,7 +151,7 @@ class Nav extends HTMLElement  {
             </div>
            
             
-    
+    </nav>
     <div class="icons-responsive inactive" >
         <div class="active-icons">
                     <ul>
@@ -199,7 +188,7 @@ class Nav extends HTMLElement  {
                 <p id="nav-all">All</p>
                 <p id="nav-new">Top</p>
             </div>
-             </nav>
+             
           
             `;
             const userId = appState.user; 
