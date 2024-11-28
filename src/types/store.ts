@@ -15,7 +15,8 @@ export enum Screens {
     'LOGIN' = 'LOGIN',
     'DASHBOARD' = 'DASHBOARD',
     'REGISTER' = 'REGISTER',
-    'ACCOUNT' = 'ACCOUNT'
+    'ACCOUNT' = 'ACCOUNT',
+    'ACCOUNTUSER' = 'ACCOUNTUSER'
 }
 
 export enum Actions {
