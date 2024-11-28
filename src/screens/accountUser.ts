@@ -4,6 +4,7 @@ import { Actions, Screens } from '../types/store';
 import { addObserver, appState } from '../store/store';
 import { loginUser } from '../utils/firebase';
 import Button, { AttributeBtn } from '../components/button/button';
+import ButtonAccount,  {AttributeBtnAccount} from '../components/buttonAddPostAccount/buttonAccount';
 import Field, {AttributeField} from '../components/professionalField/professionalField';
 import CardAccount, {AttributeCardAccount} from '../components/cardAccount/cardAccount';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
@@ -11,9 +12,23 @@ import '../components/addPost/addPost';
 import '../components/editAccount/editAccount';
 import styles from './login.css'
 import storage from '../utils/storage';
+import { getPostsByUser, getUserData } from '../utils/firebase';
 import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
-
+interface UserData {
+    name: string;
+    imgUser:string;
+    username: string;
+    email: string;
+    followers: number;
+    following: number;
+    category: string;
+    placeresidence: string;
+    currenttraining: string;
+    currentjob: string;
+    academy: string;
+    moreworksurl: string;
+}
 class AccountUsers extends HTMLElement {
     constructor() {
 		super();

@@ -1,7 +1,7 @@
 import "../button/button";
 import { uploadFileProfileByUser, uploadUserData, getUserData} from "../../utils/firebase";
 import { dispatch } from "../../store/store";
-import { setOpenCloseScreen, getImgUserFileAction} from "../../store/actions";
+import { setOpenCloseScreen} from "../../store/actions";
 import { addObserver, appState } from '../../store/store';
 import { EditUserInformation } from "../../types/editPost";
 
