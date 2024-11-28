@@ -29,13 +29,13 @@ export const setOpenCloseScreen = (modalScreen: Number) => {
 // 		payload: user,
 // 	};
 // };
-export const getPostAction = async () => {
-	const posts = await getPosts(); 
-	return {
-		action: Actions.GETPOST,
-		payload: posts,
-	};
-};
+// export const getPostAction = async () => {
+// 	const posts = await getPosts(); 
+// 	return {
+// 		action: Actions.GETPOST,
+// 		payload: posts,
+// 	};
+// };
 
 export const getUsersAction = async () => {
 	const users = await getUsers(); 

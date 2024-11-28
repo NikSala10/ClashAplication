@@ -9,9 +9,9 @@ import PostCard, {AttributePostCard} from '../components/postCard/postCard';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost'
 import { appState } from '../store/store'
-import { getComment, getFiles, uploadUserData, getUserData} from '../utils/firebase'
+import { getComment, getFiles, getUserData, getPosts} from '../utils/firebase'
 import { dispatch } from '../store/store'
-import { setOpenCloseScreen, getPostAction, getUsersAction, getCommentsAction} from '../store/actions';
+import { setOpenCloseScreen, getUsersAction, getCommentsAction} from '../store/actions';
 import { navigate } from '../store/actions';
 import { Screens } from '../types/store';
 interface UserData {
@@ -40,10 +40,6 @@ class Dashboard extends HTMLElement  {
             this.imagesBanner.push(imageArrayBanner1); 
         });
         
-        if (appState.post.length === 0) {
-            const postsAction = await getPostAction();
-            dispatch(postsAction)
-        }
         if (appState.users.length === 0) {
             const usersAction = await getUsersAction();
             dispatch(usersAction)
@@ -105,7 +101,11 @@ class Dashboard extends HTMLElement  {
             //POST
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');
             if(!appState.loadPost){
-                appState.post.forEach((post) =>  {   
+               getPosts((posts: any[]) =>  {
+                while (containerPost?.firstChild) {
+                    containerPost.removeChild(containerPost.firstChild);
+                }
+                posts.forEach((post: any) => {     
                     const commentsPost = appState.comments.filter((c) => c.postid === post.id) 
                     const user = appState.users.find(u => u.id === post.userUid);                   
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
@@ -124,6 +124,7 @@ class Dashboard extends HTMLElement  {
                     userPostCards.setAttribute(AttributePostCard.commentsElements,JSON.stringify(commentsPost));
                     containerPost?.appendChild(userPostCards);
                 });
+            });
             }else{
                 const postTopLikes = appState.post.slice()
                 postTopLikes.sort((a, b) => b.likes - a.likes);

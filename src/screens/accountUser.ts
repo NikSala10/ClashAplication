@@ -1,5 +1,5 @@
 import { dispatch } from '../store/store';
-import { setOpenCloseScreen, getPostAction } from '../store/actions';
+import { setOpenCloseScreen } from '../store/actions';
 import { Actions, Screens } from '../types/store';
 import { addObserver, appState } from '../store/store';
 import { loginUser } from '../utils/firebase';
@@ -32,10 +32,10 @@ class AccountUsers extends HTMLElement {
 
 	async connectedCallback() {
 		this.render();
-        if (appState.post.length === 0) {
-            const postsAction = await getPostAction();
-            dispatch(postsAction)
-        }
+        // if (appState.post.length === 0) {
+        //     const postsAction = await getPostAction();
+        //     dispatch(postsAction)
+        // }
 	}
 	async render() {
 		if (this.shadowRoot) {
