@@ -183,5 +183,5 @@ class PostUserCard extends HTMLElement  {
    
 };
 
-customElements.define('cardaccount-component',PostUserCard);
+customElements.define('postuser-component', PostUserCard);
 export default PostUserCard;

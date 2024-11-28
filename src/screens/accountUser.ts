@@ -6,7 +6,7 @@ import { loginUser } from '../utils/firebase';
 import Button, { AttributeBtn } from '../components/button/button';
 import ButtonAccount,  {AttributeBtnAccount} from '../components/buttonAddPostAccount/buttonAccount';
 import Field, {AttributeField} from '../components/professionalField/professionalField';
-import CardAccount, {AttributeCardAccount} from '../components/cardAccount/cardAccount';
+import PostUserCard,  {AttributeCardUser} from '../components/postAccountUser/postUserby';
 import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost';
 import '../components/editAccount/editAccount';
@@ -175,13 +175,13 @@ class AccountUsers extends HTMLElement {
                     containerPost.removeChild(containerPost.firstChild);
                 }
                 posts.forEach((post: any) => {        
-                    const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
-                    userPostCard.setAttribute(AttributeCardAccount.image, post.image);
-                    userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
-                    userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
-                    userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
-                    userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
-                    userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
+                    const userPostCard = this.ownerDocument.createElement("postuser-component") as PostUserCard;
+                    userPostCard.setAttribute(AttributeCardUser.image, post.image);
+                    userPostCard.setAttribute(AttributeCardUser.postid, post.id);
+                    userPostCard.setAttribute(AttributeCardUser.hashtags, post.hashtags);
+                    userPostCard.setAttribute(AttributeCardUser.likes, post.likes);
+                    userPostCard.setAttribute(AttributeCardUser.favorites, post.favourites);
+                    userPostCard.setAttribute(AttributeCardUser.comments, post.comments);
                     containerPost?.appendChild(userPostCard);
                 });
             });
