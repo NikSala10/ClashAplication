@@ -1,10 +1,12 @@
 import { getCommentsByPost, getUserData, updatePostField } from "../../utils/firebase";
 import Comments, {CommentsAttribute} from "../comments/comments";
 import { UpdateFieldType } from "../../types/post";
-import { appState } from "../../store/store";
+import { appState, dispatch } from "../../store/store";
 
 import '../hashtags/hashtags'
 import Field from "../professionalField/professionalField";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/store";
 
 export enum AttributePostCard  { 
     'postid' = 'postid',
@@ -26,6 +28,7 @@ export enum AttributePostCard  {
 }
 
 class PostCard extends HTMLElement  {
+    userid?:string;
     postid?: string; 
     imguser?: string;
     name?: string;
@@ -162,19 +165,12 @@ class PostCard extends HTMLElement  {
 
         const userImage = this.shadowRoot?.querySelector('.circle-img') as HTMLElement;
             userImage.addEventListener('click', () => {
-                // Verifica si existe el appState y si tiene el usuario actual
                 if (appState.user) {
-                    // Si existe el username en appState o en el propio post, redirige a su perfil
-                    const username = this.username || appState.user;
-                    if (username) {
-                        // Redirige al perfil del usuario, usando su username en la URL
-                        window.location.href = `/profile/${username}`;
+                    const userUid = this.userid || appState.user;
+                    if (userUid) {
+                        dispatch(navigate(Screens.ACCOUNTUSER))
                     }
-                } else {
-                    // Si no hay usuario en appState, redirige al login o muestra un mensaje
-                    alert('Necesitas estar logueado para ver el perfil.');
-                    window.location.href = '/login';  // Redirige a la página de login
-                }
+                } 
             });
         
 
