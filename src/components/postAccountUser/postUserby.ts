@@ -3,7 +3,7 @@ import PostIcons, {AttributePostIcons} from '../postIcons/postIcons';
 import Comments, {CommentsAttribute} from '../comments/comments';
 import '../hashtags/hashtags'
 import { dispatch } from '../../store/store';
-import { deletePost, getPostsByUser} from '../../utils/firebase';
+import { getPostsByUser} from '../../utils/firebase';
 
 export enum AttributeCardUser {
     'image' = 'image',
@@ -118,7 +118,6 @@ class PostUserCard extends HTMLElement  {
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/postAccountUser/postUserby.css">
             <div class= "card">
-                    <svg id="delete" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 20 20"><path fill="#CAC1E4" d="M8.5 4h3a1.5 1.5 0 0 0-3 0m-1 0a2.5 2.5 0 0 1 5 0h5a.5.5 0 0 1 0 1h-1.054l-1.194 10.344A3 3 0 0 1 12.272 18H7.728a3 3 0 0 1-2.98-2.656L3.554 5H2.5a.5.5 0 0 1 0-1zM9 8a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0zm2.5-.5a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 1 0V8a.5.5 0 0 0-.5-.5"/></svg>
                     <hashtags-component hashtags='${this.hashtags ? this.hashtags : ''}'></hashtags-component>
                     <img class="img-post" src="${this.image ? this.image : 'Not found'}">
                     <div class="post-icons">
@@ -147,12 +146,7 @@ class PostUserCard extends HTMLElement  {
                     
                 </div>	
             `;
-            const deleteButton = this.shadowRoot.querySelector('#delete');
-            deleteButton?.addEventListener('click', () => {
-                this.deletePostFunction(this.postid);
-                alert('Post borrado')
-            });
-
+            
 
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
@@ -186,23 +180,7 @@ class PostUserCard extends HTMLElement  {
         
         
     }
-    async deletePostFunction(postId: string | undefined) {
-        if (!postId) {
-            console.error('ID del producto no proporcionado para eliminar.');
-            return; 
-        }
-        try {
-            await deletePost(postId);
-            const action = getPostsByUser((posts) => {
-                dispatch({
-                    type: 'UPDATE_USER_POSTS',
-                    payload: posts
-                });
-            });
-        } catch (error) {
-            console.error('Error al eliminar el post:', error); 
-        }
-    }
+   
 };
 
 customElements.define('cardaccount-component',PostUserCard);
