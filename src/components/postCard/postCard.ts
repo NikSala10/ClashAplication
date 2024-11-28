@@ -170,7 +170,7 @@ class PostCard extends HTMLElement  {
                         } as UserData);
         
                         await uploadUserData(currentUser, {
-                            ...currentUserInfo,
+                             ...currentUserInfo,
                             following: updatedFollowing,
                         } as UserData);
                     }

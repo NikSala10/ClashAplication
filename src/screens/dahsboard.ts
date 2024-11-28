@@ -107,7 +107,16 @@ class Dashboard extends HTMLElement  {
                 }
                 posts.forEach((post: any) => {     
                     const commentsPost = appState.comments.filter((c) => c.postid === post.id) 
-                    const user = appState.users.find(u => u.id === post.userUid);                   
+                    const user = appState.users.find(u => u.id === post.userUid); 
+                    let follow = false 
+                    if (user.followers) {
+                        const follow = user.followers.find((r: any) => r === appState.user);  
+                        console.log(follow);
+                    }
+                  
+                    
+                    console.log(user.followers);
+                                     
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
                     userPostCards.setAttribute(AttributePostCard.userid, post.userUid)
