@@ -60,68 +60,34 @@ export const addPost = async (post: any) =>  {
    }
 };
 
-
-// export const getPosts = async () => {
-//     try {
-//         const { db } = await getFirebaseInstance();
-//         const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
-
-//         const postsCollection = collection(db, 'posts');
-
-//         // Ordena los documentos por 'dateadded' en orden descendente
-//         const postsQuery = query(postsCollection, orderBy('dateadded', 'desc'));
-//         const querySnapshot = await getDocs(postsQuery);
-
-//         const data: any[] = [];
-//         querySnapshot.forEach((doc) => {
-//             const postData = doc.data();
-// 			postData.id = doc.id;
-            
-//             data.push(postData);
-//         });
-
-//         return data;
-//     } catch (error) {
-//         console.error('Error obteniendo los documentos:', error);
-//         return [];
-//     }
-// };
 export const getPosts = async (callback: (posts: any[]) => void, userUid?: string) => {
     try {
         const { db } = await getFirebaseInstance();
         const { collection, query, where, orderBy, onSnapshot } = await import('firebase/firestore');
-
-        // Referencia a la colección de posts
         const postsCollection = collection(db, 'posts');
-
-        // Crea la consulta: filtra por usuario si `userUid` está definido
         const postsQuery = userUid
             ? query(
                 postsCollection,
-                where('userUid', '==', userUid), // Filtra por el UID del usuario
-                orderBy('dateadded', 'desc') // Ordena por fecha descendente
+                where('userUid', '==', userUid), 
+                orderBy('dateadded', 'desc') 
             )
             : query(
                 postsCollection,
-                orderBy('dateadded', 'desc') // Ordena por fecha descendente
+                orderBy('dateadded', 'desc') 
             );
 
-        // Usamos `onSnapshot` para escuchar cambios en tiempo real
         const unsubscribe = onSnapshot(postsQuery, (querySnapshot) => {
             const data: any[] = [];
 
             querySnapshot.forEach((doc) => {
                 const postData = doc.data();
-                postData.id = doc.id; // Añadimos el ID del documento a los datos
+                postData.id = doc.id; 
 
                 data.push(postData);
             });
 
-            // Llamamos al callback con los datos actualizados
             callback(data);
         });
-
-        // Retorna la función para dejar de escuchar los cambios cuando ya no sea necesario
         return unsubscribe;
 
     } catch (error) {
