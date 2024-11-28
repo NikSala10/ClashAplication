@@ -36,9 +36,11 @@ class Nav extends HTMLElement  {
     async connectedCallback() { 
         this.render();
         const bars = this.shadowRoot?.querySelector('.bars') as HTMLElement;
+        console.log(bars);
         bars.addEventListener('click', () => {
+            
             const iconsResponsive = this.shadowRoot?.querySelector('.icons-responsive') as HTMLElement;
-           
+            console.log(iconsResponsive); 
             if (iconsResponsive?.classList.contains('active')) {
                 iconsResponsive?.classList.replace('active', 'inactive');   
             }else {
@@ -60,6 +62,7 @@ class Nav extends HTMLElement  {
                 this.imguser = userInfo.imgUser || '';
                 this.render();
             });
+            this.render();
     }
     
     render() {
@@ -159,7 +162,7 @@ class Nav extends HTMLElement  {
             </div>
            
             
-    </nav>
+    
     <div class="icons-responsive inactive" >
         <div class="active-icons">
                     <ul>
@@ -196,7 +199,7 @@ class Nav extends HTMLElement  {
                 <p id="nav-all">All</p>
                 <p id="nav-new">Top</p>
             </div>
-             
+             </nav>
           
             `;
             const userId = appState.user; 

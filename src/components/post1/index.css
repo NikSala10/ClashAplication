@@ -189,8 +189,8 @@ input {
     object-fit: cover;
 }
 #img-user {
-    width: 4rem; 
-    height: 4rem; 
+    width: 6rem; 
+    height: 6rem; 
     border-radius: 50%;
     object-fit: cover; 
 }
