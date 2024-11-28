@@ -108,19 +108,17 @@ class Dashboard extends HTMLElement  {
                 posts.forEach((post: any) => {     
                     const commentsPost = appState.comments.filter((c) => c.postid === post.id) 
                     const user = appState.users.find(u => u.id === post.userUid); 
-                    let follow = false 
+                    let stateChange = false 
                     if (user.followers) {
                         const follow = user.followers.find((r: any) => r === appState.user);  
-                        console.log(follow);
+                        stateChange = follow ? true : false 
                     }
-                  
-                    
-                    console.log(user.followers);
-                                     
+                 
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
                     userPostCards.setAttribute(AttributePostCard.userid, post.userUid)
                     userPostCards.setAttribute(AttributePostCard.name, user?.name || '');  
+                    userPostCards.setAttribute(AttributePostCard.state, String(stateChange));  
                     userPostCards.setAttribute(AttributePostCard.imguser, user?.imgUser || ''); 
                     userPostCards.setAttribute(AttributePostCard.username, user?.username || '');
                     userPostCards.setAttribute(AttributePostCard.category, post.category);
