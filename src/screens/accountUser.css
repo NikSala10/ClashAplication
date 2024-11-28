@@ -54,7 +54,7 @@ cardaccount-component  {
     display: flex;
     justify-content: center;
     gap: 5rem;
-    height: 22%;
+    height: 17%;
 }
 
 #follows  {
@@ -182,7 +182,6 @@ cardaccount-component  {
 }
 .filter   {
     display: flex;
-    gap: 10rem;
     justify-content: center;
     align-items: center;
     margin-top: 3%;

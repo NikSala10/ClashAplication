@@ -101,7 +101,7 @@ class AccountUsers extends HTMLElement {
 		if (this.shadowRoot) {
             const userImage = this.imguser || '/src/assets/ImgUserIcon.svg';
 			this.shadowRoot.innerHTML = `
-			    <link rel="stylesheet" href="/src/screens/account.css">
+			    <link rel="stylesheet" href="/src/screens/accountUser.css">
                 <nav-component></nav-component>
                 <section class="account-components" id="account-components">
                     <div class="container-account"  >
