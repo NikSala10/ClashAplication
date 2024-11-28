@@ -160,6 +160,24 @@ class PostCard extends HTMLElement  {
             }
         });
 
+        const userImage = this.shadowRoot?.querySelector('.circle-img') as HTMLElement;
+            userImage.addEventListener('click', () => {
+                // Verifica si existe el appState y si tiene el usuario actual
+                if (appState.user) {
+                    // Si existe el username en appState o en el propio post, redirige a su perfil
+                    const username = this.username || appState.user;
+                    if (username) {
+                        // Redirige al perfil del usuario, usando su username en la URL
+                        window.location.href = `/profile/${username}`;
+                    }
+                } else {
+                    // Si no hay usuario en appState, redirige al login o muestra un mensaje
+                    alert('Necesitas estar logueado para ver el perfil.');
+                    window.location.href = '/login';  // Redirige a la página de login
+                }
+            });
+        
+
     }
     updatePost(field: UpdateFieldType, count: number){
         if (this.postid) {
