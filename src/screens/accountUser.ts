@@ -12,7 +12,7 @@ import '../components/addPost/addPost';
 import '../components/editAccount/editAccount';
 import styles from './login.css'
 import storage from '../utils/storage';
-import { getPostsByUserAccount, getUserData } from '../utils/firebase';
+import { getPostsByUserAccount, getUserData, uploadUserData } from '../utils/firebase';
 import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
 interface UserData {
@@ -42,7 +42,8 @@ class AccountUsers extends HTMLElement {
 	currentjob?: string;
 	academy?: string;
     moreworksurl?: string;
-    userid?:string
+    userid?:string;
+    state?: boolean
 
 	constructor() {
 		super();
@@ -65,7 +66,13 @@ class AccountUsers extends HTMLElement {
             while (containerUserInformation?.firstChild) {
                 containerUserInformation.removeChild(containerUserInformation.firstChild);
             }
-                    
+            let stateChange = false 
+                if (userInfo.followers) {
+                    const follow = userInfo.followers.find((r: any) => r === appState.user);  
+                    stateChange = follow ? true : false 
+                }
+            
+            this.state = stateChange
             this.name = userInfo.name || 'Not found';
             this.imguser = userInfo.imgUser;
             this.username = userInfo.username || 'Not found';
@@ -86,7 +93,82 @@ class AccountUsers extends HTMLElement {
             this.render();
 
         });
-       
+        const state = this.shadowRoot?.querySelector('#followThe') as HTMLElement;
+        console.log(state);
+        if (state) {
+            state.addEventListener('click', async () => {
+             
+                
+                const currentUser = appState.user;  // Usuario actual   
+                if (!currentUser) {
+                    alert('Debes iniciar sesión para seguir a otros usuarios.');
+                    return;
+                }
+        
+                const targetUserId = this.userid;  // Usuario objetivo
+                if (!targetUserId) {
+                    console.error('No se encontró el usuario objetivo.');
+                    return;
+                }
+        
+                const isFollowing = state.textContent === 'Following';
+                try {
+                    // Obtén los datos actuales de los usuarios
+                    const targetUser = await new Promise<UserData | null>((resolve) =>
+                        getUserData(targetUserId, resolve)
+                    );
+                    const currentUserInfo = await new Promise<UserData | null>((resolve) =>
+                        getUserData(currentUser, resolve)
+                    );
+        
+                    if (!targetUser || !currentUserInfo) {
+                        console.error('No se pudo obtener la información de los usuarios.');
+                        return;
+                    }
+        
+                    // Agregar o quitar el ID del usuario en los arrays de seguidores y seguidos
+                    const updatedFollowers = isFollowing
+                        ? targetUser.followers.filter((id: string) => id !== currentUser) // Si ya está siguiendo, lo elimina
+                        : [...targetUser.followers, currentUser]; // Si no está siguiendo, agrega al array
+        
+                    const updatedFollowing = isFollowing
+                        ? currentUserInfo.following.filter((id: string) => id !== targetUserId) // Elimina si está siguiendo
+                        : [...currentUserInfo.following, targetUserId]; // Agrega al array si no lo está
+        
+                    // Actualiza los datos en Firebase solo si hubo un cambio
+                    if (isFollowing) {
+                        // Eliminar del array si es "Unfollow"
+                        await uploadUserData(targetUserId, {
+                            ...targetUser,
+                            followers: updatedFollowers,
+                        } as UserData);
+        
+                        await uploadUserData(currentUser, {
+                            ...currentUserInfo,
+                            following: updatedFollowing,
+                        } as UserData);
+                    } else {
+                        // Agregar al array si es "Follow"
+                        await uploadUserData(targetUserId, {
+                            ...targetUser,
+                            followers: updatedFollowers,
+                        } as UserData);
+        
+                        await uploadUserData(currentUser, {
+                             ...currentUserInfo,
+                            following: updatedFollowing,
+                        } as UserData);
+                    }
+        
+                    // Cambiar el texto del botón, sin hacer un re-render completo
+                    state.textContent = isFollowing ? 'Follow' : 'Following';
+        
+                } catch (error) {
+                    console.error('Error al actualizar la información de seguimiento:', error);
+                }
+            });
+        }
+
         this.render();
 	}
     logout() {
@@ -129,7 +211,7 @@ class AccountUsers extends HTMLElement {
                                         <h3 id="name-user">${this.name ? this.name : 'Not found'}</h3>
                                         <p id="username">${this.username ? this.username : 'Not found'}</p>
                                     </div>
-                                    <p id="followThe">Follow</p>
+                                    <p id="followThe">${this.state ? 'Following' : 'Follow'}</p>
                                 </div>
                                 <div id="create">
                                     <p id="creative">Creative</p>
