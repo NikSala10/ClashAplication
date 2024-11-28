@@ -183,7 +183,30 @@ class PostCard extends HTMLElement  {
                 }
             });
         }
-
+        let counterLikes = [0];
+        const likesButton = this.shadowRoot?.querySelector('#like') as HTMLElement;
+        const p = this.shadowRoot?.querySelector('#likeCount') as HTMLElement;
+        const svg = this.shadowRoot?.querySelector('.icon') as HTMLElement;
+        
+        likesButton.addEventListener('click', () => { 
+                if (counterLikes[0] === 0) {
+                    counterLikes[0] = 1;
+                    svg.style.color = '#FFFFFF';
+                } else {
+                    counterLikes[0] = 0;
+                    svg.style.color = ''; 
+                }
+                p.textContent = `${counterLikes[0]}`;
+            
+        });
+        
+        let counterComments = [0];
+        const commentsButton = this.shadowRoot?.querySelector('#comment') as HTMLElement;
+        const pComments = this.shadowRoot?.querySelector('#commentCount')as HTMLElement;
+        commentsButton.addEventListener('click', () => { 
+            counterComments[0] += 1;
+            pComments.textContent = `${counterComments[0]}`;
+        });
 
         let counterFavorites = [0];
         let counterFavoritesboolean = true;
