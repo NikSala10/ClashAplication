@@ -9,6 +9,13 @@ export const navigate = (screen: Screens) => {
 	};
 };
 
+export const navigateUser = (screen: Screens, userId: string) => {
+	return {
+		action: Actions.NAVIGATEUSER,
+		payload:  {screen, userId},
+	};
+};
+
 export const setUserCredentials = (user: string) => {
 	return {
 		action: Actions.SETUSERCREDENTIALS,
@@ -45,4 +52,4 @@ export const loadPost = (loadPost: Boolean) => {
         action: Actions.LOADPOST,
         payload: loadPost,
     };
-};
+}

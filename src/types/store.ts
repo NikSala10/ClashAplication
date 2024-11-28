@@ -1,3 +1,5 @@
+import { appState } from "../store/store";
+
 export type Observer = { render: () => void } & HTMLElement;
 
 export type AppState = {
@@ -11,6 +13,8 @@ export type AppState = {
     imgUserProfile: string
 };
 
+
+
 export enum Screens {
     'LOGIN' = 'LOGIN',
     'DASHBOARD' = 'DASHBOARD',
@@ -21,6 +25,7 @@ export enum Screens {
 
 export enum Actions {
     'NAVIGATE' = 'NAVIGATE',
+    'NAVIGATEUSER' = 'NAVIGATEUSER',
     'SETUSERCREDENTIALS' = 'SETUSERCREDENTIALS',
     'OPENCLOSESCREEN' = 'OPENCLOSESCREEN',
     'LOADPOST' = 'LOADPOST',
