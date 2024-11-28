@@ -166,7 +166,7 @@ class PostCard extends HTMLElement  {
 
         const userImage = this.shadowRoot?.querySelector('.circle-img') as HTMLElement;
             userImage.addEventListener('click', () => {
-                const userUid = appState.userId || appState.user;
+                const userUid = this.userid;
                 console.log(userUid);
                 
                 if (userUid) {
