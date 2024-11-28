@@ -60,7 +60,7 @@ class AccountUsers extends HTMLElement {
         const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
         getUserData(userId, (userInfo: UserData | null) =>  {
                 if (!userInfo) {
-                        console.warn('No se recibió información de usuario.');
+                    console.warn('No se recibió información de usuario.');
                 return;
                 }
             while (containerUserInformation?.firstChild) {
@@ -93,81 +93,6 @@ class AccountUsers extends HTMLElement {
             this.render();
 
         });
-        const state = this.shadowRoot?.querySelector('#followThe') as HTMLElement;
-        console.log(state);
-        if (state) {
-            state.addEventListener('click', async () => {
-             
-                
-                const currentUser = appState.user;  // Usuario actual   
-                if (!currentUser) {
-                    alert('Debes iniciar sesión para seguir a otros usuarios.');
-                    return;
-                }
-        
-                const targetUserId = this.userid;  // Usuario objetivo
-                if (!targetUserId) {
-                    console.error('No se encontró el usuario objetivo.');
-                    return;
-                }
-        
-                const isFollowing = state.textContent === 'Following';
-                try {
-                    // Obtén los datos actuales de los usuarios
-                    const targetUser = await new Promise<UserData | null>((resolve) =>
-                        getUserData(targetUserId, resolve)
-                    );
-                    const currentUserInfo = await new Promise<UserData | null>((resolve) =>
-                        getUserData(currentUser, resolve)
-                    );
-        
-                    if (!targetUser || !currentUserInfo) {
-                        console.error('No se pudo obtener la información de los usuarios.');
-                        return;
-                    }
-        
-                    // Agregar o quitar el ID del usuario en los arrays de seguidores y seguidos
-                    const updatedFollowers = isFollowing
-                        ? targetUser.followers.filter((id: string) => id !== currentUser) // Si ya está siguiendo, lo elimina
-                        : [...targetUser.followers, currentUser]; // Si no está siguiendo, agrega al array
-        
-                    const updatedFollowing = isFollowing
-                        ? currentUserInfo.following.filter((id: string) => id !== targetUserId) // Elimina si está siguiendo
-                        : [...currentUserInfo.following, targetUserId]; // Agrega al array si no lo está
-        
-                    // Actualiza los datos en Firebase solo si hubo un cambio
-                    if (isFollowing) {
-                        // Eliminar del array si es "Unfollow"
-                        await uploadUserData(targetUserId, {
-                            ...targetUser,
-                            followers: updatedFollowers,
-                        } as UserData);
-        
-                        await uploadUserData(currentUser, {
-                            ...currentUserInfo,
-                            following: updatedFollowing,
-                        } as UserData);
-                    } else {
-                        // Agregar al array si es "Follow"
-                        await uploadUserData(targetUserId, {
-                            ...targetUser,
-                            followers: updatedFollowers,
-                        } as UserData);
-        
-                        await uploadUserData(currentUser, {
-                             ...currentUserInfo,
-                            following: updatedFollowing,
-                        } as UserData);
-                    }
-        
-                    // Cambiar el texto del botón, sin hacer un re-render completo
-                    state.textContent = isFollowing ? 'Follow' : 'Following';
-        
-                } catch (error) {
-                    console.error('Error al actualizar la información de seguimiento:', error);
-                }
-            });
-        }
 
         this.render();
 	}
@@ -275,6 +200,83 @@ class AccountUsers extends HTMLElement {
 			cssAccount.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssAccount);
 			
+            const state = this.shadowRoot?.querySelector('#followThe') as HTMLElement;
+            console.log(state);
+            if (state) {
+                state.addEventListener('click', async () => {
+                 
+                    
+                    const currentUser = appState.user;  // Usuario actual   
+                    if (!currentUser) {
+                        alert('Debes iniciar sesión para seguir a otros usuarios.');
+                        return;
+                    }
+            
+                      // Usuario objetivo
+                    if (!userId) {
+        
+                        console.error('No se encontró el usuario objetivo.');
+
+                        return;
+                    }
+            
+                    const isFollowing = state.textContent === 'Following';
+                    try {
+                        // Obtén los datos actuales de los usuarios
+                        const targetUser = await new Promise<UserData | null>((resolve) =>
+                            getUserData(userId, resolve)
+                        );
+                        const currentUserInfo = await new Promise<UserData | null>((resolve) =>
+                            getUserData(currentUser, resolve)
+                        );
+            
+                        if (!targetUser || !currentUserInfo) {
+                            console.error('No se pudo obtener la información de los usuarios.');
+                            return;
+                        }
+            
+                        // Agregar o quitar el ID del usuario en los arrays de seguidores y seguidos
+                        const updatedFollowers = isFollowing
+                            ? targetUser.followers.filter((id: string) => id !== currentUser) // Si ya está siguiendo, lo elimina
+                            : [...targetUser.followers, currentUser]; // Si no está siguiendo, agrega al array
+            
+                        const updatedFollowing = isFollowing
+                            ? currentUserInfo.following.filter((id: string) => id !== userId) // Elimina si está siguiendo
+                            : [...currentUserInfo.following, userId]; // Agrega al array si no lo está
+            
+                        // Actualiza los datos en Firebase solo si hubo un cambio
+                        if (isFollowing) {
+                            // Eliminar del array si es "Unfollow"
+                            await uploadUserData(userId, {
+                                ...targetUser,
+                                followers: updatedFollowers,
+                            } as UserData);
+            
+                            await uploadUserData(currentUser, {
+                                ...currentUserInfo,
+                                following: updatedFollowing,
+                            } as UserData);
+                        } else {
+                            // Agregar al array si es "Follow"
+                            await uploadUserData(userId, {
+                                ...targetUser,
+                                followers: updatedFollowers,
+                            } as UserData);
+            
+                            await uploadUserData(currentUser, {
+                                 ...currentUserInfo,
+                                following: updatedFollowing,
+                            } as UserData);
+                        }
+            
+                        // Cambiar el texto del botón, sin hacer un re-render completo
+                        state.textContent = isFollowing ? 'Follow' : 'Following';
+            
+                    } catch (error) {
+                        console.error('Error al actualizar la información de seguimiento:', error);
+                    }
+                });
+            }
         }
     }
        
