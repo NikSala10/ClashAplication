@@ -103,46 +103,67 @@ class PostCard extends HTMLElement  {
         const state = this.shadowRoot?.querySelector('.state') as HTMLElement;
         if (state) {
             state.addEventListener('click', async () => {
-                const currentUser = appState.user; 
+                const currentUser = appState.user;  // Usuario actual
                 if (!currentUser) {
                     alert('Debes iniciar sesión para seguir a otros usuarios.');
                     return;
                 }
-    
-                const targetUserId = this.userid;
+        
+                const targetUserId = this.userid;  // Usuario objetivo
                 if (!targetUserId) {
                     console.error('No se encontró el usuario objetivo.');
                     return;
                 }
-    
+        
                 const isFollowing = state.textContent === 'Following';
-    
+        
                 try {
+                    // Obtén los datos actuales de los usuarios
                     const targetUser = await new Promise<UserData | null>((resolve) =>
                         getUserData(targetUserId, resolve)
                     );
                     const currentUserInfo = await new Promise<UserData | null>((resolve) =>
                         getUserData(currentUser, resolve)
                     );
-    
+        
                     if (!targetUser || !currentUserInfo) {
                         console.error('No se pudo obtener la información de los usuarios.');
                         return;
                     }
-    
-                    
-                    await uploadUserData(targetUserId, {
-                        ...targetUser,
-                        followers: ,
-                    } as UserData);
-    
-                    await uploadUserData(currentUser, {
-                        ...currentUserInfo,
-                        following: updatedFollowing,
-                    } as UserData);
-    
+        
+                    // Agregar o quitar el ID del usuario en los arrays de seguidores y seguidos
+                    const updatedFollowers = isFollowing
+                        ? targetUser.followers.filter((id: string) => id !== currentUser) // Si ya está siguiendo, lo elimina
+                        : [...targetUser.followers, currentUser]; // Si no está siguiendo, agrega al array
+        
+                    const updatedFollowing = isFollowing
+                        ? currentUserInfo.following.filter((id: string) => id !== targetUserId) // Elimina si está siguiendo
+                        : [...currentUserInfo.following, targetUserId]; // Agrega al array si no lo está
+        
+                    // Actualiza los datos en Firebase solo si hubo un cambio
+                    if (isFollowing) {
+                        // Eliminar del array si es "Unfollow"
+                        await uploadUserData(targetUserId, {
+                            followers: updatedFollowers,
+                        } as UserData);
+        
+                        await uploadUserData(currentUser, {
+                            following: updatedFollowing,
+                        } as UserData);
+                    } else {
+                        // Agregar al array si es "Follow"
+                        await uploadUserData(targetUserId, {
+                            followers: updatedFollowers,
+                        } as UserData);
+        
+                        await uploadUserData(currentUser, {
+                            following: updatedFollowing,
+                        } as UserData);
+                    }
+        
+                    // Cambiar el texto del botón, sin hacer un re-render completo
                     state.textContent = isFollowing ? 'Follow' : 'Following';
-                    
+        
                 } catch (error) {
                     console.error('Error al actualizar la información de seguimiento:', error);
                 }
