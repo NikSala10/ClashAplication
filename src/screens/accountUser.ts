@@ -20,8 +20,8 @@ interface UserData {
     imgUser:string;
     username: string;
     email: string;
-    followers: number;
-    following: number;
+    followers: [];
+    following: [];
     category: string;
     placeresidence: string;
     currenttraining: string;
@@ -70,8 +70,8 @@ class AccountUsers extends HTMLElement {
             this.imguser = userInfo.imgUser;
             this.username = userInfo.username || 'Not found';
             this.email = userInfo.email || 'Not found';
-            this.followers = userInfo.followers || 0;
-            this.following = userInfo.following || 0;
+            this.followers = userInfo.followers.length || 0;
+            this.following = userInfo.following.length || 0;
             this.category = userInfo.category || 'Empty field';
             this.placeresidence = userInfo.placeresidence || 'Empty field';
             this.currentjob = userInfo.currentjob || 'Empty field';
