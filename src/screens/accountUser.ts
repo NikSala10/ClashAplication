@@ -42,7 +42,7 @@ class AccountUsers extends HTMLElement {
 	currentjob?: string;
 	academy?: string;
     moreworksurl?: string;
-
+    userid?:string
 
 	constructor() {
 		super();
@@ -55,8 +55,9 @@ class AccountUsers extends HTMLElement {
 	}
    
 	async connectedCallback() {
+        const userId = appState.userId;
         const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
-        getUserData(appState.user, (userInfo: UserData | null) =>  {
+        getUserData(userId, (userInfo: UserData | null) =>  {
                 if (!userInfo) {
                         console.warn('No se recibió información de usuario.');
                 return;

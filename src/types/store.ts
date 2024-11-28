@@ -5,6 +5,7 @@ export type Observer = { render: () => void } & HTMLElement;
 export type AppState = {
     screen: string;
     user: '';
+    userId: string;
     post: any[];
     modalScreen: Boolean[];
     loadPost: Boolean;
