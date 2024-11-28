@@ -22,7 +22,7 @@ class Nav extends HTMLElement  {
     }
 
     static get observedAttributes() {
-        return ['nav'];
+        return ['imguser', 'name'];
     }
 
     attributeChangedCallback(propName : AttributeNav, oldValue: string | undefined, newValue: string | undefined) {
@@ -68,6 +68,7 @@ class Nav extends HTMLElement  {
                 }
                
             });
+            
     }
     
     render() {
