@@ -117,6 +117,20 @@ cardaccount-component  {
     padding: 0.3rem 0.8rem 0.3rem 0.8rem;
     border-radius: 50px;
 }
+.followText  {
+    display: flex;
+    gap: 2rem;
+}
+#followThe  {
+    font-family: "Istok Web", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 17px;
+    background-color: #6414B4;
+    padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+    border-radius: 50px;
+    text-align: center;
+}
 #category  {
     font-family: "Poppins", serif;
     font-weight: 500;
