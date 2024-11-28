@@ -10,7 +10,6 @@ export const navigate = (screen: Screens) => {
 };
 
 export const navigateUser = (screen: Screens, userId: string) => {
-	console.log("Action payload", { screen, userId }); 
 	return {
 		action: Actions.NAVIGATEUSER,
 		payload:  {screen, userId},
