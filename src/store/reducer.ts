@@ -9,6 +9,12 @@ export const reducer = (currentAction: any, currentState: any) => {
 				...currentState,
 				screen: payload,
 			};
+		case Actions.NAVIGATEUSER:
+			return {
+				...currentState,
+				screen: action.payload.screen,
+				userId: action.payload.userId, 
+			};	
 
 		case Actions.SETUSERCREDENTIALS:
 			return {
