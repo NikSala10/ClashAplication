@@ -421,8 +421,8 @@ export const uploadUserData = async (uid: string, userinfo: {
     currentjob: string, 
     academy: string, 
     moreworksurl: string,
-    followers: number,
-    following:number,
+    followers: [],
+    following:[],
 }) => {
     try {
         const { db } = await getFirebaseInstance();

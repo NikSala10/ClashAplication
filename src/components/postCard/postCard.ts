@@ -36,8 +36,8 @@ interface UserData {
 	currentjob: string,
 	academy: string,
 	moreworksurl: string,
-	followers: number,
-	following: number
+	followers: [],
+	following: []
 }
 class PostCard extends HTMLElement  {
     userid?:string;
@@ -130,17 +130,10 @@ class PostCard extends HTMLElement  {
                         return;
                     }
     
-                    const updatedFollowers = isFollowing
-                        ? Math.max((targetUser.followers ?? 0) - 1, 0)
-                        : (targetUser.followers ?? 0) + 1;
-    
-                    const updatedFollowing = isFollowing
-                        ? Math.max((currentUserInfo.following ?? 0) - 1, 0)
-                        : (currentUserInfo.following ?? 0) + 1;
-    
+                    
                     await uploadUserData(targetUserId, {
                         ...targetUser,
-                        followers: updatedFollowers,
+                        followers: ,
                     } as UserData);
     
                     await uploadUserData(currentUser, {

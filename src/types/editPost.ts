@@ -7,6 +7,6 @@ export interface EditUserInformation {
 	currentjob: string,
 	academy: string,
 	moreworksurl: string,
-	followers: number,
-	following: number
+	followers: [],
+	following: []
 }

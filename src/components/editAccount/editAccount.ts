@@ -28,8 +28,8 @@ const edit: EditUserInformation = {
 	currentjob: '',
 	academy: '',
     moreworksurl: '',
-    followers:0,
-    following:0
+    followers:[],
+    following:[]
 }
 export enum AttributeEditPost  { 
     'imguser' = 'imguser',
