@@ -30,33 +30,76 @@ interface UserData {
     moreworksurl: string;
 }
 class AccountUsers extends HTMLElement {
-    constructor() {
+    imguser?: string;
+    name?: string;
+    email?: string;
+    following?: number;
+    followers?: number;
+    username?: string;
+    category?: string;
+    placeresidence?: string;
+	currenttraining?: string;
+	currentjob?: string;
+	academy?: string;
+    moreworksurl?: string;
+
+
+	constructor() {
 		super();
         addObserver(this)
 		this.attachShadow({ mode: 'open' });
-			const field = this.ownerDocument.createElement("field-component") as Field;
-            field.setAttribute(AttributeField.field, '');
-            field.setAttribute(AttributeField.label, '');
-			const cardAccount = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
-            cardAccount.setAttribute(AttributeCardAccount.likes, '');
-            cardAccount.setAttribute(AttributeCardAccount.comments, '');
-            cardAccount.setAttribute(AttributeCardAccount.favorites, '');
-            cardAccount.setAttribute(AttributeCardAccount.hashtags, '');
+        const btnAddPost = this.ownerDocument.createElement("btn-account") as ButtonAccount;
+            btnAddPost.setAttribute(AttributeBtnAccount.color, '');
+            btnAddPost.setAttribute(AttributeBtnAccount.label, '');
 			const barLateral = this.ownerDocument.createElement("bar-lateral") as BarLateral;
 	}
-
+   
 	async connectedCallback() {
-		this.render();
-        // if (appState.post.length === 0) {
-        //     const postsAction = await getPostAction();
-        //     dispatch(postsAction)
-        // }
+        const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
+        getUserData(appState.user, (userInfo: UserData | null) =>  {
+                if (!userInfo) {
+                        console.warn('No se recibió información de usuario.');
+                return;
+                }
+            while (containerUserInformation?.firstChild) {
+                containerUserInformation.removeChild(containerUserInformation.firstChild);
+            }
+                    
+            this.name = userInfo.name || 'Not found';
+            this.imguser = userInfo.imgUser;
+            this.username = userInfo.username || 'Not found';
+            this.email = userInfo.email || 'Not found';
+            this.followers = userInfo.followers || 0;
+            this.following = userInfo.following || 0;
+            this.category = userInfo.category || 'Empty field';
+            this.placeresidence = userInfo.placeresidence || 'Empty field';
+            this.currentjob = userInfo.currentjob || 'Empty field';
+            this.currenttraining = userInfo.currenttraining || 'Empty field';
+            this.academy = userInfo.academy || 'Empty field';
+            this.moreworksurl = userInfo.moreworksurl || 'Url not entered';
+
+            const fieldPlaceResidence = this.ownerDocument.createElement("field-component") as Field;
+            fieldPlaceResidence.setAttribute(AttributeField.field, '');
+            fieldPlaceResidence.setAttribute(AttributeField.label, '');
+            
+            this.render();
+
+        });
+       
+        this.render();
 	}
+    logout() {
+		indexedDB.deleteDatabase('firebase-heartbeat-database');
+		indexedDB.deleteDatabase('firebaseLocalStorageDb');
+		window.location.reload();
+        dispatch(setUserCredentials(''))
+        alert('Ha cerrado sesión')
+        
+	}
+    
 	async render() {
 		if (this.shadowRoot) {
-            let hash = ['hola', 'hola2', 'hola3']
-            
-            
+            const userImage = this.imguser || '/src/assets/ImgUserIcon.svg';
 			this.shadowRoot.innerHTML = `
 			    <link rel="stylesheet" href="/src/screens/account.css">
                 <nav-component></nav-component>
@@ -65,41 +108,41 @@ class AccountUsers extends HTMLElement {
                         <section class="info-contact-user">
                             <div class="user-info">
                                 <div class="circle-img">
-                                    <img id="img-user" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                                    <img id="img-user" src="${userImage}" alt="">
                                 </div>
                                 <div id="follows">
                                     <div id="followers">
                                         <p class="pFOlS">Followers</p>
-                                        <p class="num">14</p>
+                                        <p class="num">${this.followers}</p>
                                     </div>
                                     <div id="followeing">
                                         <p class="pFOlS">Following</p>
-                                        <p class="num">10</p>
+                                        <p class="num">${this.following}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="user-text-contact">
-                                <h3 id="name-user">Yeliani Barbosa</h3>
-                                <p id="username">@yelibarbosis</p>
+                                <h3 id="name-user">${this.name ? this.name : 'Not found'}</h3>
+                                <p id="username">${this.username ? this.username : 'Not found'}</p>
                                 <div id="create">
                                     <p id="creative">Creative</p>
-                                    <p id="category">Illustrator</p>
+                                    <p id="category">${this.category ? this.category : 'Empty field'}</p>
                                 </div>
                                 <h3 id="contct">Contact Information</h3>
-                                <p id="email">@yeliani@gmail.com</p>
+                                <p id="email">${this.email ? this.email : 'Not found'}</p>
 
                                 <div class="icons-profesional">
                                     <div class="first">
-                                        <field-component field="placeResidence" label="Cali, Colombia"></field-component>
-                                        <field-component field="currentJob" label="UI Disney"></field-component>
+                                        <field-component field="placeResidence" label="${this.placeresidence ? this.placeresidence : 'Empty field'}"></field-component>
+                                        <field-component field="currentJob" label="${this.currentjob ? this.currentjob : 'Empty field'}"></field-component>
                                     </div>
                                     <div class="first">
-                                        <field-component field="Academy" label="DMI, ICESI"></field-component>
-                                        <field-component field="currentTraining" label="Course of Design"></field-component>
+                                        <field-component field="Academy" label="${this.academy ? this.academy : 'Empty field'}"></field-component>
+                                        <field-component field="currentTraining" label="${this.currenttraining ? this.currenttraining : 'Empty field'}"></field-component>
                                     </div>
                                 </div>
                                 <p id="Works">More Works</p>
-                                <a id="url" href="https://www.behance.net/yelianibarbosa1" target="_blank">https://www.behance.net/yelianibarbosa1</a>
+                                <a id="url" href="${this.moreworksurl ? this.moreworksurl : 'Url not entered'}" target="_blank">${this.moreworksurl ? this.moreworksurl : 'Not found'}</a>
                             </div>
                      
                         </section>
@@ -114,10 +157,6 @@ class AccountUsers extends HTMLElement {
                         <hr>
                         <section class="containers">
                             <div class="container-postcards">
-                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
-                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
-                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
-                                <cardaccount-component likes="3" comments="5" favorites="8" send="10" hashtags='${JSON.stringify(hash)}' image="../src/assets/alien.jpg"></cardaccount-component>
                             </div>
                             <div class="container-barLaterals">
                                 <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
@@ -129,12 +168,31 @@ class AccountUsers extends HTMLElement {
                 </section>
 				
 			`;
-           
+            const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
+            getPostsByUser((posts: any[]) =>  {
+                while (containerPost?.firstChild) {
+                    containerPost.removeChild(containerPost.firstChild);
+                }
+                posts.forEach((post: any) => {        
+                    const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
+                    userPostCard.setAttribute(AttributeCardAccount.image, post.image);
+                    userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
+                    userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
+                    userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
+                    userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
+                    userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
+                    containerPost?.appendChild(userPostCard);
+                });
+            });
+
 			const cssAccount = this.ownerDocument.createElement("style");
 			cssAccount.innerHTML = styles;
-			this.shadowRoot?.appendChild(cssAccount);   
-		}
-	}
+			this.shadowRoot?.appendChild(cssAccount);
+			
+        }
+    }
+       
+	 
 }
 
 customElements.define('app-accountuser', AccountUsers);
