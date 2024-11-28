@@ -1,4 +1,4 @@
-import { getCommentsByPost, getUserData, updatePostField } from "../../utils/firebase";
+import { getCommentsByPost, getUserData, updatePostField, uploadUserData } from "../../utils/firebase";
 import Comments, {CommentsAttribute} from "../comments/comments";
 import { UpdateFieldType } from "../../types/post";
 import { appState, dispatch } from "../../store/store";
@@ -27,7 +27,18 @@ export enum AttributePostCard  {
     'commentsElements' = 'commentsElements'
 
 }
-
+interface UserData {
+    username: string;
+	category: string,
+	imgUser: string,
+    placeresidence: string,
+	currenttraining: string,
+	currentjob: string,
+	academy: string,
+	moreworksurl: string,
+	followers: number,
+	following: number
+}
 class PostCard extends HTMLElement  {
     userid?:string;
     postid?: string; 
@@ -91,22 +102,55 @@ class PostCard extends HTMLElement  {
         // Cambiar state de follow a following, de following a follow
         const state = this.shadowRoot?.querySelector('.state') as HTMLElement;
         if (state) {
-            state.addEventListener('click', () => {
-                if (state.textContent === 'Follow') {
-                    state.textContent = 'Following';
-                } else {
-                    state.textContent = 'Follow';  
+            state.addEventListener('click', async () => {
+                const currentUser = appState.user; 
+                if (!currentUser) {
+                    alert('Debes iniciar sesión para seguir a otros usuarios.');
+                    return;
                 }
-            });
-        };
-
-        const status = this.shadowRoot?.querySelector('.status2') as HTMLElement;
-        if (status) {
-            status.addEventListener('click', () => {
-                if (status.textContent === 'Follow') {
-                    status.textContent = 'Following';
-                } else {
-                    status.textContent = 'Follow';  
+    
+                const targetUserId = this.userid;
+                if (!targetUserId) {
+                    console.error('No se encontró el usuario objetivo.');
+                    return;
+                }
+    
+                const isFollowing = state.textContent === 'Following';
+    
+                try {
+                    const targetUser = await new Promise<UserData | null>((resolve) =>
+                        getUserData(targetUserId, resolve)
+                    );
+                    const currentUserInfo = await new Promise<UserData | null>((resolve) =>
+                        getUserData(currentUser, resolve)
+                    );
+    
+                    if (!targetUser || !currentUserInfo) {
+                        console.error('No se pudo obtener la información de los usuarios.');
+                        return;
+                    }
+    
+                    const updatedFollowers = isFollowing
+                        ? Math.max((targetUser.followers ?? 0) - 1, 0)
+                        : (targetUser.followers ?? 0) + 1;
+    
+                    const updatedFollowing = isFollowing
+                        ? Math.max((currentUserInfo.following ?? 0) - 1, 0)
+                        : (currentUserInfo.following ?? 0) + 1;
+    
+                    await uploadUserData(targetUserId, {
+                        ...targetUser,
+                        followers: updatedFollowers,
+                    } as UserData);
+    
+                    await uploadUserData(currentUser, {
+                        ...currentUserInfo,
+                        following: updatedFollowing,
+                    } as UserData);
+    
+                    state.textContent = isFollowing ? 'Follow' : 'Following';
+                } catch (error) {
+                    console.error('Error al actualizar la información de seguimiento:', error);
                 }
             });
         }
