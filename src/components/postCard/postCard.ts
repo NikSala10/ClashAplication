@@ -50,7 +50,7 @@ class PostCard extends HTMLElement  {
     image?: string;
     timeposted?: string;
     hashtags?: string ;
-    state?: string;
+    state?: boolean;
     likes? : number;
     commentsN?: number;
     favorites?: number;
@@ -72,7 +72,7 @@ class PostCard extends HTMLElement  {
     attributeChangedCallback(propName : AttributePostCard, oldValue: string | undefined, newValue: string | undefined) {
         switch (propName) {
             case AttributePostCard.state:
-                this.state = newValue;  
+                this.state = newValue? Boolean(newValue) : undefined;  
             break;
             case AttributePostCard.likes:
                 this.likes = newValue ? Number(newValue) : undefined;
