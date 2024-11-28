@@ -40,14 +40,6 @@ export const getCommentsAction = async () => {
 	};
 };
 
-export const getImgUserFileAction = async () => {
-	const imgByUser = await getFileProfile(appState.user); 
-	return {
-		action: Actions.GETIMGUSERPROFILE,
-		payload: imgByUser,
-	};
-};
-
 export const loadPost = (loadPost: Boolean) => {
     return {
         action: Actions.LOADPOST,

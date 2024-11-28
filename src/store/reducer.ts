@@ -26,11 +26,6 @@ export const reducer = (currentAction: any, currentState: any) => {
 				...currentState,
 				users: payload,
 			};
-		case Actions.GETIMGUSERPROFILE:
-			return {
-				...currentState,
-				imgUserProfile: payload,
-			};
 		case Actions.GETCOMMENT:
 			return {
 				...currentState,
