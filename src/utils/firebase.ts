@@ -378,6 +378,39 @@ export const getPostsByUser = async (callback: (posts: any[]) => void) => { // R
         console.error('Error getting documents in real-time', error);
     }
 };
+export const getPostsByUserAccount = async (userId: string, callback: (posts: any[]) => void) => {
+    try {
+        const { db } = await getFirebaseInstance();
+        const { collection, query, where, orderBy, onSnapshot } = await import('firebase/firestore');
+        
+        const ref = collection(db, 'posts');
+        
+        // Crea la consulta para obtener los posts del usuario ordenados por fecha
+        const q = query(
+            ref,
+            where('userUid', '==', userId), // Filtra por el UID del usuario recibido como parámetro
+            orderBy('dateadded', 'desc') // Ordena por la fecha en orden descendente
+        );
+        
+        // Usamos `onSnapshot` para escuchar cambios en tiempo real
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const data: any[] = [];
+
+            querySnapshot.forEach((doc) => {
+                data.push({ id: doc.id, ...doc.data() }); // Incluye también el ID del documento
+            });
+
+            // Llama al callback con los datos actualizados
+            callback(data);
+        });
+
+        // Retorna una función para dejar de escuchar los cambios cuando ya no sea necesario
+        return unsubscribe;
+
+    } catch (error) {
+        console.error('Error getting documents in real-time', error);
+    }
+};
 
 export const uploadUserData = async (uid: string, userinfo: { 
     username: string, 
