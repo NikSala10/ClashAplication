@@ -5,7 +5,7 @@ import { appState, dispatch } from "../../store/store";
 
 import '../hashtags/hashtags'
 import Field from "../professionalField/professionalField";
-import { navigate } from "../../store/actions";
+import { navigateUser } from "../../store/actions";
 import { Screens } from "../../types/store";
 
 export enum AttributePostCard  { 
@@ -169,7 +169,7 @@ class PostCard extends HTMLElement  {
                 if (appState.user) {
                     const userUid = this.userid || appState.user;
                     if (userUid) {
-                        dispatch(navigate(Screens.ACCOUNTUSER))
+                        dispatch(navigateUser(Screens.ACCOUNTUSER, String(this.userid)))
                     }
                 } 
             });
