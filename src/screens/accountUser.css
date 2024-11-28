@@ -54,7 +54,10 @@ postuser-component {
     display: flex;
     justify-content: center;
     gap: 5rem;
-    height: 17%;
+    height: 350px; 
+    flex-shrink: 0; 
+    flex-grow: 0; 
+    overflow: hidden; 
 }
 
 #follows  {
