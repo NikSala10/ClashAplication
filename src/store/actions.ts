@@ -22,20 +22,6 @@ export const setOpenCloseScreen = (modalScreen: Number) => {
 		payload: modalScreen,
 	};
 };
-// export const getUserDataAction = async () => {
-// 	const user = await getUserData(appState.user); 
-// 	return {
-// 		action: Actions.GETUSERDATA,
-// 		payload: user,
-// 	};
-// };
-// export const getPostAction = async () => {
-// 	const posts = await getPosts(); 
-// 	return {
-// 		action: Actions.GETPOST,
-// 		payload: posts,
-// 	};
-// };
 
 export const getUsersAction = async () => {
 	const users = await getUsers(); 
