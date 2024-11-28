@@ -101,68 +101,60 @@ class PostCard extends HTMLElement  {
 
         // Cambiar state de follow a following, de following a follow
         const state = this.shadowRoot?.querySelector('.state') as HTMLElement;
-if (state) {
-    state.addEventListener('click', async () => {
-        const currentUser = appState.user;
-        console.log(currentUser);
-         // Usuario actual
-        if (!currentUser) {
-            alert('Debes iniciar sesión para seguir a otros usuarios.');
-            return;
-        }
-
-        const targetUserId = this.userid; // Usuario objetivo
-        if (!targetUserId) {
-            console.error('No se encontró el usuario objetivo.');
-            return;
-        }
-
-        const isFollowing = state.textContent === 'Following'; // Verificar estado actual del botón
-
-        try {
-            // Actualizar seguidores y seguidos en Firebase
-            await uploadUserData(targetUserId, {
-                followers: isFollowing ? -1 : 1, // Incrementar o decrementar seguidores
-            } as UserData);
-
-            await uploadUserData(currentUser, {
-                following: isFollowing ? -1 : 1, // Incrementar o decrementar seguidos
-            } as UserData);
-
-            // Actualizar solo el texto del botón, sin re-renderizar todo el componente
-            state.textContent = isFollowing ? 'Follow' : 'Following';
-        } catch (error) {
-            console.error('Error al actualizar la información de seguimiento:', error);
-        }
-    });
-}
-
-        let counterLikes = [0];
-        let counterLikesboolean = true;
-        counterLikes[0] = this.likes ? this.likes : 0;
-        const likesButton = this.shadowRoot?.querySelector('#like') as HTMLElement;
-        const p = this.shadowRoot?.querySelector('#likeCount') as HTMLElement;
-        const svg = this.shadowRoot?.querySelector('.icon') as HTMLElement;
-        
-        likesButton.addEventListener('click', () => { 
-
-            if(appState.user){
-                if (counterLikesboolean) {
-                    counterLikes[0] += 1;
-                    svg.style.color = '#FFFFFF';
-                    this.likes = counterLikes[0]
-                } else {
-                    counterLikes[0] -= 1;
-                    svg.style.color = ''; 
-                    this.likes = counterLikes[0]
+        if (state) {
+            state.addEventListener('click', async () => {
+                const currentUser = appState.user; 
+                if (!currentUser) {
+                    alert('Debes iniciar sesión para seguir a otros usuarios.');
+                    return;
                 }
-                counterLikesboolean = !counterLikesboolean
-                p.textContent = `${counterLikes[0]}`;
-                this.updatePost('likes', counterLikes[0])
-            }else{
-                alert('No puedes dar like si no tienes una cuenta')
-            }
-        });
+    
+                const targetUserId = this.userid;
+                if (!targetUserId) {
+                    console.error('No se encontró el usuario objetivo.');
+                    return;
+                }
+    
+                const isFollowing = state.textContent === 'Following';
+    
+                try {
+                    const targetUser = await new Promise<UserData | null>((resolve) =>
+                        getUserData(targetUserId, resolve)
+                    );
+                    const currentUserInfo = await new Promise<UserData | null>((resolve) =>
+                        getUserData(currentUser, resolve)
+                    );
+    
+                    if (!targetUser || !currentUserInfo) {
+                        console.error('No se pudo obtener la información de los usuarios.');
+                        return;
+                    }
+    
+                    const updatedFollowers = isFollowing
+                        ? Math.max((targetUser.followers ?? 0) - 1, 0)
+                        : (targetUser.followers ?? 0) + 1;
+    
+                    const updatedFollowing = isFollowing
+                        ? Math.max((currentUserInfo.following ?? 0) - 1, 0)
+                        : (currentUserInfo.following ?? 0) + 1;
+    
+                    await uploadUserData(targetUserId, {
+                        ...targetUser,
+                        followers: updatedFollowers,
+                    } as UserData);
+    
+                    await uploadUserData(currentUser, {
+                        ...currentUserInfo,
+                        following: updatedFollowing,
+                    } as UserData);
+    
+                    state.textContent = isFollowing ? 'Follow' : 'Following';
+                } catch (error) {
+                    console.error('Error al actualizar la información de seguimiento:', error);
+                }
+            });
+        }
+
 
         let counterFavorites = [0];
         let counterFavoritesboolean = true;
