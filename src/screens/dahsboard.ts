@@ -61,7 +61,7 @@ class Dashboard extends HTMLElement  {
                 }
                 this.name = userInfo.name || ''; 
                 this.imguser = userInfo.imgUser || '';
-                this.username = userInfo.username || '';  
+                this.username = userInfo.username || '@user';  
                 this.render();
             });
         this.render();

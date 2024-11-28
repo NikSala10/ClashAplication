@@ -219,14 +219,14 @@ class PostCard extends HTMLElement  {
                         <div class="nacate1">
                             <div class="nacate2">
                                 <h4 class="name">${this.name ? this.name : 'Not found'}</h4>
-                                <h4 class="username2">${this.username ? this.username : 'Not found'}</h4>
+                                <h4 class="username2">${this.username ? this.username : '@user'}</h4>
                             </div>
                             <div class="nacate3">
                                   <p class="status2">${this.state ? this.state : 'Follow'}</p>
                             </div>
                         </div>
                         <div class="stateUser">
-                            <h4 class="username">${this.username ? this.username : 'Not found'}</h4>
+                            <h4 class="username">${this.username ? this.username : '@user'}</h4>
                             <p class="state">${this.state ? this.state : 'Follow'}</p>
                             <p class="time-post"> ${this.formatTimeAgo(this.timeposted)} </p>
                         </div>
