@@ -122,5 +122,5 @@ class AccountUsers extends HTMLElement {
 	}
 }
 
-customElements.define('app-account', AccountUsers);
+customElements.define('app-accountuser', AccountUsers);
 export default AccountUsers;

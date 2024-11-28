@@ -2,6 +2,7 @@ import './screens/register';
 import './screens/login'
 import './screens/dahsboard';
 import './screens/account';
+import './screens/accountUser'
 import { addObserver, appState } from './store/store';
 import { Screens } from './types/store';
 
@@ -37,6 +38,10 @@ class AppContainer extends HTMLElement {
 				case Screens.ACCOUNT:
 					const account = this.ownerDocument.createElement('app-account');
 					this.shadowRoot.appendChild(account);
+					break;
+				case Screens.ACCOUNTUSER:
+					const accountUser = this.ownerDocument.createElement('app-accountuser');
+					this.shadowRoot.appendChild(accountUser);
 					break;
 
 				default:
