@@ -120,6 +120,7 @@ class AccountUsers extends HTMLElement {
                                         <p class="num">${this.following}</p>
                                     </div>
                                 </div>
+                                <p id="followThe">Follow</p>
                             </div>
                             <div class="user-text-contact">
                                 <h3 id="name-user">${this.name ? this.name : 'Not found'}</h3>
