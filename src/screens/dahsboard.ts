@@ -110,6 +110,7 @@ class Dashboard extends HTMLElement  {
                     const user = appState.users.find(u => u.id === post.userUid);                   
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
+                    userPostCards.setAttribute(AttributePostCard.userid, post.userUid)
                     userPostCards.setAttribute(AttributePostCard.name, user?.name || '');  
                     userPostCards.setAttribute(AttributePostCard.imguser, user?.imgUser || ''); 
                     userPostCards.setAttribute(AttributePostCard.username, user?.username || '');

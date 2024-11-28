@@ -9,6 +9,7 @@ import { navigate } from "../../store/actions";
 import { Screens } from "../../types/store";
 
 export enum AttributePostCard  { 
+    'userid' = 'userid',
     'postid' = 'postid',
     'imguser' = 'imguser',
     'name' = 'name',
