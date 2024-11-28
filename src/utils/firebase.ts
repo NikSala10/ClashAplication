@@ -424,6 +424,19 @@ export const uploadUserData = async (uid: string, userinfo: {
     followers: [],
     following:[],
 }) => {
+    console.log('inetn',  {
+        followers: userinfo.followers,
+        following: userinfo.following,
+        username: userinfo.username, 
+        category: userinfo.category,
+        imgUser: userinfo.imgUser,
+        placeresidence: userinfo.placeresidence,
+        currenttraining: userinfo.currenttraining,
+        currentjob: userinfo.currentjob,
+        academy: userinfo.academy,
+        moreworksurl: userinfo.moreworksurl,
+    });
+    
     try {
         const { db } = await getFirebaseInstance();
         const { doc, updateDoc } = await import('firebase/firestore');

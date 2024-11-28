@@ -104,6 +104,9 @@ class PostCard extends HTMLElement  {
         if (state) {
             state.addEventListener('click', async () => {
                 const currentUser = appState.user;  // Usuario actual
+
+                console.log(currentUser);
+                
                 if (!currentUser) {
                     alert('Debes iniciar sesión para seguir a otros usuarios.');
                     return;
@@ -116,7 +119,8 @@ class PostCard extends HTMLElement  {
                 }
         
                 const isFollowing = state.textContent === 'Following';
-        
+                console.log(targetUserId);
+                
                 try {
                     // Obtén los datos actuales de los usuarios
                     const targetUser = await new Promise<UserData | null>((resolve) =>
@@ -142,21 +146,31 @@ class PostCard extends HTMLElement  {
         
                     // Actualiza los datos en Firebase solo si hubo un cambio
                     if (isFollowing) {
+                        console.log(updatedFollowing);
+                        
                         // Eliminar del array si es "Unfollow"
                         await uploadUserData(targetUserId, {
+                            ...targetUser,
                             followers: updatedFollowers,
                         } as UserData);
         
                         await uploadUserData(currentUser, {
+                            ...currentUserInfo,
                             following: updatedFollowing,
                         } as UserData);
                     } else {
+                        console.log('else');
+                        
+                        console.log(updatedFollowing);
+
                         // Agregar al array si es "Follow"
                         await uploadUserData(targetUserId, {
+                            ...targetUser,
                             followers: updatedFollowers,
                         } as UserData);
         
                         await uploadUserData(currentUser, {
+                            ...currentUserInfo,
                             following: updatedFollowing,
                         } as UserData);
                     }
