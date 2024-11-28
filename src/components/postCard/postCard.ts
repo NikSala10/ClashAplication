@@ -149,6 +149,7 @@ class PostCard extends HTMLElement  {
                     } as UserData);
     
                     state.textContent = isFollowing ? 'Follow' : 'Following';
+                    
                 } catch (error) {
                     console.error('Error al actualizar la información de seguimiento:', error);
                 }
