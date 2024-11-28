@@ -49,7 +49,7 @@ class AddPost extends HTMLElement  {
     }
 
     async connectedCallback() {
-        const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
+        const containerUserInformation = this.shadowRoot?.querySelector('.user');  
         const userId = appState.user
             getUserData(userId, (userInfo: UserData | null) => {
                 if (!userInfo) {
@@ -77,7 +77,7 @@ class AddPost extends HTMLElement  {
    
     async submitForm() {
         post.category = 'Creative';
-        const img = this.shadowRoot?.querySelector('.user') as HTMLInputElement;
+        const img = this.shadowRoot?.querySelector('#imgs-Post') as HTMLInputElement;
         const file = img?.files?.[0]; 
    
         if (file) {
