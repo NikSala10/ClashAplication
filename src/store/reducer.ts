@@ -15,11 +15,6 @@ export const reducer = (currentAction: any, currentState: any) => {
 				...currentState,
 				user: payload,
 			};
-		case Actions.GETPOST:
-			return {
-				...currentState,
-				post: payload,
-			};
 
 		case Actions.GETUSERS:
 			return {
