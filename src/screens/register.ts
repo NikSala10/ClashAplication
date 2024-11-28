@@ -15,6 +15,8 @@ const edit: EditUserInformation = {
 	currentjob: '',
 	academy: '',
     moreworksurl: '',
+	followers:0,
+	following:0,
 }
 const credentials = {
     name: '',

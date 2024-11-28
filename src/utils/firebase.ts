@@ -420,7 +420,9 @@ export const uploadUserData = async (uid: string, userinfo: {
     currenttraining: string, 
     currentjob: string, 
     academy: string, 
-    moreworksurl: string 
+    moreworksurl: string,
+    followers: number,
+    following:number,
 }) => {
     try {
         const { db } = await getFirebaseInstance();
@@ -430,6 +432,8 @@ export const uploadUserData = async (uid: string, userinfo: {
 
         // Solo actualiza los campos que se pasan como parámetros
         const userInformation = {
+            followers: userinfo.followers,
+            following: userinfo.following,
             username: userinfo.username, 
             category: userinfo.category,
             imgUser: userinfo.imgUser,
