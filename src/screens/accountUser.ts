@@ -178,6 +178,7 @@ class AccountUsers extends HTMLElement {
                 posts.forEach((post: any) => {        
                     const userPostCard = this.ownerDocument.createElement("postuser-component") as PostUserCard;
                     userPostCard.setAttribute(AttributeCardUser.image, post.image);
+                    userPostCard.setAttribute(AttributeCardUser.userid, post.userUid);
                     userPostCard.setAttribute(AttributeCardUser.postid, post.id);
                     userPostCard.setAttribute(AttributeCardUser.hashtags, post.hashtags);
                     userPostCard.setAttribute(AttributeCardUser.likes, post.likes);

@@ -12,7 +12,8 @@ export enum AttributeCardUser {
     'favorites' = 'favorites',
     'commentsElements' = 'commentsElements',
     'hashtags' = 'hashtags',
-    'postid' = 'postid'
+    'postid' = 'postid',
+    'userid' = 'userid'
 }
 
 
@@ -25,6 +26,7 @@ class PostUserCard extends HTMLElement  {
     send?: Number;
     hashtags?: String;
     commentsN?: number;
+    userid?:string;
     showComent?: boolean;
     commentsElements?: any[] = [];
     postid?: string

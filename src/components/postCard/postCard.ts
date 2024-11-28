@@ -170,7 +170,8 @@ class PostCard extends HTMLElement  {
                 console.log(userUid);
                 
                 if (userUid) {
-                    dispatch(navigateUser(Screens.ACCOUNTUSER, appState.userId));  
+                    console.log("Dispatching navigateUser action", { screen: Screens.ACCOUNTUSER, userId: userUid });
+                    dispatch(navigateUser(Screens.ACCOUNTUSER, userUid));  
                 } else {
                     console.warn('No user ID available');
                 }

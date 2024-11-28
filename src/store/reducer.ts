@@ -10,10 +10,11 @@ export const reducer = (currentAction: any, currentState: any) => {
 				screen: payload,
 			};
 		case Actions.NAVIGATEUSER:
+			console.log("Reducer updating state with:", action.payload);
 			return {
 				...currentState,
-				screen: action.payload.screen,
-				userId: action.payload.userId, 
+				screen: payload.screen,
+				userId: payload.userId, 
 			};	
 
 		case Actions.SETUSERCREDENTIALS:
