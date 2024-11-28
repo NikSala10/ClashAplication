@@ -50,16 +50,17 @@ class Post1 extends HTMLElement  {
 
     render() {
         if (this.shadowRoot) {
-            const initialLetter = this.name ? this.name.charAt(0).toUpperCase() : ''; 
+            const userImage = this.imguser || '../src/assets/ImgUserIcon.svg';
             this.shadowRoot.innerHTML = `
             <link rel="stylesheet" href="../src/components/post1/index.css">
              
             <section class="post">
                 <div class="social-post">
                         <div class="circle">
-                             <div class="circle-img">${this.imguser? `<img id="img-user" src="${this.imguser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}</div>
+                            <img id="img-user" src="${userImage}" alt="">
                         </div>
                 </div>
+                
               
                 <div class="part2">
                     <h2 id=>What's happening?</h2>
