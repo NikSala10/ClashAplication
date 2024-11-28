@@ -58,7 +58,7 @@ cardaccount-component  {
 
 #follows  {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.3rem;
     margin-top: 2rem;
 }
 #followers  {
@@ -83,7 +83,7 @@ cardaccount-component  {
     font-size: 14px;
     text-align: center;
     display: flex;
-    width: 6rem;
+    width: 7rem;
     justify-content: center;
     align-items: center;
 }
