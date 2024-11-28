@@ -1,0 +1,64 @@
+.card   {
+    background-color: #8258BD;
+    width: 85%;
+    height: 27rem;
+    padding: 1.8rem;
+    border-radius: 1rem;
+    margin-bottom: 0;
+}
+#delete  {
+    cursor: pointer;
+    margin-left: 95%;
+}
+.img-post  {
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    
+}
+.hide{
+    display: none;
+}
+
+.hashtags  {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: white;
+    font-size: 15px;
+}
+.post-icons  {
+    margin-top: 0.5rem;
+    gap: 2.7rem;
+    display: flex;
+}
+.post-icons svg   {
+    color: #CAC1E4;
+    cursor: pointer;
+}
+.counter  {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.counter p  {
+    color: #CAC1E4;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+@media (max-width: 768px)  { 
+    .card   {
+        width: 72%;
+        margin-left: 8%;
+        margin-bottom: 2rem;
+    }
+
+.nacate3  {
+    width: 15%;
+}
+
+
+
+}
