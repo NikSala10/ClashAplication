@@ -12,7 +12,7 @@ import '../components/addPost/addPost';
 import '../components/editAccount/editAccount';
 import styles from './login.css'
 import storage from '../utils/storage';
-import { getPostsByUser, getUserData } from '../utils/firebase';
+import { getPostsByUserAccount, getUserData } from '../utils/firebase';
 import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
 interface UserData {
@@ -171,7 +171,8 @@ class AccountUsers extends HTMLElement {
 				
 			`;
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
-            getPostsByUser((posts: any[]) =>  {
+            const userId = appState.userId;
+            getPostsByUserAccount(userId,(posts: any[]) =>  {
                 while (containerPost?.firstChild) {
                     containerPost.removeChild(containerPost.firstChild);
                 }
