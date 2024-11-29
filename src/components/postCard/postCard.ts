@@ -559,34 +559,34 @@ class PostCard extends HTMLElement  {
                
             `;
             
-            // this.loadComments()
-            // const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
-            // commentpost.className = "hide"
+            this.loadComments()
+            const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
+            commentpost.className = "hide"
 
-            //     const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
+                const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
 
-            //     comment.addEventListener('click', ()=>{
-            //         const commentShow = this.commentsElements?.pop()
+                comment.addEventListener('click', ()=>{
+                    const commentShow = this.commentsElements?.pop()
 
-            //         if (commentShow) {
-            //             if (countComment > 0) {
+                    if (commentShow) {
+                        if (countComment > 0) {
 
-            //                 commentShow.setAttribute(CommentsAttribute.showinput, 'true');
-            //             }else{
-            //                 commentpost.appendChild(commentShow)
-            //                 if (!this.showComent) {
-            //                     commentpost.className = "show"
-            //                     this.showComent = true
+                            commentShow.setAttribute(CommentsAttribute.showinput, 'true');
+                        }else{
+                            commentpost.appendChild(commentShow)
+                            if (!this.showComent) {
+                                commentpost.className = "show"
+                                this.showComent = true
 
-            //                 } else {
-            //                     commentShow.setAttribute(CommentsAttribute.showinput, 'false');
-            //                 }
+                            } else {
+                                commentShow.setAttribute(CommentsAttribute.showinput, 'false');
+                            }
 
-            //             }
-            //             this.commentsElements?.push(commentShow)
-            //         }   
-            //         countComment++
-            //     })   
+                        }
+                        this.commentsElements?.push(commentShow)
+                    }   
+                    countComment++
+                })   
         } }
 };
 
