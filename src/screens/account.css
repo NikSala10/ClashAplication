@@ -317,10 +317,27 @@ hr  {
     }
     .info-contact-user2  {
         display: block;
-        height: 800px;
+        height: 550px;
         flex-shrink: 0; 
         flex-grow: 0; 
         overflow: hidden; 
+    }
+    .info-contact-user2 .user-info  {
+        display: flex;
+    }
+    .info-contact-user2 #create  {
+        display: block;
+    }
+    .info-contact-user2 #create p  {
+        margin-bottom: 0.6rem;
+    }
+    .info-contact-user2 .circle-img  {
+        width: 10rem; 
+        height: 10rem; 
+    }
+    .info-contact-user2 #img-user {
+        width: 10rem; 
+        height: 10rem;
     }
     .user-info { 
         display: block;
