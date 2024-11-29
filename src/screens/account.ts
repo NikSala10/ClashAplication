@@ -162,13 +162,12 @@ class Account extends HTMLElement {
                                 <div class="circle-img">
                                     <img id="img-user" src="${userImage}" alt="">
                                 </div>
-                                <h3 id="name-user">${this.name ? this.name : 'Not found'}</h3>
-                                <p id="username">${this.username ? this.username : 'Not found'}</p>
-                                <btn-component color="#361656" label="Edit" id="btn-edit"></btn-component>
                                 <div id="create">
+                                    <p id="username">${this.username ? this.username : 'Not found'}</p>
                                     <p id="creative">Creative</p>
                                     <p id="category">${this.category ? this.category : 'Empty field'}</p>
                                 </div>
+                                <btn-component color="#361656" label="Edit" id="btn-edit"></btn-component>
                             </div>
                             <div class="user-text-contact">
                                 <h3 id="contct">Contact Information</h3>
