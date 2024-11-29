@@ -322,6 +322,9 @@ hr  {
         flex-grow: 0; 
         overflow: hidden; 
     }
+    .info-contact-user2 .user-text-contact  {
+        margin-left: 2rem;
+    }
     .info-contact-user2 .user-info  {
         display: flex;
         gap: 1rem;
