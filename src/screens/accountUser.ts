@@ -215,9 +215,6 @@ class AccountUsers extends HTMLElement {
                                 <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
                                 <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                             </div>
-                        <div id="addPost1" class="addPost">
-                            <p>+</p>
-                        </div>
                         </section>
                     </div>
                     <p>+</p>
@@ -331,16 +328,6 @@ class AccountUsers extends HTMLElement {
                 });
             }
 
-            //ADDPOSTBTN
-            const btnAddPost = this.shadowRoot.querySelector('#addPost1');
-            btnAddPost?.addEventListener('click', () => {
-                if (appState.user) {
-                    dispatch(setOpenCloseScreen(0));
-                } else {
-                    alert('Para crear un post necesitas una cuenta');
-                    dispatch(navigate(Screens.LOGIN));
-                }
-            });
         }
     }
        

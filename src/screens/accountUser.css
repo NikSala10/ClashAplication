@@ -288,6 +288,9 @@ hr  {
 
 
 }
+.info-contact-user2  {
+    display: none;
+}
 @media (max-width: 768px)  { 
     .addPost  {
         width: 60px;
@@ -313,5 +316,97 @@ hr  {
         justify-content: center;
         align-items: center;
         margin-top: 2rem;
+    }
+    #add-post { 
+        display: none;
+    }
+    .account-components{
+       
+        padding-top: 8rem;
+       
+    }
+    .bar-responsive  {
+        display: none;
+    }
+   
+    .filter p  {
+        margin-bottom: 0;
+    }
+    .info-contact-user  {
+        display: none;
+    }
+    .info-contact-user2  {
+        display: block;
+        height: 500px;
+        flex-shrink: 0; 
+        flex-grow: 0; 
+        overflow: hidden; 
+    }
+    .info-contact-user2 .user-text-contact  {
+        margin-left: 2rem;
+    }
+    .info-contact-user2 .user-info  {
+        display: flex;
+        gap: 1rem;
+        margin-left: 1.5rem;
+    }
+    .info-contact-user2 #create  {
+        display: block;
+        margin-left: 1rem;
+    }
+    .info-contact-user2 #create p  {
+        margin-bottom: 0.6rem;
+    }
+    .info-contact-user2 .circle-img  {
+        width: 10rem; 
+        height: 10rem; 
+    }
+    .info-contact-user2 #img-user {
+        width: 10rem; 
+        height: 10rem;
+    }
+    .user-info { 
+        display: block;
+    }
+    .container-barLaterals  {
+        display: none;
+    }
+    .container-postcards  {
+        display: block;
+        margin-left: 0.8rem;
+        width: 95%;
+    }
+    #post-config  {
+        gap: 0.5rem;
+        margin-left: 9rem;
+        margin-top: -0.8rem;
+    }
+    .user-text-contact  {
+        display: block;
+    }
+    #follows  {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        margin-left: 1.8rem;
+    }
+    .pFOlS  {
+        margin-bottom: 0;
+    }
+    #followers  {
+        width: 20%;
+    }
+    #followeing  {
+        width: 20%;
+    }
+    #Works  {
+        margin-bottom: 0;
+    }
+    .num  {
+    width: 5.5rem;
+    margin-bottom: 0.2rem;}
+
+    #followThe  {
+        font-size: 14px;
     }
 }
