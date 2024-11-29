@@ -497,7 +497,7 @@ class PostCard extends HTMLElement  {
         if (this.shadowRoot) {
             const initialLetter = this.name ? this.name.charAt(0).toUpperCase() : ''; 
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../src/components/postCard/postCard.css">
+            <link rel="stylesheet" href="../../../src/components/postCard/postCard.css">
            
                 <div class= "card">
                     <div class="part-user">
