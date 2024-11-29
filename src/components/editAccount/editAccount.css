@@ -183,11 +183,14 @@ input::placeholder  {
 }
 @media (max-width: 768px)  {  
     .container-modal  {
-        margin-left: 1.5rem;
+        margin-left: 1.3rem;
         padding: 1.5rem;
         width: 25rem;
     }
     #user input { 
         width: 8rem;
+    }    
+    .profesional-work input  {
+        width: 10rem;
     }    
 }
