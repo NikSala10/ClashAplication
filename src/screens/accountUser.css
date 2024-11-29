@@ -359,8 +359,15 @@ hr  {
         width: 10rem; 
         height: 10rem; 
     }
-    .info-contact-user2 #img-user {
-        width: 10rem; 
+    .info-contact-user2 .imgResponsive {
+        width: 5rem; 
+        height: 5rem;
+        display: block;
+        border-radius: 50%;
+         object-fit: cover; 
+    }
+    #img-user { 
+        width: 10rem;
         height: 10rem;
     }
     .user-info { 
