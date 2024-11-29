@@ -14,9 +14,9 @@ const onAuth = async () => {
 		
 		if (user) {
 			user.uid !== null ? dispatch(setUserCredentials(user.uid)) : ''; //Es la que se encarga de guardar el id del usuario
-			dispatch(navigate(Screens.ACCOUNT)); //Esta es la de navegar a dashboard
+			dispatch(navigate(Screens.DASHBOARD)); //Esta es la de navegar a dashboard
 		} else {
-			dispatch(navigate(Screens.ACCOUNT));
+			dispatch(navigate(Screens.DASHBOARD));
 		}
 	});
 };
@@ -25,7 +25,7 @@ onAuth();
 
 //El estado global, appState
 const initialState: AppState = {
-	screen: Screens.ACCOUNT,
+	screen: Screens.DASHBOARD,
 	user:  '',
 	userId: '',
 	post: [],
