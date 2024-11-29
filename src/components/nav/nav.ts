@@ -58,7 +58,7 @@ class Nav extends HTMLElement  {
                     // Llamar a getUserIdByUsername para obtener el userId a partir del username
                     getUserIdByUsername(searchTerm, (userId) => {
                         if (userId) {
-                            // const user = appState.userId
+                     
                             getUserData(userId, (userInfo) => {
                                 if (userInfo) {
                                     console.log('Redirigiendo a la pantalla con los siguientes datos de usuario:', userInfo); // Verificar los datos
