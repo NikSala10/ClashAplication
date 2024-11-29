@@ -1,4 +1,4 @@
-import { hashtags } from '../data/dataHashtags';
+
 import { appState } from '../store/store';
 import  {firebaseConfig} from '../utils/firebaseConfig'
 import { UpdateFieldType } from '../types/post';
