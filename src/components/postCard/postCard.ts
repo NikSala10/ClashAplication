@@ -344,54 +344,69 @@ class PostCard extends HTMLElement  {
         }
     }
 
-    async loadComments() { 
-        let comments: any[] = []; 
+    async loadComments() {
+        if (!this.postid) return;
     
-        if (this.postid) {
+        try {
             // Obtener comentarios asociados al post
-            comments = [await getCommentsByPost(this.postid)];
-            const pComments = this.shadowRoot?.querySelector('#commentCount') as HTMLElement;
+            getCommentsByPost(this.postid, (comments) => {
+                if (comments) {
+                    this.commentsN = comments.length;
     
-            // Actualizar el contador de comentarios
-            const comments1 = comments[0];
-            this.commentsN = comments1.length;
-            pComments.textContent = `${this.commentsN}`;
+                    // Actualizar el contador de comentarios en la interfaz
+                    const pComments = this.shadowRoot?.querySelector('#commentCount') as HTMLElement;
+                    if (pComments) {
+                        pComments.textContent = `${this.commentsN}`;
+                    }
     
-            // Iterar sobre los comentarios obtenidos
-            for (const commentData of comments1) {
-                const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+                    // Limpiar componentes anteriores
+                    this.commentsElements = [];
     
-                // Configurar atributos básicos
-                commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile);    
-                commentsElement.setAttribute(CommentsAttribute.postid, commentData.postid);
-                commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded);
-                commentsElement.setAttribute(CommentsAttribute.description, commentData.description);
-                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+                    // Crear componentes de comentarios
+                    comments.forEach((commentData) => {
+                        const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
     
-                // Manejar datos del usuario con callback
-                if (commentData.userUid) {
-                    getUserData(commentData.userUid, (userData) => {
-                        const name = userData?.name || 'Usuario desconocido';
-                        commentsElement.setAttribute(CommentsAttribute.username, name);
+                        // Configurar atributos básicos
+                        commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile || '');
+                        commentsElement.setAttribute(CommentsAttribute.postid, commentData.postid);
+                        commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded);
+                        commentsElement.setAttribute(CommentsAttribute.description, commentData.description);
+                        commentsElement.setAttribute(CommentsAttribute.showinput, 'false');
     
-                        // Opcional: Puedes agregar el elemento aquí si necesitas respuestas inmediatas
+                        // Manejar datos del usuario
+                        if (commentData.userUid) {
+                            getUserData(commentData.userUid, (userData) => {
+                                const name = userData?.name || 'Usuario desconocido';
+                                commentsElement.setAttribute(CommentsAttribute.username, name);
+                            });
+                        } else {
+                            commentsElement.setAttribute(CommentsAttribute.username, 'Usuario desconocido');
+                        }
+    
                         this.commentsElements?.push(commentsElement);
                     });
-                } else {
-                    commentsElement.setAttribute(CommentsAttribute.username, 'Usuario desconocido');
-                    this.commentsElements?.push(commentsElement);
-                }
-            }
-        }
     
-        // Verificar si hay elementos en la lista de comentarios y agregar un comentario vacío
-        if (this.commentsElements) {
-            const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
-            commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
-            commentsElement.setAttribute(CommentsAttribute.username, '');
-            this.commentsElements?.push(commentsElement);
+                    // Añadir un campo de entrada vacío para nuevos comentarios
+                    const newCommentElement = this.ownerDocument.createElement("comment-component") as Comments;
+                    newCommentElement.setAttribute(CommentsAttribute.showinput, 'true');
+                    newCommentElement.setAttribute(CommentsAttribute.username, '');
+                    this.commentsElements?.push(newCommentElement);
+    
+                    // Actualizar la lista en el contenedor de comentarios
+                    const commentsContainer = this.shadowRoot?.querySelector('#commentsContainer') as HTMLElement;
+                    if (commentsContainer) {
+                        commentsContainer.innerHTML = ''; // Limpiar comentarios previos
+                        this.commentsElements.forEach((element) => {
+                            commentsContainer.appendChild(element);
+                        });
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Error al cargar los comentarios:", error);
         }
     }
+
     formatTimeAgo(dateadded:any) {
         if (!dateadded) return "Fecha no disponible";
     
