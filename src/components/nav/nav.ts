@@ -52,16 +52,22 @@ class Nav extends HTMLElement  {
 
         searchInput?.addEventListener('keydown', async (event) => {
             if (event.key === 'Enter') {
-                console.log('Enter presionado')
                 const searchTerm = searchInput.value.trim();
         
                 if (searchTerm) {
-                    const user = appState.userId;
-                    if (user) {
-                        dispatch(navigateUser(Screens.ACCOUNTUSER, user));
-                    } else {
-                        alert('Usuario no encontrado');
-                    }
+                    // Aquí, supondremos que `getUserData` recibe un `username` en lugar de `userId`.
+                    // Llamamos a la función `getUserData` para buscar al usuario con el `searchTerm`.
+                    getUserData(searchTerm, (userInfo) => {
+                        if (userInfo) {
+                            // Si se encuentra el usuario, redirigimos a su perfil.
+                            dispatch(navigateUser(Screens.ACCOUNTUSER, userInfo));
+                        } else {
+                            // Si no se encuentra el usuario, mostramos un mensaje de error.
+                            alert('Usuario no encontrado');
+                        }
+                    });
+                } else {
+                    alert('Por favor ingresa un nombre de usuario');
                 }
             }
         });
