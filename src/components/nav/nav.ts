@@ -234,10 +234,7 @@ class Nav extends HTMLElement  {
                     </ul>
                 </div>
             </div>
-             <div class="bar-responsive">
-                <p id="nav-all">All</p>
-                <p id="nav-new">Top</p>
-            </div>
+           
              
           
             `;

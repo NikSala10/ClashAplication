@@ -73,8 +73,40 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.437);
 }
+.bar-responsive  {
+    display: none;
+}
 @media (max-width: 768px)  {
-     
+    .bar-responsive  {
+        display: flex;
+        position: relative;
+        top: 17rem;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        margin-left: 5%;
+        border-bottom: 2px solid rgb(255, 255, 255);
+        z-index: 999;
+       }
+       .bar-responsive p  {
+        width: 25%;
+        align-items: center;
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+        font-size: 19px;
+        font-style: normal;
+        color: white;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+       }
+       .bar-responsive p:hover  {
+            border-bottom: 2px solid rgb(255, 255, 255);
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+       }
   .containers {
     position: relative;
   }

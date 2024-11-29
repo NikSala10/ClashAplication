@@ -14,6 +14,7 @@ import { dispatch } from '../store/store'
 import { setOpenCloseScreen, getUsersAction, getCommentsAction} from '../store/actions';
 import { navigate } from '../store/actions';
 import { Screens } from '../types/store';
+import { loadPost } from '../store/actions';
 interface UserData {
     name: string;
     imgUser:string;
@@ -74,6 +75,10 @@ class Dashboard extends HTMLElement  {
              <link rel="stylesheet" href="../src/components/postCard/postCard.css">
            <link rel="stylesheet" href="/src/index.css">
            <nav-component></nav-component>
+             <div class="bar-responsive">
+                <p id="nav-all">All</p>
+                <p id="nav-new">Top</p>
+            </div>
            <section class="all" id="all">
                 <div class="add-Post hide" id="add-Post">
                     <addpost-component></addpost-component> 
@@ -97,7 +102,14 @@ class Dashboard extends HTMLElement  {
             <foo-ter></foo-ter>
             `;
             
-        
+            const navNew = this.shadowRoot.querySelector('#nav-new');
+            const navAll = this.shadowRoot.querySelector('#nav-all');
+            navNew?.addEventListener('click', ()=>{
+                dispatch(loadPost(true))
+            })
+            navAll?.addEventListener('click', ()=>{
+                dispatch(loadPost(false))
+            })
             //POST
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');
             if(!appState.loadPost){
