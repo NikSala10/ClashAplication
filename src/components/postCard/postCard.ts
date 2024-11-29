@@ -435,55 +435,55 @@ class PostCard extends HTMLElement  {
             }
         }
     }
-    // async loadComments() { 
-    //     let comments: any[] = []; 
+    async loadComments() {
+        if (!this.postid) return;
     
-    //     if (this.postid) {
-    //         // Obtener comentarios asociados al post
-    //         comments = [await getCommentsByPost(this.postid)];
-    //         const pComments = this.shadowRoot?.querySelector('#commentCount') as HTMLElement;
+        // Escuchar cambios en los comentarios en tiempo real
+        await getCommentsByPost(this.postid, async (comments) => {
+            this.commentsElements = []; // Limpiar elementos previos
     
-    //         // Actualizar el contador de comentarios
-    //         const comments1 = comments[0];
-    //         this.commentsN = comments1.length;
-    //         pComments.textContent = `${this.commentsN}`;
+            const pComments = this.shadowRoot?.querySelector('#commentCount') as HTMLElement;
+
+            this.commentsN = comments.length;
+            if (pComments) {
+                pComments.textContent = `${this.commentsN}`;
+            }
     
-    //         // Iterar sobre los comentarios obtenidos
-    //         for (const commentData of comments1) {
-    //             const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+            // Crear elementos para los comentarios
+            for (const commentData of comments) {
+                const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
     
-    //             // Configurar atributos básicos
-    //             commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile);    
-    //             commentsElement.setAttribute(CommentsAttribute.postid, commentData.postid);
-    //             commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded);
-    //             commentsElement.setAttribute(CommentsAttribute.description, commentData.description);
-    //             commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+                commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile || '');
+                commentsElement.setAttribute(CommentsAttribute.postid, this.postid || '');
+                commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded || '');
+                commentsElement.setAttribute(CommentsAttribute.description, commentData.description || '');
+                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
     
-    //             // Manejar datos del usuario con callback
-    //             if (commentData.userUid) {
-    //                 const userId = appState.user
-    //                 getUserData(userId, (userData) => {
-    //                     const name = userData?.name || 'Usuario desconocido';
-    //                     commentsElement.setAttribute(CommentsAttribute.username, name);
+                // Manejar datos del usuario con callback
+                if (commentData.userUid) {
+                    const userId = appState.user;
+                    getUserData(userId, (userData) => {
+                        const name = userData?.username || 'Usuario no encontrado';
+                        commentsElement.setAttribute(CommentsAttribute.username, name);
     
-    //                     // Opcional: Puedes agregar el elemento aquí si necesitas respuestas inmediatas
-    //                     this.commentsElements?.push(commentsElement);
-    //                 });
-    //             } else {
-    //                 commentsElement.setAttribute(CommentsAttribute.username, 'Usuario desconocido');
-    //                 this.commentsElements?.push(commentsElement);
-    //             }
-    //         }
-    //     }
+                        this.commentsElements?.push(commentsElement);
+                    });
+                } else {
+                    commentsElement.setAttribute(CommentsAttribute.username, 'Usuario desconocido');
+                    this.commentsElements?.push(commentsElement);
+                }
+            }
+            if (this.commentsElements) {
+                // Agregar un comentario vacío al final
+                const emptyCommentElement = this.ownerDocument.createElement("comment-component") as Comments;
+                emptyCommentElement.setAttribute(CommentsAttribute.showinput, 'true');
+                emptyCommentElement.setAttribute(CommentsAttribute.postid, this.postid || 'not found');
+                emptyCommentElement.setAttribute(CommentsAttribute.username, '');
+                this.commentsElements?.push(emptyCommentElement);
+            }
+        });
+    }
     
-    //     // Verificar si hay elementos en la lista de comentarios y agregar un comentario vacío
-    //     if (this.commentsElements) {
-    //         const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
-    //         commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
-    //         commentsElement.setAttribute(CommentsAttribute.username, '');
-    //         this.commentsElements?.push(commentsElement);
-    //     }
-    // }
 
     formatTimeAgo(dateadded:any) {
         if (!dateadded) return "Fecha no disponible";
