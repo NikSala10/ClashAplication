@@ -463,7 +463,7 @@ class PostCard extends HTMLElement  {
                 if (commentData.userUid) {
                     const userId = commentData.userUid;
                     getUserData(userId, (userData) => {
-                        const name = userData?.username || 'Usuario no encontrado';
+                        const name = userData?.name || 'Usuario no encontrado';
                         commentsElement.setAttribute(CommentsAttribute.username, name);
     
                         this.commentsElements?.push(commentsElement);
