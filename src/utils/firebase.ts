@@ -491,18 +491,6 @@ export const deletePost= async (id: string) => {
     }
   };
 
-//   export const getUserDataAsync = async (userId: string): Promise<any | null> => {
-//     return new Promise((resolve, reject) => {
-//         getUserData(userId, (userData) => {
-//             if (userData) {
-//                 resolve(userData);
-//             } else {
-//                 reject('No se pudo obtener los datos del usuario');
-//             }
-//         });
-//     });
-// };
-
 export const getUserIdByUsername = async (username: string, callback: (userId: string | null) => void) => {
     try {
         const { db } = await getFirebaseInstance();
