@@ -461,12 +461,11 @@ class PostCard extends HTMLElement  {
     
                 // Manejar datos del usuario con callback
                 if (commentData.userUid) {
-                    const userId = appState.user
+                    const userId = commentData.userUid;
                     getUserData(userId, (userData) => {
-                        const name = userData?.name || 'Usuario desconocido';
+                        const name = userData?.username || 'Usuario no encontrado';
                         commentsElement.setAttribute(CommentsAttribute.username, name);
-
-                        // Opcional: Puedes agregar el elemento aquí si necesitas respuestas inmediatas
+    
                         this.commentsElements?.push(commentsElement);
                     });
                 } else {
@@ -560,6 +559,7 @@ class PostCard extends HTMLElement  {
                
             `;
             
+           
             this.loadComments()
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
