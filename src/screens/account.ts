@@ -160,7 +160,7 @@ class Account extends HTMLElement {
                         <section class="info-contact-user2">
                             <div class="user-info">
                                 <div class="circle-img">
-                                    <img id="img-user" src="${userImage}" alt="">
+                                    <img class="imgResponsive" id="img-user" src="${userImage}" alt="">
                                 </div>
                                 <div id="create">
                                     <p id="username">${this.username ? this.username : 'Not found'}</p>
