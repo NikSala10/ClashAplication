@@ -18,6 +18,7 @@ interface UserData {
     currentjob: string;
     academy: string;
     moreworksurl: string;
+    likes:[]
 }
 const edit: EditUserInformation = {
     username: '',
@@ -29,7 +30,9 @@ const edit: EditUserInformation = {
 	academy: '',
     moreworksurl: '',
     followers:[],
-    following:[]
+    following:[],
+    likes:[],
+    favourites:[]
 }
 export enum AttributeEditPost  { 
     'imguser' = 'imguser',

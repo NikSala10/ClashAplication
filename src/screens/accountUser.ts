@@ -28,6 +28,8 @@ interface UserData {
     currentjob: string;
     academy: string;
     moreworksurl: string;
+    likes:[],
+	favourites:[]
 }
 class AccountUsers extends HTMLElement {
     imguser?: string;

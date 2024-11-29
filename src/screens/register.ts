@@ -17,6 +17,8 @@ const edit: EditUserInformation = {
     moreworksurl: '',
 	followers:[],
 	following:[],
+	likes:[],
+	favourites:[]
 }
 const credentials = {
     name: '',

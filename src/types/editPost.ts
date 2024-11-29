@@ -8,5 +8,7 @@ export interface EditUserInformation {
 	academy: string,
 	moreworksurl: string,
 	followers: [],
-	following: []
+	following: [],
+	likes:[],
+	favourites:[]
 }
