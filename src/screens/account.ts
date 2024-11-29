@@ -167,7 +167,7 @@ class Account extends HTMLElement {
                                     <p id="creative">Creative</p>
                                     <p id="category">${this.category ? this.category : 'Empty field'}</p>
                                 </div>
-                                <btn-component color="#361656" label="Edit" id="btn-edit"></btn-component>
+                                <btn-component color="#361656" label="Edit" class="editResponsive" id="btn-edit"></btn-component>
                             </div>
                             <div class="user-text-contact">
                                 <h3 id="contct">Contact Information</h3>
@@ -241,6 +241,9 @@ class Account extends HTMLElement {
 
              const btnAddPost = this.shadowRoot.querySelector('#add-post');
             const btnEdit = this.shadowRoot.querySelector('#btn-edit');
+         
+        
+            
 
             if (appState.modalScreen[0]) {
                 const add = this.shadowRoot?.querySelector('.add-Post')
@@ -275,8 +278,11 @@ class Account extends HTMLElement {
                 dispatch(setOpenCloseScreen(1))
                 
             })
-           
-
+            const btnEditResponsive = this.shadowRoot.querySelector('.editResponsive')
+            btnEditResponsive?.addEventListener('click', ()=>{
+                dispatch(setOpenCloseScreen(1))
+                
+            })
 
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
             const countPost = this.shadowRoot?.querySelector('#countPost');  
