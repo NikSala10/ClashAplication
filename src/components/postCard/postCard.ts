@@ -268,6 +268,7 @@ class PostCard extends HTMLElement  {
             });
         }
 
+        
         let counterLikes = [0];
         const likesButton = this.shadowRoot?.querySelector('#like') as HTMLElement;
         const p = this.shadowRoot?.querySelector('#likeCount') as HTMLElement;
@@ -341,7 +342,54 @@ class PostCard extends HTMLElement  {
         }
     }
 
-   
+    async loadComments() { 
+        let comments: any[] = []; 
+    
+        if (this.postid) {
+            // Obtener comentarios asociados al post
+            comments = [await getCommentsByPost(this.postid)];
+            const pComments = this.shadowRoot?.querySelector('#commentCount') as HTMLElement;
+    
+            // Actualizar el contador de comentarios
+            const comments1 = comments[0];
+            this.commentsN = comments1.length;
+            pComments.textContent = `${this.commentsN}`;
+    
+            // Iterar sobre los comentarios obtenidos
+            for (const commentData of comments1) {
+                const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+    
+                // Configurar atributos básicos
+                commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile);    
+                commentsElement.setAttribute(CommentsAttribute.postid, commentData.postid);
+                commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded);
+                commentsElement.setAttribute(CommentsAttribute.description, commentData.description);
+                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+    
+                // Manejar datos del usuario con callback
+                if (commentData.userUid) {
+                    getUserData(commentData.userUid, (userData) => {
+                        const name = userData?.name || 'Usuario desconocido';
+                        commentsElement.setAttribute(CommentsAttribute.username, name);
+    
+                        // Opcional: Puedes agregar el elemento aquí si necesitas respuestas inmediatas
+                        this.commentsElements?.push(commentsElement);
+                    });
+                } else {
+                    commentsElement.setAttribute(CommentsAttribute.username, 'Usuario desconocido');
+                    this.commentsElements?.push(commentsElement);
+                }
+            }
+        }
+    
+        // Verificar si hay elementos en la lista de comentarios y agregar un comentario vacío
+        if (this.commentsElements) {
+            const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+            commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+            commentsElement.setAttribute(CommentsAttribute.username, '');
+            this.commentsElements?.push(commentsElement);
+        }
+    }
     formatTimeAgo(dateadded:any) {
         if (!dateadded) return "Fecha no disponible";
     
@@ -416,35 +464,35 @@ class PostCard extends HTMLElement  {
                
             `;
             
+            this.loadComments()
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
-            
+
                 const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
-        
+
                 comment.addEventListener('click', ()=>{
                     const commentShow = this.commentsElements?.pop()
-                    
+
                     if (commentShow) {
                         if (countComment > 0) {
-                            
+
                             commentShow.setAttribute(CommentsAttribute.showinput, 'true');
                         }else{
                             commentpost.appendChild(commentShow)
                             if (!this.showComent) {
                                 commentpost.className = "show"
                                 this.showComent = true
-                                
+
                             } else {
                                 commentShow.setAttribute(CommentsAttribute.showinput, 'false');
                             }
-            
+
                         }
                         this.commentsElements?.push(commentShow)
                     }   
                     countComment++
-                })  
-        }
-    }
+                })   
+        } }
 };
 
 customElements.define('card-post',PostCard);
