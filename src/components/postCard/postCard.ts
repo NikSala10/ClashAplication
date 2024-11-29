@@ -457,6 +457,8 @@ class PostCard extends HTMLElement  {
                     getUserData(userId, (userData) => {
                         const name = userData?.name || 'Usuario no encontrado';
                         commentsElement.setAttribute(CommentsAttribute.username, name);
+                        commentsElement.setAttribute(CommentsAttribute.imgprofile, userData.imgUser);
+
                         this.commentsElements?.push(commentsElement);
                     });
                 } else {
