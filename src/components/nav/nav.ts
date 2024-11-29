@@ -57,13 +57,10 @@ class Nav extends HTMLElement  {
                 if (searchTerm) {
                     // Llamar a getUserIdByUsername para obtener el userId a partir del username
                     getUserIdByUsername(searchTerm, (userId) => {
-                        console.log('UserId obtenido:', userId);  // Verificar que el userId se obtiene correctamente
                         if (userId) {
                             getUserData(userId, (userInfo) => {
-                                console.log('User Info:', userInfo);  // Verificar que se reciben los datos correctamente
                                 if (userInfo) {
-                                    dispatch(navigateUser(Screens.ACCOUNTUSER, userInfo));
-                                    console.log(Screens.ACCOUNTUSER, userInfo);
+                                    dispatch(navigateUser(Screens.ACCOUNTUSER, userInfo.id));
                                 } else {
                                     alert('Usuario no encontrado');
                                 }

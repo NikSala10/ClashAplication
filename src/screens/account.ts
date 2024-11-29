@@ -157,6 +157,48 @@ class Account extends HTMLElement {
                             </div>
                      
                         </section>
+                        <section class="info-contact-user2">
+                            <div class="user-info">
+                                <div class="circle-img">
+                                    <img id="img-user" src="${userImage}" alt="">
+                                </div>
+                                <div id="follows">
+                                    <div id="followers">
+                                        <p class="pFOlS">Followers</p>
+                                        <p class="num">${this.followers}</p>
+                                    </div>
+                                    <div id="followeing">
+                                        <p class="pFOlS">Following</p>
+                                        <p class="num">${this.following}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-text-contact">
+                                <h3 id="name-user">${this.name ? this.name : 'Not found'}</h3>
+                                <p id="username">${this.username ? this.username : 'Not found'}</p>
+                                <btn-component color="#361656" label="Edit" id="btn-edit"></btn-component>
+                                <div id="create">
+                                    <p id="creative">Creative</p>
+                                    <p id="category">${this.category ? this.category : 'Empty field'}</p>
+                                </div>
+                                <h3 id="contct">Contact Information</h3>
+                                <p id="email">${this.email ? this.email : 'Not found'}</p>
+
+                                <div class="icons-profesional">
+                                    <div class="first">
+                                        <field-component field="placeResidence" label="${this.placeresidence ? this.placeresidence : 'Empty field'}"></field-component>
+                                        <field-component field="currentJob" label="${this.currentjob ? this.currentjob : 'Empty field'}"></field-component>
+                                    </div>
+                                    <div class="first">
+                                        <field-component field="Academy" label="${this.academy ? this.academy : 'Empty field'}"></field-component>
+                                        <field-component field="currentTraining" label="${this.currenttraining ? this.currenttraining : 'Empty field'}"></field-component>
+                                    </div>
+                                </div>
+                                <p id="Works">More Works</p>
+                                <a id="url" href="${this.moreworksurl ? this.moreworksurl : 'Url not entered'}" target="_blank">${this.moreworksurl ? this.moreworksurl : 'Not found'}</a>
+                            </div>
+                     
+                        </section>
                         <div id="post-config">
                             <btn-account color="#361656" label="+ Post" id="add-post"></btn-account>
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 24 24"><path fill="currentColor" d="M14.647 4.081a.724.724 0 0 0 1.08.448c2.439-1.485 5.23 1.305 3.745 3.744a.724.724 0 0 0 .447 1.08c2.775.673 2.775 4.62 0 5.294a.724.724 0 0 0-.448 1.08c1.485 2.439-1.305 5.23-3.744 3.745a.724.724 0 0 0-1.08.447c-.673 2.775-4.62 2.775-5.294 0a.724.724 0 0 0-1.08-.448c-2.439 1.485-5.23-1.305-3.745-3.744a.724.724 0 0 0-.447-1.08c-2.775-.673-2.775-4.62 0-5.294a.724.724 0 0 0 .448-1.08c-1.485-2.439 1.305-5.23 3.744-3.745a.722.722 0 0 0 1.08-.447c.673-2.775 4.62-2.775 5.294 0M12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6"/></svg>
@@ -195,7 +237,7 @@ class Account extends HTMLElement {
                  }
              });
 
-             
+
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
             const countPost = this.shadowRoot?.querySelector('#countPost');  
             const countPostFavorites = this.shadowRoot?.querySelector('#countPostFavorites');  
