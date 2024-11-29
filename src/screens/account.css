@@ -324,9 +324,12 @@ hr  {
     }
     .info-contact-user2 .user-info  {
         display: flex;
+        gap: 1rem;
+        margin-left: 1.5rem;
     }
     .info-contact-user2 #create  {
         display: block;
+        margin-left: 1rem;
     }
     .info-contact-user2 #create p  {
         margin-bottom: 0.6rem;
