@@ -11,8 +11,9 @@ import BarLateral, {Attribute2} from '../components/barLateral/barLateral';
 import '../components/addPost/addPost';
 import '../components/editAccount/editAccount';
 import styles from './login.css'
+import PostCard,  {AttributePostCard} from '../components/postCard/postCard';
 import storage from '../utils/storage';
-import { getPostsByUser, getUserData } from '../utils/firebase';
+import { getPostsByUser, getPosts, getUserData } from '../utils/firebase';
 import '../components/nav/nav';
 import { setUserCredentials } from '../store/actions';
 interface UserData {
@@ -28,6 +29,8 @@ interface UserData {
     currentjob: string;
     academy: string;
     moreworksurl: string;
+    likes: String[];
+    favourites: String[];
 }
 class Account extends HTMLElement {
     imguser?: string;
@@ -160,8 +163,8 @@ class Account extends HTMLElement {
                             <svg id="logOut" xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12h-9.5m7.5 3l3-3l-3-3m-5-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2v-1"/></svg>
                         </div>
                         <div class="filter">
-                            <p>All  <b>6</b></p>
-                            <p>Favorites <b>6</b></p>
+                            <p id= "Postuser">All <b id="countPost">6</b></p>
+                            <p id= "PostFavorites">Favorites <b id="countPostFavorites">6</b></p>
                         </div>
                         <hr>
                         <section class="containers">
@@ -181,11 +184,48 @@ class Account extends HTMLElement {
 				
 			`;
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
-            getPostsByUser((posts: any[]) =>  {
+            const countPost = this.shadowRoot?.querySelector('#countPost');  
+            const countPostFavorites = this.shadowRoot?.querySelector('#countPostFavorites');  
+            const Postuser = this.shadowRoot?.querySelector('#Postuser');  
+            const btnFavorites = this.shadowRoot?.querySelector('#PostFavorites');  
+
+        // Obtener los posts
+        const allPosts = await new Promise<any[]>((resolve) => {
+            getPosts((posts) => resolve(posts));
+        });
+
+        // Obtener los datos del usuario (incluyendo sus likes)
+        const userInfo = await new Promise<UserData | null>((resolve) => {
+            getUserData(appState.user, resolve);
+        });
+
+        if (userInfo) {
+            // Filtrar posts favoritos del usuario
+            const favoritePosts = allPosts.filter(post => userInfo.favourites.includes(post.id));
+
+            if (countPostFavorites) {
+                countPostFavorites.textContent = `${favoritePosts.length}`;
+            }
+            const userPosts = allPosts.filter(post => post.userUid === appState.user);
+            if (countPost) {
+                countPost.textContent = `${userPosts.length}`;
+            }
+            userPosts.forEach(post => {
+                const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
+                userPostCard.setAttribute(AttributeCardAccount.image, post.image);
+                userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
+                userPostCard.setAttribute(AttributeCardAccount.hashtags, post.hashtags);
+                userPostCard.setAttribute(AttributeCardAccount.likes, post.likes);
+                userPostCard.setAttribute(AttributeCardAccount.favorites, post.favourites);
+                userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
+                containerPost?.appendChild(userPostCard);
+            });
+
+            Postuser?.addEventListener('click', ()=>{
                 while (containerPost?.firstChild) {
                     containerPost.removeChild(containerPost.firstChild);
                 }
-                posts.forEach((post: any) => {        
+                userPosts.forEach(post => {
                     const userPostCard = this.ownerDocument.createElement("cardaccount-component") as CardAccount;
                     userPostCard.setAttribute(AttributeCardAccount.image, post.image);
                     userPostCard.setAttribute(AttributeCardAccount.postid, post.id);
@@ -195,8 +235,52 @@ class Account extends HTMLElement {
                     userPostCard.setAttribute(AttributeCardAccount.comments, post.comments);
                     containerPost?.appendChild(userPostCard);
                 });
-            });
+            })
+            // Evento al hacer clic en "Favorites"
+            btnFavorites?.addEventListener('click', () => {
+                // Limpiar los posts actuales
+                while (containerPost?.firstChild) {
+                    containerPost.removeChild(containerPost.firstChild);
+                }
 
+                // Renderizar solo los posts favoritos
+                favoritePosts.forEach(post => {
+                    const commentsPost = appState.comments.filter((c) => c.postid === post.id) 
+                    const user = appState.users.find(u => u.id === post.userUid); 
+                    let stateChange = false 
+                    if (user.followers) {
+                        const follow = user.followers.find((r: any) => r === appState.user);  
+                        stateChange = follow ? true : false 
+                    }
+                    const userLog = appState.users.find(user => user.id === appState.user);
+                    let likeStatus = false
+                                     
+                    if (userLog) {
+                        const like = userLog.likes.find((like:any) => like === post.id);
+                        if(like) likeStatus = true
+                    }
+                 
+                    const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
+                    userPostCards.setAttribute(AttributePostCard.postid, post.id)
+                    userPostCards.setAttribute(AttributePostCard.userid, post.userUid)
+                    userPostCards.setAttribute(AttributePostCard.name, user?.name || '');  
+                    userPostCards.setAttribute(AttributePostCard.state, String(stateChange));  
+                    userPostCards.setAttribute(AttributePostCard.imguser, user?.imgUser || ''); 
+                    userPostCards.setAttribute(AttributePostCard.username, user?.username || '');
+                    userPostCards.setAttribute(AttributePostCard.category, post.category);
+                    userPostCards.setAttribute(AttributePostCard.description, post.description);
+                    userPostCards.setAttribute(AttributePostCard.image, post.image);
+                    userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
+                    userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
+                    userPostCards.setAttribute(AttributePostCard.likes, post.likes);
+                    userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
+                    userPostCards.setAttribute(AttributePostCard.comments, post.comments);
+                    userPostCards.setAttribute(AttributePostCard.likeStatus, String(likeStatus));
+                    userPostCards.setAttribute(AttributePostCard.commentsElements,JSON.stringify(commentsPost));
+                    containerPost?.appendChild(userPostCards);
+                });
+            });
+        }
 			const cssAccount = this.ownerDocument.createElement("style");
 			cssAccount.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssAccount);
