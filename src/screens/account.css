@@ -305,6 +305,7 @@ hr  {
     .bar-responsive  {
         display: none;
     }
+   
     .filter p  {
         margin-bottom: 0;
     }
@@ -321,5 +322,10 @@ hr  {
         display: block;
         margin-left: 0.8rem;
         width: 95%;
+    }
+    #post-config  {
+        gap: 0.5rem;
+        margin-left: 80%;
+        margin-bottom: 3rem;
     }
 }
