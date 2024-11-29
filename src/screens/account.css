@@ -294,4 +294,15 @@ hr  {
         align-items: center;
         margin-top: 2rem;
     }
+    #add-post { 
+        display: none;
+    }
+    .account-components{
+       
+        padding-top: 8rem;
+       
+    }
+    .bar-responsive  {
+        display: none;
+    }
 }

@@ -85,7 +85,7 @@ class Nav extends HTMLElement  {
             const defaultImage = document.createElement('img');
             defaultImage.src = '../src/assets/ImgUserIcon.svg';
             defaultImage.alt = 'Default User Icon';
-            defaultImage.id = 'img-user';
+            defaultImage.id = 'img-usernav';
             containerUserInformation?.appendChild(defaultImage);
         } else {
             // Obtener información del usuario logueado
@@ -97,7 +97,7 @@ class Nav extends HTMLElement  {
                     const defaultImage = document.createElement('img');
                     defaultImage.src = '../src/assets/ImgUserIcon.svg';
                     defaultImage.alt = 'Default User Icon';
-                    defaultImage.id = 'img-user';
+                    defaultImage.id = 'img-usernav';
                     containerUserInformation?.appendChild(defaultImage);
                     return;
                 }
@@ -113,7 +113,7 @@ class Nav extends HTMLElement  {
                 const userImage = document.createElement('img');
                 userImage.src = this.imguser || '../src/assets/ImgUserIcon.svg'; // Si no hay imgUser, usa predeterminada
                 userImage.alt = 'User Image';
-                userImage.id = 'img-user';
+                userImage.id = 'img-usernav';
 
                 containerUserInformation?.appendChild(userImage);
             });
@@ -126,6 +126,7 @@ class Nav extends HTMLElement  {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
            <link rel="stylesheet" href="../src/components/nav/nav.css">
+           <link rel="stylesheet" href="../../../src/screens/account.css">
     <nav class="navegation">
         
             <div class="logo">

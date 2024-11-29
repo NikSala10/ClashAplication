@@ -139,7 +139,7 @@ svg  {
     border-radius: 50%;
     object-fit: cover;
 }
-#img-user {
+#img-usernav {
     width: 60px; 
     height: 60px; 
     border-radius: 50%;
@@ -237,18 +237,12 @@ hr {
     margin-left: 40%;
 }
 .circle-img  {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    background-color:none;
-    width: 50px; 
-    height: 50px; 
-    border-radius: 50%;
-    object-fit: cover;
+    width: 20px; 
+    height: 20px; 
 }
-#img-user {
+#img-usernav {
     width: 50px; 
-    height: 50px; 
+    height:50px; 
 }
 
 #initial {
