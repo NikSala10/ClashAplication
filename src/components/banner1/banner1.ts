@@ -36,7 +36,7 @@ class Banner1 extends HTMLElement  {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../../src/components/banner1/index.css">
+            <link rel="stylesheet" href="../components/banner1/index.css">
       
                     <div class= "cardWorker">
                         <div id="image">

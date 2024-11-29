@@ -71,9 +71,9 @@ class Dashboard extends HTMLElement  {
     render()  {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="/../src/components/banner1/index.css">
-             <link rel="stylesheet" href="/../src/components/postCard/postCard.css">
-           <link rel="stylesheet" href="/../src/index.css">
+            <link rel="stylesheet" href="../components/banner1/index.css">
+             <link rel="stylesheet" href="../components/postCard/postCard.css">
+           <link rel="stylesheet" href="../index.css">
            <nav-component></nav-component>
              <div class="bar-responsive">
                 <p id="nav-all">All</p>
