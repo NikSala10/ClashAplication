@@ -93,10 +93,24 @@ class Comments extends HTMLElement  {
         this.render();
     }
     async submitForm() {
-        console.log(this.postid);
-        
         if (this.postid) {
             comment.postid = this.postid
+            const commentCont = this.shadowRoot?.querySelector('.all')
+            if (commentCont) {
+                const currentUserInfo = await new Promise<UserData | null>((resolve) =>
+                    getUserData(appState.user, resolve)
+                );
+                const initialLetter = currentUserInfo?.username ? currentUserInfo?.username.charAt(1).toUpperCase() : ''; 
+                commentCont.innerHTML = `
+                <div class="user">
+                    <div class="circle-img">${currentUserInfo?.imgUser ? `<img id="img-user" src="${currentUserInfo?.imgUser}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}</div>
+                    <div class="two">
+                        <p id="username">${currentUserInfo? currentUserInfo.username: ''}</p>
+                        <p id="description">${comment.description}</p>
+                    </div>
+                    <p id="timeadd">now</p>
+                </div>`    
+            }
             await addComment(comment); 
             this.clearInputs();
 
@@ -114,7 +128,6 @@ class Comments extends HTMLElement  {
             let texthtml = "" 
             if (this.username) {
                 texthtml = `
-                 <link rel="stylesheet" href="../src/components/comments/comments.css">
                 <div class="user">
                     <div class="circle-img">${this.imgprofile? `<img id="img-user" src="${this.imgprofile}" alt="User Image">` : `<span id="initial">${initialLetter}</span>`}</div>
                     <div class="two">
@@ -157,7 +170,9 @@ class Comments extends HTMLElement  {
                                 alert('Por favor, escribe un comentario antes de enviarlo.');
                                 return; 
                             }
+                       
                             addComentHTML.className = 'add-comment hide'
+
                             await this.submitForm()
                         
                     }else{
