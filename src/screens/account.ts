@@ -162,18 +162,6 @@ class Account extends HTMLElement {
                                 <div class="circle-img">
                                     <img id="img-user" src="${userImage}" alt="">
                                 </div>
-                                <div id="follows">
-                                    <div id="followers">
-                                        <p class="pFOlS">Followers</p>
-                                        <p class="num">${this.followers}</p>
-                                    </div>
-                                    <div id="followeing">
-                                        <p class="pFOlS">Following</p>
-                                        <p class="num">${this.following}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-text-contact">
                                 <h3 id="name-user">${this.name ? this.name : 'Not found'}</h3>
                                 <p id="username">${this.username ? this.username : 'Not found'}</p>
                                 <btn-component color="#361656" label="Edit" id="btn-edit"></btn-component>
@@ -181,6 +169,8 @@ class Account extends HTMLElement {
                                     <p id="creative">Creative</p>
                                     <p id="category">${this.category ? this.category : 'Empty field'}</p>
                                 </div>
+                            </div>
+                            <div class="user-text-contact">
                                 <h3 id="contct">Contact Information</h3>
                                 <p id="email">${this.email ? this.email : 'Not found'}</p>
 
@@ -197,7 +187,16 @@ class Account extends HTMLElement {
                                 <p id="Works">More Works</p>
                                 <a id="url" href="${this.moreworksurl ? this.moreworksurl : 'Url not entered'}" target="_blank">${this.moreworksurl ? this.moreworksurl : 'Not found'}</a>
                             </div>
-                     
+                            <div id="follows">
+                                <div id="followers">
+                                    <p class="pFOlS">Followers</p>
+                                    <p class="num">${this.followers}</p>
+                                </div>
+                                <div id="followeing">
+                                    <p class="pFOlS">Following</p>
+                                    <p class="num">${this.following}</p>
+                                </div>
+                            </div>
                         </section>
                         <div id="post-config">
                             <btn-account color="#361656" label="+ Post" id="add-post"></btn-account>
