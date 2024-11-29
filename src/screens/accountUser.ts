@@ -165,7 +165,7 @@ class AccountUsers extends HTMLElement {
                      
                         </section>
                         <div class="filter">
-                            <p>All  <b>6</b></p>
+                             <p id= "Postuser">All <b id="countPost"></b></p>
                         </div>
                         <hr>
                         <section class="containers">
@@ -184,12 +184,17 @@ class AccountUsers extends HTMLElement {
                 </section>
 				
 			`;
+            const countPost = this.shadowRoot?.querySelector('#countPost');  
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
             const userId = appState.userId;
             getPostsByUserAccount(userId,(posts: any[]) =>  {
                 while (containerPost?.firstChild) {
                     containerPost.removeChild(containerPost.firstChild);
                 }
+                if (countPost) {
+                    countPost.textContent = `${posts.length}`;
+                }
+               
                 posts.forEach((post: any) => {        
                     const userPostCard = this.ownerDocument.createElement("postuser-component") as PostUserCard;
                     userPostCard.setAttribute(AttributeCardUser.image, post.image);
