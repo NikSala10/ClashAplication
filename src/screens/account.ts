@@ -102,9 +102,9 @@ class Account extends HTMLElement {
     
 	async render() {
 		if (this.shadowRoot) {
-            const userImage = this.imguser || '/src/assets/ImgUserIcon.svg';
+            const userImage = this.imguser || '../assets/ImgUserIcon.svg';
 			this.shadowRoot.innerHTML = `
-			    <link rel="stylesheet" href="/src/screens/account.css">
+			    <link rel="stylesheet" href="../screens/account.css">
                 <nav-component></nav-component>
                 <section class="account-components" id="account-components">
                     

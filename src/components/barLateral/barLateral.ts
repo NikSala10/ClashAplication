@@ -52,7 +52,7 @@ class BarLateral extends HTMLElement  {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="/src/components/barLateral/barLateral.css">
+            <link rel="stylesheet" href="../components/barLateral/barLateral.css">
                 <div class= "barLateral">
                     <h4>${this.titleitem ? this.titleitem : 'Not found'}</h4>
                     <p>${this.userList[0] ? this.userList[0] : 'Not found'}</p>
