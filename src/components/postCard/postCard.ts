@@ -24,8 +24,8 @@ export enum AttributePostCard  {
     'comments' = 'comments',
     'favorites' = 'favorites',
     'send' = 'send',
-    'commentsElements' = 'commentsElements'
-
+    'commentsElements' = 'commentsElements',
+    'likeStatus' = 'likeStatus'
 }
 interface UserData {
     username: string;
@@ -39,7 +39,7 @@ interface UserData {
 	followers: [],
 	following: [],
     likes: [],
-    favourites:[]
+    favourites:[],
 }
 class PostCard extends HTMLElement  {
     userid?:string;
@@ -58,8 +58,9 @@ class PostCard extends HTMLElement  {
     favorites?: number;
     send?: number;
     showComent?: boolean;
+    likeStatus?: Boolean;
     commentsElements?: any[] = [];
-    commentsAll?: any[] = []
+    commentsAll?: any[] = [];
     
     constructor()  {
         super();
@@ -90,6 +91,9 @@ class PostCard extends HTMLElement  {
                 break;
             case AttributePostCard.commentsElements:
                 this.commentsElements = newValue ? JSON.parse(newValue) : undefined;
+                    break;
+            case AttributePostCard.likeStatus:
+                this.likeStatus = newValue ? Boolean(newValue) : undefined;  
                     break;
             default:
                 this[propName] = newValue;
@@ -270,23 +274,66 @@ class PostCard extends HTMLElement  {
             });
         }
 
-        
         let counterLikes = [0];
+        counterLikes[0] = this.likes ? this.likes : 0;
         const likesButton = this.shadowRoot?.querySelector('#like') as HTMLElement;
         const p = this.shadowRoot?.querySelector('#likeCount') as HTMLElement;
         const svg = this.shadowRoot?.querySelector('.icon') as HTMLElement;
-        
-        likesButton.addEventListener('click', () => { 
-                if (counterLikes[0] === 0) {
-                    counterLikes[0] = 1;
-                    svg.style.color = '#FFFFFF';
-                } else {
-                    counterLikes[0] = 0;
-                    svg.style.color = ''; 
+        const userLog = appState.users.find(user => user.id === appState.user);
+        let likeStatus1 = false;
+        if (userLog) {
+            const like = userLog.likes.find((like:any) => like === this.postid);
+            if(like) likeStatus1 = true
+        }
+        if (this.likeStatus) {
+            svg.style.color = '#FFFFFF';
+        } else {
+            svg.style.color = ''; // Asegúrate de limpiar el color cuando no tenga like
+        }
+
+        if (likesButton) {
+            likesButton.addEventListener('click', async () => {
+                const currentUser = appState.user;
+                if (!currentUser) {
+                    alert('Debes iniciar sesión para seguir a otros usuarios.');
+                    return;
                 }
-                p.textContent = `${counterLikes[0]}`;
+                try {
+                    const currentUserInfo = await new Promise<UserData | null>((resolve) =>
+                        getUserData(currentUser, resolve)
+                    );
             
-        });
+                    let likesList: any[] = [];
+                    let likeStatus2 = false;
+                    if (currentUserInfo) {
+                        const like = currentUserInfo.likes.find((like:any) => like === this.postid);
+                        if(like) likeStatus2 = true
+                    }
+                    if (currentUserInfo) {
+                        if (likeStatus2) {
+                            likesList = currentUserInfo.likes.filter((id: string) => id !== this.postid);
+                            counterLikes[0] -= 1;
+                            this.likes = this.likes ? this.likes - 1 : 0;
+                            this.likeStatus = false; // Actualiza el estado
+                        } else {
+                            likesList = [...currentUserInfo.likes, this.postid];
+                            counterLikes[0] += 1;
+                            this.likes = this.likes ? this.likes + 1 : 1;
+                            this.likeStatus = true; // Actualiza el estado
+                        }
+                    }
+                    svg.style.color = !likeStatus2 ? '#FFFFFF' : '';
+                    p.textContent = `${this.likes}`;
+                    await uploadUserData(currentUser, {
+                        ...currentUserInfo,
+                        likes: likesList,
+                    } as UserData);
+                    this.updatePost('likes', this.likes || 0);
+                } catch (error) {
+                    console.error('Error al actualizar la información de like:', error);
+                }
+            });            
+        }
 
         let counterComments = [0];
         const commentsButton = this.shadowRoot?.querySelector('#comment') as HTMLElement;

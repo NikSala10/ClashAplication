@@ -113,6 +113,13 @@ class Dashboard extends HTMLElement  {
                         const follow = user.followers.find((r: any) => r === appState.user);  
                         stateChange = follow ? true : false 
                     }
+                    const userLog = appState.users.find(user => user.id === appState.user);
+                    let likeStatus = false
+                                     
+                    if (userLog) {
+                        const like = userLog.likes.find((like:any) => like === post.id);
+                        if(like) likeStatus = true
+                    }
                  
                     const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
                     userPostCards.setAttribute(AttributePostCard.postid, post.id)
@@ -129,6 +136,7 @@ class Dashboard extends HTMLElement  {
                     userPostCards.setAttribute(AttributePostCard.likes, post.likes);
                     userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
                     userPostCards.setAttribute(AttributePostCard.comments, post.comments);
+                    userPostCards.setAttribute(AttributePostCard.likeStatus, String(likeStatus));
                     userPostCards.setAttribute(AttributePostCard.commentsElements,JSON.stringify(commentsPost));
                     containerPost?.appendChild(userPostCards);
                 });
@@ -140,6 +148,11 @@ class Dashboard extends HTMLElement  {
                 
                 postTopLikes.forEach((post) =>  {   
                     const user = appState.users.find(user => user.id === post.userUid);
+                    const userLog = appState.users.find(user => user.id === appState.user);
+                    let likeStatus = false
+                    if (userLog) {
+                        likeStatus = userLog.likes.includes(post.id)
+                    }
                     // const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
                     // if (post.userUid) {
                     //     const userDataPost = await getUserData(post.userUid);
@@ -159,6 +172,7 @@ class Dashboard extends HTMLElement  {
                     userPostCards.setAttribute(AttributePostCard.likes, post.likes);
                     userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
                     userPostCards.setAttribute(AttributePostCard.comments, post.comments);
+                    userPostCards.setAttribute(AttributePostCard.likeStatus, String(likeStatus));
                     containerPost?.appendChild(userPostCards);
                 });
             }
