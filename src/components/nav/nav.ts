@@ -3,7 +3,7 @@ import { navigate, loadPost, navigateUser} from '../../store/actions';
 import { registerUser } from '../../utils/firebase';
 import  {Screens} from '../../types/store'
 import { appState } from '../../store/store';
-import { getUserData } from '../../utils/firebase';
+import { getUserData,getUserIdByUsername } from '../../utils/firebase';
 
 interface UserData {
     name: string;
@@ -52,26 +52,33 @@ class Nav extends HTMLElement  {
 
         searchInput?.addEventListener('keydown', async (event) => {
             if (event.key === 'Enter') {
-                const searchTerm = searchInput.value.trim();
+                const searchTerm = searchInput.value.trim(); // Obtener el valor del input
         
                 if (searchTerm) {
-                    // Aquí, supondremos que `getUserData` recibe un `username` en lugar de `userId`.
-                    // Llamamos a la función `getUserData` para buscar al usuario con el `searchTerm`.
-                    getUserData(searchTerm, (userInfo) => {
-                        if (userInfo) {
-                            // Si se encuentra el usuario, redirigimos a su perfil.
-                            dispatch(navigateUser(Screens.ACCOUNTUSER, userInfo));
+                    // Llamar a getUserIdByUsername para obtener el userId a partir del username
+                    getUserIdByUsername(searchTerm, (userId) => {
+                        if (userId) {
+                            // const user = appState.userId
+                            getUserData(userId, (userInfo) => {
+                                if (userInfo) {
+                                    console.log('Redirigiendo a la pantalla con los siguientes datos de usuario:', userInfo); // Verificar los datos
+                                    dispatch(navigateUser(Screens.ACCOUNTUSER, userInfo));
+                                    console.log(Screens.ACCOUNTUSER, userInfo);
+                                    
+                                } else {
+                                    alert('Usuario no encontrado');
+                                }
+                            });
                         } else {
-                            // Si no se encuentra el usuario, mostramos un mensaje de error.
                             alert('Usuario no encontrado');
                         }
                     });
                 } else {
+                    // Si el término de búsqueda está vacío, mostrar mensaje
                     alert('Por favor ingresa un nombre de usuario');
                 }
             }
         });
-  
         const userId = appState.user;
 
         if (!userId) {
