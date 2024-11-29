@@ -1,5 +1,5 @@
 import { dispatch } from '../store/store';
-import { setOpenCloseScreen } from '../store/actions';
+import { setOpenCloseScreen, navigate } from '../store/actions';
 import { Actions, Screens } from '../types/store';
 import { addObserver, appState } from '../store/store';
 import { loginUser } from '../utils/firebase';
@@ -240,7 +240,21 @@ class Account extends HTMLElement {
             const logOut = this.shadowRoot?.querySelector('#logOut');
             logOut?.addEventListener('click', this.logout);
 
+            //ADDPOSTBTN
+            const btnAddPostResponsive = this.shadowRoot.querySelector('#addPost1');
+            btnAddPostResponsive?.addEventListener('click', () => {
+                if (appState.user) {
+                    dispatch(setOpenCloseScreen(0));
+                } else {
+                    alert('Para crear un post necesitas una cuenta');
+                    dispatch(navigate(Screens.LOGIN));
+                }
+            });
+
+
 		}
+
+        
        
 	}
 }
