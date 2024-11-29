@@ -344,31 +344,76 @@ class PostCard extends HTMLElement  {
         });
 
         let counterFavorites = [0];
-        let counterFavoritesboolean = true;
         counterFavorites[0] = this.favorites ? this.favorites : 0;
         const favoritesButton = this.shadowRoot?.querySelector('#favorite') as HTMLElement;
         const pFavorites = this.shadowRoot?.querySelector('#favoriteCount') as HTMLElement;
         const svgFavorites = this.shadowRoot?.querySelector('.icon3') as HTMLElement;
-        
-        favoritesButton.addEventListener('click', () => { 
-            if(appState.user){
-                if (counterFavoritesboolean) {
-                    counterFavorites[0] += 1;
-                    svgFavorites.style.color = '#FFFFFF';
-                    this.favorites = counterFavorites[0]
-                } else {
-                    counterFavorites[0] -= 1;
-                    svgFavorites.style.color = ''; 
-                    this.favorites = counterFavorites[0]
+
+        // Verificar si el usuario ya marcó como favorito el post
+        const userLogFavorites = appState.users.find(user => user.id === appState.user);
+        let favoriteStatus = false;
+
+        if (userLogFavorites) {
+            const favorite = userLogFavorites.favourites.find((fav: any) => fav === this.postid);
+            if (favorite) favoriteStatus = true;
+        }
+
+        // Cambiar el color inicial basado en el estado de favoritos
+        svgFavorites.style.color = favoriteStatus ? '#FFFFFF' : '';
+
+        // Añadir evento de click
+        favoritesButton.addEventListener('click', async () => {
+            const currentUser = appState.user; // Usuario actual
+            if (!currentUser) {
+                alert('Debes iniciar sesión para marcar como favorito.');
+                return;
+            }
+
+            try {
+                const currentUserInfo = await new Promise<UserData | null>((resolve) =>
+                    getUserData(currentUser, resolve)
+                );
+
+                if (!currentUserInfo) {
+                    console.error('No se pudo obtener la información del usuario actual.');
+                    return;
                 }
-                counterFavoritesboolean = !counterFavoritesboolean
-                pFavorites.textContent = `${counterFavorites[0]}`;
-                this.updatePost('favourites', counterFavorites[0])
-            }else {
-                alert('No puedes dar like si no tienes una cuenta')
+
+                let favoritesList: any[] = [];
+                let favoritesStatus2 = false;
+                if (currentUserInfo) {
+                    const favorites = currentUserInfo.favourites.find((fav:any) => fav === this.postid);
+                    if(favorites) favoritesStatus2 = true
+                }
+                if (favoritesStatus2) {
+                    // Si ya está marcado como favorito, eliminarlo
+                    favoritesList = currentUserInfo.favourites.filter((id: string) => id !== this.postid);
+                    counterFavorites[0] -= 1;
+                    this.favorites = this.favorites ? this.favorites - 1 : 0;
+                } else {
+                    // Si no está marcado como favorito, agregarlo
+                    favoritesList = [...currentUserInfo.favourites, this.postid];
+                    counterFavorites[0] += 1;
+                    this.favorites = this.favorites ? this.favorites + 1 : 1;
+                }
+
+                // Cambiar el estado local
+                favoritesStatus2 = !favoritesStatus2
+                svgFavorites.style.color = favoritesStatus2 ? '#FFFFFF' : '';
+                pFavorites.textContent = `${this.favorites}`;
+
+                // Actualizar Firebase
+                await uploadUserData(currentUser, {
+                    ...currentUserInfo,
+                    favourites: favoritesList,
+                } as UserData);
+
+                // Actualizar el post con la nueva cantidad de favoritos
+                this.updatePost('favourites',  this.favorites || 0);
+            } catch (error) {
+                console.error('Error al actualizar la información de favoritos:', error);
             }
         });
-
         const userImage = this.shadowRoot?.querySelector('.circle-img') as HTMLElement;
             userImage.addEventListener('click', () => {
                 const userUid = this.userid;
