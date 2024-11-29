@@ -193,4 +193,7 @@ input::placeholder  {
     .profesional-work input  {
         width: 10rem;
     }    
+    .btn-edi {
+    margin-top: 0;
+    margin-left: 0; }
 }
