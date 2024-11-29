@@ -122,8 +122,8 @@ class Nav extends HTMLElement  {
     render() {
         if (this.shadowRoot) {
             this.shadowRoot.innerHTML = `
-           <link rel="stylesheet" href="./nav.css">
-           <link rel="stylesheet" href="../../screens/account.css">
+           <link rel="stylesheet" href="/src/components/nav/nav.css">
+           <link rel="stylesheet" href="/src/screens/account.css">
     <nav class="navegation">
         
             <div class="logo">
