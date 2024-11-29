@@ -461,11 +461,12 @@ class PostCard extends HTMLElement  {
     
                 // Manejar datos del usuario con callback
                 if (commentData.userUid) {
-                    const userId = appState.user;
+                    const userId = appState.user
                     getUserData(userId, (userData) => {
-                        const name = userData?.username || 'Usuario no encontrado';
+                        const name = userData?.name || 'Usuario desconocido';
                         commentsElement.setAttribute(CommentsAttribute.username, name);
-    
+
+                        // Opcional: Puedes agregar el elemento aquí si necesitas respuestas inmediatas
                         this.commentsElements?.push(commentsElement);
                     });
                 } else {
