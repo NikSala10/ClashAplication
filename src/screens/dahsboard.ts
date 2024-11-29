@@ -142,38 +142,48 @@ class Dashboard extends HTMLElement  {
                 });
             });
             }else{
-                const postTopLikes = appState.post.slice()
-                postTopLikes.sort((a, b) => b.likes - a.likes);
-              
-                
-                postTopLikes.forEach((post) =>  {   
-                    const user = appState.users.find(user => user.id === post.userUid);
-                    const userLog = appState.users.find(user => user.id === appState.user);
-                    let likeStatus = false
-                    if (userLog) {
-                        likeStatus = userLog.likes.includes(post.id)
+                const containerPost = this.shadowRoot?.querySelector('.container-postcards');
+                if (!containerPost) {
+                    console.error('No se encontró el contenedor de posts.');
+                    return;
+                }
+                getPosts(async (posts: any[]) => {
+                    // Limpiar el contenedor antes de renderizar nuevos datos
+                    while (containerPost.firstChild) {
+                        containerPost.removeChild(containerPost.firstChild);
                     }
-                    // const username = `@${user?.name.replace(/\s+/g, '').toLowerCase()}`; 
-                    // if (post.userUid) {
-                    //     const userDataPost = await getUserData(post.userUid);
-                    //     name = userDataPost?.name || '';
-                    //     username = @${userDataPost?.name.replace(/\s+/g, '').toLowerCase()};  
-                    // }
-        
-                    const userPostCards = this.ownerDocument.createElement("card-post") as PostCard;
-                    userPostCards.setAttribute(AttributePostCard.postid, post.id)
-                    userPostCards.setAttribute(AttributePostCard.name, user.name);
-                    // userPostCards.setAttribute(AttributePostCard.username, username);
-                    userPostCards.setAttribute(AttributePostCard.category, post.category);
-                    userPostCards.setAttribute(AttributePostCard.description, post.description);
-                    userPostCards.setAttribute(AttributePostCard.image, post.image);
-                    userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
-                    userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags);
-                    userPostCards.setAttribute(AttributePostCard.likes, post.likes);
-                    userPostCards.setAttribute(AttributePostCard.favorites, post.favourites);
-                    userPostCards.setAttribute(AttributePostCard.comments, post.comments);
-                    userPostCards.setAttribute(AttributePostCard.likeStatus, String(likeStatus));
-                    containerPost?.appendChild(userPostCards);
+                
+                    // Ordenar los posts por likes en orden descendente
+                    const postTopLikes = posts
+                        .slice()
+                        .sort((a, b) => b.likes - a.likes);
+                
+                    // Renderizar los posts ordenados
+                    for (const post of postTopLikes) {
+                        const user = appState.users.find((user) => user.id === post.userUid);
+                        const userLog = appState.users.find((user) => user.id === appState.user);
+                
+                        let likeStatus = false;
+                        if (userLog?.likes?.includes(post.id)) {
+                            likeStatus = true;
+                        }
+                
+                        const userPostCards = this.ownerDocument.createElement('card-post') as PostCard;
+                        userPostCards.setAttribute(AttributePostCard.postid, post.id);
+                        userPostCards.setAttribute(AttributePostCard.name, user?.name || 'Usuario desconocido');
+                        userPostCards.setAttribute(AttributePostCard.username, user?.username || '@usuario');
+                        userPostCards.setAttribute(AttributePostCard.category, post.category || 'Sin categoría');
+                        userPostCards.setAttribute(AttributePostCard.description, post.description || 'Sin descripción');
+                        userPostCards.setAttribute(AttributePostCard.image, post.image || '');
+                        userPostCards.setAttribute(AttributePostCard.timeposted, String(post.dateadded));
+                        userPostCards.setAttribute(AttributePostCard.hashtags, post.hashtags || '[]');
+                        userPostCards.setAttribute(AttributePostCard.likes, String(post.likes || '0'));
+                        userPostCards.setAttribute(AttributePostCard.favorites, String(post.favourites || '0'));
+                        userPostCards.setAttribute(AttributePostCard.comments, String(post.comments || '0'));
+                        userPostCards.setAttribute(AttributePostCard.likeStatus, String(likeStatus));
+                
+                        containerPost.appendChild(userPostCards);
+                    }
                 });
             }
 
