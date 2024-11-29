@@ -502,3 +502,26 @@ export const deletePost= async (id: string) => {
 //         });
 //     });
 // };
+
+export const getUserIdByUsername = async (username: string, callback: (userId: string | null) => void) => {
+    try {
+        const { db } = await getFirebaseInstance();
+        const { collection, query, where, getDocs } = await import('firebase/firestore');
+        
+        const usersRef = collection(db, 'users');
+        const q = query(usersRef, where('username', '==', username));
+        
+        const querySnapshot = await getDocs(q);
+        
+        if (!querySnapshot.empty) {
+            // Si se encuentra el usuario, obtenemos el userId
+            const userId = querySnapshot.docs[0].id;
+            callback(userId); // Pasamos el userId al callback
+        } else {
+            callback(null); // Si no se encuentra, pasamos null
+        }
+    } catch (error) {
+        console.error('Error buscando el userId por username:', error);
+        callback(null);
+    }
+};
