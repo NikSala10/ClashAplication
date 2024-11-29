@@ -133,26 +133,31 @@ export const addComment = async (comment: any) =>  {
 	console.error('Error getting documents', error)
 	}
  }; 
- export const getCommentsByPost = async (pid: string) => {
+ export const getCommentsByPost = async (pid: string, callback: (data: any[]) => void) => {
     try {
         const { db } = await getFirebaseInstance();
-        const { collection, getDocs, query, where } = await import('firebase/firestore');
+        const { collection, query, where, onSnapshot } = await import('firebase/firestore');
 
         const commentsRef = collection(db, 'comments');
-        const q = query(commentsRef, where('postid', '==', String(pid))); 
-        const postSnap = await getDocs(q);
+        const q = query(commentsRef, where('postid', '==', String(pid)));
 
-        const data: any[] = [];
-        postSnap.forEach((doc) => {
-            data.push(doc.data());
+        // Escuchar los cambios en tiempo real
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const data: any[] = [];
+            snapshot.forEach((doc) => {
+                const commentData = doc.data();
+                commentData.id = doc.id; // Guardar el ID del documento si es necesario
+                data.push(commentData);
+            });
+            callback(data); // Llamar al callback con los datos actualizados
         });
 
-        return data;
+        return unsubscribe; // Retornar la función para cancelar la suscripción si se necesita
     } catch (error) {
-        console.error('Error getting comments:', error);
-        return null;
+        console.error('Error getting comments in real-time:', error);
     }
 };
+
 export const addHashtags = async (hashtag: any) =>  {
 	try {
 		const {db} = await getFirebaseInstance();

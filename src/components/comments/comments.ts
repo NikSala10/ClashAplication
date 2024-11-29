@@ -12,6 +12,20 @@ const comment: Comment = {
     description: '', 
     postid: ''
 }
+interface UserData {
+    username: string;
+	category: string,
+	imgUser: string,
+    placeresidence: string,
+	currenttraining: string,
+	currentjob: string,
+	academy: string,
+	moreworksurl: string,
+	followers: [],
+	following: [],
+    likes: [],
+    favourites:[],
+}
 
 export enum CommentsAttribute  {
     'imgprofile' = 'imgprofile',
@@ -78,10 +92,11 @@ class Comments extends HTMLElement  {
         this.render();
     }
     async submitForm() {
+        console.log(this.postid);
+        
         if (this.postid) {
             comment.postid = this.postid
             await addComment(comment); 
-            
             this.clearInputs();
 
         }else{
@@ -128,13 +143,12 @@ class Comments extends HTMLElement  {
 
             const saveComment = this.shadowRoot.querySelector('.save-comment') as HTMLElement
             const addComentHTML = this.shadowRoot.querySelector('.add-comment') as HTMLElement
-            const usernameHTML = this.shadowRoot.querySelector('#description') as HTMLElement
+            const usernameHTML = this.shadowRoot.querySelector('#username') as HTMLElement
             const timeadd = this.shadowRoot.querySelector('#timeadd') as HTMLElement
             const descriptionhtml = this.shadowRoot.querySelector('#description') as HTMLElement
             const descriptionInputValue = this.shadowRoot.querySelector('#comment-input') as HTMLInputElement
             descriptionInputValue?.addEventListener('change', this.changeDescription);
             if (comment.postid) {
-                // console.log(comment.postid);
                 saveComment.addEventListener('click', async () => {
                     
                     if (appState.user) {
@@ -142,12 +156,20 @@ class Comments extends HTMLElement  {
                                 alert('Por favor, escribe un comentario antes de enviarlo.');
                                 return; 
                             }
-            
-                        addComentHTML.className = 'add-comment hide'
-                        usernameHTML.innerHTML = comment.username
-                        timeadd.innerHTML = 'now'
-                        descriptionhtml.innerHTML = descriptionInputValue.value
-                        await this.submitForm()
+                            const currentUserInfo = await new Promise<UserData | null>((resolve) =>
+                                getUserData(appState.user, resolve)
+                            );
+                        if (currentUserInfo) {
+                            console.log(currentUserInfo.username);
+                            addComentHTML.className = 'add-comment hide'
+                            if (usernameHTML) {
+                                usernameHTML.textContent = currentUserInfo.username;
+                            }                            
+                            timeadd.innerHTML = 'now'
+                            descriptionhtml.innerHTML = descriptionInputValue.value
+                           
+                            await this.submitForm()
+                        }else console.log('el usuario no se encontro en los registros');
                         
                     }else{
                         alert('No puedes crear un comentario porque no tienes una cuenta de usuario')
