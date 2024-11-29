@@ -344,66 +344,46 @@ class PostCard extends HTMLElement  {
         }
     }
 
+  
     async loadComments() {
-        if (!this.postid) return;
-    
-        try {
-            // Obtener comentarios asociados al post
-            getCommentsByPost(this.postid, (comments) => {
-                if (comments) {
-                    this.commentsN = comments.length;
-    
-                    // Actualizar el contador de comentarios en la interfaz
-                    const pComments = this.shadowRoot?.querySelector('#commentCount') as HTMLElement;
-                    if (pComments) {
-                        pComments.textContent = `${this.commentsN}`;
-                    }
-    
-                    // Limpiar componentes anteriores
-                    this.commentsElements = [];
-    
-                    // Crear componentes de comentarios
-                    comments.forEach((commentData) => {
-                        const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
-    
-                        // Configurar atributos básicos
-                        commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile || '');
-                        commentsElement.setAttribute(CommentsAttribute.postid, commentData.postid);
-                        commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded);
-                        commentsElement.setAttribute(CommentsAttribute.description, commentData.description);
-                        commentsElement.setAttribute(CommentsAttribute.showinput, 'false');
-    
-                        // Manejar datos del usuario
-                        if (commentData.userUid) {
-                            getUserData(commentData.userUid, (userData) => {
-                                const name = userData?.name || 'Usuario desconocido';
-                                commentsElement.setAttribute(CommentsAttribute.username, name);
-                            });
-                        } else {
-                            commentsElement.setAttribute(CommentsAttribute.username, 'Usuario desconocido');
-                        }
-    
-                        this.commentsElements?.push(commentsElement);
+        let comments: any[] = []; 
+        if (this.postid) {
+
+            comments = [await getCommentsByPost(this.postid)];
+        const pComments = this.shadowRoot?.querySelector('#commentCount')as HTMLElement;
+
+            const comments1 = comments[0]
+            this.commentsN = comments[0].length
+            pComments.textContent = `${this.commentsN}`;
+
+            comments1.forEach(async (commentData: any)=> {
+                let name = '';
+
+                if (commentData.userUid) {
+                    getUserData(commentData.userUid, (userData) => {
+                        commentsElement.setAttribute(CommentsAttribute.username, userData.username);
                     });
-    
-                    // Añadir un campo de entrada vacío para nuevos comentarios
-                    const newCommentElement = this.ownerDocument.createElement("comment-component") as Comments;
-                    newCommentElement.setAttribute(CommentsAttribute.showinput, 'true');
-                    newCommentElement.setAttribute(CommentsAttribute.username, '');
-                    this.commentsElements?.push(newCommentElement);
-    
-                    // Actualizar la lista en el contenedor de comentarios
-                    const commentsContainer = this.shadowRoot?.querySelector('#commentsContainer') as HTMLElement;
-                    if (commentsContainer) {
-                        commentsContainer.innerHTML = ''; // Limpiar comentarios previos
-                        this.commentsElements.forEach((element) => {
-                            commentsContainer.appendChild(element);
-                        });
-                    }
                 }
+                const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+
+                commentsElement.setAttribute(CommentsAttribute.imgprofile, commentData.imgprofile);    
+                commentsElement.setAttribute(CommentsAttribute.postid, commentData.postid);
+                commentsElement.setAttribute(CommentsAttribute.username, name);
+                commentsElement.setAttribute(CommentsAttribute.timeaddcomment, commentData.dateadded);
+                commentsElement.setAttribute(CommentsAttribute.description, commentData.description);
+                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+
+                this.commentsElements?.push(commentsElement)
             });
-        } catch (error) {
-            console.error("Error al cargar los comentarios:", error);
+
+        }
+
+        if(this.commentsElements){
+            const commentsElement = this.ownerDocument.createElement("comment-component") as Comments;
+                commentsElement.setAttribute(CommentsAttribute.showinput, 'true');
+                commentsElement.setAttribute(CommentsAttribute.username, '');
+                this.commentsElements?.push(commentsElement)
+
         }
     }
 

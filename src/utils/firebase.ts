@@ -133,32 +133,23 @@ export const addComment = async (comment: any) =>  {
 	console.error('Error getting documents', error)
 	}
  }; 
- export const getCommentsByPost = async (
-    pid: string,
-    callback: (comments: any[] | null) => void
-) => {
+ export const getCommentsByPost = async (pid: string) => {
     try {
         const { db } = await getFirebaseInstance();
-        const { collection, query, where, onSnapshot } = await import('firebase/firestore');
+        const { collection, getDocs, query, where } = await import('firebase/firestore');
 
         const commentsRef = collection(db, 'comments');
-        const q = query(commentsRef, where('postid', '==', String(pid)));
+        const q = query(commentsRef, where('postid', '==', String(pid))); 
+        const postSnap = await getDocs(q);
 
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            const data: any[] = [];
-            querySnapshot.forEach((doc) => {
-                data.push({ id: doc.id, ...doc.data() }); // Incluye el ID del documento en los datos
-            });
-            callback(data); // Llamar al callback con los datos obtenidos
-        }, (error) => {
-            console.error('Error listening to comments in real-time:', error);
-            callback(null); // Llamar al callback con null en caso de error
+        const data: any[] = [];
+        postSnap.forEach((doc) => {
+            data.push(doc.data());
         });
 
-        return unsubscribe; // Retorna la función para desuscribir si es necesario
+        return data;
     } catch (error) {
-        console.error('Error setting up real-time comments listener:', error);
-        callback(null);
+        console.error('Error getting comments:', error);
         return null;
     }
 };
