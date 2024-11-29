@@ -164,6 +164,46 @@ class AccountUsers extends HTMLElement {
                             </div>
                      
                         </section>
+                        <section class="info-contact-user2">
+                            <div class="user-info">
+                                <div class="circle-img">
+                                    <img id="img-user" src="${userImage}" alt="">
+                                </div>
+                                <div id="create">
+                                    <p id="username">${this.username ? this.username : 'Not found'}</p>
+                                    <p id="creative">Creative</p>
+                                    <p id="category">${this.category ? this.category : 'Empty field'}</p>
+                                </div>
+                                <p id="followThe">${this.state ? 'Following' : 'Follow'}</p>
+                            </div>
+                            <div class="user-text-contact">
+                                <h3 id="contct">Contact Information</h3>
+                                <p id="email">${this.email ? this.email : 'Not found'}</p>
+
+                                <div class="icons-profesional">
+                                    <div class="first">
+                                        <field-component field="placeResidence" label="${this.placeresidence ? this.placeresidence : 'Empty field'}"></field-component>
+                                        <field-component field="currentJob" label="${this.currentjob ? this.currentjob : 'Empty field'}"></field-component>
+                                    </div>
+                                    <div class="first">
+                                        <field-component field="Academy" label="${this.academy ? this.academy : 'Empty field'}"></field-component>
+                                        <field-component field="currentTraining" label="${this.currenttraining ? this.currenttraining : 'Empty field'}"></field-component>
+                                    </div>
+                                </div>
+                                <p id="Works">More Works</p>
+                                <a id="url" href="${this.moreworksurl ? this.moreworksurl : 'Url not entered'}" target="_blank">${this.moreworksurl ? this.moreworksurl : 'Not found'}</a>
+                            </div>
+                            <div id="follows">
+                                <div id="followers">
+                                    <p class="pFOlS">Followers</p>
+                                    <p class="num">${this.followers}</p>
+                                </div>
+                                <div id="followeing">
+                                    <p class="pFOlS">Following</p>
+                                    <p class="num">${this.following}</p>
+                                </div>
+                            </div>
+                        </section>
                         <div class="filter">
                              <p id= "Postuser">All <b id="countPost"></b></p>
                         </div>
