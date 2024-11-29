@@ -183,6 +183,19 @@ class Account extends HTMLElement {
                 </section>
 				
 			`;
+
+             //ADDPOSTBTN
+             const btnAddPostResponsive = this.shadowRoot.querySelector('#addPost1');
+             btnAddPostResponsive?.addEventListener('click', () => {
+                 if (appState.user) {
+                     dispatch(setOpenCloseScreen(0));
+                 } else {
+                     alert('Para crear un post necesitas una cuenta');
+                     dispatch(navigate(Screens.LOGIN));
+                 }
+             });
+
+             
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
             const countPost = this.shadowRoot?.querySelector('#countPost');  
             const countPostFavorites = this.shadowRoot?.querySelector('#countPostFavorites');  
@@ -324,16 +337,7 @@ class Account extends HTMLElement {
             const logOut = this.shadowRoot?.querySelector('#logOut');
             logOut?.addEventListener('click', this.logout);
 
-            //ADDPOSTBTN
-            const btnAddPostResponsive = this.shadowRoot.querySelector('#addPost1');
-            btnAddPostResponsive?.addEventListener('click', () => {
-                if (appState.user) {
-                    dispatch(setOpenCloseScreen(0));
-                } else {
-                    alert('Para crear un post necesitas una cuenta');
-                    dispatch(navigate(Screens.LOGIN));
-                }
-            });
+           
 
 
 		}
