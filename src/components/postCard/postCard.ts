@@ -37,7 +37,9 @@ interface UserData {
 	academy: string,
 	moreworksurl: string,
 	followers: [],
-	following: []
+	following: [],
+    likes: [],
+    favourites:[]
 }
 class PostCard extends HTMLElement  {
     userid?:string;
