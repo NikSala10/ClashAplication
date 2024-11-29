@@ -181,3 +181,10 @@ input::placeholder  {
     outline: none;   
     color: white;
 }
+@media (max-width: 768px)  {  
+    .container-modal  {
+        margin-left: 1.5rem;
+        padding: 1.5rem;
+        width: 25rem;
+    }
+}
