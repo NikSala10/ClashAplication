@@ -356,11 +356,23 @@ hr  {
         margin-left: 0.8rem;
         width: 95%;
     }
-    #post-config  {
+    .info-contact-user2 #post-config2 {
         gap: 0.5rem;
         margin-left: 9rem;
         margin-top: -0.8rem;
+        display: flex;
+        align-items: center;
     }
+    #post-config  {
+        display: none;
+    }
+    #post-config2 svg {
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
     .user-text-contact  {
         display: block;
     }
