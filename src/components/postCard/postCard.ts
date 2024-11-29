@@ -335,14 +335,6 @@ class PostCard extends HTMLElement  {
             });            
         }
 
-        let counterComments = [0];
-        const commentsButton = this.shadowRoot?.querySelector('#comment') as HTMLElement;
-        const pComments = this.shadowRoot?.querySelector('#commentCount')as HTMLElement;
-        commentsButton.addEventListener('click', () => { 
-            counterComments[0] += 1;
-            pComments.textContent = `${counterComments[0]}`;
-        });
-
         let counterFavorites = [0];
         counterFavorites[0] = this.favorites ? this.favorites : 0;
         const favoritesButton = this.shadowRoot?.querySelector('#favorite') as HTMLElement;
@@ -463,7 +455,7 @@ class PostCard extends HTMLElement  {
                 if (commentData.userUid) {
                     const userId = commentData.userUid;
                     getUserData(userId, (userData) => {
-                        const name = userData?.username || 'Usuario no encontrado';
+                        const name = userData?.name || 'Usuario no encontrado';
                         commentsElement.setAttribute(CommentsAttribute.username, name);
                         this.commentsElements?.push(commentsElement);
                     });
