@@ -201,6 +201,11 @@ class Account extends HTMLElement {
                                 </div>
                             </div>
                         </section>
+                        <div id="post-config">
+                            <btn-account color="#361656" label="+ Post" id="add-post"></btn-account>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 24 24"><path fill="currentColor" d="M14.647 4.081a.724.724 0 0 0 1.08.448c2.439-1.485 5.23 1.305 3.745 3.744a.724.724 0 0 0 .447 1.08c2.775.673 2.775 4.62 0 5.294a.724.724 0 0 0-.448 1.08c1.485 2.439-1.305 5.23-3.744 3.745a.724.724 0 0 0-1.08.447c-.673 2.775-4.62 2.775-5.294 0a.724.724 0 0 0-1.08-.448c-2.439 1.485-5.23-1.305-3.745-3.744a.724.724 0 0 0-.447-1.08c-2.775-.673-2.775-4.62 0-5.294a.724.724 0 0 0 .448-1.08c-1.485-2.439 1.305-5.23 3.744-3.745a.722.722 0 0 0 1.08-.447c.673-2.775 4.62-2.775 5.294 0M12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6"/></svg>
+                            <svg id="logOut" xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12h-9.5m7.5 3l3-3l-3-3m-5-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2v-1"/></svg>
+                        </div>
                         <div class="filter">
                             <p id= "Postuser">All <b id="countPost"></b></p>
                             <p id= "PostFavorites">Favorites <b id="countPostFavorites"></b></p>
@@ -233,6 +238,45 @@ class Account extends HTMLElement {
                      dispatch(navigate(Screens.LOGIN));
                  }
              });
+
+             const btnAddPost = this.shadowRoot.querySelector('#add-post');
+            const btnEdit = this.shadowRoot.querySelector('#btn-edit');
+
+            if (appState.modalScreen[0]) {
+                const add = this.shadowRoot?.querySelector('.add-Post')
+                const container = this.shadowRoot?.querySelector('#account-components')
+                
+                if (add && container) {
+                    add.className = "add-Post"
+                    container.className = "account-components-post"
+                }
+            }else if (appState.modalScreen[1]) {
+                const add = this.shadowRoot?.querySelector('.edit-account')
+                const container = this.shadowRoot?.querySelector('#account-components')
+                
+                if (add && container) {
+                    add.className = "edit-account"
+                    container.className = "account-components-post"
+                }
+            }else{
+                const add = this.shadowRoot?.querySelector('.edit-account')
+                const container = this.shadowRoot?.querySelector('#account-components')
+                
+                if (add && container) {
+                    add.className = "edit-account hide"
+                    container.className = "account-components"
+                }
+            }
+            btnAddPost?.addEventListener('click', ()=>{
+                dispatch(setOpenCloseScreen(0))
+                
+            })
+            btnEdit?.addEventListener('click', ()=>{
+                dispatch(setOpenCloseScreen(1))
+                
+            })
+            const logOut = this.shadowRoot?.querySelector('#logOut');
+            logOut?.addEventListener('click', this.logout);
 
 
             const containerPost = this.shadowRoot?.querySelector('.container-postcards');  
@@ -337,45 +381,7 @@ class Account extends HTMLElement {
 			cssAccount.innerHTML = styles;
 			this.shadowRoot?.appendChild(cssAccount);
 			
-            const btnAddPost = this.shadowRoot.querySelector('#add-post');
-            const btnEdit = this.shadowRoot.querySelector('#btn-edit');
-
-            if (appState.modalScreen[0]) {
-                const add = this.shadowRoot?.querySelector('.add-Post')
-                const container = this.shadowRoot?.querySelector('#account-components')
-                
-                if (add && container) {
-                    add.className = "add-Post"
-                    container.className = "account-components-post"
-                }
-            }else if (appState.modalScreen[1]) {
-                const add = this.shadowRoot?.querySelector('.edit-account')
-                const container = this.shadowRoot?.querySelector('#account-components')
-                
-                if (add && container) {
-                    add.className = "edit-account"
-                    container.className = "account-components-post"
-                }
-            }else{
-                const add = this.shadowRoot?.querySelector('.edit-account')
-                const container = this.shadowRoot?.querySelector('#account-components')
-                
-                if (add && container) {
-                    add.className = "edit-account hide"
-                    container.className = "account-components"
-                }
-            }
-            btnAddPost?.addEventListener('click', ()=>{
-                dispatch(setOpenCloseScreen(0))
-                
-            })
-            btnEdit?.addEventListener('click', ()=>{
-                dispatch(setOpenCloseScreen(1))
-                
-            })
-            const logOut = this.shadowRoot?.querySelector('#logOut');
-            logOut?.addEventListener('click', this.logout);
-
+            
            
 
 
