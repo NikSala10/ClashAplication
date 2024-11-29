@@ -30,6 +30,7 @@ interface UserData {
 export enum CommentsAttribute  {
     'imgprofile' = 'imgprofile',
     'username' = 'username',
+    'userid' = 'userid',
     'timeaddcomment' = 'timeaddcomment',
     'description' = 'description',
     'showinput' = 'showinput',
@@ -37,7 +38,7 @@ export enum CommentsAttribute  {
 }
 
 class Comments extends HTMLElement  {
- 
+    userid?: String;
     imgprofile?: string;
     username?: String;
     timeaddcomment?: String;
@@ -156,20 +157,8 @@ class Comments extends HTMLElement  {
                                 alert('Por favor, escribe un comentario antes de enviarlo.');
                                 return; 
                             }
-                            const currentUserInfo = await new Promise<UserData | null>((resolve) =>
-                                getUserData(appState.user, resolve)
-                            );
-                        if (currentUserInfo) {
-                            console.log(currentUserInfo.username);
                             addComentHTML.className = 'add-comment hide'
-                            if (usernameHTML) {
-                                usernameHTML.textContent = currentUserInfo.username;
-                            }                            
-                            timeadd.innerHTML = 'now'
-                            descriptionhtml.innerHTML = descriptionInputValue.value
-                           
                             await this.submitForm()
-                        }else console.log('el usuario no se encontro en los registros');
                         
                     }else{
                         alert('No puedes crear un comentario porque no tienes una cuenta de usuario')
