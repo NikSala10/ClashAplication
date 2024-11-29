@@ -1,5 +1,5 @@
 import { dispatch } from '../store/store';
-import { setOpenCloseScreen } from '../store/actions';
+import { setOpenCloseScreen, navigate } from '../store/actions';
 import { Actions, Screens } from '../types/store';
 import { addObserver, appState } from '../store/store';
 import { loginUser } from '../utils/firebase';
@@ -175,9 +175,10 @@ class AccountUsers extends HTMLElement {
                                 <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
                                 <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                             </div>
+                        <div id="addPost1" class="addPost">
                         </section>
                     </div>
-                    
+                    <p>+</p>
                 </section>
 				
 			`;
@@ -282,6 +283,17 @@ class AccountUsers extends HTMLElement {
                     }
                 });
             }
+
+            //ADDPOSTBTN
+            const btnAddPost = this.shadowRoot.querySelector('#addPost1');
+            btnAddPost?.addEventListener('click', () => {
+                if (appState.user) {
+                    dispatch(setOpenCloseScreen(0));
+                } else {
+                    alert('Para crear un post necesitas una cuenta');
+                    dispatch(navigate(Screens.LOGIN));
+                }
+            });
         }
     }
        
