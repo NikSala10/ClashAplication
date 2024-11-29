@@ -463,9 +463,8 @@ class PostCard extends HTMLElement  {
                 if (commentData.userUid) {
                     const userId = commentData.userUid;
                     getUserData(userId, (userData) => {
-                        const name = userData?.name || 'Usuario no encontrado';
+                        const name = userData?.username || 'Usuario no encontrado';
                         commentsElement.setAttribute(CommentsAttribute.username, name);
-    
                         this.commentsElements?.push(commentsElement);
                     });
                 } else {
@@ -559,14 +558,13 @@ class PostCard extends HTMLElement  {
                
             `;
             
-           
             this.loadComments()
             const commentpost = this.shadowRoot?.querySelector('#comment-post') as HTMLElement
             commentpost.className = "hide"
-
-                const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
-
-                comment.addEventListener('click', ()=>{
+            
+            const comment = this.shadowRoot?.querySelector('#comment') as HTMLElement
+            
+            comment.addEventListener('click', ()=>{
                     const commentShow = this.commentsElements?.pop()
 
                     if (commentShow) {
