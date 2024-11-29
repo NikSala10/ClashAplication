@@ -59,6 +59,7 @@ class AccountUsers extends HTMLElement {
    
 	async connectedCallback() {
         const userId = appState.userId;
+        
         const containerUserInformation = this.shadowRoot?.querySelector('.info-contact-user');  
         getUserData(userId, (userInfo: UserData | null) =>  {
                 if (!userInfo) {
@@ -74,6 +75,7 @@ class AccountUsers extends HTMLElement {
                     stateChange = follow ? true : false 
                 }
             
+           
             this.state = stateChange
             this.name = userInfo.name || 'Not found';
             this.imguser = userInfo.imgUser;
@@ -196,6 +198,7 @@ class AccountUsers extends HTMLElement {
                     userPostCard.setAttribute(AttributeCardUser.comments, post.comments);
                     containerPost?.appendChild(userPostCard);
                 });
+                    
             });
 
 			const cssAccount = this.ownerDocument.createElement("style");
@@ -203,7 +206,7 @@ class AccountUsers extends HTMLElement {
 			this.shadowRoot?.appendChild(cssAccount);
 			
             const state = this.shadowRoot?.querySelector('#followThe') as HTMLElement;
-            console.log(state);
+
             if (state) {
                 state.addEventListener('click', async () => {
                  
