@@ -89,8 +89,8 @@ class Dashboard extends HTMLElement  {
                         <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                     </div>
                     <div id="addPost1" class="addPost">
-                    <p>+</p>
-                </div>
+                        <p>+</p>
+                    </div>
                 </section>
            </section>
              

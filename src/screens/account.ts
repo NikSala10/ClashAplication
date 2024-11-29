@@ -171,6 +171,9 @@ class Account extends HTMLElement {
                                 <bar-lateral titleitem="Lastest" dataitem="hashtags"></bar-lateral>
                                 <bar-lateral titleitem="Categories" dataitem="categories"></bar-lateral>
                             </div>
+                            <div id="addPost1" class="addPost">
+                                <p>+</p>
+                            </div>
                         </section>
                     </div>
                     
