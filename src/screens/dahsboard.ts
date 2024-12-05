@@ -1,4 +1,3 @@
-import  {imageArray} from '../data/dataBanner'
 import '../components/post1/post1'
 import '../components/footer/footer'
 import '../components/banner1/banner1'
